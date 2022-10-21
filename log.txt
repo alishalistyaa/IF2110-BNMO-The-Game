@@ -1,0 +1,34 @@
+CHECK-LIST
+Fitur                           | Status Pengerjaan
+************** MAKE ADT **************
+Point                           | DONE
+Time                            | 
+Makanan                         |
+Simulator                       |
+List (Statis)                   |
+Matriks                         |
+Charmachine                     |
+WordMachine                     |
+Queue (Dinamis)                 |
+Stack                           |
+Tree                            |
+
+*********** FUNCTIONALITAS ***********
+Inisiasi                        |
+Simulator                       |
+Makanan                         |
+Resep                           |
+Inventory                       |
+Pesan Bahan Makanan & Delivery  |
+Peta                            |
+Pengolahan Makanan              |
+Mekanisme Waktu                 |
+
+*********** FITUR HARUSNYA ***********
+-
+
+************** BONUS **************
+Kulkas                          |
+Waktu Pengolahan Makanan        |
+Rekomendasi Makanan             |
+Auto-BNMO                       |
