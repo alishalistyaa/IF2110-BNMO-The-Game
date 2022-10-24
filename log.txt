@@ -1,28 +1,30 @@
 CHECK-LIST
+Asistensi Jumat / Kamis Malem : 13.00 / 20.00
+
 Fitur                           | Status Pengerjaan
 ************** MAKE ADT **************
-Point                           | DONE
-Time                            | 
-Makanan                         |
-Simulator                       |
-List (Statis)                   |
-Matriks                         |
-Charmachine                     |
-WordMachine                     |
-Queue (Dinamis)                 |
-Stack                           |
-Tree                            |
+Point                           | J
+Time                            | B
+Makanan                         | A
+Simulator                       | R
+List (Statis)                   | S
+Matriks                         | B
+Charmachine                     | A
+WordMachine                     | R
+Queue (Dinamis)                 | S
+Stack                           | B
+Tree                            | J
 
 *********** FUNCTIONALITAS ***********
-Inisiasi                        |
-Simulator                       |
-Makanan                         |
-Resep                           |
-Inventory                       |
-Pesan Bahan Makanan & Delivery  |
-Peta                            |
-Pengolahan Makanan              |
-Mekanisme Waktu                 |
+Inisiasi                        | A
+Simulator                       | R
+Makanan                         | A / B
+Resep                           | J
+Inventory                       | S
+Pesan Bahan Makanan & Delivery  | S
+Peta                            | J / B
+Pengolahan Makanan              | J
+Mekanisme Waktu                 | B
 
 *********** FITUR HARUSNYA ***********
 -
