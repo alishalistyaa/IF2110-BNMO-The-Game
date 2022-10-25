@@ -1,6 +1,6 @@
 #include "time.h"
+#include "../boolean/boolean.h"
 #include <stdio.h>
-
 
 /* ***************************************************************** */
 /* DEFINISI PRIMITIF                                                 */

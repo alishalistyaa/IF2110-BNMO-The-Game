@@ -1,6 +1,8 @@
 #ifndef TIME_H
 #define TIME_H
 
+#include "../boolean/boolean.h"
+
 /* *** Definisi TYPE TIME <HH:MM:SS> *** */
 typedef struct { 
 	int DD; /* integer [0... ] Hari */

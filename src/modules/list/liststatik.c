@@ -1,6 +1,6 @@
-#include"liststatik.h"
-#include"boolean.h"
-#include<stdio.h>
+#include "liststatik.h"
+#include "../boolean/boolean.h"
+#include <stdio.h>
 void CreateListStatik(ListStatik *l)
 {
     int i;

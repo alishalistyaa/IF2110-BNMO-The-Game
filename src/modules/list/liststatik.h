@@ -1,7 +1,7 @@
 #ifndef LISTSTATIK_H
 #define LISTSTATIK_H
 
-#include"boolean.h"
+#include "../boolean/boolean.h"
 
 /*  Kamus Umum */
 #define CAPACITY 100
