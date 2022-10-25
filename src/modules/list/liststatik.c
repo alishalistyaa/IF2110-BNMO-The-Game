@@ -6,13 +6,13 @@ void CreateListStatik(ListStatik *l)
     int i;
     for (i=0;i<CAPACITY;i++)
     {
-        ELMT(*l,i)=MARK;
+        ELMT(*l,i)=MARKLIST;
     }
 }
 int lengthList(ListStatik l)
 {
     int i = 0;
-    while(ELMT(l,i)!=MARK && i!=CAPACITY)
+    while(ELMT(l,i)!=MARKLIST && i!=CAPACITY)
     {
         i++;
     }
@@ -22,7 +22,7 @@ boolean isValValid(ListStatik l, ElType val)
 {
     boolean found = false;
     int i = 0;
-    while(ELMT(l,i)!=MARK && i!=CAPACITY && !found)
+    while(ELMT(l,i)!=MARKLIST && i!=CAPACITY && !found)
     {
         if(ELMT(l,i)==val)
         {
@@ -87,7 +87,7 @@ void cetakList(ListStatik l)
 void CopyList(ListStatik l1,ListStatik *l2)
 {
     int i = 0;
-    while(ELMT(l1,i)!=MARK && i != CAPACITY)
+    while(ELMT(l1,i)!=MARKLIST && i != CAPACITY)
     {
         ELMT(*l2,i) = ELMT(l1,i);
         i++;

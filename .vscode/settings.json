@@ -4,6 +4,8 @@
         "*.ejs": "html",
         "*.html": "html",
         "charmachine.h": "c",
-        "boolean.h": "c"
+        "boolean.h": "c",
+        "wordmachine.h": "c",
+        "liststatik.h": "c"
     }
 }

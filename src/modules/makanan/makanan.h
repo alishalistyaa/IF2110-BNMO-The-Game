@@ -11,7 +11,7 @@
 /* *** Definisi TYPE MAKANAN *** */
 typedef struct { 
 	int ID;             /* integer [0... ] ID */
-	WORD Nama;          /* WORD Nama Makanan */
+	Word Nama;          /* WORD Nama Makanan */
 	TIME Kedaluarsa;    /* TIME <HH:MM:SS> Waktu Kadaluarsa */
     POINT Aksi;         /* POINT <x,y> Lokasi Aksi */   
     TIME LamaKirim;     /* TIME <HH:MM:SS> Lama Kirim Makanan */    

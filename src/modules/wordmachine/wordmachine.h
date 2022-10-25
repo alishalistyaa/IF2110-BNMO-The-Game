@@ -4,12 +4,15 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "../boolean/boolean.h"
 #include "../charmachine/charmachine.h"
 
 #define NMax 50
 #define BLANK ' '
 
+/* *** Definisi TYPE WORD *** */
 typedef struct
 {
    char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
