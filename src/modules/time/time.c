@@ -1,6 +1,6 @@
 #include "time.h"
-#include "../boolean/boolean.h"
 #include <stdio.h>
+
 
 /* ***************************************************************** */
 /* DEFINISI PRIMITIF                                                 */
@@ -44,12 +44,13 @@ void BacaTIME1 (TIME * T) {
     scanf("%d %d", &h, &m);
     while (!IsTIMEValid(0, h, m)) {
         printf("Jam tidak valid\n");
+        printf("Masukan waktu awal BNMO dimulai (jam dan menit): ");
         scanf("%d %d", &h, &m);
     }
     CreateTime(T, 0, h, m);
 }
    
-void BacaTIME2 (TIME * T) {
+void BacaTIMEKedaluwarsa (TIME * T) {
 /* I.S. : T tidak terdefinisi */
 /* F.S. : T terdefinisi dan merupakan jam yang valid */
 /* Proses : mengulangi membaca komponen DD, JJ, MM sehingga membentuk T */
@@ -64,9 +65,35 @@ void BacaTIME2 (TIME * T) {
    1 3 4 (1 hari 3 jam 4 menit)
    --> akan terbentuk TIME <1,3,4> */
     int h, m, s;
+    printf("Masukkan waktu kedaluwarsa: ");
     scanf("%d %d %d", &h, &m, &s);
     while (!IsTIMEValid(h, m, s)) {
-        printf("Waktu tidak valid\n");
+        printf("Waktu kedaluwarsa tidak valid\n");
+        printf("Masukkan waktu kedaluwarsa: ");
+        scanf("%d %d %d", &h, &m, &s);
+    }
+    CreateTime(T, h, m, s);
+}
+void BacaTIMEDelivery (TIME * T) {
+/* I.S. : T tidak terdefinisi */
+/* F.S. : T terdefinisi dan merupakan jam yang valid */
+/* Proses : mengulangi membaca komponen DD, JJ, MM sehingga membentuk T */
+/* yang valid. Tidak mungkin menghasilkan T yang tidak valid. */
+/* Pembacaan dilakukan dengan mengetikkan komponen DD, HH, MM
+   dalam satu baris, masing-masing dipisahkan 1 spasi, diakhiri enter. */
+/* Jika TIME tidak valid maka diberikan pesan: "Waktu kedaluwarsa/delivery tidak valid", dan pembacaan
+   diulangi hingga didapatkan jam yang valid. */
+/* Contoh: 
+   0 2 1 (0 hari 2 jam 1 menit)
+   Jam tidak valid
+   1 3 4 (1 hari 3 jam 4 menit)
+   --> akan terbentuk TIME <1,3,4> */
+    int h, m, s;
+    printf("Masukkan waktu sisa delivery: ");
+    scanf("%d %d %d", &h, &m, &s);
+    while (!IsTIMEValid(h, m, s)) {
+        printf("Waktu sisa delivery tidak valid\n");
+        printf("Masukkan waktu sisa delivery: ");
         scanf("%d %d %d", &h, &m, &s);
     }
     CreateTime(T, h, m, s);
@@ -76,7 +103,7 @@ void TulisTIME1 (TIME T) {
 /* I.S. : T sembarang */
 /* F.S. : Nilai T ditulis dg format HH.MM */
 /* Proses : menulis nilai setiap komponen T ke layar dalam format HH.MM */
-    printf("%d.%d", Hour(T), Minute(T));
+    printf("%d.%02d", Hour(T), Minute(T));
 }
 
 void TulisTIME2 (TIME T) {
@@ -91,7 +118,7 @@ void TulisTIME2 (TIME T) {
         printf(" ");
     }
     if (Hour(T) != 0) {
-        printf("%d menit", Hour(T));
+        printf("%d jam", Hour(T));
     }
     if (Hour(T) != 0 && Minute(T) != 0) {
         printf(" ");

@@ -1,7 +1,7 @@
 #ifndef TIME_H
 #define TIME_H
 
-#include "../boolean/boolean.h"
+#include "boolean.h"
 
 /* *** Definisi TYPE TIME <HH:MM:SS> *** */
 typedef struct { 
@@ -47,7 +47,22 @@ void BacaTIME1 (TIME * T);
    1 24
    --> akan terbentuk TIME <1,3,4> */
    
-void BacaTIME2 (TIME * T);
+void BacaTIMEKedaluwarsa (TIME * T);
+/* I.S. : T tidak terdefinisi */
+/* F.S. : T terdefinisi dan merupakan jam yang valid */
+/* Proses : mengulangi membaca komponen DD, JJ, MM sehingga membentuk T */
+/* yang valid. Tidak mungkin menghasilkan T yang tidak valid. */
+/* Pembacaan dilakukan dengan mengetikkan komponen DD, HH, MM
+   dalam satu baris, masing-masing dipisahkan 1 spasi, diakhiri enter. */
+/* Jika TIME tidak valid maka diberikan pesan: "Waktu kedaluwarsa/delivery tidak valid", dan pembacaan
+   diulangi hingga didapatkan jam yang valid. */
+/* Contoh: 
+   0 2 1 (0 hari 2 jam 1 menit)
+   Jam tidak valid
+   1 3 4 (1 hari 3 jam 4 menit)
+   --> akan terbentuk TIME <1,3,4> */
+
+void BacaTIMEDelivery (TIME * T);
 /* I.S. : T tidak terdefinisi */
 /* F.S. : T terdefinisi dan merupakan jam yang valid */
 /* Proses : mengulangi membaca komponen DD, JJ, MM sehingga membentuk T */
