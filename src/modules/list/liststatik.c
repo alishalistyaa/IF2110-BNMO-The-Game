@@ -70,11 +70,11 @@ void delete(ListStatik *l,ElType *val,IdxType i)
                 idx+=1;
             }
         }
-        ELMT(*l,idx-1) = MARK;
+        ELMT(*l,idx-1) = MARKLIST;
     }
     else
     {
-        *val = MARK;
+        *val = MARKLIST;
         printf("Index tidak terdapat di list");
     }
 }
