@@ -1,3 +1,8 @@
+#ifndef queue_H
+#define queue_H
+
+
+#define Nil -1
 #include"../makanan/makanan.h"
 #include"../boolean/boolean.h"
 #include<stdio.h>
@@ -34,3 +39,4 @@ void Enqueue(queue *Q,MAKANAN M);
 /*Menambah M ke dalam Q dengan aturan priority queue,terurut membesar berdasarkan kedaluarsa*/
 void Dequeue(queue *Q,MAKANAN *M);
 /*Menghapus M pada Q*/
+#endif
