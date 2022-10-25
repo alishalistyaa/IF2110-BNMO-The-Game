@@ -47,6 +47,37 @@ boolean isFull(ListStatik l)
 {
     return(lengthList(l)==CAPACITY);
 }
+void insert(ListStatik *l,ElType val)
+{
+    ELMT(*l,lengthList(*l)) = val;
+}
+void delete(ListStatik *l,ElType *val,IdxType i)
+{
+    int idx;
+    if(i>=0 && i<lengthList(*l))
+    {
+        *val = ELMT(*l,i);
+        idx = 0;
+        while(idx<lengthList(*l))
+        {
+            if(idx >= i)
+            {
+                ELMT(*l,idx) = ELMT(*l,idx+1);
+                idx+=1;
+            }
+            else
+            {
+                idx+=1;
+            }
+        }
+        ELMT(*l,idx-1) = MARK;
+    }
+    else
+    {
+        *val = MARK;
+        printf("Index tidak terdapat di list");
+    }
+}
 void bacaList(ListStatik *l)
 {
     int n;

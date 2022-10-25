@@ -47,6 +47,12 @@ boolean isEmpty(ListStatik l);
 boolean isFull(ListStatik l);
 /* Mengirimkan true jika List l penuh, mengirimkan false jika tidak */
 
+void insert(ListStatik *l,ElType val);
+/* Menambah elemen val sebagai elemen terakhir list*/
+
+void delete(ListStatik *l,ElType *val,IdxType i);
+/*Menghapus elemen indeks ke i pada list*/
+
 void bacaList(ListStatik *l);
 /* I.S. l sembarang */
 /* F.S. List l terdefinisi */
@@ -63,9 +69,11 @@ void cetakList(ListStatik l);
    siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
    karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
 /* I.S. l boleh kosong */
-/* F.S. Jika l tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika List kosong : menulis [] */
+/* F.S. Jika l tidak kosong akan mencetak secara terurut dari indeks 1 ke indeks (length-1) */
+/* Contoh : jika ada tiga elemen*/
+/* 1 . ID ke 1*/
+/* 2 . ID ke 2*/
+/* 3 . ID ke 3*/
 void CopyList(ListStatik l1,ListStatik *l2);
 /*Menyalin semua elemen di list 1 ke list 2*/
 
