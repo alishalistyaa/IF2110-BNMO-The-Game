@@ -11,7 +11,7 @@ void CreateSimulator(SIMULATOR * S, char X[], POINT P, PrioQueue I){
            currentUsername, currentlocation, and currentInventort */
     Location(*S) = P;
     Name(*S) = X; 
-    PrioQueue(*S) = Q;
+    PrioQueue(*S) = I;
 }
 
 /** Primitif SIMULATOR **/
@@ -24,7 +24,7 @@ char * getName(SIMULATOR S){
 POINT getLocation(SIMULATOR S){
 /*  I.S. : sembarang
     F.S. : mendapatkan currentLocation dari SIMULATOR */
-    return (Locatiion(S));
+    return (Location(S));
 }
 
 PrioQueue getInventory(SIMULATOR S){

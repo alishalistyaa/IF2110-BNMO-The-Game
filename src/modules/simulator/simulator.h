@@ -45,15 +45,15 @@ PrioQueue getInventory(SIMULATOR S);
 /*  I.S. : sembarang
     F.S. : mendapatkan currentInventory dari SIMULATOR */
 
-void setName(SIMULATOR S, char X[]);
+void setName(SIMULATOR * S, char X[]);
 /*  I.S. : sembarang
     F.S. : meng-set currentName pada SIMULATOR */
 
-void setLocation(SIMULATOR S, POINT P);
+void setLocation(SIMULATOR * S, POINT P);
 /*  I.S. : sembarang
     F.S. : meng-set currentLocation pada SIMULATOR */
 
-void setInventory(SIMULATOR S, PrioQueue I);
+void setInventory(SIMULATOR * S, PrioQueue I);
 /*  I.S. : sembarang
     F.S. : meng-set currentInventory pada SIMULATOR */
 
