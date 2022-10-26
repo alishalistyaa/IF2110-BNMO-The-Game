@@ -7,18 +7,18 @@
 int main(){
     /* Memulai Mesin Karakter */
     START();
-    while ((currentChar != ' ') && (currentChar != MARK)){
-        ADV();
-    }
-
+    while ((currentChar != ' ') || (currentChar != LINEMARK)){
+        ADV(); }
+    
     /* Pengecekan Mesin Karakter */
-    if ((currentChar != ' ') && (currentChar != MARK)){
+    if (currentChar == LINEMARK){
         printf("MESIN KATA SELESAI.");
     } else {
-        printf("%c", currentChar);
-        ADV();
+        while((currentChar != ' ') && (currentChar != LINEMARK)){
+            printf("%c", currentChar);
+            ADV();
+        } 
     }
-
     return(0);
     
 }

@@ -41,3 +41,20 @@ void ADV()
               fclose(pita);
        }
 }
+
+/* OPERATOR TAMBAHAN */
+boolean isFileExist(const char *filename){
+       /* Mengembalikan true apabila File yang dituju ada dan tidak kosong.*/
+       /* C tidak support exception handling, jadi alternatifnya pake ini. */
+       // Kamus Lokal
+       FILE *fp;
+       // Algoritma
+       fp = fopen(filename, "r");
+       return(fp != NULL);
+}
+
+void ADVFile(const char *filename){
+       /* ADV() tetapi menerima input dari file */
+       pita = fopen(filename, "r");
+       ADV();
+}

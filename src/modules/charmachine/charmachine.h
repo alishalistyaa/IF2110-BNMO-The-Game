@@ -6,7 +6,9 @@
 
 #include "../boolean/boolean.h"
 
-#define MARK '.'
+#define MARK '.'        // Menandakan mark string biasa
+#define FILEMARK EOF    // Menandakan End of File
+#define LINEMARK '\n'   // Menandakan End of Line
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;
@@ -25,5 +27,13 @@ void ADV();
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
+
+/* OPERATOR TAMBAHAN */
+boolean isFileExist();
+/* Mengembalikan true apabila File yang dituju ada dan tidak kosong.*/
+/* C tidak support exception handling, jadi alternatifnya pake ini. */
+
+void ADVFile();
+/* ADV() tetapi menerima input dari file */
 
 #endif

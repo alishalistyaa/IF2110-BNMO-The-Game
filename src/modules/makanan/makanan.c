@@ -1,6 +1,7 @@
 /* File: makanan.c */
 /* Implementasi Makanan */
 
+#include "makanan.h"
 #include "../boolean/boolean.h"
 #include "../point/point.h"
 #include "../time/time.h"
@@ -21,7 +22,7 @@ void CreateMakanan();
 /* ***************************************************************** */
 /* KELOMPOK BACA/TULIS                                               */
 /* ***************************************************************** */
-void ConfigMakanan (MAKANAN *M, WORD filename);
+void ConfigMakanan (MAKANAN *M, Word filename);
 /* Membaca file figurasi config dan membaca makanan */
 /* I.S. List terdefinisi  */
 /* F.S. */
@@ -32,7 +33,7 @@ void ConfigMakanan (MAKANAN *M, WORD filename);
 void DecreaseExpired(MAKANAN *M){
     /* Mengurangi waktu expired */
     // Algoritma
-    PrevMenit(EXPIRED(M));
+    // PrevMenit(EXPIRED(*M));
 }
 
 void IncreaseDelivery(MAKANAN *M);
@@ -40,17 +41,17 @@ void IncreaseDelivery(MAKANAN *M);
 
 boolean isExpired(MAKANAN M){ 
     /* Mengirimkan true jika makanan sudah expired */
-    return (Day(EXPIRED(M)) == 0 && Hour(EXPIRED(M)) == 0 && Minute(EXPIRED(M)))
+    return (Day(EXPIRED(M)) == 0 && Hour(EXPIRED(M)) == 0 && Minute(EXPIRED(M)));
 }
 
 boolean isDelivered(MAKANAN M){
     /* Mengirimkan true jika makanan sudah dikirimkan */
-    return(Day(DELIVERY(M)) == 0 && Hour(DELIVERY(M)) == 0 && Minute(DELIVERY(M)))
+    return(Day(DELIVERY(M)) == 0 && Hour(DELIVERY(M)) == 0 && Minute(DELIVERY(M)));
 }
 
 boolean isDeliveryEqual(MAKANAN M1, MAKANAN M2){
     /* Mengirimkan true jika Delivery M1 = Delivery M2 */
-    return ((Day(DELIVERY(M1)) == Day(DELIVERY(M2))) && (Hour(DELIVERY(M1)) == Hour(DELIVERY(M2))) && (Minute(DELIVERY(M1)) == Minute(DELIVERY(M2))))
+    return ((Day(DELIVERY(M1)) == Day(DELIVERY(M2))) && (Hour(DELIVERY(M1)) == Hour(DELIVERY(M2))) && (Minute(DELIVERY(M1)) == Minute(DELIVERY(M2))));
 }
 
 boolean isDeliveryLonger(MAKANAN M1, MAKANAN M2){
@@ -73,7 +74,7 @@ boolean isDeliveryLonger(MAKANAN M1, MAKANAN M2){
 
 boolean isExpiredEqual(MAKANAN M1, MAKANAN M2){
     /* Mengirimkan true jika Expired M1 = Expired M2 */
-    return ((Day(EXPIRED(M1)) == Day(EXPIRED(M2))) && (Hour(EXPIRED(M1)) == Hour(EXPIRED(M2))) && (Minute(EXPIRED(M1)) == Minute(EXPIRED(M2))))
+    return ((Day(EXPIRED(M1)) == Day(EXPIRED(M2))) && (Hour(EXPIRED(M1)) == Hour(EXPIRED(M2))) && (Minute(EXPIRED(M1)) == Minute(EXPIRED(M2))));
 }
 
 boolean isExpiredLonger(MAKANAN M1, MAKANAN M2){
