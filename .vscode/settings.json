@@ -6,6 +6,8 @@
         "charmachine.h": "c",
         "boolean.h": "c",
         "wordmachine.h": "c",
-        "liststatik.h": "c"
+        "liststatik.h": "c",
+        "makanan.h": "c",
+        "matriks.h": "c"
     }
 }
