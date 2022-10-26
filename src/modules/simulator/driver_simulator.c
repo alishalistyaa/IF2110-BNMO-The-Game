@@ -3,23 +3,29 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "../point/point.h"
 #include "simulator.c"
 
 int main(){
-    Location l1;
-    Location l2;
-    l1.coor.X = 1;
-    l1.coor.Y = 1;
-    l1.typeLoc = 'M';
-
-    l2.coor.X = 2;
-    l2.coor.Y = 3;
-    l2.typeLoc = 'M';
-    displayLoc(l1);
-    displayLoc(l2);
-    if(isLocationEqual(l1,l2)){
-        printf("Sama");
-    }else{
-        printf("Beda");
-    }
+    SIMULATOR S;
+    POINT P;
+    POINT P1;
+    PrioQueue I;
+    PrioQueue I1;
+    name = "Coba";
+    name1 = "Coba1"
+    CreatePoint(&P, 1, 1);
+    CreatePoint(&P1, 2, 2,);
+    CreatePrioQueue(&I);
+    CreatePrioQueue(&I1);
+    CreateSimulator(&S, name, P, I);
+    printf("%s", getName(S));
+    printf("<%d,%d>", getLocation(S).X, getLocation(S).Y);
+    printf("%s", getInventory(S));
+    setName(&S, name1);
+    setLocation(&S, P1);
+    setInventory(&S, I1);
+    printf("%s", getName(S));
+    printf("<%d,%d>", getLocation(S).X, getLocation(S).Y);
+    printf("%s", getInventory(S));   
 }

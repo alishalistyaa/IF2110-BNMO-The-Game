@@ -16,25 +16,45 @@
 
 /***** Definisi TYPE LOKASI *****/
 typedef struct{
-    char typeLoc;
-    POINT coor;
-} Location;
+    char NAME[];
+    POINT LOCATION;
+    PrioQueue INVENTORY;
+} SIMULATOR;
 
-/* State Simulator */
-extern Word currentName;
-extern Location currentLoc;
-extern MAKANAN currentFood;
+#define Name(S) (S).NAME
+#define Location(S) (S).LOCATION
+#define Inventory(S) (S).INVENTORY
 
-/* getter Simulator */
-#define getTypeLocation(l) (l).typeLoc
-#define getCoordinate(l) (l).coor
+/* ** DEFINISI PROTOTIPE PRIMITIF ** */
+/* ** Konstruktor PEMBENTUK SIMULATOR ***/
+void CreateSimulator(SIMULATOR * S, char X[], POINT P, PrioQueue I);
+/*  I.S. : sembarang
+    F.S. : membentuk simulator yang tersusun atas
+           currentUsername, currentlocation, and currentInventort */
 
-void displayLoc(Location l);
-/*  I.S. : currentLoc sembarang
-    F.S. : Mencetak tipe lokasi serta koordinatnya */
+/** Primitif SIMULATOR **/
+char * getName(SIMULATOR S);
+/*  I.S. : sembarang
+    F.S. : mendapatkan currentName dari SIMULATOR */
 
-boolean isLocationEqual(Location l1, Location l2);
-/*  I.S. : l1 & l2 sembarang
-    F.S. : Melakukan cek apakah l1 & l2 adalah tempat yang sama */
+POINT getLocation(SIMULATOR S);
+/*  I.S. : sembarang
+    F.S. : mendapatkan currentLocation dari SIMULATOR */
+
+PrioQueue getInventory(SIMULATOR S);
+/*  I.S. : sembarang
+    F.S. : mendapatkan currentInventory dari SIMULATOR */
+
+void setName(SIMULATOR S, char X[]);
+/*  I.S. : sembarang
+    F.S. : meng-set currentName pada SIMULATOR */
+
+void setLocation(SIMULATOR S, POINT P);
+/*  I.S. : sembarang
+    F.S. : meng-set currentLocation pada SIMULATOR */
+
+void setInventory(SIMULATOR S, PrioQueue I);
+/*  I.S. : sembarang
+    F.S. : meng-set currentInventory pada SIMULATOR */
 
 #endif
