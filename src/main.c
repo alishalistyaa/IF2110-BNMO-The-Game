@@ -23,6 +23,7 @@ int main(){
     // Inisialisasi Game
     start = false;
     // Variable Main
+    char* filename;
 
     // PROGRAM MULAI
     while (!start){
@@ -34,7 +35,12 @@ int main(){
 
         // if NEW GAME:
             // CONFIG FILES
-            printf("Masukkan nama file config");
+            // do {
+            // printf("Pastikan file config sudah masuk ke folder config ya!\n");
+            // printf("Masukkan nama file config: ");
+            // scanf("%c", filename);
+            // }
+            // while (!isFileExist(filename));
 
             // INISIALISASI SELURUH OBJECT DAN ADT
             // CreateMakanan();

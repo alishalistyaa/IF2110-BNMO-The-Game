@@ -9,6 +9,7 @@ void CreateListStatik(ListStatik *l)
         ELMT(*l,i)=MARKLIST;
     }
 }
+
 int lengthList(ListStatik l)
 {
     int i = 0;

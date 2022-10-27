@@ -9,6 +9,7 @@
         "liststatik.h": "c",
         "makanan.h": "c",
         "matriks.h": "c",
-        "map.h": "c"
+        "map.h": "c",
+        "point.h": "c"
     }
 }

@@ -35,12 +35,36 @@ void ADV()
 
        /* Algoritma */
        retval = fscanf(pita, "%c", &currentChar);
-       EOP = (currentChar == MARK);
-       if (EOP)
-       {
+       if (retval == -1) 
+       { // Jika sudah EOF
+              currentChar = FILEMARK;
               fclose(pita);
        }
 }
+
+void ADVFILE(const char *filename){
+       /* ADV() tetapi menerima input dari file */
+       pita = fopen(filename, "r");
+       ADV();
+}
+
+// void ADVFILE()
+// {
+//        /* Pita dimajukan satu karakter.
+//           I.S. : Karakter pada jendela =
+//                  currentChar, currentChar != MARK
+//           F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
+//                  currentChar mungkin = MARK.
+//                        Jika  currentChar = MARK maka EOP akan menyala (true) */
+
+//        /* Algoritma */
+//        retval = getc(pita);
+//        EOP = (retval == EOF);
+//        if (EOP)
+//        {
+//               fclose(pita);
+//        }
+// }
 
 /* OPERATOR TAMBAHAN */
 boolean isFileExist(const char *filename){
@@ -53,8 +77,4 @@ boolean isFileExist(const char *filename){
        return(fp != NULL);
 }
 
-void ADVFile(const char *filename){
-       /* ADV() tetapi menerima input dari file */
-       pita = fopen(filename, "r");
-       ADV();
-}
+

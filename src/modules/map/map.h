@@ -17,10 +17,10 @@ typedef struct {
     int width; /* integer [10... 50] Lebar Map */
     int height;/* integer [10... 50] Panjang Map */
     ListStatik Lokasi; 
-
+    ListStatik ListBuilding;
 } MAP;
 
-/* *** Notasi Akses: selektor MAKANAN *** */
+/* *** Notasi Akses: selektor MAP *** */
 
 
 #endif
