@@ -14,13 +14,14 @@
 
 /* *** Definisi TYPE MAP *** */
 typedef struct {
-    int width; /* integer [10... 50] Lebar Map */
-    int height;/* integer [10... 50] Panjang Map */
+    Matrix m;
     ListStatik Lokasi; 
     ListStatik ListBuilding;
 } MAP;
 
 /* *** Notasi Akses: selektor MAP *** */
-
+#define WIDTH(P) (P).(m).colEff
+#define HEIGHT(P) (P).(m).rowEff
+#define MATRIX(P) (P).m
 
 #endif
