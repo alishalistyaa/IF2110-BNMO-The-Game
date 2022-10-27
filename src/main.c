@@ -29,12 +29,12 @@ int main(){
         // Splash Screen 
 
         // COMMAND AWAL
-        printf("1. NEW GAME\n")
-        printf("2. EXIT\n")
+        printf("1. NEW GAME\n");
+        printf("2. EXIT\n");
 
         // if NEW GAME:
             // CONFIG FILES
-            printf("Masukkan nama file config")
+            printf("Masukkan nama file config");
 
             // INISIALISASI SELURUH OBJECT DAN ADT
             // CreateMakanan();
