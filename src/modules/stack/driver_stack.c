@@ -23,7 +23,7 @@ int main () {
     CreateTime(&delivery, 0, 2, 0);
     DELIVERY(m) = delivery;
 
-    updateState(&s, &m, &t, &loc, &undo);
+    updateState(s, m, t, loc, &undo);
     printf("State now:\n");
     TulisTIME1(InfoTop(undo).T);
     printf(" ");
@@ -41,7 +41,7 @@ int main () {
     Minute(delivery) = 0;
     loc = NextX(loc);
 
-    updateState(&s, &m, &t, &loc, &undo);
+    updateState(s, m, t, loc, &undo);
     printf("State now: (after another input)\n");
     TulisTIME1(InfoTop(undo).T);
     printf(" ");
@@ -51,7 +51,7 @@ int main () {
     printf("\n");
     printf("\n");
 
-    Undo(&undo, &redo);
+    Undo(&undo, &redo, &s, &m, &t, &loc);
     printf("After undo:\n");
     TulisTIME1(InfoTop(undo).T);
     printf(" ");
@@ -61,7 +61,7 @@ int main () {
     printf("\n");
     printf("\n");
 
-    Redo(&undo, &redo);
+    Redo(&undo, &redo, &s, &m, &t, &loc);
     printf("After redo:\n");
     TulisTIME1(InfoTop(undo).T);
     printf(" ");
