@@ -66,38 +66,16 @@ void Pop(Stack * S, infotype *X);
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
-void Undo(Stack *undo, Stack *Redo, char* (*command), MAKANAN *M, TIME *T, POINT *l) {
+void Undo(Stack *undo, Stack *Redo, char* (*command), MAKANAN *M, TIME *T, POINT *l);
 /* Melakukan proses undo */
 /* Menghapus Top dari Stack Undo dan memasukkannya ke Stack Redo */
-    infotype s;
-    Pop(undo, &s);
-    *command = InfoTop(*undo).command;
-    *M = InfoTop(*undo).M;
-    *T = InfoTop(*undo).T;
-    *l = InfoTop(*undo).l;
-    Push(Redo, s);
-}
-void Redo(Stack *undo, Stack *Redo, char* (*command), MAKANAN *M, TIME *T, POINT *l) {
+
+void Redo(Stack *undo, Stack *Redo, char* (*command), MAKANAN *M, TIME *T, POINT *l);
 /* Melakukan proses redo */
 /* Menghapus Top dari Stack Redo dan memasukkannya ke Stack Undo */
-    infotype s;
-    Pop(Redo, &s);
-    Push(Undo, s);
-    *command = InfoTop(*undo).command;
-    *M = InfoTop(*undo).M;
-    *T = InfoTop(*undo).T;
-    *l = InfoTop(*undo).l;
-}
 
-void updateState(char* command, MAKANAN M, TIME T, POINT l, Stack *undo) {
+void updateState(char* command, MAKANAN M, TIME T, POINT l, Stack *undo);
 /* Menginput atau mengupdate state */
 /* I. S. undo, M, T, l terdefinisi*/
 /* F. S. terbentuk infotype X untuk dan X telah di-push ke stack */
-  infotype X;
-  X.command = command;
-  X.M = M;
-  X.T = T;
-  X.l = l;
-  Push(undo, X);
-}
 #endif
