@@ -7,7 +7,6 @@
 
 #include "../boolean/boolean.h"
 #include "../wordmachine/wordmachine.h"
-#include "../charmachine/charmachine.h"
 #include "../makanan/makanan.h"
 #include "../time/time.h"
 #include "../point/point.h"
@@ -18,7 +17,7 @@
 
 
 typedef struct { /* tipe state */
-  Word command;
+  char* command;
   MAKANAN M;
   TIME T;
   POINT l;
@@ -75,11 +74,8 @@ void Redo(Stack *undo, Stack *redo);
 /* Melakukan proses redo */
 /* Menghapus Top dari Stack Redo dan memasukkannya ke Stack Undo */
 
-void updateState(Word command, MAKANAN M, TIME T, POINT l, Stack *undo) {
-/* Menginput atau mengupdate state */
+void updateState(char* (*command), MAKANAN *M, TIME *T, POINT *l, Stack *undo);
 /* Menginput atau mengupdate state */
 /* I. S. undo, M, T, l terdefinisi*/
 /* F. S. terbentuk infotype X untuk dan X telah di-push ke stack */
-}
-
 #endif

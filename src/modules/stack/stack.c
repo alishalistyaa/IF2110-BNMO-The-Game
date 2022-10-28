@@ -68,14 +68,18 @@ void Redo(Stack *Undo, Stack *Redo) {
     Push(Undo, s);
 }
 
-void updateState(Word command, MAKANAN M, TIME T, POINT l, Stack *undo) {
+void updateState(char* (*command), MAKANAN *M, TIME *T, POINT *l, Stack *undo) {
 /* Menginput atau mengupdate state */
 /* I. S. undo, M, T, l terdefinisi*/
 /* F. S. terbentuk infotype X untuk dan X telah di-push ke stack */
   infotype X;
-  X.command = command;
-  X.M = M;
-  X.T = T;
-  X.l = l;
+  X.command = *command;
+  X.M = *M;
+  X.T = *T;
+  X.l = *l;
   Push(undo, X);
+  *command = InfoTop(*undo).command;
+  *M = InfoTop(*undo).M;
+  *T = InfoTop(*undo).T;
+  *l = InfoTop(*undo).l;
 }
