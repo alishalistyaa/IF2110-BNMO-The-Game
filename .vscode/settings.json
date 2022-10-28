@@ -10,6 +10,7 @@
         "makanan.h": "c",
         "matriks.h": "c",
         "map.h": "c",
-        "point.h": "c"
+        "point.h": "c",
+        "stack.h": "c"
     }
 }
