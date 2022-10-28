@@ -37,10 +37,7 @@ void Push(Stack * S, infotype X) {
     else {
         Top(*S)++;
     }
-    InfoTop(*S).command = X.command;
-    InfoTop(*S).M = X.M;
-    InfoTop(*S).T = X.T;
-    InfoTop(*S).l = X.l;
+    InfoTop(*S) = X;
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
@@ -48,10 +45,7 @@ void Pop(Stack * S, infotype * X) {
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
-    (*X).command = InfoTop(*S).command;
-    (*X).M = InfoTop(*S).M;
-    (*X).T = InfoTop(*S).T;
-    (*X).l = InfoTop(*S).l;
+    *X = InfoTop(*S);
     if (Top(*S) == 0) {
         Top(*S) = Nil;
     } else {
