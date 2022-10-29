@@ -3,190 +3,199 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+/* Definisi PohonBiner */
+/* pohon Biner kosong p = NULL */
 
-BinTree Tree(ElType root, BinTree left_tree, BinTree right_tree) {
-    Address p = (Address)(malloc(sizeof(BinTree)));
-    if (p != NULL) {
-        Akar(p) = root;
-        Kiri(p) = left_tree;
-        Kanan(p) = right_tree;
-    }
-    return p;
-}
-/* Menghasilkan sebuah pohon biner dari root, left_tree, dan right_tree, jika alokasi berhasil 
+Tree newTree(ElType Root,Tree child[], int leaves){
+/* Menghasilkan sebuah pohon n-ary dari root dan child, jika alokasi berhasil 
    Menghasilkan pohon kosong (NULL) jika alokasi gagal */
+   Address p = (Address)(malloc(sizeof(Tree)));
+    if (p != NULL) {
+        Root(p) = Root;
+        addressChild(p) = (Tree) malloc(leaves * sizeof(Tree));
 
-void CreateTree(ElType root, BinTree left_tree, BinTree right_tree, BinTree *p) {
-    Address a = (Address)(malloc(sizeof(BinTree)));
-    if (a != NULL) {
-        Akar(a) = root;
-        Kiri(a) = left_tree;
-        Kanan(a) = right_tree;
+        if(addressChild(p) != NULL){
+            for(int i = 0; i<leaves;i++){
+            getChild(p,i) = child[i];
+            nChild(p) = leaves;
+        }  
+        
+        }
+        else{//Gagal alokasi
+            nChild(p) = 0;
+        }
+        
     }
-    *p = a;
+    return p; 
 }
-/* I.S. Sembarang
-   F.S. Menghasilkan sebuah pohon p
-   Menghasilkan sebuah pohon biner p dari akar, l, dan r, jika alokasi 
-   berhasil 
-   Menghasilkan pohon p yang kosong (NULL) jika alokasi gagal */
+
+void CreateTree (ElType Root, Tree child[], int leaves, Tree *p){
+    *p = newTree(Root,child,leaves);
+}
 
 Address newTreeNode(ElType val) {
-    Address p = (Address)(malloc(sizeof(BinTree)));
+    Address p = (Address)(malloc(sizeof(Tree)));
     if (p != NULL) {
-        Akar(p) = val;
-        Kiri(p) = NULL;
-        Kanan(p) = NULL;
+        Root(p) = val;
+        addressChild(p) = NULL;
+        nChild(p) = 0;
     }
     return p;
 }
-/* Alokasi sebuah address p, bernilai tidak NULL jika berhasil */
-/* Mengirimkan address hasil alokasi sebuah elemen bernilai val
-   Jika alokasi berhasil, maka address tidak NULL, dan misalnya 
-   menghasilkan p, maka p↑.info=val, p↑.left=NULL, p↑.right=NULL 
-   Jika alokasi gagal, mengirimkan NULL */
 
-void deallocTreeNode(Address p) {
-    free(p);
-}
+void deallocTreeNode (Address p){
 /* I.S. p terdefinisi 
    F.S. p dikembalikan ke sistem 
    Melakukan dealokasi/pengembalian address p */
+   free(p);
+}
 
-boolean isTreeEmpty(BinTree p) {
+
+boolean isTreeEmpty (Tree p){
+/* Mengirimkan true jika p adalah pohon yang kosong */
     return p == NULL;
 }
-/* Mengirimkan true jika p adalah pohon biner yang kosong */
 
-boolean isOneElmt(BinTree p) {
-    if (!isTreeEmpty(p)) {
-        return (Kiri(p) == NULL && Kanan(p) == NULL);
-    } else {
-        return false;
-    }
-}
+boolean isOneElmt (Tree p){
 /* Mengirimkan true jika p tidak kosong dan hanya terdiri atas 1 elemen */
-
-boolean isUnerLeft(BinTree p) {
-    if (!isTreeEmpty(p)) {
-        return (Kiri(p) != NULL && Kanan(p) == NULL);
-    } else {
-        return false;
-    }
+    return (!isTreeEmpty(p)) && (nChild(p) == 0);
 }
-/* Mengirimkan true jika pohon biner tidak kosong, p adalah pohon unerleft: 
-   hanya mempunyai subpohon kiri */
-
-boolean isUnerRight(BinTree p) {
-    if (!isTreeEmpty(p)) {
-        return (Kiri(p) == NULL && Kanan(p) != NULL);
-    } else {
-        return false;
-    }
-}
-/* Mengirimkan true jika pohon biner tidak kosong, p adalah pohon unerright: 
-   hanya mempunyai subpohon kanan */
-
-boolean isBinary(BinTree p) {
-    if (!isTreeEmpty(p)) {
-        return (Kiri(p) != NULL && Kanan(p) != NULL);
-    } else {
-        return false;
-    }
-}
-/* Mengirimkan true jika pohon biner tidak kosong, p adalah pohon biner: 
-  mempunyai subpohon kiri dan subpohon kanan */
 
 /* ****** Display Tree ***** */
-void printPreorder(BinTree p) {
+void printPreorder(Tree p){
     printf("(");
     if (p != NULL) {
-        printf("%d", Akar(p));
-        printPreorder(Kiri(p));
-        printPreorder(Kanan(p));
-    }
-    printf(")");
-}
-/* I.S. p terdefinisi */
-/* F.S. Semua simpul p sudah dicetak secara preorder: akar, pohon kiri, dan pohon kanan. 
-   Setiap pohon ditandai dengan tanda kurung buka dan kurung tutup (). 
-   Pohon kosong ditandai dengan ().
-   Tidak ada tambahan karakter apa pun di depan, tengah, atau akhir. */
-/* Contoh: 
-   (A()()) adalah pohon dengan 1 elemen dengan akar A
-   (A(B()())(C()())) adalah pohon dengan akar A dan subpohon kiri (B()()) dan subpohon kanan (C()()) */
-
-void printInorder(BinTree p) {
-    printf("(");
-    if (p != NULL) {
-        printInorder(Kiri(p));
-        printf("%d", Akar(p));
-        printInorder(Kanan(p));
-    }
-    printf(")");
-}
-/* I.S. p terdefinisi */
-/* F.S. Semua simpul p sudah dicetak secara inorder: pohon kiri, akar, dan pohon kanan. 
-   Setiap pohon ditandai dengan tanda kurung buka dan kurung tutup (). 
-   Pohon kosong ditandai dengan ().
-   Tidak ada tambahan karakter apa pun di depan, tengah, atau akhir. */
-/* Contoh: 
-   (()A()) adalah pohon dengan 1 elemen dengan akar A
-   ((()B())A(()C())) adalah pohon dengan akar A dan subpohon kiri (()B()) dan subpohon kanan (()C()) */
-
-void printPostorder(BinTree p) {
-    printf("(");
-    if (p != NULL) {
-        printPostorder(Kiri(p));
-        printPostorder(Kanan(p));
-        printf("%d", Akar(p));
-    }
-    printf(")");
-}
-/* I.S. p terdefinisi */
-/* F.S. Semua simpul p sudah dicetak secara postorder: pohon kiri, pohon kanan, dan akar. 
-   Setiap pohon ditandai dengan tanda kurung buka dan kurung tutup (). 
-   Pohon kosong ditandai dengan ().
-   Tidak ada tambahan karakter apa pun di depan, tengah, atau akhir. */
-/* Contoh: 
-   (()()A) adalah pohon dengan 1 elemen dengan akar A
-   ((()()B)(()()C)A) adalah pohon dengan akar A dan subpohon kiri (()()B) dan subpohon kanan (()()C) */
-
-void printSubTree(BinTree p, int h, int depth) {
-    int i;
-    if (!isTreeEmpty(p)) {
-        for (i = 0; i < depth*h; i++) {
-            printf("%s", " ");
+        printf("%d", Root(p));
+        if(!isOneElmt(p)){
+        for(int i = 0; i < nChild(p); i++)printPreorder(getChild(p,i));
         }
-        printf("%d\n", Akar(p));
-        printSubTree(Kiri(p), h, depth + 1);
-        printSubTree(Kanan(p), h, depth + 1);
+        else printf("()");
+    }
+    printf(")");
+}
+
+void printtree(Tree p, int h, int depth){
+    if (!isTreeEmpty(p)){
+        printf("%*s%d\n", depth*h, "", Root(p));
+        for(int i = 0; i < nChild(p); i++){
+            printtree(getChild(p,i),h,depth+1);
+        }
+    }
+}
+void printTree(Tree p, int h){
+    printtree(p,h,0);
+}
+
+/* *** Searching *** */
+boolean searchTree(Tree p, ElType X){
+    boolean state = false;
+    if(isTreeEmpty(p)){
+        return false;
+    }
+    else if(isOneElmt(p)){
+        return (Root(p)==X);
+    }
+    else{
+        for(int k = 0; k < nChild(p);k++){
+                state |= (Root(p)==X) || (searchTree(getChild(p,k),X));
+        }
+        return state;
     }
 }
 
-void printTree(BinTree p, int h) {
-    int i;
-    if (!isTreeEmpty(p)) {
-        printf("%d\n", Akar(p));
-        printSubTree(Kiri(p), h, 1);
-        printSubTree(Kanan(p), h, 1);
+/* *** Fungsi-Fungsi Lain *** */
+int NbElmt(Tree p){
+    //BASIS
+    
+    if(isTreeEmpty(p)){
+        return 0;
+    }
+    else if(isOneElmt(p)){
+        return 1;
+    }
+    //REKURENS
+    else{
+       int counter = 1;
+       for(int k = 0; k < nChild(p); k++){
+            counter += NbElmt(getChild(p,k)); 
+        }
+        return counter;
     }
 }
-/* I.S. p terdefinisi, h adalah jarak indentasi (spasi) */
-/* F.S. Semua simpul p sudah ditulis dengan indentasi (spasi) */
-/* Penulisan akar selalu pada baris baru (diakhiri newline) */
-/* Contoh, jika h = 2: 
-1) Pohon preorder: (A()()) akan ditulis sbb:
-A
-2) Pohon preorder: (A(B()())(C()())) akan ditulis sbb:
-A
-  B
-  C
-3) Pohon preorder: (A(B(D()())())(C()(E()()))) akan ditulis sbb:
-A
-  B
-    D
-  C
-    E
-Note: Anda boleh membuat fungsi tambahan untuk membuat implementasi fungsi ini jika diperlukan
-*/
+
+int NbDaun(Tree p){
+    int counter = 0;
+    if(isTreeEmpty(p)){
+        return 0;
+    }
+    else if(isOneElmt(p)){
+        return 1;
+    }
+    //REKURENS
+    else{
+       for(int k = 0; k < nChild(p); k++){
+            counter += NbDaun(getChild(p,k)); 
+        }
+        return counter;
+    }
+}
+
+void level(Tree p, ElType x, int depth, int *q){
+    if (!isTreeEmpty(p)){
+        
+        printf("Root sekarang: %d, dengan depth: %d\n",Root(p),depth);
+        if(x == Root(p)) *q = depth;
+        if(!isOneElmt(p)){
+            for(int i = 0; i < nChild(p); i++){
+            level(getChild(p,i),x,depth+1,q);
+        }
+       
+        
+        }
+
+    }
+}
+
+int Level(Tree p, ElType X){
+/* Mengirimkan level dari node X yang merupakan salah satu simpul dari pohon P. 
+   Akar(P) level-nya adalah 1. Pohon P tidak kosong. */
+    if (searchTree(p,X)){
+        int z;
+        level(p,X,1,&z);
+        return z;
+    }
+    else return -1;
+}
+
+void depthh(Tree p, int depth, int *buffer){
+    
+    if(*buffer < depth) *buffer = depth;   
+    for(int i = 0; i < nChild(p); i++){
+        depthh(getChild(p,i),depth+1,buffer);
+    } 
+    
+}
+int Depth(Tree p){
+/* Pohon  mungkin kosong. Tinggi pohon kosong = 0.
+   Mengirim "depth" yaitu kedalaman dari pohon */
+   if(isTreeEmpty(p))
+        return 0;
+    else{
+        int depth = 1;
+        depthh(p,1,&depth);
+        return depth;
+    }
+   
+}
+
+// /* *** Operasi lain *** */
+void addLeaves(Tree *p, Tree child[], int leaves){
+    addressChild(*p) = (Tree) malloc(leaves * sizeof(Tree));
+    if(addressChild(*p) != NULL){
+        for(int i = 0; i<leaves;i++){
+            getChild(*p,i) = child[i];
+        } 
+        nChild(*p) = leaves;
+    }
+    
+}
