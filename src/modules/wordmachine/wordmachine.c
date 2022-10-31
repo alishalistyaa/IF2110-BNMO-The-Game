@@ -59,14 +59,17 @@ void CopyWord(){
             currentChar = BLANK atau currentChar = MARK;
             currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
             Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-    int i;
-    i=0;
-    while((currentChar != MARK) && (currentChar != BLANK)){
-        if(i<50){
-            currentWord.TabWord[i] = currentChar;
-            i++;
-        }
+    int i = 0;
+    while (currentChar != MARK && currentChar != BLANK) {
+        currentWord.TabWord[i] = currentChar;
         ADV();
+        i++;
     }
-    currentWord.Length = i;
+
+    if (i > NMax) {
+        currentWord.Length = NMax;
+    } else {
+        currentWord.Length = i;
+    }
+    currentWord.TabWord[i] = '\0';
 }
