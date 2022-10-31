@@ -29,7 +29,7 @@ void STARTWORD(){
     
     
     IgnoreBlanks();
-    if(currentChar == MARK){
+    if(currentChar == LINEMARK){
         endWord = true;
     }
     else{
@@ -45,7 +45,7 @@ void ADVWORD(){
             Jika currentChar = MARK, EndWord = true.
     Proses : Akuisisi kata menggunakan procedure SalinWord */
     IgnoreBlanks();
-    if (currentChar == MARK){
+    if (currentChar == MARK || currentChar == LINEMARK || currentChar == FILEMARK){
         endWord = true;
     }
     else{

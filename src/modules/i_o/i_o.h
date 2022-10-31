@@ -12,7 +12,8 @@
 #include "../tree/tree.h"
 #include "../charmachine/charmachine.h"
 
-void configMakanan(char *filename, MAKANAN *makanan);
+
+void configMakanan(char *filename, ListStatik *listofMakanan);
 /* Membaca file figurasi config dan membaca makanan */
 /* I.S. Makanan sembarang */
 /* F.S. Makanan terdefinisi dari file */

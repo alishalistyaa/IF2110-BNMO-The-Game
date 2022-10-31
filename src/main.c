@@ -14,6 +14,10 @@
 #include "./modules/time/time.h"
 #include "./modules/tree/tree.h"
 #include "./modules/wordmachine/wordmachine.h"
+// #include "./modules/i_o/i_o.c.h"
+
+Word currentWord;
+boolean endWord;
 
 int main(){
     /* KAMUS */
@@ -21,37 +25,76 @@ int main(){
 
     /* ALGORITMA */
     // Inisialisasi Game
-    start = false;
+    start = true;
     // Variable Main
     char* filename;
-
+    char *command[3];
     // PROGRAM MULAI
-    while (!start){
+    while (start){
         // Splash Screen 
 
         // COMMAND AWAL
-        printf("1. NEW GAME\n");
+        printf("1. START\n");
         printf("2. EXIT\n");
+        // Read command
+        STARTWORD();
+        command[0] = currentWord.TabWord;
+        if (same(command[0], "START")) {
+            // Variable to save the configuration
+            MAP peta;
+            ListStatik listMakanan;
+            // Reading all configuration
+            int count = 0;
+            do {
+                printf("Pastikan file config sudah masuk ke folder config ya!\n");
+                printf("Masukkan nama file config ");
+                if (count == 0) {
+                    printf("makanan: ");
+                } else if (count == 1) {
+                    printf("resep: ");
+                } else if (count == 2) {
+                    printf("peta: ");
+                }
+                scanf("%c", filename);
+                if (!isFileExist(filename)) {
+                    printf("Masukan file tidak valid!");
+                } else {
+                    if (count == 0) {
+                        configMakanan(filename, &listMakanan);
+                    } else if (count == 1) {
+                        configMap(filename, &peta);
+                    } else if (count == 2) {
+                        //configResep (filename, &resep);
+                    }
+                    count++;
+                }
 
-        // if NEW GAME:
-            // CONFIG FILES
-            // do {
-            // printf("Pastikan file config sudah masuk ke folder config ya!\n");
-            // printf("Masukkan nama file config: ");
-            // scanf("%c", filename);
-            // }
-            // while (!isFileExist(filename));
-
-            // INISIALISASI SELURUH OBJECT DAN ADT
-            // CreateMakanan();
-
-            // GAME MULAI
-            while (start){
-                //  Update data
-
-                // IF FINISHED STATE THEN START = FALSE
-
-                
             }
-    }
+            while (count < 3);
+            printf("File konfigurasi telah selesai dibaca\n");
+            // INISIALISASI SELURUH OBJECT DAN ADT
+            // Posisi 
+            SIMULATOR S;
+            POINT P;
+            CreatePoint(&P, 0, 0);
+            // CreateSimulator(SIMULATOR * S, nama, P, inventory)
+            // Waktu
+            TIME T;
+            BacaTIME1(&T);
+            // Notifikasi 
+            // Peta            // CreateMakanan();
+
+             updateState(command[0], makanan, T, )           // GAME MULAI
+ 
+            boolean start1 = true;           while (start){1
+                 //  Update data
+
+                                // IF FINISHED STATE THEN START = FALSE
+
+               
+            }
+ 
+        } else if (same(command[0], "EXIT")) {
+            start = false;
+        }   }
 }

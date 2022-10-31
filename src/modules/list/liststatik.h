@@ -20,7 +20,7 @@ typedef struct {
    MAKANAN contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
 } ListStatik;
 
-#define ELMT(l, i) (l).contents[(i)]
+#define ELMTLIST(l, i) (l).contents[(i)]
 
 //--KONSTRUKTOR--
 
@@ -36,7 +36,7 @@ int lengthList(ListStatik l);
 boolean isFoodValid(ListStatik l, MAKANAN val);
 /* Mengirimkan true jika i adalah elemen yang valid dari list */
 
-boolean isIdxEff(ListStatik l, IdxType i);
+boolean isIdxListEff(ListStatik l, IdxType i);
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk List l */
 /* yaitu antara 0..length(l)-1 */
 

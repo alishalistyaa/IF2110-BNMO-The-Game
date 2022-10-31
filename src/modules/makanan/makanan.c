@@ -15,9 +15,16 @@
 
 
 /* *** Konstruktor: Membentuk sebuah TIME dari komponen-komponennya *** */
-void CreateMakanan();
-/* Membentuk sebuah MAKANAN dari komponen-komponen yang valid */
-/* Prekondisi*/
+void CreateMakanan(MAKANAN *M, int ID, char* Name, TIME Expired, POINT Action, TIME Delivery){
+    /* Membentuk sebuah MAKANAN dari komponen-komponen yang valid */
+    /* Prekondisi*/
+    ID(*M) = ID;
+    NAME(*M) = Name;
+    EXPIRED(*M) = Expired;
+    ACTION(*M) = Action;
+    DELIVERY(*M) = Delivery;
+}
+
 
 /* ***************************************************************** */
 /* KELOMPOK BACA/TULIS                                               */

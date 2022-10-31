@@ -12,7 +12,14 @@
         "map.h": "c",
         "point.h": "c",
         "stack.h": "c",
+<<<<<<< HEAD
         "tree.h": "c",
         "iodummy.h": "c"
+=======
+        "__locale": "c",
+        "__string": "c",
+        "string": "c",
+        "string_view": "c"
+>>>>>>> df0276a100ed961dd07a4ed747cf15a025e82989
     }
 }
