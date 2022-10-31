@@ -9,11 +9,11 @@
 #define ROW_CAP 100
 #define COL_CAP 100
 
-typedef int IdxType; /* Index baris, kolom */
-typedef char ElType;
+typedef int IdxTypeMAT; /* Index baris, kolom */
+typedef char ElTypeMAT;
 typedef struct
 {
-   ElType mem[ROW_CAP][COL_CAP];
+   ElTypeMAT mem[ROW_CAP][COL_CAP];
    int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
    int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } Matrix;
@@ -38,13 +38,13 @@ boolean isMatrixIdxValid(int i, int j);
 /* Mengirimkan true jika i, j adalah index yang valid untuk matriks apa pun */
 
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
-IdxType getLastIdxRow(Matrix m);
+IdxTypeMAT getLastIdxRow(Matrix m);
 /* Mengirimkan Index baris terbesar m */
-IdxType getLastIdxCol(Matrix m);
+IdxTypeMAT getLastIdxCol(Matrix m);
 /* Mengirimkan Index kolom terbesar m */
-boolean isIdxEff(Matrix m, IdxType i, IdxType j);
+boolean isIdxEff(Matrix m, IdxTypeMAT i, IdxTypeMAT j);
 /* Mengirimkan true jika i, j adalah Index efektif bagi m */
-ElType getElmtDiagonal(Matrix m, IdxType i);
+ElTypeMAT getElmtDiagonal(Matrix m, IdxTypeMAT i);
 /* Mengirimkan elemen m(i,i) */
 
 /* ********** Assignment  Matrix ********** */

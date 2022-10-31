@@ -8,13 +8,13 @@ Buy
 Ayam Potong
 0 2 0
 0 0 0
-Chop 
-10          
+Chop
+10
 Tepung
 0 1 0
 0 0 30
 Buy
-15          
+15
 Minyak Goreng
 0 1 30
 0 1 0

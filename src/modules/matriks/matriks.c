@@ -24,19 +24,19 @@ boolean isMatrixIdxValid(int i, int j) {
 }
 
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
-IdxType getLastIdxRow(Matrix m) {
+IdxTypeMAT getLastIdxRow(Matrix m) {
 /* Mengirimkan Index baris terbesar m */
     return ROW_EFF(m) - 1;
 }
-IdxType getLastIdxCol(Matrix m) {
+IdxTypeMAT getLastIdxCol(Matrix m) {
 /* Mengirimkan Index kolom terbesar m */
     return COL_EFF(m) - 1;
 }
-boolean isIdxEff(Matrix m, IdxType i, IdxType j) {
+boolean isIdxEff(Matrix m, IdxTypeMAT i, IdxTypeMAT j) {
 /* Mengirimkan true jika i, j adalah Index efektif bagi m */
     return i >= 0 && i < ROW_EFF(m) && j >= 0 && j < COL_EFF(m);
 }
-ElType getElmtDiagonal(Matrix m, IdxType i) {
+ElTypeMAT getElmtDiagonal(Matrix m, IdxTypeMAT i) {
 /* Mengirimkan elemen m(i,i) */
     return ELMT(m, i, i);
 }

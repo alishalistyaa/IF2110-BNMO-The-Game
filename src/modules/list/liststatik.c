@@ -6,14 +6,14 @@ void CreateListStatik(ListStatik *l)
     int i;
     for (i=0;i<CAPACITY;i++)
     {
-        ELMT(*l,i).ID=MARKLIST;
+        ELMTLIST(*l,i).ID=MARKLIST;
     }
 }
 
 int lengthList(ListStatik l)
 {
     int i = 0;
-    while(ELMT(l,i).ID!=MARKLIST && i!=CAPACITY)
+    while(ELMTLIST(l,i).ID!=MARKLIST && i!=CAPACITY)
     {
         i++;
     }
@@ -23,9 +23,9 @@ boolean isFoodValid(ListStatik l, MAKANAN val)
 {
     boolean found = false;
     int i = 0;
-    while(ELMT(l,i).ID!=MARKLIST && i!=CAPACITY && !found)
+    while(ELMTLIST(l,i).ID!=MARKLIST && i!=CAPACITY && !found)
     {
-        if(ELMT(l,i).ID==val.ID)
+        if(ELMTLIST(l,i).ID==val.ID)
         {
             found = true;
         }
@@ -36,7 +36,7 @@ boolean isFoodValid(ListStatik l, MAKANAN val)
     }
     return (found);
 }
-boolean isIdxEff(ListStatik l, IdxType i)
+boolean isIdxListEff(ListStatik l, IdxType i)
 {
     return(i>=0 && i<lengthList(l));
 }
@@ -56,7 +56,7 @@ void insert(ListStatik *l,MAKANAN val)
     }
     else
     {
-        ELMT(*l,lengthList(*l)) = val;
+        ELMTLIST(*l,lengthList(*l)) = val;
     }
 }
 void delete(ListStatik *l,MAKANAN *val,IdxType i)
@@ -64,13 +64,13 @@ void delete(ListStatik *l,MAKANAN *val,IdxType i)
     int idx;
     if(i>=0 && i<lengthList(*l))
     {
-        *val = ELMT(*l,i);
+        *val = ELMTLIST(*l,i);
         idx = 0;
         while(idx<lengthList(*l))
         {
             if(idx >= i)
             {
-                ELMT(*l,idx) = ELMT(*l,idx+1);
+                ELMTLIST(*l,idx) = ELMTLIST(*l,idx+1);
                 idx+=1;
             }
             else
@@ -78,7 +78,7 @@ void delete(ListStatik *l,MAKANAN *val,IdxType i)
                 idx+=1;
             }
         }
-        ELMT(*l,idx-1).ID = MARKLIST;
+        ELMTLIST(*l,idx-1).ID = MARKLIST;
     }
     else
     {
@@ -98,16 +98,16 @@ void cetakList(ListStatik l)
     {
         for(i = 0;i<panjang;i++)
         {
-            printf("%i. %c\n",(i+1),ELMT(l,i).Name);
+            printf("%i. %s\n",(i+1),ELMTLIST(l,i).Name);
         }
     }
 }
 void CopyList(ListStatik l1,ListStatik *l2)
 {
     int i = 0;
-    while(ELMT(l1,i).ID!=MARKLIST && i != CAPACITY)
+    while(ELMTLIST(l1,i).ID!=MARKLIST && i != CAPACITY)
     {
-        ELMT(*l2,i) = ELMT(l1,i);
+        ELMTLIST(*l2,i) = ELMTLIST(l1,i);
         i++;
     }
 }

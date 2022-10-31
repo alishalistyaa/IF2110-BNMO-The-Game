@@ -16,7 +16,7 @@ int main(){
             int valWord = currentWord.TabWord[i];
             int val = (int)((valWord - 97) % 26 + 65);
             char huruf = val;
-            printf("%c", huruf);
+            printf("%c", currentWord.TabWord[i]);
         }
         ADVWORD();
         if(!endWord){

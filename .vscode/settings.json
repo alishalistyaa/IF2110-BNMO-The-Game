@@ -11,6 +11,10 @@
         "matriks.h": "c",
         "map.h": "c",
         "point.h": "c",
-        "stack.h": "c"
+        "stack.h": "c",
+        "__locale": "c",
+        "__string": "c",
+        "string": "c",
+        "string_view": "c"
     }
 }
