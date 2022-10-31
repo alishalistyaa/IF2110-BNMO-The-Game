@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-/* Definisi PohonBiner */
-/* pohon Biner kosong p = NULL */
+/* Definisi Pohon */
+/* pohon kosong p = NULL */
 
 Tree newTree(ElType Root,Tree child[], int leaves){
 /* Menghasilkan sebuah pohon n-ary dari root dan child, jika alokasi berhasil 

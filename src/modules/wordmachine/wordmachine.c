@@ -26,6 +26,8 @@ void STARTWORD(){
             atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
             currentChar karakter pertama sesudah karakter terakhir kata */
     START();
+    
+    
     IgnoreBlanks();
     if(currentChar == MARK){
         endWord = true;

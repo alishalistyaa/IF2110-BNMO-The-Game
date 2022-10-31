@@ -6,17 +6,22 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "wordmachine.c"
 #include "wordmachine.h"
+
 
 int main(){
     int i;
     STARTWORD();
     while(!endWord){
         for(i=0; i<currentWord.Length; i++){
+            /*
             int valWord = currentWord.TabWord[i];
             int val = (int)((valWord - 97) % 26 + 65);
             char huruf = val;
             printf("%c", huruf);
+            */
+            printf("%c", currentWord.TabWord[i]);
         }
         ADVWORD();
         if(!endWord){

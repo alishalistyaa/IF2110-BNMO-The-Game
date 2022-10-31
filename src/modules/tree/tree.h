@@ -1,5 +1,5 @@
-/* File : bintree.h */
-/* ADT pohon biner */
+/* File : tree.h */
+/* ADT pohon */
 /* Representasi Address dengan pointer */
 /* ElType adalah integer */
 

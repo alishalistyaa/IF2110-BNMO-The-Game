@@ -3,12 +3,14 @@
 
 #include <stdio.h>
 #include "i_o.h"
-#include "../charmachine/charmachine.c"
+
+
 
 void configMakanan(char *filename, MAKANAN *makanan);
 /* Membaca file figurasi config dan membaca makanan */
 /* I.S. Makanan sembarang */
 /* F.S. Makanan terdefinisi dari file */
+
 
 void configMap(char *filename, MAP *peta){
     /* Membaca file figurasi config dan membaca map */
@@ -64,11 +66,69 @@ void configMap(char *filename, MAP *peta){
     fclose(pita);
 }
 
+void configResep(char *filename, Tree *resep){
+    /* Membaca file figurasi config dan membaca resep */
+    /* I.S. Resep sembarang */
+    /* F.S. Resep terdefinisi dari file */
+    //KAMUS LOKAL
+    int i,j,k;
+    int nResep;
+    int child[100];
+    int ctr;
 
-// void configResep(char *filename, tree *resep);
-/* Membaca file figurasi config dan membaca resep */
-/* I.S. Resep sembarang */
-/* F.S. Resep terdefinisi dari file */
+    nResep = 0;
+    //ALGORITMA
+    ADVFILE(filename);
+    while(currentChar != LINEMARK){
+        nResep = nResep * 10 + (currentChar - 48);
+        ADV();
+    }
+
+    ADV(); // next after LINEMARK
+    //Membuat array of tree
+    Tree *p = (Tree) malloc(nResep*sizeof(Tree));
+
+    for(j = 0; j < nResep; j++){
+        i = 0;
+        while (currentChar != BLANK)
+        {
+            i = i * 10 + (currentChar - 48);
+            ADV();
+        }
+        //currentChar == BLANK
+        p[j] = newTreeNode(i);
+        ADV();
+        
+        ctr = 0;
+        i = 0;
+        while(currentChar != FILEMARK && currentChar != LINEMARK){
+            while (currentChar != BLANK  && currentChar != LINEMARK && currentChar != FILEMARK)
+                {
+                i = i * 10 + (currentChar - 48);
+                ADV();
+                }
+            //currentChar == BLANK or LINEMARK or FILEMARK
+            child[ctr] = i;
+            if(currentChar == BLANK){
+                i = 0;
+                ADV(); //Lanjut ke angka selanjutnya  
+            }
+        }
+
+        addressChild(p[j]) = (Tree) malloc(ctr *sizeof(Tree));
+
+        for(k = 0; k < ctr; k++){
+            getChild(p[j],k) = newTreeNode(child[k]);
+        }
+
+        }
+    
+    resep = p;
+    free(p);
+
+    fclose(pita);
+}
+
 
 boolean validateString();
 /* Mengembalikan true jika string yang dimasukkan valid */

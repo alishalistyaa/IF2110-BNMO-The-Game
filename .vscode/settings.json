@@ -11,6 +11,8 @@
         "matriks.h": "c",
         "map.h": "c",
         "point.h": "c",
-        "stack.h": "c"
+        "stack.h": "c",
+        "tree.h": "c",
+        "iodummy.h": "c"
     }
 }

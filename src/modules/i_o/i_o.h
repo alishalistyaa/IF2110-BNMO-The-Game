@@ -22,13 +22,15 @@ void configMap(char *filename, MAP *peta);
 /* I.S. Map sembarang */
 /* F.S. Map terdefinisi dari file */
 
-// void configResep(char *filename, tree *resep);
+void configResep(char *filename, Tree *resep);
 /* Membaca file figurasi config dan membaca resep */
 /* I.S. Resep sembarang */
 /* F.S. Resep terdefinisi dari file */
 
 boolean validateString();
 /* Mengembalikan true jika string yang dimasukkan valid */
+
+
 
 
 

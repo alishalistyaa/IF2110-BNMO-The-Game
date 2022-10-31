@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../boolean/boolean.h"
-#include "../charmachine/charmachine.h"
+#include "../charmachine/charmachine.c"
 
 #define NMax 50
 #define BLANK ' '

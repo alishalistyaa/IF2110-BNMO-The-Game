@@ -27,13 +27,15 @@ void ADV();
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
+          
+void ADVFILE(char *filename);
+/* ADV() tetapi menerima input dari file */
 
 /* OPERATOR TAMBAHAN */
 boolean isFileExist();
 /* Mengembalikan true apabila File yang dituju ada dan tidak kosong.*/
 /* C tidak support exception handling, jadi alternatifnya pake ini. */
 
-void ADVFile();
-/* ADV() tetapi menerima input dari file */
+
 
 #endif

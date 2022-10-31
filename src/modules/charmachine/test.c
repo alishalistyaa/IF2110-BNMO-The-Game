@@ -2,9 +2,13 @@
 /* Definisi Driver Mesin Karakter */
 
 #include <stdio.h>
-#include "charmachine.h"
+#include "charmachine.c"
 
 int main(){
-    printf("Masukkan filename: ");
+    ADVFILE("../../config/resep.txt");
+    while(currentChar!=EOF){
+        printf("%c",currentChar);
+        ADV();
+    }
     return(0);
 }

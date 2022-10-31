@@ -42,11 +42,14 @@ void ADV()
        }
 }
 
-void ADVFILE(const char *filename){
+void ADVFILE(char *filename){
        /* ADV() tetapi menerima input dari file */
        pita = fopen(filename, "r");
        ADV();
 }
+
+
+
 
 // void ADVFILE()
 // {
