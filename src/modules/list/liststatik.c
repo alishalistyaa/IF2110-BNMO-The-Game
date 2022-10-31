@@ -6,26 +6,26 @@ void CreateListStatik(ListStatik *l)
     int i;
     for (i=0;i<CAPACITY;i++)
     {
-        ELMT(*l,i)=MARKLIST;
+        ELMT(*l,i).ID=MARKLIST;
     }
 }
 
 int lengthList(ListStatik l)
 {
     int i = 0;
-    while(ELMT(l,i)!=MARKLIST && i!=CAPACITY)
+    while(ELMT(l,i).ID!=MARKLIST && i!=CAPACITY)
     {
         i++;
     }
     return (i);
 }
-boolean isValValid(ListStatik l, ElType val)
+boolean isFoodValid(ListStatik l, MAKANAN val)
 {
     boolean found = false;
     int i = 0;
-    while(ELMT(l,i)!=MARKLIST && i!=CAPACITY && !found)
+    while(ELMT(l,i).ID!=MARKLIST && i!=CAPACITY && !found)
     {
-        if(ELMT(l,i)==val)
+        if(ELMT(l,i).ID==val.ID)
         {
             found = true;
         }
@@ -48,11 +48,18 @@ boolean isFull(ListStatik l)
 {
     return(lengthList(l)==CAPACITY);
 }
-void insert(ListStatik *l,ElType val)
+void insert(ListStatik *l,MAKANAN val)
 {
-    ELMT(*l,lengthList(*l)) = val;
+    if(isFull(*l))
+    {
+        printf("List penuh\n");
+    }
+    else
+    {
+        ELMT(*l,lengthList(*l)) = val;
+    }
 }
-void delete(ListStatik *l,ElType *val,IdxType i)
+void delete(ListStatik *l,MAKANAN *val,IdxType i)
 {
     int idx;
     if(i>=0 && i<lengthList(*l))
@@ -71,33 +78,12 @@ void delete(ListStatik *l,ElType *val,IdxType i)
                 idx+=1;
             }
         }
-        ELMT(*l,idx-1) = MARKLIST;
+        ELMT(*l,idx-1).ID = MARKLIST;
     }
     else
     {
-        *val = MARKLIST;
+        (*val).ID = MARKLIST;
         printf("Index tidak terdapat di list");
-    }
-}
-void bacaList(ListStatik *l)
-{
-    int n;
-    int i;
-    printf("Masukkan banyak item yang akan dimasukkan ke dalam list = ");
-    scanf("%i",&n);
-    while (n<0 || n>CAPACITY)
-    {
-        printf("Masukkan salah,silahkan input lagi = ");
-        scanf("%i",&n);
-    }
-    CreateListStatik(l);
-    if(n!=0)
-    {
-        for(i=0;i<n;i++)
-        {
-            printf("Masukkan ID makanan/resep %i = \n",(i+1));
-            scanf("%i",&ELMT(*l,i));
-        }
     }
 }
 void cetakList(ListStatik l)
@@ -112,14 +98,14 @@ void cetakList(ListStatik l)
     {
         for(i = 0;i<panjang;i++)
         {
-            printf("%i. %i\n",(i+1),ELMT(l,i));
+            printf("%i. %c\n",(i+1),ELMT(l,i).Name);
         }
     }
 }
 void CopyList(ListStatik l1,ListStatik *l2)
 {
     int i = 0;
-    while(ELMT(l1,i)!=MARKLIST && i != CAPACITY)
+    while(ELMT(l1,i).ID!=MARKLIST && i != CAPACITY)
     {
         ELMT(*l2,i) = ELMT(l1,i);
         i++;

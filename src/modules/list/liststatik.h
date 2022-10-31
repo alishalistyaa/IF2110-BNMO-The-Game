@@ -2,6 +2,7 @@
 #define LISTSTATIK_H
 
 #include "../boolean/boolean.h"
+#include "../makanan/makanan.h"
 
 /*  Kamus Umum */
 #define CAPACITY 100
@@ -14,10 +15,9 @@
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef int ElType;  /* type elemen List */
 typedef int IdxType;
 typedef struct {
-   ElType contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
+   MAKANAN contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
 } ListStatik;
 
 #define ELMT(l, i) (l).contents[(i)]
@@ -33,7 +33,7 @@ int lengthList(ListStatik l);
 /* Mengirimkan banyaknya elemen efektif List */
 /* Mengirimkan nol jika List kosong */  
 
-boolean isValValid(ListStatik l, ElType val);
+boolean isFoodValid(ListStatik l, MAKANAN val);
 /* Mengirimkan true jika i adalah elemen yang valid dari list */
 
 boolean isIdxEff(ListStatik l, IdxType i);
@@ -47,22 +47,11 @@ boolean isEmpty(ListStatik l);
 boolean isFull(ListStatik l);
 /* Mengirimkan true jika List l penuh, mengirimkan false jika tidak */
 
-void insert(ListStatik *l,ElType val);
+void insert(ListStatik *l,MAKANAN val);
 /* Menambah elemen val sebagai elemen terakhir list*/
 
-void delete(ListStatik *l,ElType *val,IdxType i);
+void delete(ListStatik *l,MAKANAN *val,IdxType i);
 /*Menghapus elemen indeks ke i pada list*/
-
-void bacaList(ListStatik *l);
-/* I.S. l sembarang */
-/* F.S. List l terdefinisi */
-/* Proses: membaca banyaknya elemen l dan mengisi nilainya */
-/* 1. Baca banyaknya elemen diakhiri enter, misalnya n */
-/*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= CAPACITY */
-/*    Jika n tidak valid, tidak diberikan pesan kesalahan */
-/* 2. Jika 0 < n <= CAPACITY; Lakukan n kali: 
-          Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
-/*    Jika n = 0; hanya terbentuk List kosong */
 
 void cetakList(ListStatik l);
 /* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung 
@@ -71,9 +60,9 @@ void cetakList(ListStatik l);
 /* I.S. l boleh kosong */
 /* F.S. Jika l tidak kosong akan mencetak secara terurut dari indeks 1 ke indeks (length-1) */
 /* Contoh : jika ada tiga elemen*/
-/* 1 . ID ke 1*/
-/* 2 . ID ke 2*/
-/* 3 . ID ke 3*/
+/* 1 . Nama makanan 1*/
+/* 2 . Nama makanan 2*/
+/* 3 . Nama makanan 3*/
 void CopyList(ListStatik l1,ListStatik *l2);
 /*Menyalin semua elemen di list 1 ke list 2*/
 
