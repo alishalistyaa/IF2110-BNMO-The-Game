@@ -54,9 +54,6 @@ void delete(ListStatik *l,MAKANAN *val,IdxType i);
 /*Menghapus elemen indeks ke i pada list*/
 
 void cetakList(ListStatik l);
-/* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung 
-   siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
-   karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
 /* I.S. l boleh kosong */
 /* F.S. Jika l tidak kosong akan mencetak secara terurut dari indeks 1 ke indeks (length-1) */
 /* Contoh : jika ada tiga elemen*/
