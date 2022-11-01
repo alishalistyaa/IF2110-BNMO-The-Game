@@ -5,12 +5,13 @@
 #define Nil -1
 #include"../time/time.h"
 #include"../boolean/boolean.h"
+#include"../makanan/makanan.h"
 #include<stdio.h>
 #include<stdlib.h>
 
 typedef struct
 {
-    TIME * T;
+    MAKANAN * T;
     int HEAD;
     int TAIL;
     int MAXEL;
@@ -38,11 +39,11 @@ void MakeEmpty(queue * Q,int Max);
 /*Membuat queue kosong dengan tabel memori berukuran Max+1*/
 void Dealokasi(queue *Q);
 /*Q pernah dialokasi,dan Q menjadi tidak terdefinisi (Q).MAXEL = 0*/
-void EnqueuePrio(queue *Q,TIME time);
+void EnqueuePrio(queue *Q,MAKANAN time);
 /*Menambah T ke dalam Q dengan aturan priority queue,terurut membesar berdasarkan waktu*/
-void Enqueue(queue *Q,TIME time);
+void Enqueue(queue *Q,MAKANAN time);
 /*Menambah T ke dalam Q secara sederhana*/
-void Dequeue(queue *Q,TIME *time);
+void Dequeue(queue *Q,MAKANAN *time);
 /*Menghapus M pada Q*/
 void Display(queue Q);
 /*Menampilkan isi dari queue*/
