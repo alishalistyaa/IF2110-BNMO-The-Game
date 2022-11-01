@@ -101,7 +101,7 @@ void cetakList(ListStatik l)
         for(j = 0;j<panjang;j++)
         {
             printf("\n id makanan: %d\n",ID(ELMTLIST(l,j)));
-            printf("%i. nama makanan: %s\n",(j+1),NAME(ELMTLIST(l,j)));
+            printf("%i. nama makanan: %s\n",(j+1), NAME(ELMTLIST(l,j)));
             printf("delivery: ");
             TulisTIME2(DELIVERY(ELMTLIST(l,j)));
             printf("\n expired: ");

@@ -20,4 +20,13 @@ int main(){
     }
     
     cetakList(l);
+
+    Matrix peta;
+    if (isFileExist("peta.txt")){
+        printf("%d\n", 1);
+        configMap("peta.txt", &peta);
+    } else {
+        printf("%d\n", 0);
+    }
+    displayMatrix(peta);
 }

@@ -12,9 +12,7 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
     int countMakanan;
     int i;
     int tempID;
-    char *tempName;
     TIME tempExpired;
-    char *tempActionWord;
     POINT tempActionPoint;
     TIME tempDelivery;
 
@@ -49,7 +47,13 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
         /* BACA JUDUL */
         ADV(); // next after LINEMARK
         CopyWord();
-        tempName = currentWord.TabWord;
+        char tempName[50]= "";
+        for (int j=0; j<currentWord.Length; j++){
+            char temp = currentWord.TabWord[j];
+            tempName[j] = temp;
+        }
+        // tempName = currentWord.TabWord;
+        printf("%s\n", tempName);
 
         // TESTING
         // printf("DONE JUDUL\n");
@@ -103,7 +107,12 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
         /* BACA ACTION */
         ADV();
         CopyWord(); // next after LINEMARK
-         tempActionWord = currentWord.TabWord;
+        char tempActionWord[50]= "";
+        for (int j=0; j<currentWord.Length; j++){
+            char temp = currentWord.TabWord[j];
+            tempActionWord[j] = temp;
+        }
+        printf("%s\n", tempActionWord);
 
         // Convert Action to Point
         CreatePoint(&tempActionPoint, 0, 0);
@@ -112,7 +121,7 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
         // printf("Done ACTION\n");
 
         MAKANAN M;
-        CreateMakanan(&M, tempID, tempName, tempExpired, tempActionPoint, tempDelivery);
+        CreateMakanan(&M, tempID, *tempName, tempExpired, tempActionPoint, tempDelivery);
         insert(listofMakanan, M);
 
         // TESTING
@@ -123,18 +132,15 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
 
 
 
-void configMap(char *filename, MAP *peta){
+void configMap(char *filename, Matrix *m){
     /* Membaca file figurasi config dan membaca map */
     /* I.S. Map sembarang */
     /* F.S. Map terdefinisi dari file */
     /* Prekondisi: filename pasti valid dan exist */
     // KAMUS LOKAL
-    int i;
+    ADVFILE("peta.txt");
+    int i = 0;
     int M[2];
-
-    // ALGORITMA
-    ADVFILE(filename);
-    i = 0;
     while (currentChar != LINEMARK) {
         int value = 0;
         while (currentChar != BLANK && currentChar != LINEMARK) {
@@ -148,15 +154,16 @@ void configMap(char *filename, MAP *peta){
         i++;
     }    
     
-    createMatrix(M[0] + 2, M[1] + 2, &(MATRIX(*peta)));
+    Matrix m;
+    createMatrix(M[0] + 2, M[1] + 2, &m);
     // creating border for matrix peta
     for (int i = 0; i < M[1] + 2; i++) {
-        (*peta).m.mem[0][i] = '*';
-        (*peta).m.mem[M[0] + 1][i] = '*';
+        (*m).mem[0][i] = '*';
+        (*m).mem[M[0] + 1][i] = '*';
     }
     for (int i = 0; i < M[0] + 2; i++) {
-        (*peta).m.mem[i][0] = '*';
-        (*peta).m.mem[i][M[1] + 1] = '*';
+        (*m).mem[i][0] = '*';
+        (*m).mem[i][M[1] + 1] = '*';
     }
 
     ADV(); // next after LINEMARK
@@ -167,10 +174,10 @@ void configMap(char *filename, MAP *peta){
             }
             for (int j = 1; j < M[1] + 1; j++) {
                 if (currentChar == '#') {
-                    (*peta).m.mem[i][j] = BLANK;
+                    (*m).mem[i][j] = BLANK;
                     ADV();
                 } else {
-                    (*peta).m.mem[i][j] = currentChar;
+                    (*m).mem[i][j] = currentChar;
                     ADV();
                 }
             }
