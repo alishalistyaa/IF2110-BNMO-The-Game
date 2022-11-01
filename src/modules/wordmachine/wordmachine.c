@@ -35,6 +35,7 @@ void STARTWORD(){
     else{
         endWord = false;
         CopyWord();
+        IgnoreBlanks();
     }
 }
 
@@ -49,6 +50,7 @@ void ADVWORD(){
         endWord = true;
     }
     else{
+        endWord = false;
         CopyWord();
         IgnoreBlanks();
     }
@@ -74,4 +76,14 @@ void CopyWord(){
         currentWord.Length = i;
     }
     currentWord.TabWord[i] = '\0';
+}
+
+void LowerCase(){
+    /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
+    /* F.S. currentword menjadi lowercase di setiap karakternya */
+    for(int i=0; i<currentWord.Length; i++){
+        if((currentWord.TabWord[i] >=65) && (currentWord.TabWord[i] <= 90)){
+            currentWord.TabWord[i] += 32;
+        }
+    }
 }
