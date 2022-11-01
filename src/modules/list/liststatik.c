@@ -1,5 +1,7 @@
 #include "liststatik.h"
 #include "../boolean/boolean.h"
+#include "../time/time.h"
+#include "../point/point.h"
 #include <stdio.h>
 void CreateListStatik(ListStatik *l)
 {
@@ -89,16 +91,26 @@ void delete(ListStatik *l,MAKANAN *val,IdxType i)
 void cetakList(ListStatik l)
 {
     int panjang = lengthList(l);
-    int i;
+    int j;
     if(panjang == 0)
     {
         printf("List kosong");
     }
     else
     {
-        for(i = 0;i<panjang;i++)
+        for(j = 0;j<panjang;j++)
         {
-            printf("%i. %s\n",(i+1),ELMTLIST(l,i).Name);
+            printf("\n id makanan: %d\n",ID(ELMTLIST(l,j)));
+            printf("%i. nama makanan: %s\n",(j+1),NAME(ELMTLIST(l,j)));
+            printf("delivery: ");
+            TulisTIME2(DELIVERY(ELMTLIST(l,j)));
+            printf("\n expired: ");
+            TulisTIME2(EXPIRED(ELMTLIST(l,j)));
+            printf("\n action: ");
+            TulisPOINT(ACTION(ELMTLIST(l,j)));
+            printf("\n");
+
+            
         }
     }
 }

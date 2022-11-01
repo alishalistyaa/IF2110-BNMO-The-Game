@@ -9,16 +9,20 @@ void CreateSimulator(SIMULATOR * S, char X[], POINT P, PrioQueue I){
 /*  I.S. : sembarang
     F.S. : membentuk simulator yang tersusun atas
            currentUsername, currentlocation, and currentInventort */
-    Location(*S) = P;
-    Name(*S) = X; 
-    PrioQueue(*S) = I;
+    copySimulatorName(X, Nama(*S));
+    Location(*S) = P; 
+    Inventory(*S) = I;
 }
 
 /** Primitif SIMULATOR **/
-char * getName(SIMULATOR S){
+void copySimulatorName(char input[], char output[]){
 /*  I.S. : sembarang
-    F.S. : mendapatkan currentName dari SIMULATOR */
-    return (Name(S));
+    F.S. : melakukan traversal untuk mengcopy simulator */
+    for(int i=0; i<100; i++){
+        if(input[i] != '\n'){
+            output[i] = input[i];
+        }
+    }
 }
 
 POINT getLocation(SIMULATOR S){
@@ -31,12 +35,6 @@ PrioQueue getInventory(SIMULATOR S){
 /*  I.S. : sembarang
     F.S. : mendapatkan currentInventory dari SIMULATOR */
     return (Inventory(S));
-}
-
-void setName(SIMULATOR * S, char X[]){
-/*  I.S. : sembarang
-    F.S. : meng-set currentName pada SIMULATOR */
-    Name(*S) = X;
 }
 
 void setLocation(SIMULATOR * S, POINT P){

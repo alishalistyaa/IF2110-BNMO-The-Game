@@ -17,6 +17,7 @@ void IgnoreBlanks(){
     F.S. : currentChar ≠ BLANK atau currentChar = MARK */
     while(currentChar == BLANK){
         ADV();
+        printf("Detected blank!");
     }
 }
 
@@ -27,7 +28,6 @@ void STARTWORD(){
             currentChar karakter pertama sesudah karakter terakhir kata */
     START();
     
-    
     IgnoreBlanks();
     if(currentChar == LINEMARK){
         endWord = true;
@@ -35,6 +35,7 @@ void STARTWORD(){
     else{
         endWord = false;
         CopyWord();
+        IgnoreBlanks();
     }
 }
 
@@ -47,10 +48,14 @@ void ADVWORD(){
     IgnoreBlanks();
     if (currentChar == MARK || currentChar == LINEMARK || currentChar == FILEMARK){
         endWord = true;
+        printf("endword!");
     }
     else{
+        endWord = false;
         CopyWord();
         IgnoreBlanks();
+        // testing
+        printf("copied!");
     }
 }
 
@@ -62,7 +67,7 @@ void CopyWord(){
             currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
             Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
     int i = 0;
-    while (currentChar != MARK && currentChar != BLANK) {
+    while (currentChar != LINEMARK) {
         currentWord.TabWord[i] = currentChar;
         ADV();
         i++;
@@ -74,4 +79,14 @@ void CopyWord(){
         currentWord.Length = i;
     }
     currentWord.TabWord[i] = '\0';
+}
+
+void LowerCase(){
+    /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
+    /* F.S. currentword menjadi lowercase di setiap karakternya */
+    for(int i=0; i<currentWord.Length; i++){
+        if((currentWord.TabWord[i] >=65) && (currentWord.TabWord[i] <= 90)){
+            currentWord.TabWord[i] += 32;
+        }
+    }
 }

@@ -9,6 +9,7 @@
 #include "../boolean/boolean.h"
 #include "../point/point.h"
 #include "../matriks/matriks.h"
+#include "../prioqueue/prioqueue.h"
 #include "../list/liststatik.h"
 #include "../makanan/makanan.h"
 #include "../wordmachine/wordmachine.h"
@@ -16,11 +17,12 @@
 
 /***** Definisi TYPE LOKASI *****/
 typedef struct{
-    char NAME[];
-    POINT LOCATION;
-    PrioQueue INVENTORY;
+    char NAME[100]; /* Nama User */
+    POINT LOCATION; /* Koordinat Lokasi pada Map */
+    PrioQueue INVENTORY; /* Inventory */
 } SIMULATOR;
 
+/* NOTASI AKSES: Selektor SIMULATOR */
 #define Name(S) (S).NAME
 #define Location(S) (S).LOCATION
 #define Inventory(S) (S).INVENTORY
@@ -33,9 +35,9 @@ void CreateSimulator(SIMULATOR * S, char X[], POINT P, PrioQueue I);
            currentUsername, currentlocation, and currentInventort */
 
 /** Primitif SIMULATOR **/
-char * getName(SIMULATOR S);
+void copySimulatorName(char input[], char output[]);
 /*  I.S. : sembarang
-    F.S. : mendapatkan currentName dari SIMULATOR */
+    F.S. : melakukan traversal untuk mengcopy simulator */
 
 POINT getLocation(SIMULATOR S);
 /*  I.S. : sembarang
@@ -44,10 +46,6 @@ POINT getLocation(SIMULATOR S);
 PrioQueue getInventory(SIMULATOR S);
 /*  I.S. : sembarang
     F.S. : mendapatkan currentInventory dari SIMULATOR */
-
-void setName(SIMULATOR * S, char X[]);
-/*  I.S. : sembarang
-    F.S. : meng-set currentName pada SIMULATOR */
 
 void setLocation(SIMULATOR * S, POINT P);
 /*  I.S. : sembarang

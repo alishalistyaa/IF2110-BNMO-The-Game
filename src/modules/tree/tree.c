@@ -149,8 +149,6 @@ void level(Tree p, ElType x, int depth, int *q){
             for(int i = 0; i < nChild(p); i++){
             level(getChild(p,i),x,depth+1,q);
         }
-       
-        
         }
 
     }

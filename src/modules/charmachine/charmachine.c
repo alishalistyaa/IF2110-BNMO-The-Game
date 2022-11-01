@@ -48,9 +48,6 @@ void ADVFILE(char *filename){
        ADV();
 }
 
-
-
-
 // void ADVFILE()
 // {
 //        /* Pita dimajukan satu karakter.

@@ -24,13 +24,10 @@ int main(){
     CreatePrioQueue(&I);
     CreatePrioQueue(&I1);
     CreateSimulator(&S, name, P, I);
-    printf("%s", getName(S));
     printf("<%d,%d>", getLocation(S).X, getLocation(S).Y);
     printf("%s", getInventory(S));
-    setName(&S, name1);
     setLocation(&S, P1);
     setInventory(&S, I1);
-    printf("%s", getName(S));
     printf("<%d,%d>", getLocation(S).X, getLocation(S).Y);
     printf("%s", getInventory(S));
     return 0;   
