@@ -9,7 +9,7 @@ void CreateSimulator(SIMULATOR * S, char X[], POINT P, PrioQueue I){
 /*  I.S. : sembarang
     F.S. : membentuk simulator yang tersusun atas
            currentUsername, currentlocation, and currentInventort */
-    copySimulatorName(X, Nama(*S));
+    copySimulatorName(X, Name(*S));
     Location(*S) = P; 
     Inventory(*S) = I;
 }

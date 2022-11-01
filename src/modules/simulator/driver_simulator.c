@@ -6,7 +6,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../point/point.h"
+#include "../time/time.c"
+#include "../prioqueue/prioqueue.c"
+#include "../point/point.c"
+#include "../makanan/makanan.c"
 #include "simulator.c"
 
 int main(){
@@ -15,20 +18,28 @@ int main(){
     POINT P1;
     char * name;
     char * name1;
+    char * namaMakanan;
+    TIME T1, T2;
+    CreateTime(&T1, 1, 1, 1);
+    CreateTime(&T2, 2, 2, 2);
+    namaMakanan = "Tahu";
     PrioQueue I;
-    PrioQueue I1;
+    MAKANAN m;
+    float x1=20, y1=20;
+    float x2=30, y2=30;
     name = "Coba";
     name1 = "Coba1";
-    CreatePoint(&P, 1, 1);
-    CreatePoint(&P1, 2, 2);
-    CreatePrioQueue(&I);
-    CreatePrioQueue(&I1);
+    CreatePoint(&P, x1, y1);
+    CreatePoint(&P1, x2, y2);
+    MakeEmpty(&I, 100);
     CreateSimulator(&S, name, P, I);
-    printf("<%d,%d>", getLocation(S).X, getLocation(S).Y);
-    printf("%s", getInventory(S));
+    printf("<%.2f,%.2f>\n", getLocation(S).X, getLocation(S).Y);
+    printInventory(getInventory(S));
     setLocation(&S, P1);
-    setInventory(&S, I1);
-    printf("<%d,%d>", getLocation(S).X, getLocation(S).Y);
-    printf("%s", getInventory(S));
+    CreateMakanan(&m, 15, namaMakanan, T1, P, T2);
+    Enqueue(&I, m);
+    setInventory(&S, I);
+    printf("<%.2f,%.2f>\n", getLocation(S).X, getLocation(S).Y);
+    printInventory(getInventory(S));
     return 0;   
 }

@@ -6,9 +6,9 @@
 #ifndef PrioQueue_H
 #define PrioQueue_H
 
-#include "../modules/boolean/boolean.h"
-#include "../modules/makanan/makanan.h"
-#include "../modules/time/time.h"
+#include "../boolean/boolean.h"
+#include "../makanan/makanan.h"
+#include "../time/time.h"
 
 #define Nil -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
