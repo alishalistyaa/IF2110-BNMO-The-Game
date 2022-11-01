@@ -17,6 +17,7 @@ void IgnoreBlanks(){
     F.S. : currentChar ≠ BLANK atau currentChar = MARK */
     while(currentChar == BLANK){
         ADV();
+        printf("Detected blank!");
     }
 }
 
@@ -26,7 +27,6 @@ void STARTWORD(){
             atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
             currentChar karakter pertama sesudah karakter terakhir kata */
     START();
-    
     
     IgnoreBlanks();
     if(currentChar == LINEMARK){
@@ -47,10 +47,13 @@ void ADVWORD(){
     IgnoreBlanks();
     if (currentChar == MARK || currentChar == LINEMARK || currentChar == FILEMARK){
         endWord = true;
+        printf("endword!");
     }
     else{
         CopyWord();
         IgnoreBlanks();
+        // testing
+        printf("copied!");
     }
 }
 
@@ -62,7 +65,7 @@ void CopyWord(){
             currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
             Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
     int i = 0;
-    while (currentChar != MARK && currentChar != BLANK) {
+    while (currentChar != LINEMARK) {
         currentWord.TabWord[i] = currentChar;
         ADV();
         i++;

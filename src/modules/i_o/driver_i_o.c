@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "i_o.h"
-#include "../charmachine/charmachine.c"
+#include "i_o.c"
 #include "../wordmachine/wordmachine.c"
 #include "../makanan/makanan.c"
 #include "../boolean/boolean.h"
@@ -8,7 +7,7 @@
 #include "../time/time.c"
 #include "../list/liststatik.c"
 #include "../matriks/matriks.c"
-#include "../i_o/i_o.c"
+#include "../tree/tree.c"
 
 int main(){
     ListStatik l;

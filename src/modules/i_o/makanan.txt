@@ -19,12 +19,12 @@ Minyak Goreng
 0 1 30
 0 1 0
 Buy
-31          
+31
 Ayam Tepung
 0 0 30
 0 0 0
 Mix
-37          
+37
 Ayam Goreng
 0 0 15
 0 0 0

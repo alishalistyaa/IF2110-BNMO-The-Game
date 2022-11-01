@@ -28,13 +28,11 @@ void configResep(char *filename, Tree *resep);
 /* I.S. Resep sembarang */
 /* F.S. Resep terdefinisi dari file */
 
+int stringlen(char *s);
+
+boolean same(char *s1, char *s2);
+
 boolean validateString();
 /* Mengembalikan true jika string yang dimasukkan valid */
-
-
-
-
-
-
 
 #endif

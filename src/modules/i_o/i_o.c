@@ -4,9 +4,6 @@
 #include <stdio.h>
 #include "i_o.h"
 
-static FILE *pita;
-static int retval;
-
 void configMakanan(char *filename, ListStatik *listofMakanan){
     /* Membaca file figurasi config dan membaca makanan */
     /* I.S. Makanan sembarang */
@@ -27,12 +24,15 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
     countMakanan = 0;
     while (currentChar != LINEMARK){
             countMakanan = countMakanan * 10 + (currentChar - 48);
-            ADV();    
+            ADV();
+            IgnoreBlanks();    
     }
+    // testing
     printf("%d\n", countMakanan);
 
     // Membaca makanan sebanyak countMakanan
     for(i = 0; i < countMakanan; i++){
+        printf("i: %d\n", i);
         /* BACA ID */
         tempID = 0;
         ADV(); // next after LINEMARK
@@ -42,12 +42,17 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
                 ADV();
             }      
     }        
+        // testing
+        printf("%d\n", tempID);
 
         /* BACA JUDUL */
-        ADVWORD(); // next after LINEMARK
-            while (!endWord){
-                tempName = currentWord.TabWord;
-            }
+        ADV(); // next after LINEMARK
+        CopyWord(); 
+        tempName = currentWord.TabWord;
+        // printf("%s\n", tempName);
+
+        // TESTING
+        printf("DONE JUDUL\n");
 
         /* BACA EXPIRED */
         ADV(); // next after LINEMARK
@@ -65,8 +70,12 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
                 }
                 countEx++;
         } 
+        
         // Masukkan ke dalam time
-        CreateTime(&tempExpired, LEx[0], LEx[1], LEx[2]);      
+        CreateTime(&tempExpired, LEx[0], LEx[1], LEx[2]); 
+
+        //TESTING
+        // printf("Done EXPIRED\n");     
 
         /* BACA DELIVERY */
         ADV(); //Next after LINEMARK
@@ -87,19 +96,27 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
         // Masukkan ke dalam time
         CreateTime(&tempDelivery, LDeliv[0], LDeliv[1], LDeliv[2]); 
 
+        // TESTING
+        // printf("Done DELIVERY\n");
+
 
         /* BACA ACTION */
-        ADVWORD(); // next after LINEMARK
-            while (!endWord){
-                tempActionWord = currentWord.TabWord;
-            }
+        ADV();
+        CopyWord(); // next after LINEMARK
+         tempActionWord = currentWord.TabWord;
 
         // Convert Action to Point
         CreatePoint(&tempActionPoint, 0, 0);
 
+        // TESTING
+        // printf("Done ACTION\n");
+
         MAKANAN M;
         CreateMakanan(&M, tempID, tempName, tempExpired, tempActionPoint, tempDelivery);
         insert(listofMakanan, M);
+
+        // TESTING
+        // printf("Done MAKANAN\n");
     }
     fclose(pita);
 }
