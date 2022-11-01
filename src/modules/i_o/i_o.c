@@ -32,6 +32,7 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
 
     // Membaca makanan sebanyak countMakanan
     for(i = 0; i < countMakanan; i++){
+        // TESTING
         printf("i: %d\n", i);
         /* BACA ID */
         tempID = 0;
@@ -47,12 +48,11 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
 
         /* BACA JUDUL */
         ADV(); // next after LINEMARK
-        CopyWord(); 
+        CopyWord();
         tempName = currentWord.TabWord;
-        // printf("%s\n", tempName);
 
         // TESTING
-        printf("DONE JUDUL\n");
+        // printf("DONE JUDUL\n");
 
         /* BACA EXPIRED */
         ADV(); // next after LINEMARK

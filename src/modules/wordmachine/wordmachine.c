@@ -48,14 +48,12 @@ void ADVWORD(){
     IgnoreBlanks();
     if (currentChar == MARK || currentChar == LINEMARK || currentChar == FILEMARK){
         endWord = true;
-        printf("endword!");
     }
     else{
         endWord = false;
         CopyWord();
         IgnoreBlanks();
         // testing
-        printf("copied!");
     }
 }
 
