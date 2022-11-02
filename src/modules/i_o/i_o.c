@@ -176,6 +176,7 @@ void configMap(char *filename, MAP *peta){
             }
         }
     }
+    
     fclose(pita);
 }
 
@@ -196,20 +197,24 @@ void configResep(char *filename, Tree *resep){
         nResep = nResep * 10 + (currentChar - 48);
         ADV();
     }
-
+    printf("Banyaknya resep: %d\n",nResep);
     ADV(); // next after LINEMARK
     //Membuat array of tree
-    Tree *p = (Tree) malloc(nResep*sizeof(Tree));
+    resep = (Tree) malloc(nResep*sizeof(Tree));
 
     for(j = 0; j < nResep; j++){
         i = 0;
+        while (currentChar == BLANK || currentChar == LINEMARK) ADV();
         while (currentChar != BLANK)
         {
             i = i * 10 + (currentChar - 48);
+            printf("%c",currentChar);
             ADV();
         }
+        printf("\n");
         //currentChar == BLANK
-        p[j] = newTreeNode(i);
+        resep[j] = newTreeNode(i);
+        printf("root: %d\n",Root(resep[j]));
         ADV();
         
         ctr = 0;
@@ -222,23 +227,25 @@ void configResep(char *filename, Tree *resep){
                 }
             //currentChar == BLANK or LINEMARK or FILEMARK
             child[ctr] = i;
+            printf("child: %d\n",i);
             if(currentChar == BLANK){
+                ctr++;
                 i = 0;
                 ADV(); //Lanjut ke angka selanjutnya  
             }
         }
 
-        addressChild(p[j]) = (Tree) malloc(ctr *sizeof(Tree));
+        addressChild(resep[j]) = (Tree) malloc(ctr *sizeof(Tree));
+        nChild(resep[j]) = ctr+1;
 
-        for(k = 0; k < ctr; k++){
-            getChild(p[j],k) = newTreeNode(child[k]);
+        for(k = 0; k < ctr+1; k++){
+            getChild(resep[j],k) = newTreeNode(child[k]);
+            printf("child %d: %d\n",k, Root(getChild(resep[j],k)));
         }
 
         }
+    for(int i = 0; i<nResep; i++)printTree(resep[i],2);
     
-    resep = p;
-    free(p);
-
     fclose(pita);
 }
 
