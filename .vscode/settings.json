@@ -1,25 +1,9 @@
 {
-    "C_Cpp.errorSquiggles": "Enabled",
     "files.associations": {
         "*.ejs": "html",
         "*.html": "html",
-        "charmachine.h": "c",
-        "boolean.h": "c",
-        "wordmachine.h": "c",
-        "liststatik.h": "c",
         "makanan.h": "c",
-        "matriks.h": "c",
-        "map.h": "c",
-        "point.h": "c",
-        "stack.h": "c",
-<<<<<<< HEAD
-        "tree.h": "c",
-        "iodummy.h": "c"
-=======
-        "__locale": "c",
-        "__string": "c",
-        "string": "c",
-        "string_view": "c"
->>>>>>> df0276a100ed961dd07a4ed747cf15a025e82989
+        "boolean.h": "c",
+        "wordmachine.h": "c"
     }
 }

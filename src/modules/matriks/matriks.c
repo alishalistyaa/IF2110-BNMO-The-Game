@@ -134,3 +134,12 @@ boolean isSquare(Matrix m) {
 /* Mengirimkan true jika m adalah matriks dg ukuran baris dan kolom sama */
     return  ROW_EFF(m) == COL_EFF(m);
 }
+
+boolean isBuilding(char c) {
+/* Mengirimkan true jika c adalah bagian dari building */
+    if (c == 'T' || c == 'F' || c == 'B' || c == 'C' || c == '*') {
+        return true;
+    } else {
+        return false;
+    }
+}

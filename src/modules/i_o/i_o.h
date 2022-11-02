@@ -11,14 +11,14 @@
 #include "../map/map.h"
 #include "../tree/tree.h"
 #include "../charmachine/charmachine.h"
-
+#include "../matriks/matriks.h"
 
 void configMakanan(char *filename, ListStatik *listofMakanan);
 /* Membaca file figurasi config dan membaca makanan */
 /* I.S. Makanan sembarang */
 /* F.S. Makanan terdefinisi dari file */
 
-void configMap(char *filename, MAP *peta);
+void configMap(char *filename, Matrix *m);
 /* Membaca file figurasi config dan membaca map */
 /* I.S. Map sembarang */
 /* F.S. Map terdefinisi dari file */

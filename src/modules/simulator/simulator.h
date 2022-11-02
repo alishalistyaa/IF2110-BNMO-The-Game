@@ -10,7 +10,6 @@
 #include "../point/point.h"
 #include "../matriks/matriks.h"
 #include "../prioqueue/prioqueue.h"
-#include "../list/liststatik.h"
 #include "../makanan/makanan.h"
 #include "../wordmachine/wordmachine.h"
 #include "../map/map.h"

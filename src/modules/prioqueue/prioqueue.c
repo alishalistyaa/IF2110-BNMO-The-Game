@@ -133,14 +133,14 @@ void PrintPrioQueue (PrioQueue Q) {
 }
 
 void printInventory (PrioQueue Q) {
-    if (isEmpty(Q)) {
+    if (IsEmpty(Q)) {
         printf("Tidak terdapat bahan makanan apapun di inventory\n");
     } else if (Tail(Q) == Head(Q)) {
         printf("List Makanan di Inventory\n");
         printf("(nama - waktu sisa kedaluwarsa)\n");
         printf("\t1. ");
-        prinf(""); // nama makanan 
-        print(" - ");
+        printf(""); // nama makanan 
+        printf(" - ");
         TulisTIME2(Time(InfoHead(Q))); // waktu expired
         printf("\n");
     }
@@ -149,8 +149,8 @@ void printInventory (PrioQueue Q) {
         int count = 1;
         for (int i = Head(Q); i <= Tail(Q); i++) {
             printf("\t%d.", count);
-            print(""); // nama makanan
-            print(" - ");
+            printf(""); // nama makanan
+            printf(" - ");
             TulisTIME2(Time(InfoHead(Q))); // waktu expired
             printf("\n");
         }

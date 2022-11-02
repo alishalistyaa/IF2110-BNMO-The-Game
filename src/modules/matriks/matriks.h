@@ -93,4 +93,7 @@ int countElmt(Matrix m);
 boolean isSquare(Matrix m);
 /* Mengirimkan true jika m adalah matriks dg ukuran baris dan kolom sama */
 
+boolean isBuilding(char c);
+/* Mengirimkan true jika c adalah bagian dari building */
+
 #endif

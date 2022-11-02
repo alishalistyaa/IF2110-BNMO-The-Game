@@ -39,7 +39,7 @@ void Dealokasi(queue *Q)
     IDXHEAD(*Q) = Nil;
     IDXTAIL(*Q) = Nil;
 }
-void EnqueuePrio(queue *Q,TIME time)
+void EnqueuePrio(queue *Q,MAKANAN time)
 {
     if(isEmpty(*Q))
     {
@@ -65,7 +65,7 @@ void EnqueuePrio(queue *Q,TIME time)
         boolean swap = false;
         for(int i = IDXHEAD(*Q);i<=IDXTAIL(*Q);i++)
         {
-            if(TLT(time,ELMT(*Q,i)))
+            if(TLT(time.Expired,ELMT(*Q,i).Expired))
             {
                 swap = true;
                 for(int j = IDXTAIL(*Q);j>=i;j--)
@@ -83,7 +83,7 @@ void EnqueuePrio(queue *Q,TIME time)
         }
     }
 }
-void Enqueue(queue *Q,TIME time)
+void Enqueue(queue *Q,MAKANAN time)
 {
     if(isEmpty(*Q))
     {
@@ -97,7 +97,7 @@ void Enqueue(queue *Q,TIME time)
         INFOTAIL(*Q)=time;
     }
 }
-void Dequeue(queue *Q,TIME *time)
+void Dequeue(queue *Q,MAKANAN *time)
 {
     if(IDXHEAD(*Q)==IDXTAIL(*Q))
     {
@@ -128,7 +128,7 @@ void Display(queue Q)
     for(int i = IDXHEAD(Q);i<=IDXTAIL(Q);i++)
     {
         printf("%i. ",i+1);
-        TulisTIME2(ELMT(Q,i));
+        TulisTIME2(ELMT(Q,i).Expired);
         printf("\n");
     }
 }
