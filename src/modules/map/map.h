@@ -33,7 +33,7 @@ typedef struct {
 /* *** Selektor: Untuk sebuah MAP M yang terdefinisi: *** */
 #define ROW_MAP(M) (M).m.rowEff
 #define COL_MAP(M) (M).m.colEff
-#define ElmtMap(M,i,j) ELMT((M).m, (((M).sim.LOCATION).X-1), (((M).sim.LOCATION).Y))
+#define ElmtMap(M,i,j) ELMT((M).m, (i), (j))
 #define S(m) (m).sim.LOCATION
 
 /* Loader */
@@ -56,7 +56,10 @@ void printMap(MAP M);
 /* F.S. map ditampilkan ke layar */
 boolean isNear(MAP M, char ch);
 /* Mengembalikan true jika ada bangunan dengan karakter ch yang berdekatan dengan bangunan lain */
-boolean move_map(MAP *M, Word command);
+void move_map(MAP *M, Word command);
+/* I.S. map terdefinisi */
+/* F.S. map bergerak sesuai dengan command */
+void moveDirection(MAP *M, char direction);
 /* I.S. map terdefinisi */
 /* F.S. map bergerak sesuai dengan command */
 
