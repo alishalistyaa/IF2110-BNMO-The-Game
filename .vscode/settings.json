@@ -4,6 +4,8 @@
         "*.html": "html",
         "makanan.h": "c",
         "boolean.h": "c",
-        "wordmachine.h": "c"
+        "wordmachine.h": "c",
+        "matriks.h": "c",
+        "map": "c"
     }
 }

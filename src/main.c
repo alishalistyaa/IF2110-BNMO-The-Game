@@ -77,14 +77,23 @@ int main(){
             SIMULATOR S;
             POINT P;
             CreatePoint(&P, 0, 0);
-            // CreateSimulator(SIMULATOR * S, nama, P, inventory)
             // Waktu
             TIME T;
             BacaTIME1(&T);
             // Notifikasi 
-            // Peta            // CreateMakanan();
+            // Peta
+            // Makanan
+            MAKANAN M;
+            // CreateMakanan(&M, 0, "Tahu", T, P, T);
+            // Inventory
+            PrioQueue I;
+            MakeEmpty(&I, 100);
+            // Enqueue(&I, M);
+            // Simulator
+            CreateSimulator(&S, "Coba", P, I);
+            // CreateSimulator(SIMULATOR * S, nama, P, inventory)
 
-             updateState(command[0], makanan, T, )           // GAME MULAI
+            updateState(command[0], M, T, );           // GAME MULAI
  
             boolean start1 = true;           while (start){1
                  //  Update data
