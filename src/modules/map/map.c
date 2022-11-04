@@ -242,3 +242,15 @@ void moveDirection(MAP *M, char direction)
         }
     }
 }
+
+boolean isEqual(Word one, Word two) {
+    if (one.Length == two.Length) {
+        for (int i = 0; i < one.Length; i++) {
+            if (one.TabWord[i] != two.TabWord[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
+}

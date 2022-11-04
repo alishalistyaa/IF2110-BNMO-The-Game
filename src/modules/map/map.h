@@ -62,5 +62,6 @@ void move_map(MAP *M, Word command);
 void moveDirection(MAP *M, char direction);
 /* I.S. map terdefinisi */
 /* F.S. map bergerak sesuai dengan command */
+boolean isEqual(Word one, Word two);
 
 #endif

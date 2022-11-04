@@ -187,67 +187,67 @@ void configMap(char *filename, Matrix *m){
 }
 
 
-void configResep(char *filename, BukuResep *b){
-    /* Membaca file figurasi config dan membaca resep */
-    /* I.S. Resep sembarang */
-    /* F.S. Resep terdefinisi dari file */
-    //KAMUS LOKAL
-    int i,j,k;
-    int nResep;
-    int child[100];
-    int ctr;
+// void configResep(char *filename, BukuResep *b){
+//     /* Membaca file figurasi config dan membaca resep */
+//     /* I.S. Resep sembarang */
+//     /* F.S. Resep terdefinisi dari file */
+//     //KAMUS LOKAL
+//     int i,j,k;
+//     int nResep;
+//     int child[100];
+//     int ctr;
 
-    nResep = 0;
-    //ALGORITMA
-    ADVFILE(filename);
-    while(currentChar != LINEMARK){
-        nResep = nResep * 10 + (currentChar - 48);
-        ADV();
-    }
-    BanyakResep(*b) = nResep;
-    ADV(); // next after LINEMARK
+//     nResep = 0;
+//     //ALGORITMA
+//     ADVFILE(filename);
+//     while(currentChar != LINEMARK){
+//         nResep = nResep * 10 + (currentChar - 48);
+//         ADV();
+//     }
+//     BanyakResep(*b) = nResep;
+//     ADV(); // next after LINEMARK
     
 
-    for(j = 0; j < nResep; j++){
-        i = 0;
-        while (currentChar == BLANK || currentChar == LINEMARK) ADV();
-        while (currentChar != BLANK)
-        {
-            i = i * 10 + (currentChar - 48);
-            ADV();
-        }
-        //currentChar == BLANK
-        ELMTBUKURESEP(*b,j) = newTreeNode(i);
-        ADV();
+//     for(j = 0; j < nResep; j++){
+//         i = 0;
+//         while (currentChar == BLANK || currentChar == LINEMARK) ADV();
+//         while (currentChar != BLANK)
+//         {
+//             i = i * 10 + (currentChar - 48);
+//             ADV();
+//         }
+//         //currentChar == BLANK
+//         ELMTBUKURESEP(*b,j) = newTreeNode(i);
+//         ADV();
         
-        ctr = 0;
-        i = 0;
-        while(currentChar != FILEMARK && currentChar != LINEMARK){
-            while (currentChar != BLANK  && currentChar != LINEMARK && currentChar != FILEMARK)
-                {
-                i = i * 10 + (currentChar - 48);
-                ADV();
-                }
-            //currentChar == BLANK or LINEMARK or FILEMARK
-            child[ctr] = i;
-            if(currentChar == BLANK){
-                ctr++;
-                i = 0;
-                ADV(); //Lanjut ke angka selanjutnya  
-            }
-        }
+//         ctr = 0;
+//         i = 0;
+//         while(currentChar != FILEMARK && currentChar != LINEMARK){
+//             while (currentChar != BLANK  && currentChar != LINEMARK && currentChar != FILEMARK)
+//                 {
+//                 i = i * 10 + (currentChar - 48);
+//                 ADV();
+//                 }
+//             //currentChar == BLANK or LINEMARK or FILEMARK
+//             child[ctr] = i;
+//             if(currentChar == BLANK){
+//                 ctr++;
+//                 i = 0;
+//                 ADV(); //Lanjut ke angka selanjutnya  
+//             }
+//         }
 
-        addressChild(ELMTBUKURESEP(*b,j)) = (Tree) malloc(ctr *sizeof(Tree));
-        nChild(ELMTBUKURESEP(*b,j)) = ctr+1;
+//         addressChild(ELMTBUKURESEP(*b,j)) = (Tree) malloc(ctr *sizeof(Tree));
+//         nChild(ELMTBUKURESEP(*b,j)) = ctr+1;
 
-        for(k = 0; k < ctr+1; k++){
-            getChild(ELMTBUKURESEP(*b,j),k) = newTreeNode(child[k]);
-        }
+//         for(k = 0; k < ctr+1; k++){
+//             getChild(ELMTBUKURESEP(*b,j),k) = newTreeNode(child[k]);
+//         }
 
-        }
+//         }
     
-    fclose(pita);
-}
+//     fclose(pita);
+//}
 
 int stringlen(char *s) {
     int length = 0;
@@ -257,10 +257,10 @@ int stringlen(char *s) {
     return length;
 }
 
-boolean same(Word one, Word two) {
-    if (one.Length == two.Length) {
+boolean same(Word one, char *s) {
+    if (one.Length == stringlen(s)) {
         for (int i = 0; i < one.Length; i++) {
-            if (one.TabWord[i] != two.TabWord[i]) {
+            if (one.TabWord[i] != s[i]) {
                 return false;
             }
         }
