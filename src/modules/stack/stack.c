@@ -18,7 +18,7 @@ void CreateEmpty(Stack *S) {
 }
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsEmpty(Stack S) {
+boolean IsEmptyStack(Stack S) {
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
     return Top(S) == Nil;
 }
@@ -31,7 +31,7 @@ void Push(Stack * S, infotype X) {
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
-    if (IsEmpty(*S)) {
+    if (IsEmptyStack(*S)) {
         Top(*S) = 0;
     }
     else {
@@ -53,7 +53,7 @@ void Pop(Stack * S, infotype * X) {
     }
 }
 
-void Undo(Stack *undo, Stack *Redo, char* (*command), MAKANAN *M, TIME *T, POINT *l) {
+void Undo(Stack *undo, Stack *Redo, Word *command, MAKANAN *M, TIME *T, POINT *l) {
 /* Melakukan proses undo */
 /* Menghapus Top dari Stack Undo dan memasukkannya ke Stack Redo */
     infotype s;
@@ -64,19 +64,19 @@ void Undo(Stack *undo, Stack *Redo, char* (*command), MAKANAN *M, TIME *T, POINT
     *l = InfoTop(*undo).l;
     Push(Redo, s);
 }
-void Redo(Stack *undo, Stack *Redo, char* (*command), MAKANAN *M, TIME *T, POINT *l) {
+void Redo(Stack *undo, Stack *Redo, Word *command, MAKANAN *M, TIME *T, POINT *l) {
 /* Melakukan proses redo */
 /* Menghapus Top dari Stack Redo dan memasukkannya ke Stack Undo */
     infotype s;
     Pop(Redo, &s);
-    Push(Undo, s);
+    Push(undo, s);
     *command = InfoTop(*undo).command;
     *M = InfoTop(*undo).M;
     *T = InfoTop(*undo).T;
     *l = InfoTop(*undo).l;
 }
 
-void updateState(char* command, MAKANAN M, TIME T, POINT l, Stack *undo) {
+void updateState(Word command, MAKANAN M, TIME T, POINT l, Stack *undo) {
 /* Menginput atau mengupdate state */
 /* I. S. undo, M, T, l terdefinisi*/
 /* F. S. terbentuk infotype X untuk dan X telah di-push ke stack */

@@ -8,7 +8,7 @@
 #include "./modules/map/map.h"
 #include "./modules/matriks/matriks.h"
 #include "./modules/point/point.h"
-#include "./modules/queue/queue.h"
+// #include "./modules/queue/queue.h"
 #include "./modules/simulator/simulator.h"
 #include "./modules/stack/stack.h"
 #include "./modules/time/time.h"
@@ -28,7 +28,6 @@ int main(){
     start = true;
     // Variable Main
     char* filename;
-    char *command[3];
     // PROGRAM MULAI
     while (start){
         // Splash Screen 
@@ -37,11 +36,12 @@ int main(){
         printf("1. START\n");
         printf("2. EXIT\n");
         // Read command
+        printf("Enter command: ");
         STARTWORD();
-        command[0] = currentWord.TabWord;
-        if (same(command[0], "START")) {
+        if (same(currentWord), "START") {
             // Variable to save the configuration
-            MAP peta;
+            printf("It should enter here\n");
+            Matrix peta;
             ListStatik listMakanan;
             // Reading all configuration
             int count = 0;
@@ -95,11 +95,9 @@ int main(){
 
             updateState(command[0], M, T, );           // GAME MULAI
  
-            boolean start1 = true;           while (start){1
+            boolean start1 = true;           
+            while (start1){
                  //  Update data
-
-                                // IF FINISHED STATE THEN START = FALSE
-
                
             }
  

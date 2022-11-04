@@ -33,7 +33,7 @@ typedef struct {
 /* *** Selektor: Untuk sebuah MAP M yang terdefinisi: *** */
 #define ROW_MAP(M) (M).m.rowEff
 #define COL_MAP(M) (M).m.colEff
-#define ElmtMap(M,i,j) ELMT((M).m, (i), (j))
+#define ElmtMap(M,i,j) ELMTMAT((M).m, (i), (j))
 #define S(m) (m).sim.LOCATION
 
 /* Loader */

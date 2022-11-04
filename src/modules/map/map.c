@@ -27,7 +27,7 @@ void loadMap(MAP *M, char *filename)
 /* F.S. map terbentuk dari file eksternal */
 {
     char *location;
-    START(filename);
+    ADVFILE(filename);
     int i,j,ii,jj;
     int space;
     

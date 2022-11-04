@@ -121,7 +121,7 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
         // printf("Done ACTION\n");
 
         MAKANAN M;
-        CreateMakanan(&M, tempID, *tempName, tempExpired, tempActionPoint, tempDelivery);
+        CreateMakanan(&M, tempID, tempName, tempExpired, tempActionPoint, tempDelivery);
         insert(listofMakanan, M);
 
         // TESTING
@@ -132,60 +132,59 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
 
 
 
-// void configMap(char *filename, Matrix *m){
-//     /* Membaca file figurasi config dan membaca map */
-//     /* I.S. Map sembarang */
-//     /* F.S. Map terdefinisi dari file */
-//     /* Prekondisi: filename pasti valid dan exist */
-//     // KAMUS LOKAL
-//     ADVFILE("peta.txt");
-//     int i = 0;
-//     int M[2];
-//     while (currentChar != LINEMARK) {
-//         int value = 0;
-//         while (currentChar != BLANK && currentChar != LINEMARK) {
-//             value = value * 10 + (currentChar - 48);
-//             ADV();
-//         }
-//         M[i] = value;
-//         if (currentChar == BLANK) {
-//             ADV();
-//         }
-//         i++;
-//     }    
+void configMap(char *filename, Matrix *m){
+    /* Membaca file figurasi config dan membaca map */
+    /* I.S. Map sembarang */
+    /* F.S. Map terdefinisi dari file */
+    /* Prekondisi: filename pasti valid dan exist */
+    // KAMUS LOKAL
+    ADVFILE("peta.txt");
+    int i = 0;
+    int M[2];
+    while (currentChar != LINEMARK) {
+        int value = 0;
+        while (currentChar != BLANK && currentChar != LINEMARK) {
+            value = value * 10 + (currentChar - 48);
+            ADV();
+        }
+        M[i] = value;
+        if (currentChar == BLANK) {
+            ADV();
+        }
+        i++;
+    }    
     
-//     Matrix M;
-//     createMatrix(M[0] + 2, M[1] + 2, &m);
-//     // creating border for matrix peta
-//     for (int i = 0; i < M[1] + 2; i++) {
-//         (*m).mem[0][i] = '*';
-//         (*m).mem[M[0] + 1][i] = '*';
-//     }
-//     for (int i = 0; i < M[0] + 2; i++) {
-//         (*m).mem[i][0] = '*';
-//         (*m).mem[i][M[1] + 1] = '*';
-//     }
+    createMatrix(M[0] + 2, M[1] + 2, m);
+    // creating border for matrix peta
+    for (int i = 0; i < M[1] + 2; i++) {
+        (*m).mem[0][i] = '*';
+        (*m).mem[M[0] + 1][i] = '*';
+    }
+    for (int i = 0; i < M[0] + 2; i++) {
+        (*m).mem[i][0] = '*';
+        (*m).mem[i][M[1] + 1] = '*';
+    }
 
-//     ADV(); // next after LINEMARK
-//     while (currentChar != FILEMARK) {
-//         for (int i = 1; i < M[0] + 1; i++) {
-//             if (currentChar == LINEMARK) {
-//                 ADV();
-//             }
-//             for (int j = 1; j < M[1] + 1; j++) {
-//                 if (currentChar == '#') {
-//                     (*m).mem[i][j] = BLANK;
-//                     ADV();
-//                 } else {
-//                     (*m).mem[i][j] = currentChar;
-//                     ADV();
-//                 }
-//             }
-//         }
-//     }
+    ADV(); // next after LINEMARK
+    while (currentChar != FILEMARK) {
+        for (int i = 1; i < M[0] + 1; i++) {
+            if (currentChar == LINEMARK) {
+                ADV();
+            }
+            for (int j = 1; j < M[1] + 1; j++) {
+                if (currentChar == '#') {
+                    (*m).mem[i][j] = BLANK;
+                    ADV();
+                } else {
+                    (*m).mem[i][j] = currentChar;
+                    ADV();
+                }
+            }
+        }
+    }
     
-//     fclose(pita);
-// }
+    fclose(pita);
+}
 
 
 void configResep(char *filename, BukuResep *b){
@@ -258,10 +257,10 @@ int stringlen(char *s) {
     return length;
 }
 
-boolean same(char *s1, char *s2) {
-    if (stringlen(s1) == stringlen(s2)) {
-        for (int i = 0; i < stringlen(s1); i++) {
-            if (s1[i] != s2[i]) {
+boolean same(Word one, Word two) {
+    if (one.Length == two.Length) {
+        for (int i = 0; i < one.Length; i++) {
+            if (one.TabWord[i] != two.TabWord[i]) {
                 return false;
             }
         }
