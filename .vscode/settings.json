@@ -6,6 +6,7 @@
         "boolean.h": "c",
         "wordmachine.h": "c",
         "matriks.h": "c",
-        "map": "c"
+        "map": "c",
+        "charmachine.h": "c"
     }
 }

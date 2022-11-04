@@ -103,6 +103,21 @@ boolean searchTree(Tree p, ElType X){
     }
 }
 
+Address searchNodeTrue(Tree p, ElType X){ //Terdapat address dengan elemen yang dimaksud
+    if(Root(p) == X) return p;
+    else if(!isOneElmt(p)){
+        for(int i = 0; i < nChild(p); i++){
+            searchNodeTrue(getChild(p,i),X);
+        }
+    }
+}
+Address SearchNode(Tree p, ElType X){
+    if(searchTree(p,X)){
+        searchNodeTrue(p,X);
+    }
+    else return NULL;
+}
+
 /* *** Fungsi-Fungsi Lain *** */
 int NbElmt(Tree p){
     //BASIS

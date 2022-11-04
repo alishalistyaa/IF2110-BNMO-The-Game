@@ -9,12 +9,12 @@
 #include "../list/liststatik.c"
 #include "../matriks/matriks.c"
 #include "../tree/tree.c"
+#include "../resep/resep.c"
 
 int main(){
-    Tree *s;
-
-    configResep("resep.txt",s);
-    printf("\n");
-    printTree(s[0],2);
+    BukuResep b;
+    configResep("resep.txt",&b);
+    
+    cetakResep(b);
     return 0;
 }

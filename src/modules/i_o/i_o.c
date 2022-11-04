@@ -132,62 +132,63 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
 
 
 
-void configMap(char *filename, Matrix *m){
-    /* Membaca file figurasi config dan membaca map */
-    /* I.S. Map sembarang */
-    /* F.S. Map terdefinisi dari file */
-    /* Prekondisi: filename pasti valid dan exist */
-    // KAMUS LOKAL
-    ADVFILE("peta.txt");
-    int i = 0;
-    int M[2];
-    while (currentChar != LINEMARK) {
-        int value = 0;
-        while (currentChar != BLANK && currentChar != LINEMARK) {
-            value = value * 10 + (currentChar - 48);
-            ADV();
-        }
-        M[i] = value;
-        if (currentChar == BLANK) {
-            ADV();
-        }
-        i++;
-    }    
+// void configMap(char *filename, Matrix *m){
+//     /* Membaca file figurasi config dan membaca map */
+//     /* I.S. Map sembarang */
+//     /* F.S. Map terdefinisi dari file */
+//     /* Prekondisi: filename pasti valid dan exist */
+//     // KAMUS LOKAL
+//     ADVFILE("peta.txt");
+//     int i = 0;
+//     int M[2];
+//     while (currentChar != LINEMARK) {
+//         int value = 0;
+//         while (currentChar != BLANK && currentChar != LINEMARK) {
+//             value = value * 10 + (currentChar - 48);
+//             ADV();
+//         }
+//         M[i] = value;
+//         if (currentChar == BLANK) {
+//             ADV();
+//         }
+//         i++;
+//     }    
     
-    Matrix m;
-    createMatrix(M[0] + 2, M[1] + 2, &m);
-    // creating border for matrix peta
-    for (int i = 0; i < M[1] + 2; i++) {
-        (*m).mem[0][i] = '*';
-        (*m).mem[M[0] + 1][i] = '*';
-    }
-    for (int i = 0; i < M[0] + 2; i++) {
-        (*m).mem[i][0] = '*';
-        (*m).mem[i][M[1] + 1] = '*';
-    }
+//     Matrix M;
+//     createMatrix(M[0] + 2, M[1] + 2, &m);
+//     // creating border for matrix peta
+//     for (int i = 0; i < M[1] + 2; i++) {
+//         (*m).mem[0][i] = '*';
+//         (*m).mem[M[0] + 1][i] = '*';
+//     }
+//     for (int i = 0; i < M[0] + 2; i++) {
+//         (*m).mem[i][0] = '*';
+//         (*m).mem[i][M[1] + 1] = '*';
+//     }
 
-    ADV(); // next after LINEMARK
-    while (currentChar != FILEMARK) {
-        for (int i = 1; i < M[0] + 1; i++) {
-            if (currentChar == LINEMARK) {
-                ADV();
-            }
-            for (int j = 1; j < M[1] + 1; j++) {
-                if (currentChar == '#') {
-                    (*m).mem[i][j] = BLANK;
-                    ADV();
-                } else {
-                    (*m).mem[i][j] = currentChar;
-                    ADV();
-                }
-            }
-        }
-    }
+//     ADV(); // next after LINEMARK
+//     while (currentChar != FILEMARK) {
+//         for (int i = 1; i < M[0] + 1; i++) {
+//             if (currentChar == LINEMARK) {
+//                 ADV();
+//             }
+//             for (int j = 1; j < M[1] + 1; j++) {
+//                 if (currentChar == '#') {
+//                     (*m).mem[i][j] = BLANK;
+//                     ADV();
+//                 } else {
+//                     (*m).mem[i][j] = currentChar;
+//                     ADV();
+//                 }
+//             }
+//         }
+//     }
     
-    fclose(pita);
-}
+//     fclose(pita);
+// }
 
-void configResep(char *filename, Tree *resep){
+
+void configResep(char *filename, BukuResep *b){
     /* Membaca file figurasi config dan membaca resep */
     /* I.S. Resep sembarang */
     /* F.S. Resep terdefinisi dari file */
@@ -204,10 +205,9 @@ void configResep(char *filename, Tree *resep){
         nResep = nResep * 10 + (currentChar - 48);
         ADV();
     }
-    printf("Banyaknya resep: %d\n",nResep);
+    BanyakResep(*b) = nResep;
     ADV(); // next after LINEMARK
-    //Membuat array of tree
-    resep = (Tree) malloc(nResep*sizeof(Tree));
+    
 
     for(j = 0; j < nResep; j++){
         i = 0;
@@ -215,13 +215,10 @@ void configResep(char *filename, Tree *resep){
         while (currentChar != BLANK)
         {
             i = i * 10 + (currentChar - 48);
-            printf("%c",currentChar);
             ADV();
         }
-        printf("\n");
         //currentChar == BLANK
-        resep[j] = newTreeNode(i);
-        printf("root: %d\n",Root(resep[j]));
+        ELMTBUKURESEP(*b,j) = newTreeNode(i);
         ADV();
         
         ctr = 0;
@@ -234,7 +231,6 @@ void configResep(char *filename, Tree *resep){
                 }
             //currentChar == BLANK or LINEMARK or FILEMARK
             child[ctr] = i;
-            printf("child: %d\n",i);
             if(currentChar == BLANK){
                 ctr++;
                 i = 0;
@@ -242,20 +238,17 @@ void configResep(char *filename, Tree *resep){
             }
         }
 
-        addressChild(resep[j]) = (Tree) malloc(ctr *sizeof(Tree));
-        nChild(resep[j]) = ctr+1;
+        addressChild(ELMTBUKURESEP(*b,j)) = (Tree) malloc(ctr *sizeof(Tree));
+        nChild(ELMTBUKURESEP(*b,j)) = ctr+1;
 
         for(k = 0; k < ctr+1; k++){
-            getChild(resep[j],k) = newTreeNode(child[k]);
-            printf("child %d: %d\n",k, Root(getChild(resep[j],k)));
+            getChild(ELMTBUKURESEP(*b,j),k) = newTreeNode(child[k]);
         }
 
         }
-    for(int i = 0; i<nResep; i++)printTree(resep[i],2);
     
     fclose(pita);
 }
-
 
 int stringlen(char *s) {
     int length = 0;
