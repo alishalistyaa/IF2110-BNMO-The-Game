@@ -72,5 +72,10 @@ int main()
 //---Dealokasi---
     Dealokasi(&p);
     printf("\n-----Dealokasi-------\n");
-    printf("\nMaxEl = %i",MAXEL(p));
+    printf("\nMaxEl = %i\n",MAXEL(p));
+//--Inventory kosong-----
+    printf("\n-----Inventory Kosong-------\n");
+    Dequeue(&p,&buang);
+    Dequeue(&p,&buang);
+    Display(p);
 }
