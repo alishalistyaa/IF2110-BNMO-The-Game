@@ -121,14 +121,16 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
         // printf("Done ACTION\n");
 
         MAKANAN M;
-        CreateMakanan(&M, tempID, tempName, tempExpired, tempActionPoint, tempDelivery);
+        CreateMakanan(&M, tempID, *tempName, tempExpired, tempActionPoint, tempDelivery);
         insert(listofMakanan, M);
+
 
         // TESTING
         // printf("Done MAKANAN\n");
     }
     fclose(pita);
 }
+
 
 
 
