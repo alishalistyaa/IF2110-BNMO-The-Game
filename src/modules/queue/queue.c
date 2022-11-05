@@ -21,7 +21,7 @@ int NBELMT (queue Q)
 }
 void MakeEmpty(queue * Q,int Max)
 {
-    Buffer(*Q) = (TIME *)malloc((Max+1) *sizeof(TIME));
+    Buffer(*Q) = (MAKANAN *)malloc((Max+1) *sizeof(MAKANAN));
     if(Buffer(*Q)==NULL)
     {
         MAXEL(*Q) = 0;
@@ -39,13 +39,13 @@ void Dealokasi(queue *Q)
     IDXHEAD(*Q) = Nil;
     IDXTAIL(*Q) = Nil;
 }
-void EnqueuePrio(queue *Q,MAKANAN time)
+void EnqueuePrio(queue *Q,MAKANAN food)
 {
     if(isEmpty(*Q))
     {
         IDXHEAD(*Q)=0;
         IDXTAIL(*Q)=0;
-        INFOTAIL(*Q) = time;
+        INFOTAIL(*Q) = food;
     }
     else
     {
@@ -57,7 +57,7 @@ void EnqueuePrio(queue *Q,MAKANAN time)
             MakeEmpty(Q,MAXEL(copy)*2);
             for(int i=IDXHEAD(copy);i<=IDXTAIL(copy);i++)
             {
-                Enqueue(Q,ELMT(copy,i));
+                Enqueue(Q,ELMTQUEUE(copy,i));
             }
             Dealokasi(&copy);
 
@@ -65,52 +65,52 @@ void EnqueuePrio(queue *Q,MAKANAN time)
         boolean swap = false;
         for(int i = IDXHEAD(*Q);i<=IDXTAIL(*Q);i++)
         {
-            if(TLT(time.Expired,ELMT(*Q,i).Expired))
+            if(TLT(food.Expired,ELMTQUEUE(*Q,i).Expired))
             {
                 swap = true;
                 for(int j = IDXTAIL(*Q);j>=i;j--)
                 {
-                    ELMT(*Q,i+1) = ELMT(*Q,i);
+                    ELMTQUEUE(*Q,i+1) = ELMTQUEUE(*Q,i);
                 }
-                ELMT(*Q,i) = time;
+                ELMTQUEUE(*Q,i) = food;
                 break;
             }
         }
         IDXTAIL(*Q) +=1;
         if(!swap)
         {
-            INFOTAIL(*Q) = time;
+            INFOTAIL(*Q) = food;
         }
     }
 }
-void Enqueue(queue *Q,MAKANAN time)
+void Enqueue(queue *Q,MAKANAN food)
 {
     if(isEmpty(*Q))
     {
         IDXHEAD(*Q)=0;
         IDXTAIL(*Q)=0;
-        INFOTAIL(*Q) = time;
+        INFOTAIL(*Q) = food;
     }
     else
     {
         IDXTAIL(*Q)+=1;
-        INFOTAIL(*Q)=time;
+        INFOTAIL(*Q)=food;
     }
 }
-void Dequeue(queue *Q,MAKANAN *time)
+void Dequeue(queue *Q,MAKANAN *food)
 {
     if(IDXHEAD(*Q)==IDXTAIL(*Q))
     {
-        *time = INFOHEAD(*Q);
+        *food = INFOHEAD(*Q);
         IDXHEAD(*Q)=Nil;
         IDXTAIL(*Q)=Nil;
     }
     else
     {
-        *time = INFOHEAD(*Q);
+        *food = INFOHEAD(*Q);
         for(int i = IDXHEAD(*Q);i<=IDXTAIL(*Q)-1;i++)
         {
-            ELMT(*Q,i) = ELMT(*Q,i+1);
+            ELMTQUEUE(*Q,i) = ELMTQUEUE(*Q,i+1);
         }
         IDXTAIL(*Q)-=1;
     }
@@ -120,15 +120,23 @@ void Copy(queue Q,queue *copy)
     MakeEmpty(copy,MAXEL(Q));
     for(int i = IDXHEAD(Q);i<=IDXTAIL(Q);i++)
     {
-        Enqueue(copy,ELMT(Q,i));
+        Enqueue(copy,ELMTQUEUE(Q,i));
     }
 }
 void Display(queue Q)
 {
-    for(int i = IDXHEAD(Q);i<=IDXTAIL(Q);i++)
+    printf("List Makanan di Inventory\n");
+    if(isEmpty(Q))
     {
-        printf("%i. ",i+1);
-        TulisTIME2(ELMT(Q,i).Expired);
-        printf("\n");
+        printf("Tidak ada makanan di inventory\n");
+    }
+    else
+    {
+        for(int i = IDXHEAD(Q);i<=IDXTAIL(Q);i++)
+        {
+            printf("%i. %c - ",i+1,ELMTQUEUE(Q,i).Name);
+            TulisTIME2(ELMTQUEUE(Q,i).Expired);
+            printf("\n");
+        }
     }
 }
