@@ -115,7 +115,22 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
         printf("%s\n", tempActionWord);
 
         // Convert Action to Point
-        CreatePoint(&tempActionPoint, 0, 0);
+        if (same(currentWord, "Buy")){
+
+        } 
+        if else (same(currentWord, "Fry")){
+
+        }
+        if else (same(currentWord, "Boil")){
+
+        }
+        if else (same(currentWord, "Mix")){
+
+        }
+        if else (same(currentWord, "Chop")){
+
+        } else { CreatePoint(&tempActionPoint, 0, 0); }
+        
 
         // TESTING
         // printf("Done ACTION\n");

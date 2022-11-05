@@ -1,3 +1,6 @@
+/* File: makanan.h */
+/* Definisi Iput / Output */
+
 #ifndef BUILDING_H
 #define BUILDING_H
 
@@ -25,5 +28,8 @@ boolean isBuilding(BUILDING B1, BUILDING B2);
 
 boolean isBuildingExist(BUILDING B);
 /* Mengembalikan true jika building exist */
+
+POINT getLocBuilding(BUILDING B);
+/* Mengembalikan lokasi bangunan */
 
 #endif

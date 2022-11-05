@@ -109,7 +109,6 @@ void cetakList(ListStatik l)
             printf("\n action: ");
             TulisPOINT(ACTION(ELMTLIST(l,j)));
             printf("\n");
-
             
         }
     }
