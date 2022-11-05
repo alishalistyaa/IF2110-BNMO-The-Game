@@ -107,15 +107,17 @@ int main(){
             printf("Waktu: ");
             TulisTIME1(T);
             printf("\n");
+            printf("Notifikasi: -\n");
             displayMatrix(peta);
             printf("Enter command: ");
             STARTWORD();
-            if (same(currentWord, "BUY")) {
-                printf("test\n");
-            }
-            else if (same(currentWord, "EXIT")) {
-                start = false;
-            }
+            printf("%s\n", currentWord);
+            // if (same(currentWord, "BUY")) {
+            //     printf("test\n");
+            // }
+            // else if (same(currentWord, "EXIT")) {
+            //     start = false;
+            // }
         }
 
     } else if (same(currentWord, "EXIT")) {
