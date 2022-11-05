@@ -50,7 +50,7 @@ void delResep(BukuResep *b, Resep *buffer,IdxResep i){
 }
 
 
-void cetakResep(BukuResep b){
+void cetakBukuResep(BukuResep b){
 /* I.S. BukuResep boleh kosong */
 /* F.S. Jika BukuResep tidak kosong akan mencetak secara terurut dari indeks 1 ke indeks (length-1) */
     for(int i = 0; i < BanyakResep(b);i++){
@@ -60,6 +60,11 @@ void cetakResep(BukuResep b){
     }
 }
 
+//void printResep(Resep r);
+
+boolean isResepOlah_able(Resep r){
+    
+}
 
 
 //Resep concatResep(Resep r1, Resep r2);

@@ -7,12 +7,14 @@
 #define POHON_H
 
 #include "../boolean/boolean.h"
+#define methodUdf -999
 
 /* Selektor */
 #define Root(p) (p)->Root
 #define addressChild(p) (p)->Child
 #define getChild(p,i) (p)->Child[i]
 #define nChild(p) (p)->nChild
+#define Method(p) (p)->Method
 
 typedef int ElType;
 typedef struct tNode* Address;
@@ -20,6 +22,7 @@ typedef struct tNode {
      ElType Root; 
      Address *Child; //Array of child
      int nChild; //Banyaknya child 
+     int Method; //Akan digunakan pada pengolahan makanan dan resep
 } Node;
 
 /* Definisi Pohon */
