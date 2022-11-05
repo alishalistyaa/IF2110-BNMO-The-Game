@@ -30,9 +30,8 @@ typedef struct {
 /* KELOMPOK VALIDASI TERHADAP TYPE                                   */
 /* ***************************************************************** */
 
-
 /* *** Konstruktor: Membentuk sebuah TIME dari komponen-komponennya *** */
-void CreateMakanan(MAKANAN *M, int ID, char *Name, TIME Expired, POINT Action, TIME Delivery);
+void CreateMakanan(MAKANAN *M, int ID, char Name, TIME Expired, POINT Action, TIME Delivery);
 /* Membentuk sebuah MAKANAN dari komponen-komponen yang valid */
 /* Prekondisi*/
 

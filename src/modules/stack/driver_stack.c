@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include "stack.h"
+#include "stack.c"
+#include "../time/time.c"
+#include "../point/point.c"
 
 int main () {
     Stack undo, redo;
@@ -7,8 +9,10 @@ int main () {
     CreateEmpty(&redo);
 
     // Creating infotype
-    char* s;
-    s = "BUY";
+    Word s;
+    s.TabWord[0] = 'B';
+    s.TabWord[1] = 'U';
+    s.TabWord[2] = 'Y';
     TIME t;
     CreateTime(&t, 0, 1, 23);
     POINT loc;
@@ -27,7 +31,7 @@ int main () {
     printf("State now:\n");
     TulisTIME1(InfoTop(undo).T);
     printf(" ");
-    printf("%s ", InfoTop(undo).command);
+    printf("%s ", InfoTop(undo).command.TabWord);
     printf("%s ", InfoTop(undo).M.Name);
     TulisPOINT(InfoTop(undo).l);
     printf("\n");
@@ -35,7 +39,9 @@ int main () {
 
     // After receiving another input, update state again
     NextMenit(&t);
-    s = "FRY";
+    s.TabWord[0] = 'F';
+    s.TabWord[1] = 'R';
+    s.TabWord[2] = 'Y';
     Day(delivery) = 0;
     Hour(delivery) = 3;
     Minute(delivery) = 0;
@@ -45,7 +51,7 @@ int main () {
     printf("State now: (after another input)\n");
     TulisTIME1(InfoTop(undo).T);
     printf(" ");
-    printf("%s ", InfoTop(undo).command);
+    printf("%s ", InfoTop(undo).command.TabWord);
     printf("%s ", InfoTop(undo).M.Name);
     TulisPOINT(InfoTop(undo).l);
     printf("\n");
@@ -55,7 +61,7 @@ int main () {
     printf("After undo:\n");
     TulisTIME1(InfoTop(undo).T);
     printf(" ");
-    printf("%s ", InfoTop(undo).command);
+    printf("%s ", InfoTop(undo).command.TabWord);
     printf("%s ", InfoTop(undo).M.Name);
     TulisPOINT(InfoTop(undo).l);
     printf("\n");
@@ -65,7 +71,7 @@ int main () {
     printf("After redo:\n");
     TulisTIME1(InfoTop(undo).T);
     printf(" ");
-    printf("%s ", InfoTop(undo).command);
+    printf("%s ", InfoTop(undo).command.TabWord);
     printf("%s ", InfoTop(undo).M.Name);
     TulisPOINT(InfoTop(undo).l);
     printf("\n");

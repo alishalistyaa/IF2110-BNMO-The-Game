@@ -38,7 +38,7 @@ boolean isIdxEff(Matrix m, IdxTypeMAT i, IdxTypeMAT j) {
 }
 ElTypeMAT getElmtDiagonal(Matrix m, IdxTypeMAT i) {
 /* Mengirimkan elemen m(i,i) */
-    return ELMT(m, i, i);
+    return ELMTMAT(m, i, i);
 }
 
 /* ********** Assignment  Matrix ********** */
@@ -47,7 +47,7 @@ void copyMatrix(Matrix mIn, Matrix *mOut) {
     createMatrix(ROW_EFF(mIn), COL_EFF(mIn), mOut);
     for (int i = 0; i < ROW_EFF(mIn); i++) {
         for (int j = 0; j < COL_EFF(mIn); j++) {
-            ELMT(*mOut, i, j) = ELMT(mIn, i, j); 
+            ELMTMAT(*mOut, i, j) = ELMTMAT(mIn, i, j); 
         }
     }
 
@@ -68,7 +68,7 @@ void readMatrix(Matrix *m, int nRow, int nCol) {
     createMatrix(nRow, nCol, m);
     for (int i = 0; i < nRow; i++) {
         for (int j = 0; j < nCol; j++) {
-            scanf("\n%c", &ELMT(*m, i, j));
+            scanf("\n%c", &ELMTMAT(*m, i, j));
         }
     }
 }
@@ -86,9 +86,9 @@ void displayMatrix(Matrix m) {
     for(int i = 0; i < ROW_EFF(m); i++) {
         for (int j = 0; j < COL_EFF(m); j++) {
             if (j == COL_EFF(m) - 1) {
-                printf("%c\n", ELMT(m, i, j));
+                printf("%c\n", ELMTMAT(m, i, j));
             } else {
-                printf("%c ", ELMT(m, i, j));
+                printf("%c ", ELMTMAT(m, i, j));
             }
         }
     }
@@ -102,7 +102,7 @@ boolean isMatrixEqual(Matrix m1, Matrix m2) {
     if (countElmt(m1) == countElmt(m2) && getLastIdxCol(m1) == getLastIdxCol(m2)) {
         for (int i = 0; i < ROW_EFF(m1); i++) {
             for (int j = 0; j < COL_EFF(m1); j++) {
-                if (ELMT(m1, i, j) != ELMT(m2, i, j)) {
+                if (ELMTMAT(m1, i, j) != ELMTMAT(m2, i, j)) {
                     return false;
                 }
             }

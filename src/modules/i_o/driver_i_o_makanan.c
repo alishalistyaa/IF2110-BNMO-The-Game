@@ -7,9 +7,10 @@
 #include "../time/time.c"
 #include "../list/liststatik.c"
 #include "../matriks/matriks.c"
-#include "../tree/tree.c"
+//#include "../tree/tree.c"
 
 int main(){
+
     ListStatik l;
     CreateListStatik(&l);
     if (isFileExist("makanan.txt")){
@@ -21,12 +22,12 @@ int main(){
     
     cetakList(l);
 
-    // Matrix peta;
-    // if (isFileExist("peta.txt")){
-    //     printf("%d\n", 1);
-    //     configMap("peta.txt", &peta);
-    // } else {
-    //     printf("%d\n", 0);
-    // }
-    // displayMatrix(peta);
+    Matrix peta;
+    if (isFileExist("peta.txt")){
+        printf("%d\n", 1);
+        configMap("peta.txt", &peta);
+    } else {
+        printf("%d\n", 0);
+    }
+    displayMatrix(peta);
 }

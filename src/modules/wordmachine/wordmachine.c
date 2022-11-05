@@ -88,3 +88,60 @@ void LowerCase(){
         }
     }
 }
+
+void CopyWordBlank(){
+/* Mengakuisisi kata, menyimpan dalam currentWord
+    I.S. : currentChar adalah karakter pertama dari kata
+    F.S. : currentWord berisi kata yang sudah diakuisisi;
+            currentChar = BLANK atau currentChar = MARK;
+            currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+            Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+    int i = 0;
+    while (currentChar != BLANK) {
+        currentWord.TabWord[i] = currentChar;
+        ADV();
+        i++;
+    }
+
+    if (i > NMax) {
+        currentWord.Length = NMax;
+    } else {
+        currentWord.Length = i;
+    }
+    currentWord.TabWord[i] = '\0';
+}
+
+void ADVWORDBlank(){
+/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
+    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
+            currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
+            Jika currentChar = MARK, EndWord = true.
+    Proses : Akuisisi kata menggunakan procedure SalinWord */
+    IgnoreBlanks();
+    if (currentChar == MARK || currentChar == LINEMARK || currentChar == FILEMARK){
+        endWord = true;
+    }
+    else{
+        endWord = false;
+        CopyWordBlank();
+        IgnoreBlanks();
+        // testing
+    }
+}
+
+void STARTWORDBlank(){
+/* I.S. : currentChar sembarang
+    F.S. : EndWord = true, dan currentChar = MARK;
+            atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
+            currentChar karakter pertama sesudah karakter terakhir kata */
+    START();
+    IgnoreBlanks();
+    if(currentChar == LINEMARK){
+        endWord = true;
+    }
+    else{
+        endWord = false;
+        CopyWordBlank();
+        IgnoreBlanks();
+    }
+}

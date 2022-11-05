@@ -11,6 +11,7 @@
 #include "../map/map.h"
 #include "../tree/tree.h"
 #include "../charmachine/charmachine.h"
+#include "../wordmachine/wordmachine.h"
 #include "../matriks/matriks.h"
 #include "../resep/resep.h"
 
@@ -32,7 +33,7 @@ void configResep(char *filename, BukuResep *b);
 
 int stringlen(char *s);
 
-boolean same(char *s1, char *s2);
+boolean same(Word one, char *s);
 
 boolean validateString();
 /* Mengembalikan true jika string yang dimasukkan valid */

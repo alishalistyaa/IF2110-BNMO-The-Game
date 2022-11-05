@@ -27,7 +27,7 @@ void loadMap(MAP *M, char *filename)
 /* F.S. map terbentuk dari file eksternal */
 {
     char *location;
-    START(filename);
+    ADVFILE(filename);
     int i,j,ii,jj;
     int space;
     
@@ -241,4 +241,16 @@ void moveDirection(MAP *M, char direction)
             Ordinat(S(*M)) = Ordinat(S(*M)) - 1;
         }
     }
+}
+
+boolean isEqual(Word one, Word two) {
+    if (one.Length == two.Length) {
+        for (int i = 0; i < one.Length; i++) {
+            if (one.TabWord[i] != two.TabWord[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
 }
