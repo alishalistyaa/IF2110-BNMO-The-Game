@@ -7,7 +7,6 @@
 #include "../time/time.c"
 #include "../list/liststatik.c"
 #include "../matriks/matriks.c"
-// #include "../tree/tree.c"
 
 int main(){
 
