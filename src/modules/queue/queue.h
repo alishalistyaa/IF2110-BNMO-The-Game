@@ -11,22 +11,19 @@
 
 typedef struct
 {
-    MAKANAN * T;
+    MAKANAN * M;
     int HEAD;
     int TAIL;
     int MAXEL;
 } queue;
 /* AKSES SELEKTOR */
-#define D(e) (e).DD
-#define H(e) (e).HH
-#define M(e) (e).MM
 #define IDXHEAD(q) (q).HEAD
 #define IDXTAIL(q) (q).TAIL
-#define INFOHEAD(q) (q).T[(q).HEAD]
-#define INFOTAIL(q) (q).T[(q).TAIL]
+#define INFOHEAD(q) (q).M[(q).HEAD]
+#define INFOTAIL(q) (q).M[(q).TAIL]
 #define MAXEL(q) (q).MAXEL
-#define ELMT(q,i) (q).T[(i)]
-#define Buffer(q) (q).T
+#define ELMTQUEUE(q,i) (q).M[(i)]
+#define Buffer(q) (q).M
 
 boolean isEmpty(queue Q);
 /*Mengirim true jika queue kosong*/
@@ -39,12 +36,14 @@ void MakeEmpty(queue * Q,int Max);
 /*Membuat queue kosong dengan tabel memori berukuran Max+1*/
 void Dealokasi(queue *Q);
 /*Q pernah dialokasi,dan Q menjadi tidak terdefinisi (Q).MAXEL = 0*/
-void EnqueuePrio(queue *Q,MAKANAN time);
+void EnqueuePrio(queue *Q,MAKANAN food);
 /*Menambah T ke dalam Q dengan aturan priority queue,terurut membesar berdasarkan waktu*/
-void Enqueue(queue *Q,MAKANAN time);
+void Enqueue(queue *Q,MAKANAN food);
 /*Menambah T ke dalam Q secara sederhana*/
-void Dequeue(queue *Q,MAKANAN *time);
+void Dequeue(queue *Q,MAKANAN *food);
 /*Menghapus M pada Q*/
+void Copy(queue Q,queue *copy);
+/*Menyalin makanan ke inventory lain*/
 void Display(queue Q);
 /*Menampilkan isi dari queue*/
 #endif

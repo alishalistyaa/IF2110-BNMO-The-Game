@@ -4,147 +4,142 @@
 #include <stdio.h>
 #include "i_o.h"
 
-// void configMakanan(char *filename, ListStatik *listofMakanan){
-//     /* Membaca file figurasi config dan membaca makanan */
-//     /* I.S. Makanan sembarang */
-//     /* F.S. Makanan terdefinisi dari file */
-//     // KAMUS LOKAL
-//     int countMakanan;
-//     int i;
-//     int tempID;
-//     TIME tempExpired;
-//     POINT tempActionPoint;
-//     TIME tempDelivery;
+void configMakanan(char *filename, ListStatik *listofMakanan){
+    /* Membaca file figurasi config dan membaca makanan */
+    /* I.S. Makanan sembarang */
+    /* F.S. Makanan terdefinisi dari file */
+    // KAMUS LOKAL
+    int countMakanan;
+    int i;
+    int tempID;
+    TIME tempExpired;
+    POINT tempActionPoint;
+    TIME tempDelivery;
+    Word tempName;    
+    Word tempActionWord;    
 
-//     // ALGORITMA
-//     // Membaca berapa makanan yang ada di file config
-//     ADVFILE(filename);
-//     countMakanan = 0;
-//     while (currentChar != LINEMARK){
-//             countMakanan = countMakanan * 10 + (currentChar - 48);
-//             ADV();
-//             IgnoreBlanks();    
-//     }
-//     // testing
-//     printf("%d\n", countMakanan);
 
-//     // Membaca makanan sebanyak countMakanan
-//     for(i = 0; i < countMakanan; i++){
-//         // TESTING
-//         printf("i: %d\n", i);
-//         /* BACA ID */
-//         tempID = 0;
-//         ADV(); // next after LINEMARK
-//         while (currentChar != LINEMARK){
-//             while (currentChar != BLANK && currentChar != LINEMARK) {
-//                 tempID = tempID * 10 + (currentChar - 48);
-//                 ADV();
-//             }      
-//     }        
-//         // testing
-//         printf("%d\n", tempID);
+    // ALGORITMA
+    // Membaca berapa makanan yang ada di file config
+    ADVFILE(filename);
+    countMakanan = 0;
+    while (currentChar != LINEMARK){
+            countMakanan = countMakanan * 10 + (currentChar - 48);
+            ADV();
+            IgnoreBlanks();    
+    }
+    // testing
+    printf("%d\n", countMakanan);
 
-//         /* BACA JUDUL */
-//         ADV(); // next after LINEMARK
-//         CopyWord();
-//         char tempName[50]= "";
-//         for (int j=0; j<currentWord.Length; j++){
-//             char temp = currentWord.TabWord[j];
-//             tempName[j] = temp;
-//         }
-//         // tempName = currentWord.TabWord;
-//         printf("%s\n", tempName);
+    // Membaca makanan sebanyak countMakanan
+    for(i = 0; i < countMakanan; i++){
+        // TESTING
+        printf("i: %d\n", i);
+        /* BACA ID */
+        tempID = 0;
+        ADV(); // next after LINEMARK
+        while (currentChar != LINEMARK){
+            while (currentChar != BLANK && currentChar != LINEMARK) {
+                tempID = tempID * 10 + (currentChar - 48);
+                ADV();
+            }      
+    }        
+        // testing
+        printf("%d\n", tempID);
 
-//         // TESTING
-//         // printf("DONE JUDUL\n");
+        /* BACA JUDUL */
+        ADV(); // next after LINEMARK
+        CopyWord();
+        tempName = currentWord;
+        // tempName = currentWord.TabWord;
+        printf("%s\n", tempName.TabWord);
 
-//         /* BACA EXPIRED */
-//         ADV(); // next after LINEMARK
-//         int LEx[3];
-//         int countEx = 0;
-//         while (currentChar != LINEMARK) {
-//             int value = 0;
-//                 while (currentChar != BLANK && currentChar != LINEMARK) {
-//                     value = value * 10 + (currentChar - 48);
-//                     ADV();
-//                 }
-//                 LEx[countEx] = value;
-//                 if (currentChar == BLANK) {
-//                     ADV();
-//                 }
-//                 countEx++;
-//         } 
+        // TESTING
+        // printf("DONE JUDUL\n");
+
+        /* BACA EXPIRED */
+        ADV(); // next after LINEMARK
+        int LEx[3];
+        int countEx = 0;
+        while (currentChar != LINEMARK) {
+            int value = 0;
+                while (currentChar != BLANK && currentChar != LINEMARK) {
+                    value = value * 10 + (currentChar - 48);
+                    ADV();
+                }
+                LEx[countEx] = value;
+                if (currentChar == BLANK) {
+                    ADV();
+                }
+                countEx++;
+        } 
         
-//         // Masukkan ke dalam time
-//         CreateTime(&tempExpired, LEx[0], LEx[1], LEx[2]); 
+        // Masukkan ke dalam time
+        CreateTime(&tempExpired, LEx[0], LEx[1], LEx[2]); 
 
-//         //TESTING
-//         // printf("Done EXPIRED\n");     
+        //TESTING
+        // printf("Done EXPIRED\n");     
 
-//         /* BACA DELIVERY */
-//         ADV(); //Next after LINEMARK
-//         int LDeliv[3];
-//         int countDeliv = 0;
-//         while (currentChar != LINEMARK) {
-//             int value = 0;
-//                 while (currentChar != BLANK && currentChar != LINEMARK) {
-//                     value = value * 10 + (currentChar - 48);
-//                     ADV();
-//                 }
-//                 LDeliv[countDeliv] = value;
-//                 if (currentChar == BLANK) {
-//                     ADV();
-//                 }
-//                 countDeliv++;
-//         } 
-//         // Masukkan ke dalam time
-//         CreateTime(&tempDelivery, LDeliv[0], LDeliv[1], LDeliv[2]); 
+        /* BACA DELIVERY */
+        ADV(); //Next after LINEMARK
+        int LDeliv[3];
+        int countDeliv = 0;
+        while (currentChar != LINEMARK) {
+            int value = 0;
+                while (currentChar != BLANK && currentChar != LINEMARK) {
+                    value = value * 10 + (currentChar - 48);
+                    ADV();
+                }
+                LDeliv[countDeliv] = value;
+                if (currentChar == BLANK) {
+                    ADV();
+                }
+                countDeliv++;
+        } 
+        // Masukkan ke dalam time
+        CreateTime(&tempDelivery, LDeliv[0], LDeliv[1], LDeliv[2]); 
 
-//         // TESTING
-//         // printf("Done DELIVERY\n");
+        // TESTING
+        // printf("Done DELIVERY\n");
 
 
-//         /* BACA ACTION */
-//         ADV();
-//         CopyWord(); // next after LINEMARK
-//         char tempActionWord[50]= "";
-//         for (int j=0; j<currentWord.Length; j++){
-//             char temp = currentWord.TabWord[j];
-//             tempActionWord[j] = temp;
-//         }
-//         printf("%s\n", tempActionWord);
+        /* BACA ACTION */
+        ADV();
+        CopyWord(); // next after LINEMARK
+        tempActionWord = currentWord;
+        printf("%s\n", tempActionWord.TabWord);
 
-//         // Convert Action to Point
-//         if (same(currentWord, "Buy")){
+        // // Convert Action to Point
+        // if (same(currentWord, "Buy")){
 
-//         } 
-//         if else (same(currentWord, "Fry")){
+        // } 
+        // if else (same(currentWord, "Fry")){
 
-//         }
-//         if else (same(currentWord, "Boil")){
+        // }
+        // if else (same(currentWord, "Boil")){
 
-//         }
-//         if else (same(currentWord, "Mix")){
+        // }
+        // if else (same(currentWord, "Mix")){
 
-//         }
-//         if else (same(currentWord, "Chop")){
+        // }
+        // if else (same(currentWord, "Chop")){
 
-//         } else { CreatePoint(&tempActionPoint, 0, 0); }
+        // } else { CreatePoint(&tempActionPoint, 0, 0); }
         
 
-//         // TESTING
-//         // printf("Done ACTION\n");
+        // TESTING
+        // printf("Done ACTION\n");
+        // printf("%s\n", tempName.TabWord);
+        MAKANAN M;
+        CreateMakanan(&M, tempID, tempName, tempExpired, tempActionPoint, tempDelivery);
+        insert(listofMakanan, M);
 
-//         MAKANAN M;
-//         CreateMakanan(&M, tempID, *tempName, tempExpired, tempActionPoint, tempDelivery);
-//         insert(listofMakanan, M);
 
-
-//         // TESTING
-//         // printf("Done MAKANAN\n");
-//     }
-//     fclose(pita);
-// }
+        // TESTING
+        // printf("Done MAKANAN\n");
+    }
+    fclose(pita);
+}
 
 
 
