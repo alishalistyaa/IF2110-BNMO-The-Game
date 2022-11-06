@@ -4,147 +4,147 @@
 #include <stdio.h>
 #include "i_o.h"
 
-void configMakanan(char *filename, ListStatik *listofMakanan){
-    /* Membaca file figurasi config dan membaca makanan */
-    /* I.S. Makanan sembarang */
-    /* F.S. Makanan terdefinisi dari file */
-    // KAMUS LOKAL
-    int countMakanan;
-    int i;
-    int tempID;
-    TIME tempExpired;
-    POINT tempActionPoint;
-    TIME tempDelivery;
+// void configMakanan(char *filename, ListStatik *listofMakanan){
+//     /* Membaca file figurasi config dan membaca makanan */
+//     /* I.S. Makanan sembarang */
+//     /* F.S. Makanan terdefinisi dari file */
+//     // KAMUS LOKAL
+//     int countMakanan;
+//     int i;
+//     int tempID;
+//     TIME tempExpired;
+//     POINT tempActionPoint;
+//     TIME tempDelivery;
 
-    // ALGORITMA
-    // Membaca berapa makanan yang ada di file config
-    ADVFILE(filename);
-    countMakanan = 0;
-    while (currentChar != LINEMARK){
-            countMakanan = countMakanan * 10 + (currentChar - 48);
-            ADV();
-            IgnoreBlanks();    
-    }
-    // testing
-    printf("%d\n", countMakanan);
+//     // ALGORITMA
+//     // Membaca berapa makanan yang ada di file config
+//     ADVFILE(filename);
+//     countMakanan = 0;
+//     while (currentChar != LINEMARK){
+//             countMakanan = countMakanan * 10 + (currentChar - 48);
+//             ADV();
+//             IgnoreBlanks();    
+//     }
+//     // testing
+//     printf("%d\n", countMakanan);
 
-    // Membaca makanan sebanyak countMakanan
-    for(i = 0; i < countMakanan; i++){
-        // TESTING
-        printf("i: %d\n", i);
-        /* BACA ID */
-        tempID = 0;
-        ADV(); // next after LINEMARK
-        while (currentChar != LINEMARK){
-            while (currentChar != BLANK && currentChar != LINEMARK) {
-                tempID = tempID * 10 + (currentChar - 48);
-                ADV();
-            }      
-    }        
-        // testing
-        printf("%d\n", tempID);
+//     // Membaca makanan sebanyak countMakanan
+//     for(i = 0; i < countMakanan; i++){
+//         // TESTING
+//         printf("i: %d\n", i);
+//         /* BACA ID */
+//         tempID = 0;
+//         ADV(); // next after LINEMARK
+//         while (currentChar != LINEMARK){
+//             while (currentChar != BLANK && currentChar != LINEMARK) {
+//                 tempID = tempID * 10 + (currentChar - 48);
+//                 ADV();
+//             }      
+//     }        
+//         // testing
+//         printf("%d\n", tempID);
 
-        /* BACA JUDUL */
-        ADV(); // next after LINEMARK
-        CopyWord();
-        char tempName[50]= "";
-        for (int j=0; j<currentWord.Length; j++){
-            char temp = currentWord.TabWord[j];
-            tempName[j] = temp;
-        }
-        // tempName = currentWord.TabWord;
-        printf("%s\n", tempName);
+//         /* BACA JUDUL */
+//         ADV(); // next after LINEMARK
+//         CopyWord();
+//         char tempName[50]= "";
+//         for (int j=0; j<currentWord.Length; j++){
+//             char temp = currentWord.TabWord[j];
+//             tempName[j] = temp;
+//         }
+//         // tempName = currentWord.TabWord;
+//         printf("%s\n", tempName);
 
-        // TESTING
-        // printf("DONE JUDUL\n");
+//         // TESTING
+//         // printf("DONE JUDUL\n");
 
-        /* BACA EXPIRED */
-        ADV(); // next after LINEMARK
-        int LEx[3];
-        int countEx = 0;
-        while (currentChar != LINEMARK) {
-            int value = 0;
-                while (currentChar != BLANK && currentChar != LINEMARK) {
-                    value = value * 10 + (currentChar - 48);
-                    ADV();
-                }
-                LEx[countEx] = value;
-                if (currentChar == BLANK) {
-                    ADV();
-                }
-                countEx++;
-        } 
+//         /* BACA EXPIRED */
+//         ADV(); // next after LINEMARK
+//         int LEx[3];
+//         int countEx = 0;
+//         while (currentChar != LINEMARK) {
+//             int value = 0;
+//                 while (currentChar != BLANK && currentChar != LINEMARK) {
+//                     value = value * 10 + (currentChar - 48);
+//                     ADV();
+//                 }
+//                 LEx[countEx] = value;
+//                 if (currentChar == BLANK) {
+//                     ADV();
+//                 }
+//                 countEx++;
+//         } 
         
-        // Masukkan ke dalam time
-        CreateTime(&tempExpired, LEx[0], LEx[1], LEx[2]); 
+//         // Masukkan ke dalam time
+//         CreateTime(&tempExpired, LEx[0], LEx[1], LEx[2]); 
 
-        //TESTING
-        // printf("Done EXPIRED\n");     
+//         //TESTING
+//         // printf("Done EXPIRED\n");     
 
-        /* BACA DELIVERY */
-        ADV(); //Next after LINEMARK
-        int LDeliv[3];
-        int countDeliv = 0;
-        while (currentChar != LINEMARK) {
-            int value = 0;
-                while (currentChar != BLANK && currentChar != LINEMARK) {
-                    value = value * 10 + (currentChar - 48);
-                    ADV();
-                }
-                LDeliv[countDeliv] = value;
-                if (currentChar == BLANK) {
-                    ADV();
-                }
-                countDeliv++;
-        } 
-        // Masukkan ke dalam time
-        CreateTime(&tempDelivery, LDeliv[0], LDeliv[1], LDeliv[2]); 
+//         /* BACA DELIVERY */
+//         ADV(); //Next after LINEMARK
+//         int LDeliv[3];
+//         int countDeliv = 0;
+//         while (currentChar != LINEMARK) {
+//             int value = 0;
+//                 while (currentChar != BLANK && currentChar != LINEMARK) {
+//                     value = value * 10 + (currentChar - 48);
+//                     ADV();
+//                 }
+//                 LDeliv[countDeliv] = value;
+//                 if (currentChar == BLANK) {
+//                     ADV();
+//                 }
+//                 countDeliv++;
+//         } 
+//         // Masukkan ke dalam time
+//         CreateTime(&tempDelivery, LDeliv[0], LDeliv[1], LDeliv[2]); 
 
-        // TESTING
-        // printf("Done DELIVERY\n");
+//         // TESTING
+//         // printf("Done DELIVERY\n");
 
 
-        /* BACA ACTION */
-        ADV();
-        CopyWord(); // next after LINEMARK
-        char tempActionWord[50]= "";
-        for (int j=0; j<currentWord.Length; j++){
-            char temp = currentWord.TabWord[j];
-            tempActionWord[j] = temp;
-        }
-        printf("%s\n", tempActionWord);
+//         /* BACA ACTION */
+//         ADV();
+//         CopyWord(); // next after LINEMARK
+//         char tempActionWord[50]= "";
+//         for (int j=0; j<currentWord.Length; j++){
+//             char temp = currentWord.TabWord[j];
+//             tempActionWord[j] = temp;
+//         }
+//         printf("%s\n", tempActionWord);
 
-        // Convert Action to Point
-        if (same(currentWord, "Buy")){
+//         // Convert Action to Point
+//         if (same(currentWord, "Buy")){
 
-        } 
-        if else (same(currentWord, "Fry")){
+//         } 
+//         if else (same(currentWord, "Fry")){
 
-        }
-        if else (same(currentWord, "Boil")){
+//         }
+//         if else (same(currentWord, "Boil")){
 
-        }
-        if else (same(currentWord, "Mix")){
+//         }
+//         if else (same(currentWord, "Mix")){
 
-        }
-        if else (same(currentWord, "Chop")){
+//         }
+//         if else (same(currentWord, "Chop")){
 
-        } else { CreatePoint(&tempActionPoint, 0, 0); }
+//         } else { CreatePoint(&tempActionPoint, 0, 0); }
         
 
-        // TESTING
-        // printf("Done ACTION\n");
+//         // TESTING
+//         // printf("Done ACTION\n");
 
-        MAKANAN M;
-        CreateMakanan(&M, tempID, *tempName, tempExpired, tempActionPoint, tempDelivery);
-        insert(listofMakanan, M);
+//         MAKANAN M;
+//         CreateMakanan(&M, tempID, *tempName, tempExpired, tempActionPoint, tempDelivery);
+//         insert(listofMakanan, M);
 
 
-        // TESTING
-        // printf("Done MAKANAN\n");
-    }
-    fclose(pita);
-}
+//         // TESTING
+//         // printf("Done MAKANAN\n");
+//     }
+//     fclose(pita);
+// }
 
 
 
@@ -204,67 +204,67 @@ void configMap(char *filename, Matrix *m){
 }
 
 
-// void configResep(char *filename, BukuResep *b){
-//     /* Membaca file figurasi config dan membaca resep */
-//     /* I.S. Resep sembarang */
-//     /* F.S. Resep terdefinisi dari file */
-//     //KAMUS LOKAL
-//     int i,j,k;
-//     int nResep;
-//     int child[100];
-//     int ctr;
+void configResep(char *filename, BukuResep *b){
+    /* Membaca file figurasi config dan membaca resep */
+    /* I.S. Resep sembarang */
+    /* F.S. Resep terdefinisi dari file */
+    //KAMUS LOKAL
+    int i,j,k;
+    int nResep;
+    int child[100];
+    int ctr;
 
-//     nResep = 0;
-//     //ALGORITMA
-//     ADVFILE(filename);
-//     while(currentChar != LINEMARK){
-//         nResep = nResep * 10 + (currentChar - 48);
-//         ADV();
-//     }
-//     BanyakResep(*b) = nResep;
-//     ADV(); // next after LINEMARK
+    nResep = 0;
+    //ALGORITMA
+    ADVFILE(filename);
+    while(currentChar != LINEMARK){
+        nResep = nResep * 10 + (currentChar - 48);
+        ADV();
+    }
+    BanyakResep(*b) = nResep;
+    ADV(); // next after LINEMARK
     
 
-//     for(j = 0; j < nResep; j++){
-//         i = 0;
-//         while (currentChar == BLANK || currentChar == LINEMARK) ADV();
-//         while (currentChar != BLANK)
-//         {
-//             i = i * 10 + (currentChar - 48);
-//             ADV();
-//         }
-//         //currentChar == BLANK
-//         ELMTBUKURESEP(*b,j) = newTreeNode(i);
-//         ADV();
+    for(j = 0; j < nResep; j++){
+        i = 0;
+        while (currentChar == BLANK || currentChar == LINEMARK) ADV();
+        while (currentChar != BLANK)
+        {
+            i = i * 10 + (currentChar - 48);
+            ADV();
+        }
+        //currentChar == BLANK
+        ELMTBUKURESEP(*b,j) = newTreeNode(i);
+        ADV();
         
-//         ctr = 0;
-//         i = 0;
-//         while(currentChar != FILEMARK && currentChar != LINEMARK){
-//             while (currentChar != BLANK  && currentChar != LINEMARK && currentChar != FILEMARK)
-//                 {
-//                 i = i * 10 + (currentChar - 48);
-//                 ADV();
-//                 }
-//             //currentChar == BLANK or LINEMARK or FILEMARK
-//             child[ctr] = i;
-//             if(currentChar == BLANK){
-//                 ctr++;
-//                 i = 0;
-//                 ADV(); //Lanjut ke angka selanjutnya  
-//             }
-//         }
+        ctr = 0;
+        i = 0;
+        while(currentChar != FILEMARK && currentChar != LINEMARK){
+            while (currentChar != BLANK  && currentChar != LINEMARK && currentChar != FILEMARK)
+                {
+                i = i * 10 + (currentChar - 48);
+                ADV();
+                }
+            //currentChar == BLANK or LINEMARK or FILEMARK
+            child[ctr] = i;
+            if(currentChar == BLANK){
+                ctr++;
+                i = 0;
+                ADV(); //Lanjut ke angka selanjutnya  
+            }
+        }
 
-//         addressChild(ELMTBUKURESEP(*b,j)) = (Tree) malloc(ctr *sizeof(Tree));
-//         nChild(ELMTBUKURESEP(*b,j)) = ctr+1;
+        addressChild(ELMTBUKURESEP(*b,j)) = (Tree) malloc(ctr *sizeof(Tree));
+        nChild(ELMTBUKURESEP(*b,j)) = ctr+1;
 
-//         for(k = 0; k < ctr+1; k++){
-//             getChild(ELMTBUKURESEP(*b,j),k) = newTreeNode(child[k]);
-//         }
+        for(k = 0; k < ctr+1; k++){
+            getChild(ELMTBUKURESEP(*b,j),k) = newTreeNode(child[k]);
+        }
 
-//         }
+        }
     
-//     fclose(pita);
-//}
+    fclose(pita);
+}
 
 int stringlen(char *s) {
     int length = 0;
