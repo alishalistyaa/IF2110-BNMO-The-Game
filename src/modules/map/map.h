@@ -20,8 +20,6 @@
 /* *** Definisi TYPE MAP *** */
 typedef struct {
     Matrix m;
-    ListStatik Lokasi; 
-    ListStatik ListBuilding;
     SIMULATOR sim;
 } MAP;
 

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "building.h"
 #include "../point/point.h"
 #include "../boolean/boolean.h"
 #include "../map/map.h"
@@ -12,12 +13,11 @@ void CreateBuilding(BUILDING *B, POINT p, char name){
     TYPE(*B) = name; 
 }
 
-boolean isBuilding(BUILDING B1, BUILDING B2){
+boolean isBuildingSame(BUILDING B1, BUILDING B2){
     /* Mengembalikan true jika type building sama */
     // Algoritma
     return (TYPE(B1) == TYPE(B2));
 }
-
 
 boolean isBuildingExist(BUILDING B, MAP M){
     /* Mengembalikan true jika building exist */
@@ -28,7 +28,7 @@ boolean isBuildingExist(BUILDING B, MAP M){
 
     // Algoritma
         isFound = false;
-        while (!isfound){
+        while (!isFound){
             for (i = 0; i <= ROW_MAP(M); i++ ){
                 for (j = 0; j <= COL_MAP(M); j++){
                     if(ElmtMap(M,i,j) == TYPE(B)){
@@ -62,7 +62,6 @@ POINT getLocBuilding(char C, MAP M){
         CreatePoint(&p, i, j);
     } else {CreatePoint(&p, IDX_UNDEF, IDX_UNDEF);}
     
-
     return (p);
 
 }

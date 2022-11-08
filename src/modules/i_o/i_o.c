@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "i_o.h"
 
-void configMakanan(char *filename, ListStatik *listofMakanan){
+void configMakanan(MAP M, char *filename, ListStatik *listofMakanan){
     /* Membaca file figurasi config dan membaca makanan */
     /* I.S. Makanan sembarang */
     /* F.S. Makanan terdefinisi dari file */
@@ -47,13 +47,13 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
         /* BACA JUDUL */
         ADV(); // next after LINEMARK
         CopyWord();
-        char tempName[50]= "";
-        for (int j=0; j<currentWord.Length; j++){
-            char temp = currentWord.TabWord[j];
-            tempName[j] = temp;
-        }
-        // tempName = currentWord.TabWord;
-        printf("%s\n", tempName);
+        // char tempName[50]= "";
+        // for (int j=0; j<currentWord.Length; j++){
+        //     char temp = currentWord.TabWord[j];
+        //     tempName[j] = temp;
+        // }
+        Word tempName = currentWord;
+        printf("%s\n", tempName.TabWord);
 
         // TESTING
         // printf("DONE JUDUL\n");
@@ -103,34 +103,29 @@ void configMakanan(char *filename, ListStatik *listofMakanan){
         // TESTING
         // printf("Done DELIVERY\n");
 
-
         /* BACA ACTION */
         ADV();
         CopyWord(); // next after LINEMARK
-        char tempActionWord[50]= "";
-        for (int j=0; j<currentWord.Length; j++){
-            char temp = currentWord.TabWord[j];
-            tempActionWord[j] = temp;
-        }
-        printf("%s\n", tempActionWord);
+        Word tempActionWord = currentWord;
+        // printf("%s\n", tempActionWord);
 
-        // Convert Action to Point
-        if (same(currentWord, "Buy")){
+        // // Convert Action to Point
+        // if (same(currentWord, "Buy")){
+        //     getLocBuilding('B', MAP M);
+        // } 
+        // if else (same(currentWord, "Fry")){
 
-        } 
-        if else (same(currentWord, "Fry")){
+        // }
+        // if else (same(currentWord, "Boil")){
 
-        }
-        if else (same(currentWord, "Boil")){
+        // }
+        // if else (same(currentWord, "Mix")){
 
-        }
-        if else (same(currentWord, "Mix")){
+        // }
+        // if else (same(currentWord, "Chop")){
 
-        }
-        if else (same(currentWord, "Chop")){
-
-        } else { CreatePoint(&tempActionPoint, 0, 0); }
-        
+        // } else { CreatePoint(&tempActionPoint, 0, 0); }
+        CreatePoint(&tempActionPoint, 0, 0);
 
         // TESTING
         // printf("Done ACTION\n");

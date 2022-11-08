@@ -23,7 +23,7 @@ typedef struct {
 void CreateBuilding(BUILDING *B, POINT p, char name);
 /* Membentuk sebuah BUILDING dari komponen-komponennya yang valid */
 
-boolean isBuilding(BUILDING B1, BUILDING B2);
+boolean isBuildingSame(BUILDING B1, BUILDING B2);
 /* Mengembalikan true jika type building sama */
 
 boolean isBuildingExist(BUILDING B);

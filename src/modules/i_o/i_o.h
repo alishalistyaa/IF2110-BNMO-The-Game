@@ -15,7 +15,7 @@
 #include "../matriks/matriks.h"
 #include "../resep/resep.h"
 
-void configMakanan(char *filename, ListStatik *listofMakanan);
+void configMakanan(MAP M, char *filename, ListStatik *listofMakanan);
 /* Membaca file figurasi config dan membaca makanan */
 /* I.S. Makanan sembarang */
 /* F.S. Makanan terdefinisi dari file */
