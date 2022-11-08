@@ -15,12 +15,16 @@
 #include "../matriks/matriks.h"
 #include "../resep/resep.h"
 
+<<<<<<< HEAD
 void configMakanan(MAP M, char *filename, ListStatik *listofMakanan);
+=======
+// void configMakanan(char *filename, ListStatik *listofMakanan);
+>>>>>>> c7e2daa286204bacb11dd9812f12424d48c45025
 /* Membaca file figurasi config dan membaca makanan */
 /* I.S. Makanan sembarang */
 /* F.S. Makanan terdefinisi dari file */
 
-// void configMap(char *filename, Matrix *m);
+ void configMap(char *filename, Matrix *m);
 /* Membaca file figurasi config dan membaca map */
 /* I.S. Map sembarang */
 /* F.S. Map terdefinisi dari file */

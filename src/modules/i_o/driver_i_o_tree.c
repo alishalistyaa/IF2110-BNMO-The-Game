@@ -15,6 +15,6 @@ int main(){
     BukuResep b;
     configResep("resep.txt",&b);
     
-    cetakResep(b);
+    cetakBukuResep(b);
     return 0;
 }

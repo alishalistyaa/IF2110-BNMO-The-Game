@@ -14,6 +14,13 @@
 #define MARKRESEP NULL
 /* Nilai elemen tak terdefinisi*/
 #define MARKMAKANAN -999
+/*ID untuk Makanan tak terdefinisi*/
+
+//Definisi untuk "Method" pengolahan resep
+#define MIX 0xF
+#define CHOP 0xFF
+#define FRY 0xFFF
+#define BOIL 0xFFFF
 
 /* Definisi Resep berbasiskan pohon n-ary */
 typedef Tree Resep;
@@ -30,9 +37,7 @@ typedef struct {
 // --SELEKTOR--
 #define ELMTBUKURESEP(b, i) (b).contents[i]
 #define BanyakResep(b) (b).nResep
-//#define RootResep(r) Root(r)
-//#define BahanMakanan(r,i) getChild(r,i)
-//#define BanyakBahanMakanan(r) nChild(r)
+#define MethodResep(r) Method(r)
 
 //--KONSTRUKTOR--
 
@@ -59,15 +64,18 @@ void insertResep(BukuResep *b,Resep r);
 void delResep(BukuResep *b, Resep *buffer,IdxResep i);
 /*Menghapus elemen indeks ke i pada list*/
 
-void cetakResep(BukuResep b);
+void cetakBukuResep(BukuResep b);
 /* I.S. l boleh kosong */
 /* F.S. Jika l tidak kosong akan mencetak secara terurut dari indeks 1 ke indeks (length-1) */
 /* Contoh : jika ada tiga elemen*/
 /* 1 . Nama makanan 1*/
 /* 2 . Nama makanan 2*/
 /* 3 . Nama makanan 3*/
+//void printResep(Resep r);
 
+boolean isResepOlah_able(Resep r);
 
+void setMethod(Resep *r);
 // Resep concatResep(Resep r1, Resep r2);
 /*Melakukan konkatenasi Resep 2 ke resep 1*/
 #endif

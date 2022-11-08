@@ -15,7 +15,7 @@ void createMap(MAP *M)
     {
         for (j = 0; j < 50; j++)
         {
-            ElmtMap(*M,i,j) = ' ';
+            ElmtMap(*M,i,j) = '*';
         }
     }
     Absis(S(*M))=IDX_UNDEF;
@@ -67,7 +67,6 @@ void loadMap(MAP *M, char *filename)
             ElmtMap(*M,i,j) = currentChar;
             ADV();
         }
-        ADV();
     }
     ROW_MAP(*M) = ii;
     COL_MAP(*M) = jj;
@@ -96,9 +95,9 @@ void printMap(MAP M)
 /* F.S. map ditampilkan ke layar */
 {
     int i,j;
-    for(i = 1; i <= ROW_MAP(M); i++)
+    for(i = 0; i <= ROW_MAP(M)+1; i++)
     {
-        for(j = 1; j <= COL_MAP(M); j++)
+        for(j = 0; j <= COL_MAP(M)+1; j++)
         {
             if(j!=0){
                 printf(" ");

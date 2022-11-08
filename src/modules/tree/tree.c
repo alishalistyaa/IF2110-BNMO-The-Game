@@ -39,6 +39,7 @@ Address newTreeNode(ElType val) {
         Root(p) = val;
         addressChild(p) = NULL;
         nChild(p) = 0;
+        Method(p) = methodUdf;
     }
     return p;
 }

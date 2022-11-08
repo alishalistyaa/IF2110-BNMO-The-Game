@@ -14,7 +14,8 @@
 #include "./modules/simulator/simulator.c"
 #include "./modules/stack/stack.c"
 #include "./modules/time/time.c"
-// #include "./modules/tree/tree.c"
+#include "./modules/tree/tree.c"
+#include "./modules/resep/resep.c"
 #include "./modules/i_o/i_o.c"
 
 Word currentWord;
@@ -45,6 +46,7 @@ int main(){
         printf("It should enter here\n");
         Matrix peta;
         ListStatik listMakanan;
+        BukuResep bookRsp;
         // Reading all configuration
         int count = 0;
         do {
@@ -52,9 +54,9 @@ int main(){
             printf("Masukkan nama file config ");
             if (count == 0) {
                 printf("makanan: ");
-            // } else if (count == 1) {
-            //     printf("resep: ");
             } else if (count == 1) {
+                printf("resep: ");
+            } else if (count == 2) {
                 printf("peta: ");
             }
             STARTWORD();
@@ -64,18 +66,19 @@ int main(){
                 printf("Masukan file tidak valid!");
             } else {
                 if (count == 0) {
-                    // configMakanan(filename, &listMakanan);
-                    printf("skip first\n");
-                } else if (count == 1) {
+                    configMakanan(filename, &listMakanan);
+                    //printf("skip first\n");
+                }  else if (count == 1) {
+                    configResep (filename, &bookRsp);
+                }
+                    else if (count == 2) {
                     configMap("peta.txt", &peta);
-                } else if (count == 2) {
-                    //configResep (filename, &resep);
                 }
                 count++;
             }
 
         }
-        while (count < 2);
+        while (count < 3);
         printf("File konfigurasi telah selesai dibaca\n");
         // INISIALISASI SELURUH OBJECT DAN ADT
         // Posisi 
@@ -113,12 +116,24 @@ int main(){
             printf("Enter command: ");
             STARTWORD();
             printf("%s\n", currentWord);
-            // if (same(currentWord, "BUY")) {
-            //     printf("test\n");
-            // }
-            // else if (same(currentWord, "EXIT")) {
-            //     start = false;
-            // }
+            if (same(currentWord, "BUY")) {
+                printf("test\n");
+            }
+            else if (same(currentWord, "EXIT")) {
+                start = false;
+            }
+            else if (same(currentWord, "MIX")) {
+                printf("test\n");
+            }
+            else if (same(currentWord, "CHOP")) {
+                printf("test\n");
+            }
+            else if (same(currentWord, "FRY")) {
+                printf("test\n");
+            }
+            else if (same(currentWord, "BOIL")) {
+                printf("test\n");
+            }
         }
 
     } else if (same(currentWord, "EXIT")) {
