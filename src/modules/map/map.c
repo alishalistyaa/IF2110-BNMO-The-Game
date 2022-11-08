@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "map.h"
+#include "../i_o/i_o.h"
 
 
 /* Loader */
@@ -67,7 +68,7 @@ void configMap(MAP *M, char *filename)
                     (*M).m.mem[i][j] = currentChar;
                     ADV();
                 } else {
-                    (*M).m.mem[i][j] = currentChar;
+                    (*M).m.mem[i][j] = BLANK;
                     Absis(S(*M)) = i-1;
                     Ordinat(S(*M)) = j-1;
                     ADV();
@@ -100,7 +101,16 @@ void printMap(MAP M)
 /* I.S. map terdefinisi */
 /* F.S. map ditampilkan ke layar */
 {
- displayMatrix(MATRIX(M));
+    for (int i = 0; i < ROW_MAP(M); i++) {
+        for (int j = 0; j < COL_MAP(M); j++) {
+            if (i == Absis(S(M)) + 1 && j == Ordinat(S(M)) + 1) {
+                printf("S ");
+            } else {
+                printf("%c ", ElmtMap(M, i, j));
+            }
+        }
+        printf("\n");
+    } 
 }
 
 boolean isNear(MAP M, char ch)
@@ -133,64 +143,28 @@ boolean isNear(MAP M, char ch)
     return false;
 }
 
-void move_map(MAP *M, Word command)
+void move_map(MAP *M, Word command) 
 /* I.S. map terdefinisi */
 /* F.S. map bergerak sesuai dengan command */
 {
-    Word NORTH, SOUTH, EAST, WEST;
-    NORTH.Length = 5;
-    NORTH.TabWord[0] = 'N';
-    NORTH.TabWord[1] = 'O';
-    NORTH.TabWord[2] = 'R';
-    NORTH.TabWord[3] = 'T';
-    NORTH.TabWord[4] = 'H';
-    SOUTH.Length = 5;
-    SOUTH.TabWord[0] = 'S';
-    SOUTH.TabWord[1] = 'O';
-    SOUTH.TabWord[2] = 'U';
-    SOUTH.TabWord[3] = 'T';
-    SOUTH.TabWord[4] = 'H';
-    EAST.Length = 4;
-    EAST.TabWord[0] = 'E';
-    EAST.TabWord[1] = 'A';
-    EAST.TabWord[2] = 'S';
-    EAST.TabWord[3] = 'T';
-    WEST.Length = 4;
-    WEST.TabWord[0] = 'W';
-    WEST.TabWord[1] = 'E';
-    WEST.TabWord[2] = 'S';
-    WEST.TabWord[3] = 'T';
-
-    if(isEqual(command, NORTH)){
-        if(ElmtMap(*M, (int)Absis(S(*M))-1, (int)Ordinat(S(*M))) == '#'){
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))) = '#';
-            ElmtMap(*M, (int)Absis(S(*M))-1, (int)Ordinat(S(*M))) = 'S';
-
-            Absis(S(*M)) = Absis(S(*M)) - 1;
+    if(same(command, "NORTH")){
+        if(ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))+1) == ' '){
+            Absis(S(*M))--;
         }
     }
-    else if(isEqual(command, SOUTH)){
-        if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))) == '#'){
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))) = '#';
-            ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))) = 'S';
-
-            Absis(S(*M)) = Absis(S(*M)) + 1;
+    else if(same(command, "SOUTH")){
+        if(ElmtMap(*M, (int)Absis(S(*M))+2, (int)Ordinat(S(*M))+1) == ' '){
+            Absis(S(*M))++;
         }
     }
-    else if(isEqual(command, EAST)){
-        if(ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))+1) == '#'){
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))) = '#';
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))+1) = 'S';
-
-            Ordinat(S(*M)) = Ordinat(S(*M)) + 1;
+    else if(same(command, "EAST")){
+        if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))+2) == ' '){
+            Ordinat(S(*M))++;
         }
     }
-    else if(isEqual(command, WEST)){
-        if(ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))-1) == '#'){
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))) = '#';
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))-1) = 'S';
-
-            Ordinat(S(*M)) = Ordinat(S(*M)) - 1;
+    else if(same(command, "WEST")){
+        if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))) == ' '){
+            Ordinat(S(*M))--;
         }
     }
 }
@@ -231,16 +205,4 @@ void moveDirection(MAP *M, char direction)
             Ordinat(S(*M)) = Ordinat(S(*M)) - 1;
         }
     }
-}
-
-boolean isEqual(Word one, Word two) {
-    if (one.Length == two.Length) {
-        for (int i = 0; i < one.Length; i++) {
-            if (one.TabWord[i] != two.TabWord[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
-    return false;
 }
