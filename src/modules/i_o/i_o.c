@@ -233,7 +233,18 @@ void configResep(char *filename, BukuResep *b){
         ADV();
         
         ctr = 0;
+        while (currentChar != BLANK)
+        {
+            ctr = ctr * 10 + (currentChar - 48);
+            ADV();
+        }
+        //currentChar == BLANK
+        ADV();
+
+        nChild(ELMTBUKURESEP(*b,j)) = ctr;
+        addressChild(ELMTBUKURESEP(*b,j)) = (Tree) malloc(ctr *sizeof(Tree));
         i = 0;
+        int k = 0;
         while(currentChar != FILEMARK && currentChar != LINEMARK){
             while (currentChar != BLANK  && currentChar != LINEMARK && currentChar != FILEMARK)
                 {
@@ -241,19 +252,12 @@ void configResep(char *filename, BukuResep *b){
                 ADV();
                 }
             //currentChar == BLANK or LINEMARK or FILEMARK
-            child[ctr] = i;
+            getChild(ELMTBUKURESEP(*b,j),k) = newTreeNode(i);
             if(currentChar == BLANK){
-                ctr++;
+                k++;
                 i = 0;
                 ADV(); //Lanjut ke angka selanjutnya  
             }
-        }
-
-        addressChild(ELMTBUKURESEP(*b,j)) = (Tree) malloc(ctr *sizeof(Tree));
-        nChild(ELMTBUKURESEP(*b,j)) = ctr+1;
-
-        for(k = 0; k < ctr+1; k++){
-            getChild(ELMTBUKURESEP(*b,j),k) = newTreeNode(child[k]);
         }
 
         }

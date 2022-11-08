@@ -75,6 +75,7 @@ void cetakBukuResep(BukuResep b);
 
 boolean isResepOlah_able(Resep r);
 
+void setMethod(Resep *r);
 // Resep concatResep(Resep r1, Resep r2);
 /*Melakukan konkatenasi Resep 2 ke resep 1*/
 #endif
