@@ -113,34 +113,42 @@ void printMap(MAP M)
     } 
 }
 
-boolean isNear(MAP M, char ch)
-/* Mengembalikan true jika ada bangunan dengan karakter ch yang berdekatan dengan bangunan lain */
-{
-    if(Absis(S(M)) != 0){
-        if(ElmtMap(M, (int)Absis(S(M))-1, (int)Ordinat(S(M))) == ch){
-            return true;
-        }
-    }
+boolean isNear(MAP M, char ch) {
+// /* Mengembalikan true jika ada bangunan dengan karakter ch yang berdekatan dengan bangunan lain */
+// {
+//     if(Absis(S(M)) != 0){
+//         if(ElmtMap(M, (int)Absis(S(M))-1, (int)Ordinat(S(M))) == ch){
+//             return true;
+//         }
+//     }
 
-    if(Absis(S(M)) != ROW_MAP(M)){
-        if(ElmtMap(M, (int)Absis(S(M))+1, (int)Ordinat(S(M))) == ch){
-            return true;
-        }
-    }
+//     if(Absis(S(M)) != ROW_MAP(M)){
+//         if(ElmtMap(M, (int)Absis(S(M))+1, (int)Ordinat(S(M))) == ch){
+//             return true;
+//         }
+//     }
 
-    if(Ordinat(S(M)) != 0){
-        if(ElmtMap(M, (int)Absis(S(M)), (int)Ordinat(S(M))-1) == ch){
-            return true;
-        }
-    }
+//     if(Ordinat(S(M)) != 0){
+//         if(ElmtMap(M, (int)Absis(S(M)), (int)Ordinat(S(M))-1) == ch){
+//             return true;
+//         }
+//     }
 
-    if(Ordinat(S(M)) != COL_MAP(M)-1){
-        if(ElmtMap(M, (int)Absis(S(M)), (int)Ordinat(S(M))+1) == ch){
-            return true;
-        }
-    }
+//     if(Ordinat(S(M)) != COL_MAP(M)-1){
+//         if(ElmtMap(M, (int)Absis(S(M)), (int)Ordinat(S(M))+1) == ch){
+//             return true;
+//         }
+//     }
 
-    return false;
+//     return false;
+    if (ElmtMap(M, (int)Absis(S(M)) + 1, (int)Ordinat(S(M))) == ch ||
+        ElmtMap(M, (int)Absis(S(M)), (int)Ordinat(S(M)) + 1) == ch ||
+        ElmtMap(M, (int)Absis(S(M)) + 1, (int)Ordinat(S(M)) + 2) == ch ||
+        ElmtMap(M, (int)Absis(S(M)) + 2, (int)Ordinat(S(M)) + 1) == ch) {
+            return true;
+    } else {
+        return false;
+    }
 }
 
 void move_map(MAP *M, Word command) 
@@ -165,44 +173,6 @@ void move_map(MAP *M, Word command)
     else if(same(command, "WEST")){
         if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))) == ' '){
             Ordinat(S(*M))--;
-        }
-    }
-}
-
-void moveDirection(MAP *M, char direction)
-/* I.S. map terdefinisi */
-/* F.S. map bergerak sesuai dengan command */
-{
-    if(direction == 'w'){
-        if(ElmtMap(*M, (int)Absis(S(*M))-1, (int)Ordinat(S(*M))) == '#'){
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))) = '#';
-            ElmtMap(*M, (int)Absis(S(*M))-1, (int)Ordinat(S(*M))) = 'S';
-
-            Absis(S(*M)) = Absis(S(*M)) - 1;
-        }
-    }
-    else if(direction == 's'){
-        if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))) == '#'){
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))) = '#';
-            ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))) = 'S';
-
-            Absis(S(*M)) = Absis(S(*M)) + 1;
-        }
-    }
-    else if(direction == 'd'){
-        if(ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))+1) == '#'){
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))) = '#';
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))+1) = 'S';
-
-            Ordinat(S(*M)) = Ordinat(S(*M)) + 1;
-        }
-    }
-    else if(direction == 'a'){
-        if(ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))-1) == '#'){
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))) = '#';
-            ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))-1) = 'S';
-
-            Ordinat(S(*M)) = Ordinat(S(*M)) - 1;
         }
     }
 }

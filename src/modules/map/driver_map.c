@@ -26,6 +26,9 @@ int main(){
     printf("Simulator loc: ");
     TulisPOINT(m.sim.LOCATION);
     printf("\n");
+    if (isNear(m,'*')) {
+        printf("Near *\n");
+    }
     Word w;
     w.Length=4;
     w.TabWord[0]='E';
@@ -51,6 +54,10 @@ int main(){
     printMap(m);
     printf("Simulator loc: \n");
     TulisPOINT(m.sim.LOCATION);
+    printf("\n");
+    if (isNear(m, 'M')) {
+        printf("Near M");
+    }
     printf("\n");
     printf("\n");
     w.Length=4;
