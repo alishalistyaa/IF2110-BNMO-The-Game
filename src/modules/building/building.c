@@ -49,17 +49,20 @@ POINT getLocBuilding(char C, MAP M){
 
     // Algoritma
     isFound = false;
+    int idxb, idxk;
     while (!isFound){
-        for (i = 0; i <= ROW_MAP(M); i++ ){
-            for (j = 0; j <= COL_MAP(M); j++){
+        for (i = 0; i < ROW_MAP(M); i++ ){
+            for (j = 0; j < COL_MAP(M); j++){
                 if(ElmtMap(M,i,j) == C){
                     isFound = true;
+                    idxb = i;
+                    idxk = j;
                 }
             }
         }
     }
     if (isBuildingExist(C, M)){
-        CreatePoint(&p, i, j);
+        CreatePoint(&p, idxb-1, idxk-1);
     } else {CreatePoint(&p, IDX_UNDEF, IDX_UNDEF);}
     
     return (p);

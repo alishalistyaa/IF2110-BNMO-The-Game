@@ -7,12 +7,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "map.c"
+#include "../matriks/matriks.c"
+#include "../point/point.c"
+#include "../building/building.c"
 
 int main(){
     MAP m;
     createMap(&m);
-    loadMap(&m, "peta.txt");
+    configMap(&m, "peta.txt");
     printMap(m);
+    printf("Simulator loc: ");
+    TulisPOINT(m.sim.LOCATION);
+    printf("\n");
+    POINT P = getLocBuilding('B',m);
+    TulisPOINT(P);
+    printf("%c", ElmtMap(m, 10, 7));
     Word w;
     w.Length=4;
     w.TabWord[0]='E';

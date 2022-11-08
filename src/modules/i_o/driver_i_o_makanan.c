@@ -20,6 +20,7 @@ int main(){
         printf("%d\n", 0);
     }
 
+    printMap(peta);
     ListStatik l;
     CreateListStatik(&l);
     if (isFileExist("makanan.txt")){

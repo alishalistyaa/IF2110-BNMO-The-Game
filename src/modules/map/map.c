@@ -22,54 +22,60 @@ void createMap(MAP *M)
     Ordinat(S(*M))=IDX_UNDEF;
 }
 
-void loadMap(MAP *M, char *filename)
+void configMap(MAP *M, char *filename)
 /* I.S. map sembarang */
 /* F.S. map terbentuk dari file eksternal */
 {
-    char *location;
-    ADVFILE(filename);
-    int i,j,ii,jj;
-    int space;
-    
-    i = 1;
-    j = 1;
-    ii = 0;
-    jj = 0;
-    space = 0;
-    while((currentChar >= '0' && currentChar <= '9') || currentChar == ' ')
-    {
-        if(space == 0){
-            if(currentChar >= '0' && currentChar <= '9'){
-                ii = ii*10 + (currentChar - '0');
-            }
-            else{
-                space = 1;
-            }
-        }else{
-            if(currentChar >= '0' && currentChar <= '9'){
-                jj = jj*10 + (currentChar - '0');
-            }
-        }
-        ADV();
-    }
-
-    for(i = 1; i <= ii; i++)
-    {
-        for(j = 1; j <= jj; j++)
-        {
-            if(currentChar == '\n'){
-                ADV();
-            }
-            if(currentChar == 'S'){
-                Absis(S(*M)) = i;
-                Ordinat(S(*M)) = j;
-            }
-            ElmtMap(*M,i,j) = currentChar;
+    ADVFILE("peta.txt");
+    int i = 0;
+    int s[2];
+    while (currentChar != LINEMARK) {
+        int value = 0;
+        while (currentChar != BLANK && currentChar != LINEMARK) {
+            value = value * 10 + (currentChar - 48);
             ADV();
         }
+        s[i] = value;
+        if (currentChar == BLANK) {
+            ADV();
+        }
+        i++;
+    }    
+    
+    createMatrix(s[0] + 2, s[1] + 2, &MATRIX(*M));
+    // creating border for matrix peta
+    for (int i = 0; i < s[1] + 2; i++) {
+        (*M).m.mem[0][i] = '*';
+        (*M).m.mem[s[0] + 1][i] = '*';
     }
-    ROW_MAP(*M) = ii;
-    COL_MAP(*M) = jj;
+    for (int i = 0; i < s[0] + 2; i++) {
+        (*M).m.mem[i][0] = '*';
+        (*M).m.mem[i][s[1] + 1] = '*';
+    }
+
+    ADV(); // next after LINEMARK
+    while (currentChar != FILEMARK) {
+        for (int i = 1; i < s[0] + 1; i++) {
+            if (currentChar == LINEMARK) {
+                ADV();
+            }
+            for (int j = 1; j < s[1] + 1; j++) {
+                if (currentChar == '#') {
+                    (*M).m.mem[i][j] = BLANK;
+                    ADV();
+                } else if (currentChar != 'S') {
+                    (*M).m.mem[i][j] = currentChar;
+                    ADV();
+                } else {
+                    (*M).m.mem[i][j] = currentChar;
+                    Absis(S(*M)) = i-1;
+                    Ordinat(S(*M)) = j-1;
+                    ADV();
+                }
+            }
+        }
+    }
+    fclose(pita);
 }
 /* Validator */
 boolean isEmptyMap(MAP M)
@@ -94,22 +100,7 @@ void printMap(MAP M)
 /* I.S. map terdefinisi */
 /* F.S. map ditampilkan ke layar */
 {
-    int i,j;
-    for(i = 0; i <= ROW_MAP(M)+1; i++)
-    {
-        for(j = 0; j <= COL_MAP(M)+1; j++)
-        {
-            if(j!=0){
-                printf(" ");
-            }
-            if(ElmtMap(M,i,j) == '#'){
-                printf(" ");
-            }else{
-                printf("%c",ElmtMap(M,i,j));
-            }
-        }
-        printf("\n");
-    }
+ displayMatrix(MATRIX(M));
 }
 
 boolean isNear(MAP M, char ch)
