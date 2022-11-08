@@ -19,7 +19,7 @@ boolean isBuildingSame(BUILDING B1, BUILDING B2){
     return (TYPE(B1) == TYPE(B2));
 }
 
-boolean isBuildingExist(BUILDING B, MAP M){
+boolean isBuildingExist(char C, MAP M){
     /* Mengembalikan true jika building exist */
         // Kamus Lokal
         int i, j;
@@ -31,7 +31,7 @@ boolean isBuildingExist(BUILDING B, MAP M){
         while (!isFound){
             for (i = 0; i <= ROW_MAP(M); i++ ){
                 for (j = 0; j <= COL_MAP(M); j++){
-                    if(ElmtMap(M,i,j) == TYPE(B)){
+                    if((char) ElmtMap(M,i,j) == (char) C){
                         isFound = true;
                     }
                 }
@@ -49,7 +49,7 @@ POINT getLocBuilding(char C, MAP M){
 
     // Algoritma
     isFound = false;
-    while (!isfound){
+    while (!isFound){
         for (i = 0; i <= ROW_MAP(M); i++ ){
             for (j = 0; j <= COL_MAP(M); j++){
                 if(ElmtMap(M,i,j) == C){
@@ -58,7 +58,7 @@ POINT getLocBuilding(char C, MAP M){
             }
         }
     }
-    if (isBuildingExist){
+    if (isBuildingExist(C, M)){
         CreatePoint(&p, i, j);
     } else {CreatePoint(&p, IDX_UNDEF, IDX_UNDEF);}
     

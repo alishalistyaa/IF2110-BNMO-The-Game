@@ -3,8 +3,9 @@
 
 #include <stdio.h>
 #include "i_o.h"
+#include "../building/building.h"
 
-void configMakanan(MAP M, char *filename, ListStatik *listofMakanan){
+void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
     /* Membaca file figurasi config dan membaca makanan */
     /* I.S. Makanan sembarang */
     /* F.S. Makanan terdefinisi dari file */
@@ -50,17 +51,8 @@ void configMakanan(MAP M, char *filename, ListStatik *listofMakanan){
         /* BACA JUDUL */
         ADV(); // next after LINEMARK
         CopyWord();
-<<<<<<< HEAD
-        // char tempName[50]= "";
-        // for (int j=0; j<currentWord.Length; j++){
-        //     char temp = currentWord.TabWord[j];
-        //     tempName[j] = temp;
-        // }
-        Word tempName = currentWord;
-=======
         tempName = currentWord;
         // tempName = currentWord.TabWord;
->>>>>>> c7e2daa286204bacb11dd9812f12424d48c45025
         printf("%s\n", tempName.TabWord);
 
         // TESTING
@@ -114,49 +106,30 @@ void configMakanan(MAP M, char *filename, ListStatik *listofMakanan){
         /* BACA ACTION */
         ADV();
         CopyWord(); // next after LINEMARK
-<<<<<<< HEAD
-        Word tempActionWord = currentWord;
+        tempActionWord = currentWord;
         // printf("%s\n", tempActionWord);
 
-        // // Convert Action to Point
-        // if (same(currentWord, "Buy")){
-        //     getLocBuilding('B', MAP M);
-        // } 
-        // if else (same(currentWord, "Fry")){
-
-        // }
-        // if else (same(currentWord, "Boil")){
-
-        // }
-        // if else (same(currentWord, "Mix")){
-
-        // }
-        // if else (same(currentWord, "Chop")){
-
-        // } else { CreatePoint(&tempActionPoint, 0, 0); }
-        CreatePoint(&tempActionPoint, 0, 0);
-=======
-        tempActionWord = currentWord;
-        printf("%s\n", tempActionWord.TabWord);
-
-        // // Convert Action to Point
-        // if (same(currentWord, "Buy")){
-
-        // } 
-        // if else (same(currentWord, "Fry")){
-
-        // }
-        // if else (same(currentWord, "Boil")){
-
-        // }
-        // if else (same(currentWord, "Mix")){
-
-        // }
-        // if else (same(currentWord, "Chop")){
-
-        // } else { CreatePoint(&tempActionPoint, 0, 0); }
-        
->>>>>>> c7e2daa286204bacb11dd9812f12424d48c45025
+        // Convert Action to Point
+        if (same(currentWord, "Buy")){
+            Absis(tempActionPoint) = Absis(getLocBuilding('B', peta));
+            Ordinat(tempActionPoint) = Ordinat(getLocBuilding('B', peta));
+        } 
+        else if (same(currentWord, "Fry")){
+            Absis(tempActionPoint) = Absis(getLocBuilding('F', peta));
+            Ordinat(tempActionPoint) = Ordinat(getLocBuilding('F', peta));
+        }
+        else if (same(currentWord, "Boil")){
+            Absis(tempActionPoint) = Absis(getLocBuilding('B', peta));
+            Ordinat(tempActionPoint) = Ordinat(getLocBuilding('B', peta));            
+        }
+        else if (same(currentWord, "Mix")){
+            Absis(tempActionPoint) = Absis(getLocBuilding('M', peta));
+            Ordinat(tempActionPoint) = Ordinat(getLocBuilding('M', peta));
+        }
+        else if (same(currentWord, "Chop")){
+            Absis(tempActionPoint) = Absis(getLocBuilding('C', peta));
+            Ordinat(tempActionPoint) = Ordinat(getLocBuilding('C', peta));
+        } else { CreatePoint(&tempActionPoint, 0, 0); }
 
         // TESTING
         // printf("Done ACTION\n");
@@ -165,15 +138,11 @@ void configMakanan(MAP M, char *filename, ListStatik *listofMakanan){
         CreateMakanan(&M, tempID, tempName, tempExpired, tempActionPoint, tempDelivery);
         insert(listofMakanan, M);
 
-
         // TESTING
         // printf("Done MAKANAN\n");
     }
     fclose(pita);
 }
-
-
-
 
 void configMap(char *filename, Matrix *m){
     /* Membaca file figurasi config dan membaca map */
@@ -225,7 +194,6 @@ void configMap(char *filename, Matrix *m){
             }
         }
     }
-    
     fclose(pita);
 }
 

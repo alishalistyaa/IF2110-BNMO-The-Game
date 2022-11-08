@@ -7,27 +7,29 @@
 #include "../time/time.c"
 #include "../list/liststatik.c"
 #include "../matriks/matriks.c"
-//#include "../tree/tree.c"
+#include "../map/map.c"
+#include "../building/building.c"
+#include "../tree/tree.c"
 
 int main(){
+    MAP peta;
+    if (isFileExist("peta.txt")){
+        printf("%d\n", 1);
+        loadMap(&peta, "peta.txt");
+    } else {
+        printf("%d\n", 0);
+    }
 
     ListStatik l;
     CreateListStatik(&l);
     if (isFileExist("makanan.txt")){
         printf("%d\n", 1);
-        configMakanan("makanan.txt", &l);
+        configMakanan(peta, "makanan.txt", &l);
     } else {
         printf("%d\n", 0);
     }
     
     cetakList(l);
 
-    Matrix peta;
-    if (isFileExist("peta.txt")){
-        printf("%d\n", 1);
-        configMap("peta.txt", &peta);
-    } else {
-        printf("%d\n", 0);
-    }
-    displayMatrix(peta);
+
 }

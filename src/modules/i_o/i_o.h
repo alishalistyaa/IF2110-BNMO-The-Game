@@ -9,17 +9,14 @@
 #include "../boolean/boolean.h"
 #include "../makanan/makanan.h"
 #include "../map/map.h"
+#include "../building/building.h"
 #include "../tree/tree.h"
 #include "../charmachine/charmachine.h"
 #include "../wordmachine/wordmachine.h"
 #include "../matriks/matriks.h"
 #include "../resep/resep.h"
 
-<<<<<<< HEAD
 void configMakanan(MAP M, char *filename, ListStatik *listofMakanan);
-=======
-// void configMakanan(char *filename, ListStatik *listofMakanan);
->>>>>>> c7e2daa286204bacb11dd9812f12424d48c45025
 /* Membaca file figurasi config dan membaca makanan */
 /* I.S. Makanan sembarang */
 /* F.S. Makanan terdefinisi dari file */
