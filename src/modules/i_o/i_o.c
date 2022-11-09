@@ -30,12 +30,12 @@ void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
             IgnoreBlanks();    
     }
     // testing
-    printf("%d\n", countMakanan);
+    // printf("%d\n", countMakanan);
 
     // Membaca makanan sebanyak countMakanan
     for(i = 0; i < countMakanan; i++){
         // TESTING
-        printf("i: %d\n", i);
+        // printf("i: %d\n", i);
         /* BACA ID */
         tempID = 0;
         ADV(); // next after LINEMARK
@@ -46,14 +46,14 @@ void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
             }      
     }        
         // testing
-        printf("%d\n", tempID);
+        // printf("%d\n", tempID);
 
         /* BACA JUDUL */
         ADV(); // next after LINEMARK
         CopyWord();
         tempName = currentWord;
         // tempName = currentWord.TabWord;
-        printf("%s\n", tempName.TabWord);
+        // printf("%s\n", tempName.TabWord);
 
         // TESTING
         // printf("DONE JUDUL\n");

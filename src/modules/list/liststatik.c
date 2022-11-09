@@ -100,13 +100,15 @@ void cetakList(ListStatik l)
     {
         for(j = 0;j<panjang;j++)
         {
-            printf("\n id makanan: %d\n",ID(ELMTLIST(l,j)));
-            printf("%i. nama makanan: %s\n",(j+1), NAME(ELMTLIST(l,j)).TabWord);
+
+            // TESTING
+            printf("\nid makanan: %d",ID(ELMTLIST(l,j)));
+            printf("\nnama makanan: %s\n", NAME(ELMTLIST(l,j)).TabWord);
             printf("delivery: ");
             TulisTIME2(DELIVERY(ELMTLIST(l,j)));
-            printf("\n expired: ");
+            printf("\nexpired: ");
             TulisTIME2(EXPIRED(ELMTLIST(l,j)));
-            printf("\n action: ");
+            printf("\naction: ");
             TulisPOINT(ACTION(ELMTLIST(l,j)));
             printf("\n");
             
@@ -121,4 +123,32 @@ void CopyList(ListStatik l1,ListStatik *l2)
         ELMTLIST(*l2,i) = ELMTLIST(l1,i);
         i++;
     }
+}
+
+void cetakCatalog(ListStatik l, MAP M){
+    int panjang = lengthList(l);
+    int j;
+    // Header
+    printf("\n");
+    printf("List Makanan:\n");
+    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
+
+    if(panjang == 0)
+    {
+        printf("List kosong");
+    }
+    else
+    {
+        for(j = 0; j < panjang; j++)
+        {
+            // TESTING
+            printf("%d. ", (j+1));
+            printf("%s - ", NAME(ELMTLIST(l,j)).TabWord);
+            TulisTIME2(DELIVERY(ELMTLIST(l,j)));
+            printf(" ");
+            
+            printf("- ");
+            TulisTIME2(EXPIRED(ELMTLIST(l,j)));   
+        }
+    }    
 }

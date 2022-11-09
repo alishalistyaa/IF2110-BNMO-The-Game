@@ -19,6 +19,7 @@ int main(){
     } else {
         printf("%d\n", 0);
     }
+    displayMatrix(MATRIX(peta));
 
     ListStatik l;
     CreateListStatik(&l);
@@ -28,8 +29,5 @@ int main(){
     } else {
         printf("%d\n", 0);
     }
-    
     cetakList(l);
-
-
 }

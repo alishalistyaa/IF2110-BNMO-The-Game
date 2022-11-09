@@ -65,3 +65,23 @@ POINT getLocBuilding(char C, MAP M){
     return (p);
 
 }
+
+int getAction(POINT P, MAP M){
+    // KAMUS LOKAL
+    Char C;
+    ELMTLIST(Absis(P), Ordinat(P)) = C;
+
+    // ALGORITMA
+    int idx;
+    if (C == 'B'){
+        idx = 0;
+    } else if(C == 'F'){
+        idx = 1;
+    } else if(C == 'B'){
+        idx = 2;
+    } else if(C == 'M'){
+        idx = 3;
+    } else if(C == 'C'){
+        idx = 4;
+    }
+}

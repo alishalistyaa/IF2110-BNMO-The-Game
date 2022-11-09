@@ -32,4 +32,7 @@ boolean isBuildingExist(char C, MAP M);
 POINT getLocBuilding(char C, MAP M);
 /* Mengembalikan lokasi bangunan */
 
+int getAction(char C);
+/* Mengembalikan aksi pada bangunan */
+
 #endif
