@@ -139,16 +139,47 @@ int main(){
                 move_map(&peta, currentWord);
             }
             else if (same(currentWord, "MIX")) {
-                printf("test\n");
+                if(isNear(peta,'M')){
+                    printf("\n======================\n=        MIX         =\n======================\n");
+                }
             }
             else if (same(currentWord, "CHOP")) {
-                printf("test\n");
+                if(isNear(peta,'C')){
+                    printf("\n======================\n=        CHOP         =\n======================\n");
+                }
             }
             else if (same(currentWord, "FRY")) {
-                printf("test\n");
+                if(isNear(peta,'F')){
+                    printf("\n======================\n=        FRY         =\n======================\n");
+                }
             }
             else if (same(currentWord, "BOIL")) {
-                printf("test\n");
+                if(isNear(peta,'B')){
+                    printf("\n======================\n=        BOIL         =\n======================\n");
+                }
+            }
+            else if (same(currentWord, "BUY")) {
+                if(isNear(peta,'T')){ //Lakukan sesuatu!
+                    printf("\n======================\n=        BUY         =\n======================\n");
+                }
+                else printf("\nBNMO tidak berada di area telepon!\n");
+            }
+
+            else if(same(currentWord, "CATALOG")){
+                //lalala
+            }
+            else if(same(currentWord, "COOKBOOK")){
+                //lalala
+            }
+            else if(same(currentWord, "INVENTORY")){
+                //lalala
+            }
+            else if(same(currentWord, "DELIVERY")){
+                //lalala
+            }
+            else{
+                printf("Command invalid!\n");
+                PrevMenit(&T);
             }
 
 
