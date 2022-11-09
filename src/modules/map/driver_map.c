@@ -21,7 +21,7 @@
 int main(){
     MAP m;
     createMap(&m);
-    configMap(&m, "peta.txt");
+    loadMap(&m, "peta.txt");
     printMap(m);
     printf("Simulator loc: ");
     TulisPOINT(m.sim.LOCATION);

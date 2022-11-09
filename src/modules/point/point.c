@@ -17,7 +17,7 @@ void BacaPOINT (POINT * P){
 }
 
 void TulisPOINT (POINT P){
-    printf("(%.0f,%.0f)",Absis(P),Ordinat(P));
+    printf("(%d,%d)",Absis(P),Ordinat(P));
 }
 
 boolean EQ (POINT P1, POINT P2){

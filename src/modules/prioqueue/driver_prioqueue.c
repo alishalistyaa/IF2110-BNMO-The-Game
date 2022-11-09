@@ -3,7 +3,7 @@
 int main() {
     PrioQueue Q;
     MakeEmpty(&Q, 3);
-    infotype T, T1, T2, T3;
+    infotypePrioQueue T, T1, T2, T3;
     T.info = 'c';
     T.time = 1;
     T1.info = 'c';

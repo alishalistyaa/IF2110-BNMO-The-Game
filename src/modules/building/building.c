@@ -69,10 +69,10 @@ POINT getLocBuilding(char C, MAP M){
 
 }
 
-int getAction(POINT P, MAP M){
+int getAction(char C){
     // KAMUS LOKAL
-    Char C;
-    ELMTLIST(Absis(P), Ordinat(P)) = C;
+    // char C; //NOTE: ADA KESALAHAN DEKLARASI VARIABEL SEPERTINYA DISINI???????
+    // ElmtMap(M,Absis(P), Ordinat(P)) = C;
 
     // ALGORITMA
     int idx;
@@ -87,4 +87,5 @@ int getAction(POINT P, MAP M){
     } else if(C == 'C'){
         idx = 4;
     }
+    return idx;
 }

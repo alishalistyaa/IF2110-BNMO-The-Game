@@ -23,7 +23,7 @@ void createMap(MAP *M)
     Ordinat(S(*M))=IDX_UNDEF;
 }
 
-void configMap(MAP *M, char *filename)
+void loadMap(MAP *M, char *filename)
 /* I.S. map sembarang */
 /* F.S. map terbentuk dari file eksternal */
 {
@@ -155,22 +155,23 @@ void move_map(MAP *M, Word command)
 /* I.S. map terdefinisi */
 /* F.S. map bergerak sesuai dengan command */
 {
-    if(same(command, "NORTH")){
+    if(same(command, "NORTH") || same(command, "MOVE NORTH")){
         if(ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))+1) == ' '){
             Absis(S(*M))--;
+            printf("%d",Absis(S(*M)));
         }
     }
-    else if(same(command, "SOUTH")){
+    else if(same(command, "SOUTH") || same(command, "MOVE SOUTH")){
         if(ElmtMap(*M, (int)Absis(S(*M))+2, (int)Ordinat(S(*M))+1) == ' '){
             Absis(S(*M))++;
         }
     }
-    else if(same(command, "EAST")){
+    else if(same(command, "EAST") || same(command, "MOVE EAST")){
         if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))+2) == ' '){
             Ordinat(S(*M))++;
         }
     }
-    else if(same(command, "WEST")){
+    else if(same(command, "WEST") || same(command, "MOVE WEST")){
         if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))) == ' '){
             Ordinat(S(*M))--;
         }

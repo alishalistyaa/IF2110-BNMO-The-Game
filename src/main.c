@@ -17,6 +17,7 @@
 #include "./modules/tree/tree.c"
 #include "./modules/resep/resep.c"
 #include "./modules/i_o/i_o.c"
+#include "./modules/building/building.c"
 
 Word currentWord;
 boolean endWord;
@@ -44,7 +45,7 @@ int main(){
     if (same(currentWord, "START")) {
         // Variable to save the configuration
         printf("It should enter here\n");
-        Matrix peta;
+        MAP peta;
         ListStatik listMakanan;
         BukuResep bookRsp;
         // Reading all configuration
@@ -63,16 +64,16 @@ int main(){
             filename = currentWord.TabWord;
             // printf("%s", filename);
             if (!isFileExist(filename)) {
-                printf("Masukan file tidak valid!");
+                printf("Masukan file tidak valid!\n");
             } else {
                 if (count == 0) {
-                    configMakanan(filename, &listMakanan);
-                    //printf("skip first\n");
+                    // configMakanan(filename, &listMakanan);
+                    printf("skip first\n");
                 }  else if (count == 1) {
                     configResep (filename, &bookRsp);
                 }
                     else if (count == 2) {
-                    configMap("peta.txt", &peta);
+                    loadMap(&peta,filename);
                 }
                 count++;
             }
@@ -100,27 +101,42 @@ int main(){
         // Simulator
         CreateSimulator(&S, "Coba", P, I);
         // CreateSimulator(SIMULATOR * S, nama, P, inventory)
-
         // GAME MULAI
 
-        boolean start = true;           
+        boolean start = true;  
+        boolean first = true;      
         while (start){
             printf("BNMO di posisi: ");
-            TulisPOINT(P);
+            TulisPOINT(peta.sim.LOCATION);
             printf("\n");
             printf("Waktu: ");
             TulisTIME1(T);
             printf("\n");
             printf("Notifikasi: -\n");
-            displayMatrix(peta);
+            printMap(peta);
             printf("Enter command: ");
             STARTWORD();
+            if(first) STARTWORD();
             printf("%s\n", currentWord);
             if (same(currentWord, "BUY")) {
                 printf("test\n");
             }
             else if (same(currentWord, "EXIT")) {
                 start = false;
+            }
+            
+            else if (same(currentWord, "MOVE EAST")) {
+                move_map(&peta, currentWord);
+            }
+            else if (same(currentWord, "MOVE WEST")) {
+                move_map(&peta, currentWord);
+            }
+            else if (same(currentWord, "MOVE NORTH")) {
+                move_map(&peta, currentWord);
+            }
+            else if (same(currentWord, "MOVE SOUTH")) {
+
+                move_map(&peta, currentWord);
             }
             else if (same(currentWord, "MIX")) {
                 printf("test\n");
@@ -134,6 +150,12 @@ int main(){
             else if (same(currentWord, "BOIL")) {
                 printf("test\n");
             }
+
+
+            //KEADAAN SETELAH MELAKUKAN COMMAND
+
+            first = false;
+            NextMenit(&T);
         }
 
     } else if (same(currentWord, "EXIT")) {
