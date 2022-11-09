@@ -144,60 +144,6 @@ void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
     fclose(pita);
 }
 
-void configMap(char *filename, Matrix *m){
-    /* Membaca file figurasi config dan membaca map */
-    /* I.S. Map sembarang */
-    /* F.S. Map terdefinisi dari file */
-    /* Prekondisi: filename pasti valid dan exist */
-    // KAMUS LOKAL
-    ADVFILE("peta.txt");
-    int i = 0;
-    int M[2];
-    while (currentChar != LINEMARK) {
-        int value = 0;
-        while (currentChar != BLANK && currentChar != LINEMARK) {
-            value = value * 10 + (currentChar - 48);
-            ADV();
-        }
-        M[i] = value;
-        if (currentChar == BLANK) {
-            ADV();
-        }
-        i++;
-    }    
-    
-    createMatrix(M[0] + 2, M[1] + 2, m);
-    // creating border for matrix peta
-    for (int i = 0; i < M[1] + 2; i++) {
-        (*m).mem[0][i] = '*';
-        (*m).mem[M[0] + 1][i] = '*';
-    }
-    for (int i = 0; i < M[0] + 2; i++) {
-        (*m).mem[i][0] = '*';
-        (*m).mem[i][M[1] + 1] = '*';
-    }
-
-    ADV(); // next after LINEMARK
-    while (currentChar != FILEMARK) {
-        for (int i = 1; i < M[0] + 1; i++) {
-            if (currentChar == LINEMARK) {
-                ADV();
-            }
-            for (int j = 1; j < M[1] + 1; j++) {
-                if (currentChar == '#') {
-                    (*m).mem[i][j] = BLANK;
-                    ADV();
-                } else {
-                    (*m).mem[i][j] = currentChar;
-                    ADV();
-                }
-            }
-        }
-    }
-    fclose(pita);
-}
-
-
 void configResep(char *filename, BukuResep *b){
     /* Membaca file figurasi config dan membaca resep */
     /* I.S. Resep sembarang */

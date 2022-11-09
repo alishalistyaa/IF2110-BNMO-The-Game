@@ -21,6 +21,7 @@ int main(){
     }
     displayMatrix(MATRIX(peta));
 
+    printMap(peta);
     ListStatik l;
     CreateListStatik(&l);
     if (isFileExist("makanan.txt")){
