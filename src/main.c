@@ -180,7 +180,22 @@ int main(){
                 //lalala
             }
             else if(same(currentWord, "HELP")){
-                //lalala
+                printf(
+                    "Berikut merupakan command yang bisa kamu lakukan!\n"
+                    " 1. MOVE EAST  | Untuk berpindah satu langkah ke kiri\n"
+                    " 2. MOVE WEST  | Untuk berpindah satu langkah ke kanan\n"
+                    " 3. MOVE NORTH | Untuk berpindah satu langkah ke atas\n"
+                    " 4. MOVE SOUTH | Untuk berpindah satu langkah ke bawah\n"
+                    " 5. BUY        | Membeli bahan makanan   (Harus dekat lokasi T)\n"
+                    " 6. MIX        | Mencampur bahan makanan (Harus dekat Lokasi M)\n"
+                    " 7. BOIL       | Merebus makanan         (Harus dekat Lokasi B)\n"
+                    " 8. CHOP       | Memotong makanan        (Harus dekat Lokasi C)\n"
+                    " 9. FRY        | Menggoreng makanan      (Harus dekat Lokasi F)\n"
+                    "10. CATALOG    | Melihat bahan dan makanan yang tersedia\n"
+                    "11. COOKBOOK   | Melihat resep yang dapat dibuat \n"
+                    "12. INVENTORY  | Melihat inventory \n"
+                    "13. DELIVERY   | Melihat barang yang sedang diantar\n"
+                    );
             }
             else{
                 printf("Command invalid!\n");
