@@ -62,30 +62,22 @@ POINT getLocBuilding(char C, MAP M){
         }
     }
     if (isBuildingExist(C, M)){
-        CreatePoint(&p, idxb-1, idxk-1);
+        CreatePoint(&p, idxk, idxb);
     } else {CreatePoint(&p, IDX_UNDEF, IDX_UNDEF);}
     
     return (p);
 
 }
 
-int getAction(char C){
+char getAction(POINT P, MAP M){
+    // Asumsi: 1 = BUY, 2 = FRY, 3 = BOIL, 4 = MIX, 5 = CHOP
     // KAMUS LOKAL
-    // char C; //NOTE: ADA KESALAHAN DEKLARASI VARIABEL SEPERTINYA DISINI???????
-    // ElmtMap(M,Absis(P), Ordinat(P)) = C;
+    char C;
+    int x, y;
 
-    // ALGORITMA
-    int idx;
-    if (C == 'B'){
-        idx = 0;
-    } else if(C == 'F'){
-        idx = 1;
-    } else if(C == 'B'){
-        idx = 2;
-    } else if(C == 'M'){
-        idx = 3;
-    } else if(C == 'C'){
-        idx = 4;
-    }
-    return idx;
+    // ALGORITMA 
+    x = Absis(P);
+    y = Ordinat(P);
+    C = ElmtMap(M,y,x);
+    return C;
 }

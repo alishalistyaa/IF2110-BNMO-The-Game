@@ -47,18 +47,19 @@ int main(){
         printf("It should enter here\n");
         MAP peta;
         ListStatik listMakanan;
+            CreateListStatik(&listMakanan); 
         BukuResep bookRsp;
         // Reading all configuration
         int count = 0;
         do {
-            printf("Pastikan file config sudah masuk ke folder config ya!\n");
+            printf("\nPastikan file config sudah masuk ke folder config ya!\n");
             printf("Masukkan nama file config ");
             if (count == 0) {
-                printf("makanan: ");
+                printf("peta: ");
             } else if (count == 1) {
                 printf("resep: ");
             } else if (count == 2) {
-                printf("peta: ");
+                printf("makanan: ");
             }
             STARTWORD();
             filename = currentWord.TabWord;
@@ -67,13 +68,12 @@ int main(){
                 printf("Masukan file tidak valid!\n");
             } else {
                 if (count == 0) {
-                    // configMakanan(filename, &listMakanan);
-                    printf("skip first\n");
+                    loadMap(&peta,filename);
                 }  else if (count == 1) {
                     configResep (filename, &bookRsp);
                 }
                     else if (count == 2) {
-                    loadMap(&peta,filename);
+                    configMakanan(peta, filename, &listMakanan);
                 }
                 count++;
             }
@@ -96,7 +96,7 @@ int main(){
         // CreateMakanan(&M, 0, "Tahu", T, P, T);
         // Inventory
         PrioQueue I;
-        MakeEmpty(&I, 100);
+            MakeEmpty(&I, 100);
         // Enqueue(&I, M);
         // Simulator
         CreateSimulator(&S, "Coba", P, I);
@@ -106,6 +106,7 @@ int main(){
         boolean start = true;  
         boolean first = true;      
         while (start){
+            printf("\n");
             printf("BNMO di posisi: ");
             TulisPOINT(peta.sim.LOCATION);
             printf("\n");
@@ -116,8 +117,9 @@ int main(){
             printMap(peta);
             printf("Enter command: ");
             STARTWORD();
-            if(first) STARTWORD();
-            printf("%s\n", currentWord);
+
+            // if(first) STARTWORD();
+            // printf("%s\n", currentWord);
             if (same(currentWord, "BUY")) {
                 printf("test\n");
             }
@@ -166,15 +168,18 @@ int main(){
             }
 
             else if(same(currentWord, "CATALOG")){
-                //lalala
+                cetakCatalog(listMakanan, peta);
             }
             else if(same(currentWord, "COOKBOOK")){
                 //lalala
             }
             else if(same(currentWord, "INVENTORY")){
-                //lalala
+                printInventory(I);
             }
             else if(same(currentWord, "DELIVERY")){
+                //lalala
+            }
+            else if(same(currentWord, "HELP")){
                 //lalala
             }
             else{
@@ -182,11 +187,12 @@ int main(){
                 PrevMenit(&T);
             }
 
-
             //KEADAAN SETELAH MELAKUKAN COMMAND
 
             first = false;
             NextMenit(&T);
+
+            // ADVWORDBlank();
         }
 
     } else if (same(currentWord, "EXIT")) {
