@@ -1,5 +1,5 @@
 #include "time.h"
-#include "../simulator/simulator.c"
+#include "../simulator/simulator.h"
 #include <stdio.h>
 
 
@@ -226,5 +226,5 @@ void passTime (SIMULATOR *S, long plus, TIME *T){
     minutes = TIMEToMenit(*T);
     minutes += plus;
     *T = MenitToTime(minutes);
-    Time(*S) = *T;
+    Time2(*S) = *T;
 }

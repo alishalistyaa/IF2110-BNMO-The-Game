@@ -12,7 +12,7 @@ void CreateSimulator(SIMULATOR * S, char X[], POINT P, PrioQueue I, TIME T){
     copySimulatorName(X, Name(*S));
     Location(*S) = P; 
     Inventory(*S) = I;
-    Time(*S) = T;
+    Time2(*S) = T;
 }
 
 /** Primitif SIMULATOR **/
@@ -53,5 +53,5 @@ void setInventory(SIMULATOR * S, PrioQueue I){
 void setTime(SIMULATOR * S, TIME T){
 /*  I.S. : sembarang
     F.S. : meng-set currentTime pada SIMULATOR */
-    Time(*S) = T;
+    Time2(*S) = T;
 }

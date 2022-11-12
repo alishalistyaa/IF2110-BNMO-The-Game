@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "../boolean/boolean.h"
 #include "../charmachine/charmachine.c"
-#include "../simulator/simulator.c"
+#include "../simulator/simulator.h"
 #include "wordmachine.h"
 
 /* State Mesin Word */

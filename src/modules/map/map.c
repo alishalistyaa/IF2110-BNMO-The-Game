@@ -3,6 +3,11 @@
 #include "map.h"
 #include "../i_o/i_o.h"
 
+char currentChar;
+boolean EOP;
+
+static FILE *pita;
+static int retval;
 
 /* Loader */
 void createMap(MAP *M)

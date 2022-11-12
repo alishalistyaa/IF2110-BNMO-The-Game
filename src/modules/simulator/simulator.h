@@ -26,7 +26,7 @@ typedef struct{
 #define Name(S) (S).NAME
 #define Location(S) (S).LOCATION
 #define Inventory(S) (S).INVENTORY
-#define Time(S) (S).TIME
+#define Time2(S) (S).TIME
 
 /* ** DEFINISI PROTOTIPE PRIMITIF ** */
 /* ** Konstruktor PEMBENTUK SIMULATOR ***/
