@@ -3,7 +3,7 @@
 
 #include "./modules/boolean/boolean.h"
 #include "./modules/wordmachine/wordmachine.c"
-#include "./modules/charmachine/charmachine.h"
+#include "./modules/charmachine/charmachine.c"
 #include "./modules/list/liststatik.c"
 #include "./modules/makanan/makanan.c"
 #include "./modules/map/map.c"
@@ -27,6 +27,7 @@ int main(){
     int inputCom1;
     int inputCom2;
     int inputCom3;
+    MAP map;
     TIME wait;
     TIME curTime;
     POINT curLoc;
@@ -87,7 +88,6 @@ int main(){
                 }
                 count++;
             }
-
         }
         while (count < 2);
         printf("File konfigurasi telah selesai dibaca\n");
@@ -133,7 +133,81 @@ int main(){
                 printf("          BUY         \n");
                 printf("======================\n");
             case 6:
-                printf("Tes move\n");
+                ADVWORD();
+                inputCom2 = move_detection(currentWord);
+
+                switch(inputCom2)
+                {
+                case 1:
+                    ADVWORD();
+                    if(currentWord.Length > 0){
+                        printf("Input berlebihan\n");
+                        ignoreUntilEnter();
+                    }
+                    else{
+                        Word w;
+                        w.Length=4;
+                        w.TabWord[0]='W';
+                        w.TabWord[1]='E';
+                        w.TabWord[2]='S';
+                        w.TabWord[3]='T';
+                        move_map(&map, w);
+                        passTime(&BNMO, 1, &curTime);
+                    }
+                case 2:
+                    ADVWORD();
+                    if(currentWord.Length > 0){
+                        printf("Input berlebihan\n");
+                        ignoreUntilEnter();
+                    }
+                    else{
+                        Word w;
+                        w.Length=5;
+                        w.TabWord[0]='S';
+                        w.TabWord[1]='O';
+                        w.TabWord[2]='U';
+                        w.TabWord[3]='T';
+                        w.TabWord[4]='H';
+                        move_map(&map, w);
+                        passTime(&BNMO, 1, &curTime);
+                    }
+                case 3:
+                    ADVWORD();
+                    if(currentWord.Length > 0){
+                        printf("Input berlebihan\n");
+                        ignoreUntilEnter();
+                    }
+                    else{
+                        Word w;
+                        w.Length=4;
+                        w.TabWord[0]='E';
+                        w.TabWord[1]='A';
+                        w.TabWord[2]='S';
+                        w.TabWord[3]='T';
+                        move_map(&map, w);
+                        passTime(&BNMO, 1, &curTime);
+                    }
+                case 4:
+                    ADVWORD();
+                    if(currentWord.Length > 0){
+                        printf("Input berlebihan\n");
+                        ignoreUntilEnter();
+                    }
+                    else{
+                        Word w;
+                        w.Length=5;
+                        w.TabWord[0]='N';
+                        w.TabWord[1]='O';
+                        w.TabWord[2]='R';
+                        w.TabWord[3]='T';
+                        w.TabWord[4]='H';
+                        move_map(&map, w);
+                        passTime(&BNMO, 1, &curTime);
+                    }
+                deafult:
+                    printf("Input tidak valid\n");
+                    break;
+                }
             case 7:
                 ADVWORD();
                 if(currentWord.Length > 0){
@@ -170,6 +244,30 @@ int main(){
                 else{
                     printf("Input Waktu tidak valid\n");
                 }
+            case 8:
+                printf("======================\n");
+                printf("        CATALOG       \n");
+                printf("======================\n");
+            case 9:
+                printf("======================\n");
+                printf("       INVENTORY      \n");
+                printf("======================\n");
+            case 10:
+                printf("======================\n");
+                printf("        DELIVERY      \n");
+                printf("======================\n");
+            case 11:
+                printf("======================\n");
+                printf("          UNDO        \n");
+                printf("======================\n");
+            case 12:
+                printf("======================\n");
+                printf("          REDO        \n");
+                printf("======================\n");
+            case 13:
+                printf("======================\n");
+                printf("        COOKBOOK      \n");
+                printf("======================\n");
             default:
                 break;
             }

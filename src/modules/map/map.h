@@ -63,4 +63,8 @@ void moveDirection(MAP *M, char direction);
 /* F.S. map bergerak sesuai dengan command */
 boolean isEqual(Word one, Word two);
 
+int move_detector(Word command);
+/* Mengembalikan nilai base dari command move */
+/* Prekondisi: command move terdefinisi dan tidak kosong */
+
 #endif

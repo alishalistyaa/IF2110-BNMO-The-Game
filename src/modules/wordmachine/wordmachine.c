@@ -171,6 +171,24 @@ int commandToInt(Word x){
     else if(same(x, "WAIT")){
         return 7;
     }
+    else if(same(x, "CATALOG")){
+        return 8;
+    }
+    else if(same(x, "INVENTORY")){
+        return 9;
+    }
+    else if(same(x, "DELIVERY")){
+        return 10;
+    }
+    else if(same(x, "UNDO")){
+        return 11;
+    }
+    else if(same(x, "REDO")){
+        return 12;
+    }
+    else if(same(x, "COOKBOOK")){
+        return 13;
+    }
     return 0;
 }
 
