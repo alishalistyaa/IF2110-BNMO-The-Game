@@ -190,6 +190,9 @@ int commandToInt(Word x){
     else if(same(x, "COOKBOOK")){
         return 13;
     }
+    else if(same(x, "EXIT")){
+        return 14;
+    }
     return 0;
 }
 

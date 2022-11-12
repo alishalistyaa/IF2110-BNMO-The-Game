@@ -183,6 +183,7 @@ void move_map(MAP *M, Word command)
     }
 }
 
+
 int move_detector(Word command){
 /* Mengembalikan nilai base dari command move */
 /* Prekondisi: command move terdefinisi dan tidak kosong */

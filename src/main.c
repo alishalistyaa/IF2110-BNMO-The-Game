@@ -3,20 +3,20 @@
 
 #include "./modules/boolean/boolean.h"
 #include "./modules/wordmachine/wordmachine.c"
-#include "./modules/charmachine/charmachine.c"
+#include "./modules/charmachine/charmachine.h"
 #include "./modules/list/liststatik.c"
 #include "./modules/makanan/makanan.c"
-#include "./modules/map/map.c"
 #include "./modules/matriks/matriks.c"
 #include "./modules/point/point.c"
 // #include "./modules/queue/queue.c"
 #include "./modules/prioqueue/prioqueue.c"
-#include "./modules/simulator/simulator.c"
 #include "./modules/stack/stack.c"
 #include "./modules/time/time.c"
-// #include "./modules/tree/tree.c"
+#include "./modules/tree/tree.c"
 #include "./modules/i_o/i_o.c"
 #include "./modules/building/building.c"
+#include "./modules/simulator/simulator.c"
+#include "./modules/map/map.c"
 
 Word currentWord;
 boolean endWord;
@@ -53,17 +53,26 @@ int main(){
     Word command = currentWord;
     if (same(currentWord, "START")) {
         // Variable to save the configuration
-        printf("It should enter here\n");
+        // Inventory
+        PrioQueue I;
+            MakeEmpty(&I, 100);
+        // Simulator
         CreateTime(&curTime, 0, 0, 0);
         CreatePoint(&curLoc, 0, 0);
         MakeEmpty(&curInv, 10);
-        CreateSimulator(&BNMO, curName, curLoc, curInv, curTime);
-        Matrix peta;
+        CreateSimulator(&BNMO, "test", curLoc, curInv, curTime);
+        // Peta
+        MAP peta;
+        // List Makanan
         ListStatik listMakanan;
+            CreateListStatik(&listMakanan); 
+        // Resep
+        BukuResep bookRsp;
+        
         // Reading all configuration
         int count = 0;
         do {
-            printf("Pastikan file config sudah masuk ke folder config ya!\n");
+            printf("\nPastikan file config sudah masuk ke folder config ya!\n");
             printf("Masukkan nama file config ");
             if (count == 0) {
                 printf("peta: ");
@@ -76,20 +85,20 @@ int main(){
             filename = currentWord.TabWord;
             // printf("%s", filename);
             if (!isFileExist(filename)) {
-                printf("Masukan file tidak valid!");
+                printf("Masukan file tidak valid!\n");
             } else {
                 if (count == 0) {
-                    // configMakanan(filename, &listMakanan);
-                    printf("skip first\n");
-                } else if (count == 1) {
-                    configMap("peta.txt", &peta);
-                } else if (count == 2) {
-                    //configResep (filename, &resep);
+                    loadMap(&peta,filename);
+                }  else if (count == 1) {
+                    configResep (filename, &bookRsp);
+                }
+                    else if (count == 2) {
+                    configMakanan(peta, filename, &listMakanan);
                 }
                 count++;
             }
         }
-        while (count < 2);
+        while (count < 3);
         printf("File konfigurasi telah selesai dibaca\n");
 
         boolean start = true;  
@@ -103,7 +112,7 @@ int main(){
             TulisTIME1(curTime);
             printf("\n");
             printf("Notifikasi: -\n");
-            displayMatrix(peta);
+            printMap(peta);
             printf("Enter command: ");
             STARTWORD();
             inputCom1 = commandToInt(currentWord);
@@ -134,7 +143,7 @@ int main(){
                 printf("======================\n");
             case 6:
                 ADVWORD();
-                inputCom2 = move_detection(currentWord);
+                inputCom2 = move_detector(currentWord);
 
                 switch(inputCom2)
                 {
@@ -248,10 +257,13 @@ int main(){
                 printf("======================\n");
                 printf("        CATALOG       \n");
                 printf("======================\n");
+                cetakCatalog(listMakanan, peta);
+                break;
             case 9:
                 printf("======================\n");
                 printf("       INVENTORY      \n");
                 printf("======================\n");
+                printInventory(I);
             case 10:
                 printf("======================\n");
                 printf("        DELIVERY      \n");
@@ -268,6 +280,9 @@ int main(){
                 printf("======================\n");
                 printf("        COOKBOOK      \n");
                 printf("======================\n");
+            case 14:
+                printf("Game berhenti\n");
+                start = false;
             default:
                 break;
             }

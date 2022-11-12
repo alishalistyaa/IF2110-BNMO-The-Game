@@ -137,7 +137,6 @@ int main(){
                 move_map(&peta, currentWord);
             }
             else if (same(currentWord, "MOVE SOUTH")) {
-
                 move_map(&peta, currentWord);
             }
             else if (same(currentWord, "MIX")) {
@@ -175,6 +174,9 @@ int main(){
             }
             else if(same(currentWord, "INVENTORY")){
                 printInventory(I);
+            }
+            else if(same(currentWord, "DELIVERY")){
+                //lalala
             }
             else if(same(currentWord, "DELIVERY")){
                 //lalala

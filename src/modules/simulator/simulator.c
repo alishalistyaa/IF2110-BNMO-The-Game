@@ -55,3 +55,13 @@ void setTime(SIMULATOR * S, TIME T){
     F.S. : meng-set currentTime pada SIMULATOR */
     Time2(*S) = T;
 }
+
+void passTime (SIMULATOR *S, long plus, TIME *T){  
+/* I.S. : S terdefinisi, T terdefinisi, plus terdefinisi */
+/* F.S. : T bertambah sebanyak plus menit */
+    long minutes;
+    minutes = TIMEToMenit(*T);
+    minutes += plus;
+    *T = MenitToTime(minutes);
+    Time2(*S) = *T;
+}
