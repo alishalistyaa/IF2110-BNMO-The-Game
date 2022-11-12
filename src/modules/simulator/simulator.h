@@ -19,16 +19,18 @@ typedef struct{
     char NAME[100]; /* Nama User */
     POINT LOCATION; /* Koordinat Lokasi pada Map */
     PrioQueue INVENTORY; /* Inventory */
+    TIME TIME; /* Waktu */
 } SIMULATOR;
 
 /* NOTASI AKSES: Selektor SIMULATOR */
 #define Name(S) (S).NAME
 #define Location(S) (S).LOCATION
 #define Inventory(S) (S).INVENTORY
+#define Time(S) (S).TIME
 
 /* ** DEFINISI PROTOTIPE PRIMITIF ** */
 /* ** Konstruktor PEMBENTUK SIMULATOR ***/
-void CreateSimulator(SIMULATOR * S, char X[], POINT P, PrioQueue I);
+void CreateSimulator(SIMULATOR * S, char X[], POINT P, PrioQueue I, TIME T);
 /*  I.S. : sembarang
     F.S. : membentuk simulator yang tersusun atas
            currentUsername, currentlocation, and currentInventort */
@@ -53,5 +55,9 @@ void setLocation(SIMULATOR * S, POINT P);
 void setInventory(SIMULATOR * S, PrioQueue I);
 /*  I.S. : sembarang
     F.S. : meng-set currentInventory pada SIMULATOR */
+
+void setTime(SIMULATOR * S, TIME T);
+/*  I.S. : sembarang
+    F.S. : meng-set currentTime pada SIMULATOR */
 
 #endif

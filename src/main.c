@@ -23,12 +23,21 @@ boolean endWord;
 int main(){
     /* KAMUS */
     boolean start;
+    int inputCom1;
+    int inputCom2;
+    int inputCom3;
+    TIME wait;
+    TIME curTime;
+    POINT curLoc;
+    PrioQueue curInv;
+    SIMULATOR BNMO;
 
     /* ALGORITMA */
     // Inisialisasi Game
     start = true;
     // Variable Main
     char* filename;
+    char* curName;
     // PROGRAM MULAI
         // Splash Screen 
 
@@ -42,6 +51,10 @@ int main(){
     if (same(currentWord, "START")) {
         // Variable to save the configuration
         printf("It should enter here\n");
+        CreateTime(&curTime, 0, 0, 0);
+        CreatePoint(&curLoc, 0, 0);
+        MakeEmpty(&curInv, 10);
+        CreateSimulator(&BNMO, curName, curLoc, curInv, curTime);
         Matrix peta;
         ListStatik listMakanan;
         // Reading all configuration
@@ -76,48 +89,86 @@ int main(){
         }
         while (count < 2);
         printf("File konfigurasi telah selesai dibaca\n");
-        // INISIALISASI SELURUH OBJECT DAN ADT
-        // Posisi 
-        SIMULATOR S;
-        POINT P;
-        CreatePoint(&P, 0, 0);
-        // Waktu
-        TIME T;
-        BacaTIME1(&T);
-        // Notifikasi 
-        // Peta
-        // Makanan
-        MAKANAN M;
-        // CreateMakanan(&M, 0, "Tahu", T, P, T);
-        // Inventory
-        PrioQueue I;
-        MakeEmpty(&I, 100);
-        // Enqueue(&I, M);
-        // Simulator
-        CreateSimulator(&S, "Coba", P, I);
-        // CreateSimulator(SIMULATOR * S, nama, P, inventory)
-
-        // GAME MULAI
 
         boolean start = true;           
         while (start){
             printf("BNMO di posisi: ");
-            TulisPOINT(P);
+            TulisPOINT(curLoc);
             printf("\n");
             printf("Waktu: ");
-            TulisTIME1(T);
+            TulisTIME1(curTime);
             printf("\n");
             printf("Notifikasi: -\n");
             displayMatrix(peta);
             printf("Enter command: ");
             STARTWORD();
-            printf("%s\n", currentWord);
-            // if (same(currentWord, "BUY")) {
-            //     printf("test\n");
-            // }
-            // else if (same(currentWord, "EXIT")) {
-            //     start = false;
-            // }
+            inputCom1 = commandToInt(currentWord);
+            inputCom2 = -1;
+            inputCom3 = -1;
+
+            switch (inputCom1)
+            {
+            case 1:
+                printf("======================\n");
+                printf("=        MIX         =\n");
+                printf("======================\n");
+            case 2:
+                printf("======================\n");
+                printf("=        CHOP        =\n");
+                printf("======================\n");
+            case 3:
+                printf("======================\n");
+                printf("=        FRY         =\n");
+                printf("======================\n");
+            case 4:
+                printf("======================\n");
+                printf("=        BOIL        =\n");
+                printf("======================\n");
+            case 5:
+                printf("======================\n");
+                printf("=         BUY        =\n");
+                printf("======================\n");
+            case 6:
+                printf("Tes move\n");
+            case 7:
+                ADVWORD();
+                if(currentWord.Length > 0){
+                    inputCom2 = transformToInt(currentWord);
+                    ADVWORD();
+                    if(currentWord.Length > 0 && inputCom2 >= 0){
+                        inputCom3 = transformToInt(currentWord);
+
+                        ADVWORD();
+                        if(currentWord.Length>0){
+                            printf("Input berlebihan\n");
+                            ignoreUntilEnter();
+                        }
+                        else{
+                            if(inputCom3 >= 0){
+                                if(inputCom2 == 0 && inputCom3 == 0){
+                                    printf("Input Waktu tidak valid\n");
+                                } else {
+                                    printf("Menunggu untuk %d jam, %d menit\n", inputCom2, inputCom3);
+                                    CreateTime(&wait, 0, inputCom2, inputCom3);
+                                    long plusMinute = TIMEToMenit(wait);
+                                    passTime(&BNMO, plusMinute, &curTime);
+                                }
+                            }
+                            else{
+                                printf("Input Waktu tidak valid\n");
+                            }
+                        }
+                    }
+                    else{
+                        printf("Input Waktu tidak valid\n");
+                    }
+                }
+                else{
+                    printf("Input Waktu tidak valid\n");
+                }
+            default:
+                break;
+            }
         }
 
     } else if (same(currentWord, "EXIT")) {

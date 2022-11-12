@@ -7,7 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../boolean/boolean.h"
-#include "../charmachine/charmachine.c"
+#include "../charmachine/charmachine.h"
+#include "../simulator/simulator.h"
 
 #define NMax 50
 #define BLANK ' '
@@ -52,5 +53,16 @@ void CopyWord();
 void LowerCase();
     /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
     /* F.S. currentword menjadi lowercase di setiap karakternya */
+
+int commandToInt(Word x);
+    /* Mengembalikan nilai base dari currentword */
+    /* Prekondisi: currentword terdefinisi dan tidak kosong */
+
+int transformToInt(Word x);
+    /* Mengubah input currentword menjadi int */
+    /* Prekondisi: currentword terdefinisi dan tidak kosong */
+
+void ignoreUntilEnter();
+      /* Mengabaikan semua input sampai enter */
 
 #endif

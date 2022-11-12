@@ -2,6 +2,7 @@
 #define TIME_H
 
 #include "../boolean/boolean.h"
+#include "../simulator/simulator.h"
 
 /* *** Definisi TYPE TIME <HH:MM:SS> *** */
 typedef struct { 
@@ -124,6 +125,7 @@ void PrevNMenit (TIME *T, int N);
 /* Mengirim N menit sebelum T dalam bentuk TIME */
 void NextJamMenit (TIME *T, int x, int y);
 /* Mengirim T setelah ditambah x jam dan y menit */
-
+void passTime (SIMULATOR *S, long plus, TIME *T);  
+/* I.S. : S terdefinisi, T terdefinisi, plus terdefinisi */
 
 #endif

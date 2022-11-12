@@ -1,4 +1,5 @@
 #include "time.h"
+#include "../simulator/simulator.c"
 #include <stdio.h>
 
 
@@ -136,7 +137,7 @@ long TIMEToMenit (TIME T) {
 /* Rumus : detik = 3600*HH + 60*MM + SS */
 /* Nilai maksimum = 3600*23+59*60+59 */
     return 1440 * Day(T) + 60 * Hour(T) + Minute(T);
-} 
+}
 
 TIME MenitToTime (long N) {
 /* Mengirim  konversi detik ke TIME */
@@ -216,4 +217,14 @@ void NextJamMenit (TIME *T, int x, int y) {
     m2 = TIMEToMenit(*T);
     hasil = m1 + m2;
     *T = MenitToTime(hasil);
+}
+
+void passTime (SIMULATOR *S, long plus, TIME *T){  
+/* I.S. : S terdefinisi, T terdefinisi, plus terdefinisi */
+/* F.S. : T bertambah sebanyak plus menit */
+    long minutes;
+    minutes = TIMEToMenit(*T);
+    minutes += plus;
+    *T = MenitToTime(minutes);
+    Time(*S) = *T;
 }
