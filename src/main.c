@@ -122,25 +122,55 @@ int main(){
             switch (inputCom1)
             {
             case 1:
+                if(isNear(peta,'M')){
                 printf("======================\n");
                 printf("         MIX          \n");
                 printf("======================\n");
+                // MIX HERE
+
+                } else printf("\nBNMO tidak berada di area mix (M)!\n");
+                
+                break;
+
             case 2:
+                if(isNear(peta,'C')){
                 printf("======================\n");
                 printf("         CHOP         \n");
                 printf("======================\n");
+                // CHOP HERE
+
+                } else printf("\nBNMO tidak berada di area chop (C)!\n");
+                break;
+
             case 3:
+                if(isNear(peta,'F')){
                 printf("======================\n");
                 printf("         FRY          \n");
                 printf("======================\n");
+                // FRY HERE
+                
+                } else printf("\nBNMO tidak berada di area fry (F)!\n");
+                break;
+
             case 4:
+                if(isNear(peta,'B')){
                 printf("======================\n");
                 printf("         BOIL         \n");
                 printf("======================\n");
+                // BOIL HERE
+                
+                } else printf("\nBNMO tidak berada di area boil (B)!\n");
+                break;
             case 5:
+                if(isNear(peta,'T')){
                 printf("======================\n");
-                printf("          BUY         \n");
+                printf("         BUY          \n");
                 printf("======================\n");
+                // BUY HERE
+                
+                } else printf("\nBNMO tidak berada di area telepon (T)!\n");
+                break;
+
             case 6:
                 ADVWORD();
                 inputCom2 = move_detector(currentWord);
@@ -253,37 +283,49 @@ int main(){
                 else{
                     printf("Input Waktu tidak valid\n");
                 }
+                break;
+
             case 8:
                 printf("======================\n");
                 printf("        CATALOG       \n");
                 printf("======================\n");
                 cetakCatalog(listMakanan, peta);
                 break;
+
             case 9:
                 printf("======================\n");
                 printf("       INVENTORY      \n");
                 printf("======================\n");
                 printInventory(I);
+                break;
+
             case 10:
                 printf("======================\n");
                 printf("        DELIVERY      \n");
                 printf("======================\n");
+
+                break;
             case 11:
                 printf("======================\n");
                 printf("          UNDO        \n");
                 printf("======================\n");
+
             case 12:
                 printf("======================\n");
                 printf("          REDO        \n");
                 printf("======================\n");
+
             case 13:
                 printf("======================\n");
                 printf("        COOKBOOK      \n");
                 printf("======================\n");
+                // cetakBukuResep(bookRsp);
+                break;
             case 14:
                 printf("Game berhenti\n");
                 start = false;
             default:
+                printf("\nInput tidak valid! Coba lag1!\n");
                 break;
             }
         }
