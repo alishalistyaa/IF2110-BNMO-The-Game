@@ -125,7 +125,5 @@ void PrevNMenit (TIME *T, int N);
 /* Mengirim N menit sebelum T dalam bentuk TIME */
 void NextJamMenit (TIME *T, int x, int y);
 /* Mengirim T setelah ditambah x jam dan y menit */
-void passTime (SIMULATOR *S, long plus, TIME *T);  
-/* I.S. : S terdefinisi, T terdefinisi, plus terdefinisi */
 
 #endif

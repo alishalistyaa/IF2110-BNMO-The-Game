@@ -218,13 +218,3 @@ void NextJamMenit (TIME *T, int x, int y) {
     hasil = m1 + m2;
     *T = MenitToTime(hasil);
 }
-
-void passTime (SIMULATOR *S, long plus, TIME *T){  
-/* I.S. : S terdefinisi, T terdefinisi, plus terdefinisi */
-/* F.S. : T bertambah sebanyak plus menit */
-    long minutes;
-    minutes = TIMEToMenit(*T);
-    minutes += plus;
-    *T = MenitToTime(minutes);
-    Time2(*S) = *T;
-}

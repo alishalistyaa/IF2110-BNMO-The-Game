@@ -8,6 +8,7 @@
         "matriks.h": "c",
         "map": "c",
         "charmachine.h": "c",
-        "i_o.h": "c"
+        "i_o.h": "c",
+        "time.h": "c"
     }
 }

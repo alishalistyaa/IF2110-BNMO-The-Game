@@ -12,7 +12,7 @@
 #include "../prioqueue/prioqueue.h"
 #include "../makanan/makanan.h"
 #include "../wordmachine/wordmachine.h"
-#include "../map/map.h"
+#include "../time/time.h"
 
 /***** Definisi TYPE LOKASI *****/
 typedef struct{
@@ -59,5 +59,7 @@ void setInventory(SIMULATOR * S, PrioQueue I);
 void setTime(SIMULATOR * S, TIME T);
 /*  I.S. : sembarang
     F.S. : meng-set currentTime pada SIMULATOR */
+
+void passTime (SIMULATOR *S, long plus, TIME *T);
 
 #endif
