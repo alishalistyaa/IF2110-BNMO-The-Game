@@ -20,8 +20,6 @@
 /* *** Definisi TYPE MAP *** */
 typedef struct {
     Matrix m;
-    ListStatik Lokasi; 
-    ListStatik ListBuilding;
     SIMULATOR sim;
 } MAP;
 
@@ -29,6 +27,7 @@ typedef struct {
 #define WIDTH(P) (P).(m).colEff
 #define HEIGHT(P) (P).(m).rowEff
 #define MATRIX(P) (P).m
+#define SIMULATOR(P) (P).sim
 
 /* *** Selektor: Untuk sebuah MAP M yang terdefinisi: *** */
 #define ROW_MAP(M) (M).m.rowEff

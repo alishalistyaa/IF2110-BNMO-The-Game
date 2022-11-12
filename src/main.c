@@ -16,6 +16,7 @@
 #include "./modules/time/time.c"
 // #include "./modules/tree/tree.c"
 #include "./modules/i_o/i_o.c"
+#include "./modules/building/building.c"
 
 Word currentWord;
 boolean endWord;
@@ -40,6 +41,7 @@ int main(){
     char* curName;
     // PROGRAM MULAI
         // Splash Screen 
+    
 
     // COMMAND AWAL
     printf("1. START\n");
@@ -63,11 +65,11 @@ int main(){
             printf("Pastikan file config sudah masuk ke folder config ya!\n");
             printf("Masukkan nama file config ");
             if (count == 0) {
-                printf("makanan: ");
-            // } else if (count == 1) {
-            //     printf("resep: ");
-            } else if (count == 1) {
                 printf("peta: ");
+            } else if (count == 1) {
+                printf("resep: ");
+            } else if (count == 2) {
+                printf("makanan: ");
             }
             STARTWORD();
             filename = currentWord.TabWord;
@@ -90,8 +92,10 @@ int main(){
         while (count < 2);
         printf("File konfigurasi telah selesai dibaca\n");
 
-        boolean start = true;           
+        boolean start = true;  
+        boolean first = true;      
         while (start){
+            printf("\n");
             printf("BNMO di posisi: ");
             TulisPOINT(curLoc);
             printf("\n");
@@ -110,23 +114,23 @@ int main(){
             {
             case 1:
                 printf("======================\n");
-                printf("=        MIX         =\n");
+                printf("         MIX          \n");
                 printf("======================\n");
             case 2:
                 printf("======================\n");
-                printf("=        CHOP        =\n");
+                printf("         CHOP         \n");
                 printf("======================\n");
             case 3:
                 printf("======================\n");
-                printf("=        FRY         =\n");
+                printf("         FRY          \n");
                 printf("======================\n");
             case 4:
                 printf("======================\n");
-                printf("=        BOIL        =\n");
+                printf("         BOIL         \n");
                 printf("======================\n");
             case 5:
                 printf("======================\n");
-                printf("=         BUY        =\n");
+                printf("          BUY         \n");
                 printf("======================\n");
             case 6:
                 printf("Tes move\n");

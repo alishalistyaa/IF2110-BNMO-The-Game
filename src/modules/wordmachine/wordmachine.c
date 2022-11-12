@@ -18,7 +18,7 @@ void IgnoreBlanks(){
     F.S. : currentChar ≠ BLANK atau currentChar = MARK */
     while(currentChar == BLANK){
         ADV();
-        printf("Detected blank!");
+        // printf("Detected blank!");
     }
 }
 

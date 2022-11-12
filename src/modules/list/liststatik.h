@@ -3,6 +3,7 @@
 
 #include "../boolean/boolean.h"
 #include "../makanan/makanan.h"
+#include "../map/map.h"
 
 /*  Kamus Umum */
 #define CAPACITY 100

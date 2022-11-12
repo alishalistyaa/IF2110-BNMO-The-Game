@@ -2,7 +2,9 @@
 #include "../boolean/boolean.h"
 #include "../time/time.h"
 #include "../point/point.h"
+#include "../building/building.h"
 #include <stdio.h>
+
 void CreateListStatik(ListStatik *l)
 {
     int i;
@@ -100,13 +102,15 @@ void cetakList(ListStatik l)
     {
         for(j = 0;j<panjang;j++)
         {
-            printf("\n id makanan: %d\n",ID(ELMTLIST(l,j)));
-            printf("%i. nama makanan: %s\n",(j+1), NAME(ELMTLIST(l,j)).TabWord);
+
+            // TESTING
+            printf("\nid makanan: %d",ID(ELMTLIST(l,j)));
+            printf("\nnama makanan: %s\n", NAME(ELMTLIST(l,j)).TabWord);
             printf("delivery: ");
             TulisTIME2(DELIVERY(ELMTLIST(l,j)));
-            printf("\n expired: ");
+            printf("\nexpired: ");
             TulisTIME2(EXPIRED(ELMTLIST(l,j)));
-            printf("\n action: ");
+            printf("\naction: ");
             TulisPOINT(ACTION(ELMTLIST(l,j)));
             printf("\n");
             
@@ -121,4 +125,63 @@ void CopyList(ListStatik l1,ListStatik *l2)
         ELMTLIST(*l2,i) = ELMTLIST(l1,i);
         i++;
     }
+}
+
+void cetakCatalog(ListStatik l, MAP M){
+    int panjang = lengthList(l);
+    int j;
+    // Header
+    printf("\n");
+    printf("List Makanan:\n");
+    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
+
+    if (panjang == 0)
+    {
+        printf("List kosong");
+    }
+    else
+    {
+        for(j = 0; j < panjang; j++)
+        {
+            // Tulis Nomor
+            printf("%d. ", (j+1));
+
+            // Tulis Nama Makanan
+            printf("%s - ", NAME(ELMTLIST(l,j)).TabWord);
+
+            // Tulis Expired
+            TulisTIME2(EXPIRED(ELMTLIST(l,j)));  
+            
+            printf(" - ");
+
+            // Tulis Action
+            char K;
+            K = getAction(ACTION(ELMTLIST(l,j)), M);
+            if(K == 'T'){
+                printf("Buy");
+            } else if(K == 'F'){
+                printf("Fry");
+            } else if(K == 'B'){
+                printf("Boil");
+            } else if(K == 'M'){
+                printf("Mix");
+            } else if(K == 'C'){
+                printf("Chop");
+            } else {printf("Tidak ada aksi");}
+            
+            printf(" - ");
+
+            // Tulis Delivery
+            TIME DelivKosong;
+            CreateTime(&DelivKosong, 0, 0, 0); 
+            if (TEQ(DELIVERY(ELMTLIST(l,j)), DelivKosong)){
+                printf("Tidak perlu delivery");
+            } else {
+                TulisTIME2(DELIVERY(ELMTLIST(l,j)));
+            }
+            
+            printf("\n");
+            
+        }
+    }    
 }
