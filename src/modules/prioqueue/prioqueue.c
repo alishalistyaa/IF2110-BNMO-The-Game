@@ -101,36 +101,36 @@ void Dequeue (PrioQueue * Q, infotypePrioQueue * X) {
     }
 }
 
-/* Operasi Tambahan */
-void PrintPrioQueue (PrioQueue Q) {
-/* Mencetak isi queue Q ke layar */
-/* I.S. Q terdefinisi, mungkin kosong */
-/* F.S. Q tercetak ke layar dengan format:
-<time-1> <elemen-1>
-...
-<time-n> <elemen-n>
-#
-*/
-    if (IsEmpty(Q)) {
-        printf("#\n");
-    } else if (Tail(Q) == Head(Q)) {
-        printf("%d %c\n", Time(InfoHead(Q)), Info(InfoHead(Q)));
-        printf("#\n");
-    } else if (Tail(Q) >= Head(Q)) {
-        for (int i = Head(Q); i <= Tail(Q); i++) {
-            printf("%d %c\n", Time((Q).T[i]), Info((Q).T[i]));
-        }
-        printf("#\n");
-    } else {
-        for (int i = Head(Q); i < MaxEl(Q); i++) {
-            printf("%d %c\n", Time((Q).T[i]), Info((Q).T[i]));
-        }
-        for (int i = 0; i <= Tail(Q); i++) {
-            printf("%d %c\n", Time((Q).T[i]), Info((Q).T[i]));
-        }
-        printf("#\n");
-    }
-}
+// /* Operasi Tambahan */
+// void PrintPrioQueue (PrioQueue Q) {
+// /* Mencetak isi queue Q ke layar */
+// /* I.S. Q terdefinisi, mungkin kosong */
+// /* F.S. Q tercetak ke layar dengan format:
+// <time-1> <elemen-1>
+// ...
+// <time-n> <elemen-n>
+// #
+// */
+//     if (IsEmpty(Q)) {
+//         printf("#\n");
+//     } else if (Tail(Q) == Head(Q)) {
+//         printf("%d %c\n", Time(InfoHead(Q)), Info(InfoHead(Q)));
+//         printf("#\n");
+//     } else if (Tail(Q) >= Head(Q)) {
+//         for (int i = Head(Q); i <= Tail(Q); i++) {
+//             printf("%d %c\n", Time((Q).T[i]), Info((Q).T[i]));
+//         }
+//         printf("#\n");
+//     } else {
+//         for (int i = Head(Q); i < MaxEl(Q); i++) {
+//             printf("%d %c\n", Time((Q).T[i]), Info((Q).T[i]));
+//         }
+//         for (int i = 0; i <= Tail(Q); i++) {
+//             printf("%d %c\n", Time((Q).T[i]), Info((Q).T[i]));
+//         }
+//         printf("#\n");
+//     }
+// }
 
 void printInventory (PrioQueue Q) {
     if (IsEmpty(Q)) {

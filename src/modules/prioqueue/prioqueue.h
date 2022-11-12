@@ -74,14 +74,16 @@ void Dequeue (PrioQueue * Q, infotypePrioQueue * X);
         Q mungkin kosong */
 
 /* Operasi Tambahan */
-void PrintPrioQueue (PrioQueue Q);
-/* Mencetak isi queue Q ke layar */
-/* I.S. Q terdefinisi, mungkin kosong */
-/* F.S. Q tercetak ke layar dengan format:
-<time-1> <elemen-1>
-...
-<time-n> <elemen-n>
-#
-*/
+// void PrintPrioQueue (PrioQueue Q);
+// /* Mencetak isi queue Q ke layar */
+// /* I.S. Q terdefinisi, mungkin kosong */
+// /* F.S. Q tercetak ke layar dengan format:
+// <time-1> <elemen-1>
+// ...
+// <time-n> <elemen-n>
+// #
+// */
+
+void printInventory (PrioQueue Q);
 
 #endif

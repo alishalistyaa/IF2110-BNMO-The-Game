@@ -4,8 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../boolean/boolean.h"
-#include "../charmachine/charmachine.c"
 #include "../simulator/simulator.h"
+#include "../i_o/i_o.h"
+#include "../charmachine/charmachine.c"
 #include "wordmachine.h"
 
 /* State Mesin Word */
