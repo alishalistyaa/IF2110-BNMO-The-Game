@@ -17,6 +17,7 @@
 #include "./modules/building/building.c"
 #include "./modules/simulator/simulator.c"
 #include "./modules/map/map.c"
+#include "./modules/resep/resep.c"
 
 Word currentWord;
 boolean endWord;
@@ -248,20 +249,25 @@ int main(){
                 printf("          UNDO        \n");
                 printf("======================\n");
 
+                break;
+
             case 12:
                 printf("======================\n");
                 printf("          REDO        \n");
                 printf("======================\n");
 
+                break;
+
             case 13:
                 printf("======================\n");
                 printf("        COOKBOOK      \n");
                 printf("======================\n");
-                // cetakBukuResep(bookRsp);
+                cetakBukuResep(bookRsp,listMakanan,peta);
                 break;
             case 14:
                 printf("Game berhenti\n");
                 start = false;
+                break;
             default:
                 printf("\nInput tidak valid! Coba lag1!\n");
                 break;

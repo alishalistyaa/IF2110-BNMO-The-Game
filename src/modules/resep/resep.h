@@ -1,7 +1,12 @@
-#include "../tree/tree.h"
-#include "../boolean/boolean.h"
+
 #ifndef RESEP_H
 #define RESEP_H
+#include "../tree/tree.h"
+#include "../boolean/boolean.h"
+#include "../makanan/makanan.h"
+#include "../list/liststatik.h"
+#include "../map/map.h"
+#include "../building/building.h"
 //Membuat ADT resep dan buku resep dengan model list statik secara eksplisit
 
 /*  Kamus Umum */
@@ -64,7 +69,7 @@ void insertResep(BukuResep *b,Resep r);
 void delResep(BukuResep *b, Resep *buffer,IdxResep i);
 /*Menghapus elemen indeks ke i pada list*/
 
-void cetakBukuResep(BukuResep b);
+void cetakBukuResep(BukuResep b, ListStatik listmakanan, MAP M);
 /* I.S. l boleh kosong */
 /* F.S. Jika l tidak kosong akan mencetak secara terurut dari indeks 1 ke indeks (length-1) */
 /* Contoh : jika ada tiga elemen*/

@@ -50,12 +50,35 @@ void delResep(BukuResep *b, Resep *buffer,IdxResep i){
 }
 
 
-void cetakBukuResep(BukuResep b){
+void cetakBukuResep(BukuResep b, ListStatik listmakanan, MAP M){
 /* I.S. BukuResep boleh kosong */
 /* F.S. Jika BukuResep tidak kosong akan mencetak secara terurut dari indeks 1 ke indeks (length-1) */
+    int j,k;
+    printf("List Resep\n (aksi yang diperlukan - bahan...)\n");
     for(int i = 0; i < BanyakResep(b);i++){
-        printf("Resep %d:\n",(i+1));
-        printTree(ELMTBUKURESEP(b,i),2);
+        //Mendapatkan Root:
+        j = 0;
+        while(Root(ELMTBUKURESEP(b,i)) != ID(ELMTLIST(listmakanan,j)) ) j++;
+        //Cetak baris 1
+        printf("%d. %s\n",(i+1),ELMTLIST(listmakanan,j).Name);
+        //Mendapatkan action:
+        char K;
+        K = getAction(ACTION(ELMTLIST(listmakanan,j)), M);
+        if(K == 'F'){
+            printf("   FRY ");
+        } else if(K == 'B'){
+            printf("   BOIL ");
+        } else if(K == 'M'){
+            printf("   MIX ");
+        } else if(K == 'C'){
+            printf("   CHOP ");
+        }
+        for(k = 0; k < nChild(ELMTBUKURESEP(b,i)); k++){
+            j = 0;
+            
+            while(Root(getChild(ELMTBUKURESEP(b,i),k)) != ID(ELMTLIST(listmakanan,j)) ) j++;
+            printf("- %s ",ELMTLIST(listmakanan,j).Name);
+        }
         printf("\n");
     }
 }

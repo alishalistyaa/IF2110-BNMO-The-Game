@@ -11,6 +11,7 @@
 #include "../building/building.c"
 #include "../tree/tree.c"
 
+
 int main(){
     MAP peta;
     if (isFileExist("peta.txt")){

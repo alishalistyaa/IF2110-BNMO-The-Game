@@ -3,6 +3,8 @@
 #include "i_o.c"
 #include "../wordmachine/wordmachine.c"
 #include "../makanan/makanan.c"
+#include "../makanan/makanan.h"
+#include "../makanan/makanan.h"
 #include "../boolean/boolean.h"
 #include "../point/point.c"
 #include "../time/time.c"
