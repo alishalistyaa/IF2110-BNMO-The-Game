@@ -178,54 +178,11 @@ int main(){
 
             case 6:
                 ADVWORDBlank();
-                inputCom2 = move_detector(currentWord);
-                printf("%d\n", inputCom2);
-                if (currentChar == '\n') {
-                    printf("enter\n");
-                }
-                switch(inputCom2)
-                {
-                case 1:
-                    if(currentChar == '\n'){
-                        move_map(&peta, currentWord);
-                        passTime(&BNMO, 1, &curTime);
-                    }
-                    else{
-                        printf("Input berlebihan\n");
-                    }
-                    break;
-                case 2:
-                    if(currentChar == '\n'){
-                        move_map(&peta, currentWord);
-                        passTime(&BNMO, 1, &curTime);
-                        printf("Input berlebihan\n");
-                    }
-                    else{
-
-                    }
-                    break;
-                case 3:
-                    if (currentChar == '\n'){
-                        printf("something\n");
-                        move_map(&peta, currentWord);
-                        passTime(&BNMO, 1, &curTime);
-                    }
-                    else{
-                        printf("Input berlebihan\n");
-                    }
-                    break;
-                case 4:
-                    if(currentChar == '\n'){
-                        move_map(&peta, currentWord);
-                        passTime(&BNMO, 1, &curTime);
-                    }
-                    else{
-                        printf("Input berlebihan\n");
-                    }
-                    break;
-                default:
-                    printf("Input tidak valid\n");
-                    break;
+                if(currentChar == '\n'){
+                    move_map(&peta, currentWord);
+                    passTime(&BNMO, 1, &curTime);
+                } else {
+                    printf("Input berlebihan\n");
                 }
                 break;
             case 7:

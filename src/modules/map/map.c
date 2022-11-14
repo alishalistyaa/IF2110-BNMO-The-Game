@@ -172,7 +172,6 @@ void move_map(MAP *M, Word command)
     }
     else if(same(command, "EAST")){
         if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))+2) == ' '){
-            printf("Masuk east\n");
             Ordinat(S(*M))++;
         }
     }
@@ -184,22 +183,22 @@ void move_map(MAP *M, Word command)
 }
 
 
-int move_detector(Word command){
-/* Mengembalikan nilai base dari command move */
-/* Prekondisi: command move terdefinisi dan tidak kosong */
-    if(same(command, "WEST") || same(command, "MOVE WEST")){
-        return 1;
-    }
-    else if(same(command, "SOUTH") || same(command, "MOVE SOUTH")){
-        return 2;
-    }
-    else if(same(command, "EAST") || same(command, "MOVE EAST")){
-        return 3;
-    }
-    else if(same(command, "NORTH") || same(command, "MOVE NORTH")){
-        return 4;
-    }
-    else{
-        return 0;
-    }
-}
+// int move_detector(Word command){
+// /* Mengembalikan nilai base dari command move */
+// /* Prekondisi: command move terdefinisi dan tidak kosong */
+//     if(same(command, "WEST") || same(command, "MOVE WEST")){
+//         return 1;
+//     }
+//     else if(same(command, "SOUTH") || same(command, "MOVE SOUTH")){
+//         return 2;
+//     }
+//     else if(same(command, "EAST") || same(command, "MOVE EAST")){
+//         return 3;
+//     }
+//     else if(same(command, "NORTH") || same(command, "MOVE NORTH")){
+//         return 4;
+//     }
+//     else{
+//         return 0;
+//     }
+// }
