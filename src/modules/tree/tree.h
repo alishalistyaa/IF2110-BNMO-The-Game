@@ -123,6 +123,7 @@ A
 boolean SearchTree(Tree p, ElType X);
 /* Mengirimkan true jika ada node dari P yang bernilai X */
 
+
 Address SearchNode(Tree p, ElType X);
 /* Mengirimkan address jika ada node dari P yang bernilai X */
 

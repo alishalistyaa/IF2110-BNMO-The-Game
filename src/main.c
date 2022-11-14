@@ -34,8 +34,8 @@ int main(){
     POINT curLoc;
     PrioQueue curInv;
     SIMULATOR BNMO;
-    Stack Undo;
-    Stack Redo;
+    Stack undo;
+    Stack redo;
 
     /* ALGORITMA */
     // Inisialisasi Game
@@ -45,7 +45,15 @@ int main(){
     char* curName;
     // PROGRAM MULAI
         // Splash Screen 
-    
+        printf(
+            "======================================================================================\n"
+            "\n"
+            "▒█▀▀▀█ ▒█▀▀▀ ▒█░░░ ░█▀▀█ ▒█▀▄▀█ ░█▀▀█ ▀▀█▀▀ 　 ▒█▀▀▄ ░█▀▀█ ▀▀█▀▀ ░█▀▀█ ▒█▄░▒█ ▒█▀▀█ \n"
+            "░▀▀▀▄▄ ▒█▀▀▀ ▒█░░░ ▒█▄▄█ ▒█▒█▒█ ▒█▄▄█ ░▒█░░ 　 ▒█░▒█ ▒█▄▄█ ░▒█░░ ▒█▄▄█ ▒█▒█▒█ ▒█░▄▄ \n"
+            "▒█▄▄▄█ ▒█▄▄▄ ▒█▄▄█ ▒█░▒█ ▒█░░▒█ ▒█░▒█ ░▒█░░ 　 ▒█▄▄▀ ▒█░▒█ ░▒█░░ ▒█░▒█ ▒█░░▀█ ▒█▄▄█ \n"
+            "\n"
+            "======================================================================================\n"
+            );
 
     // COMMAND AWAL
     printf("1. START\n");
@@ -53,10 +61,10 @@ int main(){
     // Read command
     printf("Enter command: ");
     STARTWORD();
-    Word command = currentWord;
     if (same(currentWord, "START")) {
         // Variable to save the configuration
         // Inventory
+        Word command = currentWord;
         PrioQueue I;
         MakeEmpty(&I, 100);
         // Simulator
@@ -73,9 +81,9 @@ int main(){
         // Resep
         BukuResep bookRsp;
         // Undo-Redo
-        CreateEmpty(&Undo);
-        CreateEmpty(&Redo);
-        
+        CreateEmpty(&undo);
+        CreateEmpty(&redo);
+        updateState(command, I, curTime, curLoc, &undo);
         // Reading all configuration
         int count = 0;
         do {
@@ -107,7 +115,7 @@ int main(){
         }
         while (count < 3);
         printf("File konfigurasi telah selesai dibaca\n");
-
+        char* notification = "-";
         boolean start = true;  
         boolean first = true;      
         while (start){
@@ -118,10 +126,11 @@ int main(){
             printf("Waktu: ");
             TulisTIME1(curTime);
             printf("\n");
-            printf("Notifikasi: -\n");
+            printf("Notifikasi: %s\n", notification);
             printMap(peta);
             printf("Enter command: ");
             STARTWORDBlank();
+            command = currentWord;
             inputCom1 = commandToInt(currentWord);
             inputCom2 = -1;
             inputCom3 = -1;
@@ -172,7 +181,14 @@ int main(){
                 printf("======================\n");
                 printf("         BUY          \n");
                 printf("======================\n");
+                
                 // BUY HERE
+                displayBuyable(listMakanan);
+                printf("\nEnter Command: ");
+                
+                // Barang apa saja yang bisa di buy
+
+                // Add barang to inventory
                 
                 } else printf("\nBNMO tidak berada di area telepon (T)!\n");
                 break;
@@ -242,20 +258,38 @@ int main(){
                 printf("======================\n");
                 printf("        DELIVERY      \n");
                 printf("======================\n");
+                // printInventory(Delivery);
 
                 break;
             case 11:
                 printf("======================\n");
                 printf("          UNDO        \n");
                 printf("======================\n");
-
+                // Undo(&undo, &redo, &command, &I, &curTime, &curLoc);
+                // int inputCommand = commandToInt(command);
+                // char* makanan = Name()/
+                // switch(inputCommand) {
+                //     case 1: 
+                //         notification = "Mix " +  + " dibatalkan";
+                //     case 2: 
+                //         notification = "Chop";
+                //     case 3: 
+                //         notification = "Penggorengan";
+                //     case 4:  
+                //         notification = "Perebusan";
+                //     case 5:
+                //         notification = "Buy";
+                //     case 7: 
+                //         notification = "Wait dibatalkan, mengembalikan waktu...";
+                // }
                 break;
 
             case 12:
                 printf("======================\n");
                 printf("          REDO        \n");
                 printf("======================\n");
-
+                Redo(&undo, &redo, &command, &I, &curTime, &curLoc);
+                
                 break;
 
             case 13:
@@ -273,8 +307,20 @@ int main(){
                 break;
             }
         }
-
+        if (!same(command, "UNDO") && !same(command, "REDO")) {
+            updateState(command, I, curTime, curLoc, &undo);
+        }
     } else if (same(currentWord, "EXIT")) {
-        printf("Game berhenti\n");
+
+        printf(
+            "\n"
+            "======================================================================================\n"
+            "\n"
+            "                            █▀▀▄ █░░█ █▀▀ 　 █▀▀▄ █░░█ █▀▀ 　 ▄ ▄▀ \n"
+            "                            █▀▀▄ █▄▄█ █▀▀ 　 █▀▀▄ █▄▄█ █▀▀ 　 ░ █░ \n"
+            "                            ▀▀▀░ ▄▄▄█ ▀▀▀ 　 ▀▀▀░ ▄▄▄█ ▀▀▀ 　 ▀ ▀▄ \n"
+            "\n"
+            "======================================================================================\n"
+        );
     }  
 }

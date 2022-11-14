@@ -185,3 +185,16 @@ void cetakCatalog(ListStatik l, MAP M){
         }
     }    
 }
+
+void displayBuyable(ListStatik l){
+    int length = lengthList(l);
+    int ctr = 1;
+    for(int i = 0; i < length; i++){
+        if(same(NAME(ELMTLIST(l,i)),"Buy")){
+            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
+            TulisTIME2(DELIVERY(ELMTLIST(l,i)));
+            printf(")\n");
+            ctr++;
+        }
+    }
+}

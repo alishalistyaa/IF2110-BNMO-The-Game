@@ -13,6 +13,7 @@ boolean IsEmpty (PrioQueue Q) {
 /* Mengirim true jika Q kosong: lihat definisi di atas */
     return Head(Q) == Nil && Tail(Q) == Nil;
 }
+
 boolean IsFull (PrioQueue Q) {
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
@@ -139,19 +140,20 @@ void printInventory (PrioQueue Q) {
         printf("List Makanan di Inventory\n");
         printf("(nama - waktu sisa kedaluwarsa)\n");
         printf("\t1. ");
-        printf(""); // nama makanan 
+        printf("%s", NAME(InfoHead(Q))); // nama makanan 
         printf(" - ");
         TulisTIME2(Time(InfoHead(Q))); // waktu expired
         printf("\n");
-    }
+    } else {        
         printf("List Makanan di Inventory\n");
         printf("(nama - waktu sisa kedaluwarsa)\n");
         int count = 1;
         for (int i = Head(Q); i <= Tail(Q); i++) {
             printf("\t%d.", count);
-            printf(""); // nama makanan
+            printf("%s", NAME(InfoHead(Q))); // nama makanan
             printf(" - ");
             TulisTIME2(Time(InfoHead(Q))); // waktu expired
             printf("\n");
         }
+    }
 }

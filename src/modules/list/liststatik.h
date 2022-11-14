@@ -4,6 +4,7 @@
 #include "../boolean/boolean.h"
 #include "../makanan/makanan.h"
 #include "../map/map.h"
+#include "../i_o/i_o.h"
 
 /*  Kamus Umum */
 #define CAPACITY 100
@@ -22,6 +23,7 @@ typedef struct {
 } ListStatik;
 
 #define ELMTLIST(l, i) (l).contents[(i)]
+#define Effective_Capacity(l) (l).effCapacity;
 
 //--KONSTRUKTOR--
 
@@ -63,5 +65,8 @@ void cetakList(ListStatik l);
 /* 3 . Nama makanan 3*/
 void CopyList(ListStatik l1,ListStatik *l2);
 /*Menyalin semua elemen di list 1 ke list 2*/
+
+
+void displayBuyable(ListStatik l);
 
 #endif

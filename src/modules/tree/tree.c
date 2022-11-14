@@ -9,10 +9,9 @@
 Tree newTree(ElType Root,Tree child[], int leaves){
 /* Menghasilkan sebuah pohon n-ary dari root dan child, jika alokasi berhasil 
    Menghasilkan pohon kosong (NULL) jika alokasi gagal */
-   Address p = (Address)(malloc(sizeof(Tree)));
+   Address p = newTreeNode(Root);
     if (p != NULL) {
-        Root(p) = Root;
-        addressChild(p) = (Tree) malloc(leaves * sizeof(Tree));
+        addressChild(p) = (Tree*) malloc(leaves * sizeof(Tree));
 
         if(addressChild(p) != NULL){
             for(int i = 0; i<leaves;i++){
@@ -112,6 +111,7 @@ Address searchNodeTrue(Tree p, ElType X){ //Terdapat address dengan elemen yang 
         }
     }
 }
+
 Address SearchNode(Tree p, ElType X){
     if(searchTree(p,X)){
         searchNodeTrue(p,X);
@@ -204,7 +204,7 @@ int Depth(Tree p){
 
 // /* *** Operasi lain *** */
 void addLeaves(Tree *p, Tree child[], int leaves){
-    addressChild(*p) = (Tree) malloc(leaves * sizeof(Tree));
+    addressChild(*p) = (Tree*) malloc(leaves * sizeof(Tree));
     if(addressChild(*p) != NULL){
         for(int i = 0; i<leaves;i++){
             getChild(*p,i) = child[i];
