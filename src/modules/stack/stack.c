@@ -53,36 +53,36 @@ void Pop(Stack * S, infotype * X) {
     }
 }
 
-void Undo(Stack *undo, Stack *Redo, Word *command, MAKANAN *M, TIME *T, POINT *l) {
+void Undo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, TIME *T, POINT *l) {
 /* Melakukan proses undo */
 /* Menghapus Top dari Stack Undo dan memasukkannya ke Stack Redo */
     infotype s;
     Pop(undo, &s);
     *command = InfoTop(*undo).command;
-    *M = InfoTop(*undo).M;
+    *I = InfoTop(*undo).I;
     *T = InfoTop(*undo).T;
     *l = InfoTop(*undo).l;
     Push(Redo, s);
 }
-void Redo(Stack *undo, Stack *Redo, Word *command, MAKANAN *M, TIME *T, POINT *l) {
+void Redo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, TIME *T, POINT *l) {
 /* Melakukan proses redo */
 /* Menghapus Top dari Stack Redo dan memasukkannya ke Stack Undo */
     infotype s;
     Pop(Redo, &s);
     Push(undo, s);
     *command = InfoTop(*undo).command;
-    *M = InfoTop(*undo).M;
+    *I = InfoTop(*undo).I;
     *T = InfoTop(*undo).T;
     *l = InfoTop(*undo).l;
 }
 
-void updateState(Word command, MAKANAN M, TIME T, POINT l, Stack *undo) {
+void updateState(Word command, PrioQueue I, TIME T, POINT l, Stack *undo) {
 /* Menginput atau mengupdate state */
 /* I. S. undo, M, T, l terdefinisi*/
 /* F. S. terbentuk infotype X untuk dan X telah di-push ke stack */
   infotype X;
   X.command = command;
-  X.M = M;
+  X.I = I;
   X.T = T;
   X.l = l;
   Push(undo, X);

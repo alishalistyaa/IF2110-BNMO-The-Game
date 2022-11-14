@@ -39,6 +39,17 @@ void STARTWORD(){
         CopyWord();
         IgnoreBlanks();
     }
+
+    START();
+    IgnoreBlanks();
+    if(currentChar == LINEMARK){
+        endWord = true;
+    }
+    else{
+        endWord = false;
+        CopyWordBlank();
+        IgnoreBlanks();
+    }
 }
 
 void ADVWORD(){

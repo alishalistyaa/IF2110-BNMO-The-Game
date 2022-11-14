@@ -29,7 +29,8 @@ typedef struct {
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotypePrioQueue dan Q adalah PrioQueue, maka akses elemen : */
-#define Time(e)     (e).Expired
+#define TimeExpired(e)     (e).Expired
+#define TimeDelivery(e)     (e).Delivery
 #define Info(e)     (e).Name
 #define Head(Q)     (Q).HEAD
 #define Tail(Q)     (Q).TAIL
@@ -84,6 +85,10 @@ void Dequeue (PrioQueue * Q, infotypePrioQueue * X);
 // #
 // */
 
-void printInventory (PrioQueue Q);
+void printInventoryExpired (PrioQueue Q);
+
+void printInventoryDelivery (PrioQueue Q);
+
+void deliveryDone();
 
 #endif
