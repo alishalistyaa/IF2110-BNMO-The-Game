@@ -58,7 +58,7 @@ void DeAlokasi(PrioQueue * Q) {
 }
 
 /* *** Primitif Add/Delete *** */
-void Enqueue (PrioQueue * Q, infotypePrioQueue X) {
+void EnqueueExpired (PrioQueue * Q, infotypePrioQueue X) {
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan time */
 /* Melakukan penggeseran elemen ketika Tail(Q) = MaxEl(Q) - 1*/
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
@@ -79,7 +79,37 @@ void Enqueue (PrioQueue * Q, infotypePrioQueue X) {
         Tail(*Q)++;
         InfoTail(*Q) = X;
         int count = Tail(*Q);
-        while (count > Head(*Q) && TIMEToMenit(Time(Elmt((*Q), count))) < TIMEToMenit(Time(Elmt((*Q), count - 1)))) {
+        while (count > Head(*Q) && TIMEToMenit(TimeExpired(Elmt((*Q), count))) < TIMEToMenit(TimeExpired(Elmt((*Q), count - 1)))) {
+            infotypePrioQueue temp = Elmt((*Q), count - 1);
+            Elmt(*Q, count - 1) = Elmt((*Q), count);
+            Elmt((*Q), count) = temp;
+            count--;
+        }
+    }
+}
+
+void EnqueueDelivery (PrioQueue * Q, infotypePrioQueue X) {
+/* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan time */
+/* Melakukan penggeseran elemen ketika Tail(Q) = MaxEl(Q) - 1*/
+/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
+/* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas */
+    int idx;
+    if (IsEmpty(*Q)) {
+        Head(*Q) = 0;
+        Tail(*Q) = 0;
+        InfoTail(*Q) = X;
+    } else {
+        if (Tail(*Q) == MaxEl(*Q) - 1) { //penggeseran elemen
+            for (int i = Head(*Q); i <= Tail(*Q); i++) {
+                (*Q).T[i-Head(*Q)] = (*Q).T[i];
+            }
+            Tail(*Q) -= Head(*Q);
+            Head(*Q) = 0;
+        }
+        Tail(*Q)++;
+        InfoTail(*Q) = X;
+        int count = Tail(*Q);
+        while (count > Head(*Q) && TIMEToMenit(TimeDelivery(Elmt((*Q), count))) < TIMEToMenit(TimeDelivery(Elmt((*Q), count - 1)))) {
             infotypePrioQueue temp = Elmt((*Q), count - 1);
             Elmt(*Q, count - 1) = Elmt((*Q), count);
             Elmt((*Q), count) = temp;
@@ -102,38 +132,19 @@ void Dequeue (PrioQueue * Q, infotypePrioQueue * X) {
     }
 }
 
-// /* Operasi Tambahan */
-// void PrintPrioQueue (PrioQueue Q) {
-// /* Mencetak isi queue Q ke layar */
-// /* I.S. Q terdefinisi, mungkin kosong */
-// /* F.S. Q tercetak ke layar dengan format:
-// <time-1> <elemen-1>
-// ...
-// <time-n> <elemen-n>
-// #
-// */
-//     if (IsEmpty(Q)) {
-//         printf("#\n");
-//     } else if (Tail(Q) == Head(Q)) {
-//         printf("%d %c\n", Time(InfoHead(Q)), Info(InfoHead(Q)));
-//         printf("#\n");
-//     } else if (Tail(Q) >= Head(Q)) {
-//         for (int i = Head(Q); i <= Tail(Q); i++) {
-//             printf("%d %c\n", Time((Q).T[i]), Info((Q).T[i]));
-//         }
-//         printf("#\n");
-//     } else {
-//         for (int i = Head(Q); i < MaxEl(Q); i++) {
-//             printf("%d %c\n", Time((Q).T[i]), Info((Q).T[i]));
-//         }
-//         for (int i = 0; i <= Tail(Q); i++) {
-//             printf("%d %c\n", Time((Q).T[i]), Info((Q).T[i]));
-//         }
-//         printf("#\n");
-//     }
-// }
+void decreaseTimeExpired(PrioQueue *Q) {
+    for (int i = Head(*Q); i <= Tail(*Q); i++) {
+        PrevMenit(&TimeExpired(Elmt(*Q, i)));
+    }
+}
 
-void printInventory (PrioQueue Q) {
+void decreaseTimeDelivery(PrioQueue *Q) {
+    for (int i = Head(*Q); i <= Tail(*Q); i++) {
+        PrevMenit(&TimeDelivery(Elmt(*Q, i)));
+    }
+}
+
+void printInventoryExpired (PrioQueue Q) {
     if (IsEmpty(Q)) {
         printf("Tidak terdapat bahan makanan apapun di inventory\n");
     } else if (Tail(Q) == Head(Q)) {
@@ -142,7 +153,7 @@ void printInventory (PrioQueue Q) {
         printf("\t1. ");
         printf("%s", NAME(InfoHead(Q))); // nama makanan 
         printf(" - ");
-        TulisTIME2(Time(InfoHead(Q))); // waktu expired
+        TulisTIME2(TimeExpired(InfoHead(Q))); // waktu expired
         printf("\n");
     } else {        
         printf("List Makanan di Inventory\n");
@@ -150,10 +161,39 @@ void printInventory (PrioQueue Q) {
         int count = 1;
         for (int i = Head(Q); i <= Tail(Q); i++) {
             printf("\t%d.", count);
-            printf("%s", NAME(InfoHead(Q))); // nama makanan
+            printf("%s", NAME(Elmt(Q, i))); // nama makanan
             printf(" - ");
-            TulisTIME2(Time(InfoHead(Q))); // waktu expired
+            TulisTIME2(TimeExpired(Elmt(Q, i))); // waktu expired
             printf("\n");
         }
     }
+}
+
+void printInventoryDelivery (PrioQueue Q) {
+    if (IsEmpty(Q)) {
+        printf("Tidak terdapat bahan makanan yang sedang diantar!\n");
+    } else if (Tail(Q) == Head(Q)) {
+        printf("List Makanan di Perjalanan\n");
+        printf("(nama - waktu sisa delivery)\n");
+        printf("\t1. ");
+        printf("%s", NAME(InfoHead(Q))); // nama makanan 
+        printf(" - ");
+        TulisTIME2(TimeDelivery(InfoHead(Q))); // waktu expired
+        printf("\n");
+    } else {        
+        printf("List Makanan di Perjalanan\n");
+        printf("(nama - waktu sisa delivery)\n");
+        int count = 1;
+        for (int i = Head(Q); i <= Tail(Q); i++) {
+            printf("\t%d.", count);
+            printf("%s", NAME(Elmt(Q, i))); // nama makanan
+            printf(" - ");
+            TulisTIME2(TimeDelivery(Elmt(Q, i))); // waktu expired
+            printf("\n");
+        }
+    }
+}
+
+void deliveryDone(PrioQueue *I, PrioQueue *D){
+    
 }
