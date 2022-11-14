@@ -187,12 +187,6 @@ int main(){
                 {
                 case 1:
                     if(currentChar == '\n'){
-                        // Word w;
-                        // w.Length=4;
-                        // w.TabWord[0]='W';
-                        // w.TabWord[1]='E';
-                        // w.TabWord[2]='S';
-                        // w.TabWord[3]='T';
                         move_map(&peta, currentWord);
                         passTime(&BNMO, 1, &curTime);
                     }
@@ -202,13 +196,6 @@ int main(){
                     break;
                 case 2:
                     if(currentChar == '\n'){
-                        // Word w;
-                        // w.Length=5;
-                        // w.TabWord[0]='S';
-                        // w.TabWord[1]='O';
-                        // w.TabWord[2]='U';
-                        // w.TabWord[3]='T';
-                        // w.TabWord[4]='H';
                         move_map(&peta, currentWord);
                         passTime(&BNMO, 1, &curTime);
                         printf("Input berlebihan\n");
@@ -218,7 +205,6 @@ int main(){
                     }
                     break;
                 case 3:
-                    printf("Masuk sini?\n");
                     if (currentChar == '\n'){
                         printf("something\n");
                         move_map(&peta, currentWord);
@@ -230,13 +216,6 @@ int main(){
                     break;
                 case 4:
                     if(currentChar == '\n'){
-                        // Word w;
-                        // w.Length=5;
-                        // w.TabWord[0]='N';
-                        // w.TabWord[1]='O';
-                        // w.TabWord[2]='R';
-                        // w.TabWord[3]='T';
-                        // w.TabWord[4]='H';
                         move_map(&peta, currentWord);
                         passTime(&BNMO, 1, &curTime);
                     }
