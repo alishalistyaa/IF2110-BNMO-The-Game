@@ -194,11 +194,7 @@ int main(){
                         inputCom3 = transformToInt(currentWord);
 
                         ADVWORDBlank();
-                        if(currentWord.Length>0){
-                            printf("Input berlebihan\n");
-                            ignoreUntilEnter();
-                        }
-                        else{
+                        if(currentChar == '\n'){
                             if(inputCom3 >= 0){
                                 if(inputCom2 == 0 && inputCom3 == 0){
                                     printf("Input Waktu tidak valid\n");
@@ -212,6 +208,10 @@ int main(){
                             else{
                                 printf("Input Waktu tidak valid\n");
                             }
+                        }
+                        else{
+                            printf("Input berlebihan\n");
+                            
                         }
                     }
                     else{

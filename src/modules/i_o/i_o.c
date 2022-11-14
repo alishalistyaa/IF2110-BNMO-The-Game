@@ -167,9 +167,7 @@ void configResep(char *filename, BukuResep *b){
 
     for(j = 0; j < nResep; j++){
         i = 0;
-        while (currentChar == BLANK || currentChar == LINEMARK) {
-            ADV();
-        }
+        while (currentChar == BLANK || currentChar == LINEMARK) ADV();
         while (currentChar != BLANK)
         {
             i = i * 10 + (currentChar - 48);
