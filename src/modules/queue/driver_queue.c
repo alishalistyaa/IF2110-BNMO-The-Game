@@ -30,9 +30,9 @@ int main()
     int ID1 = 21;
     int ID2 = 31;
     int ID3 = 41;
-    char Name1 = "Ayam";
-    char Name2 = "Tahu";
-    char Name3 = "Tempe";
+    Word Name1 = "Ayam";
+    Word Name2 = "Tahu";
+    Word Name3 = "Tempe";
     CreateMakanan(&M1,ID1,Name1,K1,P1,D1);
     CreateMakanan(&M2,ID2,Name2,K2,P2,D2);
     CreateMakanan(&M3,ID3,Name3,K3,P3,D3);

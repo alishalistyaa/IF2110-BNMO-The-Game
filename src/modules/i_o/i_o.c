@@ -17,8 +17,7 @@ void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
     POINT tempActionPoint;
     TIME tempDelivery;
     Word tempName;    
-    Word tempActionWord;    
-
+    Word tempActionWord;   
 
     // ALGORITMA
     // Membaca berapa makanan yang ada di file config
@@ -82,6 +81,7 @@ void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
         // printf("Done EXPIRED\n");     
 
         /* BACA DELIVERY */
+        CreateTime(&tempDelivery, 0, 0, 0); 
         ADV(); //Next after LINEMARK
         int LDeliv[3];
         int countDeliv = 0;
@@ -111,8 +111,8 @@ void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
 
         // Convert Action to Point
         if (same(currentWord, "Buy")){
-            Absis(tempActionPoint) = Absis(getLocBuilding('B', peta));
-            Ordinat(tempActionPoint) = Ordinat(getLocBuilding('B', peta));
+            Absis(tempActionPoint) = Absis(getLocBuilding('T', peta));
+            Ordinat(tempActionPoint) = Ordinat(getLocBuilding('T', peta));
         } 
         else if (same(currentWord, "Fry")){
             Absis(tempActionPoint) = Absis(getLocBuilding('F', peta));
@@ -205,7 +205,7 @@ void configResep(char *filename, BukuResep *b){
             }
         }
 
-        }
+    }
     
     fclose(pita);
 }

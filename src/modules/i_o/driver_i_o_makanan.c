@@ -14,21 +14,20 @@
 int main(){
     MAP peta;
     if (isFileExist("peta.txt")){
-        printf("%d\n", 1);
+        printf("%s\n", "File ada!");
         loadMap(&peta, "peta.txt");
     } else {
         printf("%d\n", 0);
     }
-    displayMatrix(MATRIX(peta));
 
     printMap(peta);
     ListStatik l;
     CreateListStatik(&l);
-    if (isFileExist("makanan.txt")){
-        printf("%d\n", 1);
+    if (isFileExist("../../config/makanan.txt")){
+        printf("%s\n", "File ada!");
         configMakanan(peta, "makanan.txt", &l);
     } else {
         printf("%d\n", 0);
     }
-    cetakList(l);
+    cetakCatalog(l, peta);
 }

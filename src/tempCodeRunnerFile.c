@@ -1,1 +1,0 @@
-configMakanan(filename, &listMakanan);

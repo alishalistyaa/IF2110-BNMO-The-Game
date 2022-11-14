@@ -1,4 +1,5 @@
 #include "time.h"
+#include "../simulator/simulator.h"
 #include <stdio.h>
 
 
@@ -136,7 +137,7 @@ long TIMEToMenit (TIME T) {
 /* Rumus : detik = 3600*HH + 60*MM + SS */
 /* Nilai maksimum = 3600*23+59*60+59 */
     return 1440 * Day(T) + 60 * Hour(T) + Minute(T);
-} 
+}
 
 TIME MenitToTime (long N) {
 /* Mengirim  konversi detik ke TIME */

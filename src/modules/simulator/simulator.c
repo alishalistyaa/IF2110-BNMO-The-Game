@@ -5,13 +5,14 @@
 #include <stdlib.h>
 #include "simulator.h"
 
-void CreateSimulator(SIMULATOR * S, char X[], POINT P, PrioQueue I){
+void CreateSimulator(SIMULATOR * S, char X[], POINT P, PrioQueue I, TIME T){
 /*  I.S. : sembarang
     F.S. : membentuk simulator yang tersusun atas
            currentUsername, currentlocation, and currentInventort */
     copySimulatorName(X, Name(*S));
     Location(*S) = P; 
     Inventory(*S) = I;
+    Time2(*S) = T;
 }
 
 /** Primitif SIMULATOR **/
@@ -47,4 +48,20 @@ void setInventory(SIMULATOR * S, PrioQueue I){
 /*  I.S. : sembarang
     F.S. : meng-set currentInventory pada SIMULATOR */
     Inventory(*S) = I;
+}
+
+void setTime(SIMULATOR * S, TIME T){
+/*  I.S. : sembarang
+    F.S. : meng-set currentTime pada SIMULATOR */
+    Time2(*S) = T;
+}
+
+void passTime (SIMULATOR *S, long plus, TIME *T){  
+/* I.S. : S terdefinisi, T terdefinisi, plus terdefinisi */
+/* F.S. : T bertambah sebanyak plus menit */
+    long minutes;
+    minutes = TIMEToMenit(*T);
+    minutes += plus;
+    *T = MenitToTime(minutes);
+    Time2(*S) = *T;
 }

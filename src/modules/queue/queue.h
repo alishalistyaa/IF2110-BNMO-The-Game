@@ -36,10 +36,14 @@ void MakeEmpty(queue * Q,int Max);
 /*Membuat queue kosong dengan tabel memori berukuran Max+1*/
 void Dealokasi(queue *Q);
 /*Q pernah dialokasi,dan Q menjadi tidak terdefinisi (Q).MAXEL = 0*/
-void EnqueuePrio(queue *Q,MAKANAN food);
-/*Menambah T ke dalam Q dengan aturan priority queue,terurut membesar berdasarkan waktu*/
+void EnqueueInventory(queue *Q,MAKANAN food);
+/*Menambah T ke dalam Q dengan aturan priority queue(Inventory),terurut membesar berdasarkan waktu*/
+void EnqueueDelivery(queue *Q,MAKANAN food);
+/*Menambah T ke dalam Q dengan aturan priority queue(Delivery),terurut membesar berdasarkan waktu*/
 void Enqueue(queue *Q,MAKANAN food);
-/*Menambah T ke dalam Q secara sederhana*/
+/*Menambah T ke dalam Q dan diletakkan di akhir Q*/
+void DeleteAtInventory(queue *Q,MAKANAN food,MAKANAN *buang);
+/*Membuang makanan sesuai food yang diinputkan*/
 void Dequeue(queue *Q,MAKANAN *food);
 /*Menghapus M pada Q*/
 void Copy(queue Q,queue *copy);

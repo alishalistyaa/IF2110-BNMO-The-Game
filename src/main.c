@@ -6,31 +6,42 @@
 #include "./modules/charmachine/charmachine.h"
 #include "./modules/list/liststatik.c"
 #include "./modules/makanan/makanan.c"
-#include "./modules/map/map.c"
 #include "./modules/matriks/matriks.c"
 #include "./modules/point/point.c"
 // #include "./modules/queue/queue.c"
 #include "./modules/prioqueue/prioqueue.c"
-#include "./modules/simulator/simulator.c"
 #include "./modules/stack/stack.c"
 #include "./modules/time/time.c"
 #include "./modules/tree/tree.c"
-#include "./modules/resep/resep.c"
 #include "./modules/i_o/i_o.c"
 #include "./modules/building/building.c"
+#include "./modules/simulator/simulator.c"
+#include "./modules/map/map.c"
 
 Word currentWord;
 boolean endWord;
+char currentChar;
 
 int main(){
     /* KAMUS */
     boolean start;
+    int inputCom1;
+    int inputCom2;
+    int inputCom3;
+    TIME wait;
+    TIME curTime;
+    POINT curLoc;
+    PrioQueue curInv;
+    SIMULATOR BNMO;
+    Stack Undo;
+    Stack Redo;
 
     /* ALGORITMA */
     // Inisialisasi Game
     start = true;
     // Variable Main
     char* filename;
+    char* curName;
     // PROGRAM MULAI
         // Splash Screen 
     
@@ -44,21 +55,37 @@ int main(){
     Word command = currentWord;
     if (same(currentWord, "START")) {
         // Variable to save the configuration
-        printf("It should enter here\n");
+        // Inventory
+        PrioQueue I;
+        MakeEmpty(&I, 100);
+        // Simulator
+        CreateTime(&curTime, 0, 0, 0);
+        CreatePoint(&curLoc, 0, 0);
+        MakeEmpty(&curInv, 10);
+        CreateSimulator(&BNMO, "test", curLoc, curInv, curTime);
+        // PETA
         MAP peta;
+        createMap(&peta);
+        // List Makanan
         ListStatik listMakanan;
+        CreateListStatik(&listMakanan); 
+        // Resep
         BukuResep bookRsp;
+        // Undo-Redo
+        CreateEmpty(&Undo);
+        CreateEmpty(&Redo);
+        
         // Reading all configuration
         int count = 0;
         do {
-            printf("Pastikan file config sudah masuk ke folder config ya!\n");
+            printf("\nPastikan file config sudah masuk ke folder config ya!\n");
             printf("Masukkan nama file config ");
             if (count == 0) {
-                printf("makanan: ");
+                printf("peta: ");
             } else if (count == 1) {
                 printf("resep: ");
             } else if (count == 2) {
-                printf("peta: ");
+                printf("makanan: ");
             }
             STARTWORD();
             filename = currentWord.TabWord;
@@ -67,126 +94,178 @@ int main(){
                 printf("Masukan file tidak valid!\n");
             } else {
                 if (count == 0) {
-                    // configMakanan(filename, &listMakanan);
-                    printf("skip first\n");
+                    loadMap(&peta,filename);
                 }  else if (count == 1) {
                     configResep (filename, &bookRsp);
                 }
                     else if (count == 2) {
-                    loadMap(&peta,filename);
+                    configMakanan(peta, filename, &listMakanan);
                 }
                 count++;
             }
-
         }
         while (count < 3);
         printf("File konfigurasi telah selesai dibaca\n");
-        // INISIALISASI SELURUH OBJECT DAN ADT
-        // Posisi 
-        SIMULATOR S;
-        POINT P;
-        CreatePoint(&P, 0, 0);
-        // Waktu
-        TIME T;
-        BacaTIME1(&T);
-        // Notifikasi 
-        // Peta
-        // Makanan
-        MAKANAN M;
-        // CreateMakanan(&M, 0, "Tahu", T, P, T);
-        // Inventory
-        PrioQueue I;
-        MakeEmpty(&I, 100);
-        // Enqueue(&I, M);
-        // Simulator
-        CreateSimulator(&S, "Coba", P, I);
-        // CreateSimulator(SIMULATOR * S, nama, P, inventory)
-        // GAME MULAI
 
         boolean start = true;  
         boolean first = true;      
         while (start){
+            printf("\n");
             printf("BNMO di posisi: ");
-            TulisPOINT(peta.sim.LOCATION);
+            TulisPOINT(curLoc);
             printf("\n");
             printf("Waktu: ");
-            TulisTIME1(T);
+            TulisTIME1(curTime);
             printf("\n");
             printf("Notifikasi: -\n");
             printMap(peta);
             printf("Enter command: ");
-            STARTWORD();
-            if(first) STARTWORD();
-            printf("%s\n", currentWord);
-            if (same(currentWord, "BUY")) {
-                printf("test\n");
-            }
-            else if (same(currentWord, "EXIT")) {
-                start = false;
-            }
-            
-            else if (same(currentWord, "MOVE EAST")) {
-                move_map(&peta, currentWord);
-            }
-            else if (same(currentWord, "MOVE WEST")) {
-                move_map(&peta, currentWord);
-            }
-            else if (same(currentWord, "MOVE NORTH")) {
-                move_map(&peta, currentWord);
-            }
-            else if (same(currentWord, "MOVE SOUTH")) {
-
-                move_map(&peta, currentWord);
-            }
-            else if (same(currentWord, "MIX")) {
+            STARTWORDBlank();
+            inputCom1 = commandToInt(currentWord);
+            inputCom2 = -1;
+            inputCom3 = -1;
+            switch (inputCom1)
+            {
+            case 1:
                 if(isNear(peta,'M')){
-                    printf("\n======================\n=        MIX         =\n======================\n");
-                }
-            }
-            else if (same(currentWord, "CHOP")) {
+                printf("======================\n");
+                printf("         MIX          \n");
+                printf("======================\n");
+                // MIX HERE
+
+                } else printf("\nBNMO tidak berada di area mix (M)!\n");
+                
+                break;
+
+            case 2:
                 if(isNear(peta,'C')){
-                    printf("\n======================\n=        CHOP         =\n======================\n");
-                }
-            }
-            else if (same(currentWord, "FRY")) {
+                printf("======================\n");
+                printf("         CHOP         \n");
+                printf("======================\n");
+                // CHOP HERE
+
+                } else printf("\nBNMO tidak berada di area chop (C)!\n");
+                break;
+
+            case 3:
                 if(isNear(peta,'F')){
-                    printf("\n======================\n=        FRY         =\n======================\n");
-                }
-            }
-            else if (same(currentWord, "BOIL")) {
+                printf("======================\n");
+                printf("         FRY          \n");
+                printf("======================\n");
+                // FRY HERE
+                
+                } else printf("\nBNMO tidak berada di area fry (F)!\n");
+                break;
+
+            case 4:
                 if(isNear(peta,'B')){
-                    printf("\n======================\n=        BOIL         =\n======================\n");
+                printf("======================\n");
+                printf("         BOIL         \n");
+                printf("======================\n");
+                // BOIL HERE
+                
+                } else printf("\nBNMO tidak berada di area boil (B)!\n");
+                break;
+            case 5:
+                if(isNear(peta,'T')){
+                printf("======================\n");
+                printf("         BUY          \n");
+                printf("======================\n");
+                // BUY HERE
+                
+                } else printf("\nBNMO tidak berada di area telepon (T)!\n");
+                break;
+
+            case 6:
+                ADVWORDBlank();
+                if(currentChar == '\n'){
+                    move_map(&peta, currentWord);
+                    passTime(&BNMO, 1, &curTime);
+                } else {
+                    printf("Input berlebihan\n");
                 }
-            }
-            else if (same(currentWord, "BUY")) {
-                if(isNear(peta,'T')){ //Lakukan sesuatu!
-                    printf("\n======================\n=        BUY         =\n======================\n");
+                break;
+            case 7:
+                ADVWORDBlank();
+                if(currentWord.Length > 0){
+                    inputCom2 = transformToInt(currentWord);
+                    ADVWORDBlank();
+                    if(currentWord.Length > 0 && inputCom2 >= 0){
+                        inputCom3 = transformToInt(currentWord);
+
+                        ADVWORDBlank();
+                        if(currentChar == '\n'){
+                            if(inputCom3 >= 0){
+                                if(inputCom2 == 0 && inputCom3 == 0){
+                                    printf("Input Waktu tidak valid\n");
+                                } else {
+                                    printf("Menunggu untuk %d jam, %d menit\n", inputCom2, inputCom3);
+                                    CreateTime(&wait, 0, inputCom2, inputCom3);
+                                    long plusMinute = TIMEToMenit(wait);
+                                    passTime(&BNMO, plusMinute, &curTime);
+                                }
+                            }
+                            else{
+                                printf("Input Waktu tidak valid\n");
+                            }
+                        }
+                        else{
+                            printf("Input berlebihan\n");
+                            
+                        }
+                    }
+                    else{
+                        printf("Input Waktu tidak valid\n");
+                    }
                 }
-                else printf("\nBNMO tidak berada di area telepon!\n");
-            }
+                else{
+                    printf("Input Waktu tidak valid\n");
+                }
+                break;
 
-            else if(same(currentWord, "CATALOG")){
-                //lalala
-            }
-            else if(same(currentWord, "COOKBOOK")){
-                //lalala
-            }
-            else if(same(currentWord, "INVENTORY")){
-                //lalala
-            }
-            else if(same(currentWord, "DELIVERY")){
-                //lalala
-            }
-            else{
-                printf("Command invalid!\n");
-                PrevMenit(&T);
-            }
+            case 8:
+                printf("======================\n");
+                printf("        CATALOG       \n");
+                printf("======================\n");
+                cetakCatalog(listMakanan, peta);
+                break;
 
+            case 9:
+                printf("======================\n");
+                printf("       INVENTORY      \n");
+                printf("======================\n");
+                printInventory(I);
+                break;
 
-            //KEADAAN SETELAH MELAKUKAN COMMAND
+            case 10:
+                printf("======================\n");
+                printf("        DELIVERY      \n");
+                printf("======================\n");
 
-            first = false;
-            NextMenit(&T);
+                break;
+            case 11:
+                printf("======================\n");
+                printf("          UNDO        \n");
+                printf("======================\n");
+
+            case 12:
+                printf("======================\n");
+                printf("          REDO        \n");
+                printf("======================\n");
+
+            case 13:
+                printf("======================\n");
+                printf("        COOKBOOK      \n");
+                printf("======================\n");
+                // cetakBukuResep(bookRsp);
+                break;
+            case 14:
+                printf("Game berhenti\n");
+                start = false;
+            default:
+                printf("\nInput tidak valid! Coba lag1!\n");
+                break;
+            }
         }
 
     } else if (same(currentWord, "EXIT")) {

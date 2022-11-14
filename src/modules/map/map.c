@@ -3,6 +3,11 @@
 #include "map.h"
 #include "../i_o/i_o.h"
 
+char currentChar;
+boolean EOP;
+
+static FILE *pita;
+static int retval;
 
 /* Loader */
 void createMap(MAP *M)
@@ -155,25 +160,45 @@ void move_map(MAP *M, Word command)
 /* I.S. map terdefinisi */
 /* F.S. map bergerak sesuai dengan command */
 {
-    if(same(command, "NORTH") || same(command, "MOVE NORTH")){
+    if(same(command, "NORTH")){
         if(ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))+1) == ' '){
             Absis(S(*M))--;
-            printf("%d",Absis(S(*M)));
         }
     }
-    else if(same(command, "SOUTH") || same(command, "MOVE SOUTH")){
+    else if(same(command, "SOUTH")){
         if(ElmtMap(*M, (int)Absis(S(*M))+2, (int)Ordinat(S(*M))+1) == ' '){
             Absis(S(*M))++;
         }
     }
-    else if(same(command, "EAST") || same(command, "MOVE EAST")){
+    else if(same(command, "EAST")){
         if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))+2) == ' '){
             Ordinat(S(*M))++;
         }
     }
-    else if(same(command, "WEST") || same(command, "MOVE WEST")){
+    else if(same(command, "WEST")){
         if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))) == ' '){
             Ordinat(S(*M))--;
         }
     }
 }
+
+
+// int move_detector(Word command){
+// /* Mengembalikan nilai base dari command move */
+// /* Prekondisi: command move terdefinisi dan tidak kosong */
+//     if(same(command, "WEST") || same(command, "MOVE WEST")){
+//         return 1;
+//     }
+//     else if(same(command, "SOUTH") || same(command, "MOVE SOUTH")){
+//         return 2;
+//     }
+//     else if(same(command, "EAST") || same(command, "MOVE EAST")){
+//         return 3;
+//     }
+//     else if(same(command, "NORTH") || same(command, "MOVE NORTH")){
+//         return 4;
+//     }
+//     else{
+//         return 0;
+//     }
+// }

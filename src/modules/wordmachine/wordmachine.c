@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../boolean/boolean.h"
-#include "../charmachine/charmachine.h"
+#include "../simulator/simulator.h"
+#include "../i_o/i_o.h"
+#include "../charmachine/charmachine.c"
 #include "wordmachine.h"
 
 /* State Mesin Word */
@@ -17,7 +19,7 @@ void IgnoreBlanks(){
     F.S. : currentChar ≠ BLANK atau currentChar = MARK */
     while(currentChar == BLANK){
         ADV();
-        printf("Detected blank!");
+        // printf("Detected blank!");
     }
 }
 
@@ -97,7 +99,7 @@ void CopyWordBlank(){
             currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
             Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
     int i = 0;
-    while (currentChar != BLANK) {
+    while (currentChar != BLANK && currentChar != LINEMARK) {
         currentWord.TabWord[i] = currentChar;
         ADV();
         i++;
@@ -143,5 +145,72 @@ void STARTWORDBlank(){
         endWord = false;
         CopyWordBlank();
         IgnoreBlanks();
+    }
+}
+
+int commandToInt(Word x){
+    /* Mengembalikan nilai base dari currentword */
+    /* Prekondisi: currentword terdefinisi dan tidak kosong */
+    if(same(x, "MIX")){
+        return 1;
+    }
+    else if(same(x, "CHOP")){
+        return 2;
+    }
+    else if(same(x, "FRY")){
+        return 3;
+    }
+    else if(same(x, "BOIL")){
+        return 4;
+    }
+    else if(same(x, "BUY")){
+        return 5;
+    }
+    else if(same(x, "MOVE")){
+        return 6;
+    }
+    else if(same(x, "WAIT")){
+        return 7;
+    }
+    else if(same(x, "CATALOG")){
+        return 8;
+    }
+    else if(same(x, "INVENTORY")){
+        return 9;
+    }
+    else if(same(x, "DELIVERY")){
+        return 10;
+    }
+    else if(same(x, "UNDO")){
+        return 11;
+    }
+    else if(same(x, "REDO")){
+        return 12;
+    }
+    else if(same(x, "COOKBOOK")){
+        return 13;
+    }
+    else if(same(x, "EXIT")){
+        return 14;
+    }
+    return 0;
+}
+
+int transformToInt(Word x){
+    /* Mengubah input currentword menjadi int */
+    /* Prekondisi: currentword terdefinisi dan tidak kosong */
+    int i = 0;
+    int result = 0;
+    while(i < x.Length){
+        result = result * 10 + (x.TabWord[i] - '0');
+        i++;
+    }
+    return result;
+}
+
+void ignoreUntilEnter(){
+    /* Mengabaikan input sampai enter */
+    while(currentChar != LINEMARK){
+        ADV();
     }
 }
