@@ -29,14 +29,15 @@ typedef struct {
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotypePrioQueue dan Q adalah PrioQueue, maka akses elemen : */
-#define Time(e)     (e).Expired
-#define Info(e)     (e).Name
-#define Head(Q)     (Q).HEAD
-#define Tail(Q)     (Q).TAIL
-#define InfoHead(Q) (Q).T[(Q).HEAD]
-#define InfoTail(Q) (Q).T[(Q).TAIL]
-#define MaxEl(Q)    (Q).MaxEl
-#define Elmt(Q,i)   (Q).T[(i)]
+#define TimeExpired(e)     (e).Expired
+#define TimeDelivery(e)    (e).Expired
+#define Info(e)            (e).Name
+#define Head(Q)            (Q).HEAD
+#define Tail(Q)            (Q).TAIL
+#define InfoHead(Q)        (Q).T[(Q).HEAD]
+#define InfoTail(Q)        (Q).T[(Q).TAIL]
+#define MaxEl(Q)           (Q).MaxEl
+#define Elmt(Q,i)          (Q).T[(i)]
 
 /* ********* Prototype ********* */
 boolean IsEmpty (PrioQueue Q);

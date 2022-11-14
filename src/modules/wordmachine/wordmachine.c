@@ -90,6 +90,7 @@ void CopyWord(){
         currentWord.Length = i;
     }
     currentWord.TabWord[i] = '\0';
+    
 }
 
 void LowerCase(){

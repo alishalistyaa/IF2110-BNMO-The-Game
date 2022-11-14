@@ -197,4 +197,5 @@ void displayBuyable(ListStatik l){
             ctr++;
         }
     }
+    printf("\nKirim 0 untuk exit.\n");
 }

@@ -185,7 +185,9 @@ int main(){
                 // BUY HERE
                 displayBuyable(listMakanan);
                 printf("\nEnter Command: ");
-                
+                STARTWORDBlank();
+                int option = transformToInt(currentWord);
+
                 // Barang apa saja yang bisa di buy
 
                 // Add barang to inventory
