@@ -30,6 +30,7 @@ typedef struct {
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotypePrioQueue dan Q adalah PrioQueue, maka akses elemen : */
 #define TimeExpired(e)     (e).Expired
+<<<<<<< HEAD
 #define TimeDelivery(e)    (e).Expired
 #define Info(e)            (e).Name
 #define Head(Q)            (Q).HEAD
@@ -38,6 +39,16 @@ typedef struct {
 #define InfoTail(Q)        (Q).T[(Q).TAIL]
 #define MaxEl(Q)           (Q).MaxEl
 #define Elmt(Q,i)          (Q).T[(i)]
+=======
+#define TimeDelivery(e)     (e).Delivery
+#define Info(e)     (e).Name
+#define Head(Q)     (Q).HEAD
+#define Tail(Q)     (Q).TAIL
+#define InfoHead(Q) (Q).T[(Q).HEAD]
+#define InfoTail(Q) (Q).T[(Q).TAIL]
+#define MaxEl(Q)    (Q).MaxEl
+#define Elmt(Q,i)   (Q).T[(i)]
+>>>>>>> d6f101a503a5445a0f7cd305fa0f242d73d2d586
 
 /* ********* Prototype ********* */
 boolean IsEmpty (PrioQueue Q);
@@ -85,6 +96,10 @@ void Dequeue (PrioQueue * Q, infotypePrioQueue * X);
 // #
 // */
 
-void printInventory (PrioQueue Q);
+void printInventoryExpired (PrioQueue Q);
+
+void printInventoryDelivery (PrioQueue Q);
+
+void deliveryDone();
 
 #endif

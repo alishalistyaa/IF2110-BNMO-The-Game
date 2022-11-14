@@ -66,6 +66,8 @@ int main(){
         // Inventory
         Word command = currentWord;
         PrioQueue I;
+        // Delivery
+        PrioQueue D;
         MakeEmpty(&I, 100);
         // Simulator
         CreateTime(&curTime, 0, 0, 0);
@@ -253,37 +255,37 @@ int main(){
                 printf("======================\n");
                 printf("       INVENTORY      \n");
                 printf("======================\n");
-                printInventory(I);
+                printInventoryExpired(I);
                 break;
 
             case 10:
                 printf("======================\n");
                 printf("        DELIVERY      \n");
                 printf("======================\n");
-                // printInventory(Delivery);
+                printInventoryDelivery(D);
 
                 break;
             case 11:
                 printf("======================\n");
                 printf("          UNDO        \n");
                 printf("======================\n");
-                // Undo(&undo, &redo, &command, &I, &curTime, &curLoc);
-                // int inputCommand = commandToInt(command);
-                // char* makanan = Name()/
-                // switch(inputCommand) {
-                //     case 1: 
-                //         notification = "Mix " +  + " dibatalkan";
-                //     case 2: 
-                //         notification = "Chop";
-                //     case 3: 
-                //         notification = "Penggorengan";
-                //     case 4:  
-                //         notification = "Perebusan";
-                //     case 5:
-                //         notification = "Buy";
-                //     case 7: 
-                //         notification = "Wait dibatalkan, mengembalikan waktu...";
-                // }
+                int inputCommand = commandToInt(command);
+                char* makanan = NAME(InfoHead(I))
+                switch(inputCommand) {
+                    case 1: 
+                        notification = "Mix " +  + " dibatalkan";
+                    case 2: 
+                        notification = "Chop";
+                    case 3: 
+                        notification = "Penggorengan";
+                    case 4:  
+                        notification = "Perebusan";
+                    case 5:
+                        notification = "Buy";
+                    case 7: 
+                        notification = "Wait dibatalkan, mengembalikan waktu...";
+                Undo(&undo, &redo, &command, &I, &curTime, &curLoc);
+                }
                 break;
 
             case 12:
@@ -332,6 +334,8 @@ int main(){
             }
         }
         if (!same(command, "UNDO") && !same(command, "REDO")) {
+            decreaseTimeDelivery(&D);
+            decreaseTimeInventory(&I);
             updateState(command, I, curTime, curLoc, &undo);
         }
     } else if (same(currentWord, "EXIT")) {
