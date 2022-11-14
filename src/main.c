@@ -20,6 +20,7 @@
 
 Word currentWord;
 boolean endWord;
+char currentChar;
 
 int main(){
     /* KAMUS */
@@ -27,12 +28,13 @@ int main(){
     int inputCom1;
     int inputCom2;
     int inputCom3;
-    MAP map;
     TIME wait;
     TIME curTime;
     POINT curLoc;
     PrioQueue curInv;
     SIMULATOR BNMO;
+    Stack Undo;
+    Stack Redo;
 
     /* ALGORITMA */
     // Inisialisasi Game
@@ -55,19 +57,23 @@ int main(){
         // Variable to save the configuration
         // Inventory
         PrioQueue I;
-            MakeEmpty(&I, 100);
+        MakeEmpty(&I, 100);
         // Simulator
         CreateTime(&curTime, 0, 0, 0);
         CreatePoint(&curLoc, 0, 0);
         MakeEmpty(&curInv, 10);
         CreateSimulator(&BNMO, "test", curLoc, curInv, curTime);
-        // Peta
+        // PETA
         MAP peta;
+        createMap(&peta);
         // List Makanan
         ListStatik listMakanan;
-            CreateListStatik(&listMakanan); 
+        CreateListStatik(&listMakanan); 
         // Resep
         BukuResep bookRsp;
+        // Undo-Redo
+        CreateEmpty(&Undo);
+        CreateEmpty(&Redo);
         
         // Reading all configuration
         int count = 0;
@@ -114,11 +120,10 @@ int main(){
             printf("Notifikasi: -\n");
             printMap(peta);
             printf("Enter command: ");
-            STARTWORD();
+            STARTWORDBlank();
             inputCom1 = commandToInt(currentWord);
             inputCom2 = -1;
             inputCom3 = -1;
-
             switch (inputCom1)
             {
             case 1:
@@ -172,90 +177,87 @@ int main(){
                 break;
 
             case 6:
-                ADVWORD();
+                ADVWORDBlank();
                 inputCom2 = move_detector(currentWord);
-
+                printf("%d\n", inputCom2);
+                if (currentChar == '\n') {
+                    printf("enter\n");
+                }
                 switch(inputCom2)
                 {
                 case 1:
-                    ADVWORD();
-                    if(currentWord.Length > 0){
-                        printf("Input berlebihan\n");
-                        ignoreUntilEnter();
-                    }
-                    else{
-                        Word w;
-                        w.Length=4;
-                        w.TabWord[0]='W';
-                        w.TabWord[1]='E';
-                        w.TabWord[2]='S';
-                        w.TabWord[3]='T';
-                        move_map(&map, w);
+                    if(currentChar == '\n'){
+                        // Word w;
+                        // w.Length=4;
+                        // w.TabWord[0]='W';
+                        // w.TabWord[1]='E';
+                        // w.TabWord[2]='S';
+                        // w.TabWord[3]='T';
+                        move_map(&peta, currentWord);
                         passTime(&BNMO, 1, &curTime);
                     }
+                    else{
+                        printf("Input berlebihan\n");
+                    }
+                    break;
                 case 2:
-                    ADVWORD();
-                    if(currentWord.Length > 0){
+                    if(currentChar == '\n'){
+                        // Word w;
+                        // w.Length=5;
+                        // w.TabWord[0]='S';
+                        // w.TabWord[1]='O';
+                        // w.TabWord[2]='U';
+                        // w.TabWord[3]='T';
+                        // w.TabWord[4]='H';
+                        move_map(&peta, currentWord);
+                        passTime(&BNMO, 1, &curTime);
                         printf("Input berlebihan\n");
-                        ignoreUntilEnter();
                     }
                     else{
-                        Word w;
-                        w.Length=5;
-                        w.TabWord[0]='S';
-                        w.TabWord[1]='O';
-                        w.TabWord[2]='U';
-                        w.TabWord[3]='T';
-                        w.TabWord[4]='H';
-                        move_map(&map, w);
-                        passTime(&BNMO, 1, &curTime);
+
                     }
+                    break;
                 case 3:
-                    ADVWORD();
-                    if(currentWord.Length > 0){
-                        printf("Input berlebihan\n");
-                        ignoreUntilEnter();
-                    }
-                    else{
-                        Word w;
-                        w.Length=4;
-                        w.TabWord[0]='E';
-                        w.TabWord[1]='A';
-                        w.TabWord[2]='S';
-                        w.TabWord[3]='T';
-                        move_map(&map, w);
+                    printf("Masuk sini?\n");
+                    if (currentChar == '\n'){
+                        printf("something\n");
+                        move_map(&peta, currentWord);
                         passTime(&BNMO, 1, &curTime);
                     }
+                    else{
+                        printf("Input berlebihan\n");
+                    }
+                    break;
                 case 4:
-                    ADVWORD();
-                    if(currentWord.Length > 0){
-                        printf("Input berlebihan\n");
-                        ignoreUntilEnter();
-                    }
-                    else{
-                        Word w;
-                        w.Length=5;
-                        w.TabWord[0]='N';
-                        w.TabWord[1]='O';
-                        w.TabWord[2]='R';
-                        w.TabWord[3]='T';
-                        w.TabWord[4]='H';
-                        move_map(&map, w);
+                    if(currentChar == '\n'){
+                        // Word w;
+                        // w.Length=5;
+                        // w.TabWord[0]='N';
+                        // w.TabWord[1]='O';
+                        // w.TabWord[2]='R';
+                        // w.TabWord[3]='T';
+                        // w.TabWord[4]='H';
+                        move_map(&peta, currentWord);
                         passTime(&BNMO, 1, &curTime);
                     }
-                deafult:
+                    else{
+                        printf("Input berlebihan\n");
+                    }
+                    break;
+                default:
                     printf("Input tidak valid\n");
                     break;
                 }
+                break;
             case 7:
-                ADVWORD();
+                ADVWORDBlank();
                 if(currentWord.Length > 0){
                     inputCom2 = transformToInt(currentWord);
-                    ADVWORD();
+                    ADVWORDBlank();
                     if(currentWord.Length > 0 && inputCom2 >= 0){
                         inputCom3 = transformToInt(currentWord);
 
-                        ADVWORD();
+                        ADVWORDBlank();
                         if(currentWord.Length>0){
                             printf("Input berlebihan\n");
                             ignoreUntilEnter();

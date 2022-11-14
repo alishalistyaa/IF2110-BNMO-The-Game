@@ -99,7 +99,7 @@ void CopyWordBlank(){
             currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
             Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
     int i = 0;
-    while (currentChar != BLANK) {
+    while (currentChar != BLANK && currentChar != LINEMARK) {
         currentWord.TabWord[i] = currentChar;
         ADV();
         i++;

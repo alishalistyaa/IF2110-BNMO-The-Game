@@ -160,23 +160,23 @@ void move_map(MAP *M, Word command)
 /* I.S. map terdefinisi */
 /* F.S. map bergerak sesuai dengan command */
 {
-    if(same(command, "NORTH") || same(command, "MOVE NORTH")){
+    if(same(command, "NORTH")){
         if(ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))+1) == ' '){
             Absis(S(*M))--;
-            printf("%d",Absis(S(*M)));
         }
     }
-    else if(same(command, "SOUTH") || same(command, "MOVE SOUTH")){
+    else if(same(command, "SOUTH")){
         if(ElmtMap(*M, (int)Absis(S(*M))+2, (int)Ordinat(S(*M))+1) == ' '){
             Absis(S(*M))++;
         }
     }
-    else if(same(command, "EAST") || same(command, "MOVE EAST")){
+    else if(same(command, "EAST")){
         if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))+2) == ' '){
+            printf("Masuk east\n");
             Ordinat(S(*M))++;
         }
     }
-    else if(same(command, "WEST") || same(command, "MOVE WEST")){
+    else if(same(command, "WEST")){
         if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))) == ' '){
             Ordinat(S(*M))--;
         }
