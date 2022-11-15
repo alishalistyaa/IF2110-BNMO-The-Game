@@ -72,4 +72,9 @@ void cetakCatalog(ListStatik l, MAP M);
 /* Menampilkan semua yang terdapat dalam list makanan dengan format: */
 /* (nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)*/
 
+void displayBuyable(ListStatik l, ListStatik *buylist, MAP M);
+/* Menampilkan list yang dapat dibeli sekaligus membentuknya*/
+
+void displayCookMethod(ListStatik l, ListStatik *mixlist, char method, MAP M);
+/* Menampilkan list dengan cook Method tertentu (FRY, BOIL, etc)*/
 #endif

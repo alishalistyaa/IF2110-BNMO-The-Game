@@ -188,7 +188,7 @@ void configResep(char *filename, BukuResep *b){
         ADV();
 
         nChild(ELMTBUKURESEP(*b,j)) = ctr;
-        addressChild(ELMTBUKURESEP(*b,j)) = (Tree) malloc(ctr *sizeof(Tree));
+        addressChild(ELMTBUKURESEP(*b,j)) = (Tree*) malloc(ctr *sizeof(Tree));
         i = 0;
         int k = 0;
         while(currentChar != FILEMARK && currentChar != LINEMARK){

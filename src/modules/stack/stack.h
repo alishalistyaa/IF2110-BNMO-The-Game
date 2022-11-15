@@ -7,9 +7,12 @@
 
 #include "../boolean/boolean.h"
 #include "../wordmachine/wordmachine.h"
+#include "../charmachine/charmachine.h"
 #include "../makanan/makanan.h"
+#include "../list/liststatik.h"
 #include "../time/time.h"
 #include "../point/point.h"
+#include "../prioqueue/prioqueue.h"
 
 #define Nil -1
 #define State 1000

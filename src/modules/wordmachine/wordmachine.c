@@ -36,16 +36,16 @@ void STARTWORD(){
         IgnoreBlanks();
     }
 
-    START();
-    IgnoreBlanks();
-    if(currentChar == LINEMARK){
-        endWord = true;
-    }
-    else{
-        endWord = false;
-        CopyWordBlank();
-        IgnoreBlanks();
-    }
+    // START();
+    // IgnoreBlanks();
+    // if(currentChar == LINEMARK){
+    //     endWord = true;
+    // }
+    // else{
+    //     endWord = false;
+    //     CopyWordBlank();
+    //     IgnoreBlanks();
+    // }
 }
 
 void ADVWORD(){
@@ -244,4 +244,34 @@ int stringlen(char *s) {
         length++;
     }
     return length;
+}
+
+
+// WORDLIST
+Word MARKWORDLIST;
+MARKWORDLIST.Length = 5;
+MARKWORDLIST.TabWord[0] = 'X';
+MARKWORDLIST.TabWord[1] = 'D';
+MARKWORDLIST.TabWord[2] = 'O';
+MARKWORDLIST.TabWord[3] = 'N';
+MARKWORDLIST.TabWord[4] = 'E';
+
+void CreateWordList(WordList *l){
+    /* I.S. l sembarang */
+    /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
+    /* Proses: Inisialisasi semua elemen List l dengan MARK */
+    for(int i=0; i<CAPACITYWORDLIST; i++){
+        ELMTWORDLIST(*l,i) = MARKWORDLIST;
+    }
+}
+
+int lengthWordList (WordList l){
+    /* Mengirimkan banyaknya elemen efektif List */
+    /* Mengirimkan nol jika List kosong */ 
+    int i = 0;
+    while(!same(ELMTWORDLIST(l,i), MARKWORDLIST.TabWord) && i!= CAPACITYWORDLIST)
+    {
+        i++;
+    }
+    return (i);
 }

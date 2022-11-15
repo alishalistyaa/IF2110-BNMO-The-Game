@@ -9,9 +9,9 @@
 #include "../boolean/boolean.h"
 #include "../charmachine/charmachine.h"
 
-
 #define NMax 50
 #define BLANK ' '
+#define CAPACITYWORDLIST 50
 
 /* *** Definisi TYPE WORD *** */
 typedef struct
@@ -20,9 +20,18 @@ typedef struct
    int Length;
 } Word;
 
+/* *** Definisi LIST WORD *** */
+typedef struct 
+{
+    Word buffer[NMax]; /* container penyimpan word*/
+} WordList;
+
 /* State Mesin Word */
 extern boolean endWord;
 extern Word currentWord;
+
+#define ELMTWORDLIST(l, i) (l).buffer[(i)]
+
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK

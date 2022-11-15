@@ -2,6 +2,12 @@
 
 #include <stdio.h>
 
+char currentChar;
+boolean EOP;
+
+static FILE *pita;
+static int retval;
+
 /* STOCK */
 void CreateStock(STOCK *s){
     /* I.S. l sembarang */
@@ -158,36 +164,36 @@ void CopyList(ListStatik l1,ListStatik *l2)
 }
 
 
-void displayBuyable(ListStatik l, ListStatik *buylist){
-    int length = lengthList(l);
-    int ctr = 1;
-    for(int i = 0; i < length; i++){
-        if(same(NAME(ELMTLIST(l,i)),"Buy")){
-            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
-            TulisTIME2(DELIVERY(ELMTLIST(l,i)));
-            printf(")\n");
+// void displayBuyable(ListStatik l, ListStatik *buylist){
+//     int length = lengthList(l);
+//     int ctr = 1;
+//     for(int i = 0; i < length; i++){
+//         if(same(NAME(ELMTLIST(l,i)) ,"Buy")){
+//             printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
+//             TulisTIME2(DELIVERY(ELMTLIST(l,i)));
+//             printf(")\n");
 
-            ELMTLIST(*buylist,ctr-1) = ELMTLIST(l,i);
-            ctr++;
-        }
-    }
-    printf("\nKirim 0 untuk exit.\n");
-}
+//             ELMTLIST(*buylist,ctr-1) = ELMTLIST(l,i);
+//             ctr++;
+//         }
+//     }
+//     printf("\nKirim 0 untuk exit.\n");
+// }
 
-void displayCookMethod(ListStatik l, ListStatik *methodlist, char *method){
-    int length = lengthList(l);
-    int ctr = 1;
-    printf("List Bahan Makanan yang Bisa Dibuat:\n");
-    for(int i = 0; i < length; i++){
-        if(same(NAME(ELMTLIST(l,i)),method)){
-            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
-            TulisTIME2(DELIVERY(ELMTLIST(l,i)));
+// void displayCookMethod(ListStatik l, ListStatik *methodlist, char *method){
+//     int length = lengthList(l);
+//     int ctr = 1;
+//     printf("List Bahan Makanan yang Bisa Dibuat:\n");
+//     for(int i = 0; i < length; i++){
+//         if(same(NAME(ELMTLIST(l,i)),method)){
+//             printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
+//             TulisTIME2(DELIVERY(ELMTLIST(l,i)));
 
-            ELMTLIST(*methodlist,ctr-1) = ELMTLIST(l,i);
-            ctr++;
-        }
-    }
-    printf("\nKirim 0 untuk exit.\n");
-}
+//             ELMTLIST(*methodlist,ctr-1) = ELMTLIST(l,i);
+//             ctr++;
+//         }
+//     }
+//     printf("\nKirim 0 untuk exit.\n");
+// }
 
 

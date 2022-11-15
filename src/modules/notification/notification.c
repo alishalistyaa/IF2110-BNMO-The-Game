@@ -1,38 +1,47 @@
 #include "notification.h"
 
-printNotif(Word command, Word makanan) {
-    // PEMBATALAN ACTION
-    if (same(command, "FRY")) {
-        printf("Penggorengan ");
-        printf("%s ", makanan);
-        printf("dibatalkan\n");
-    } 
-    if (same(command, "CHOP")) {
-        printf("Pemotongan ");
-        printf("%s ", makanan);
-        printf("dibatalkan\n");
-    } 
-    if (same(command, "BOIL")) {
-        printf("Perebusan ");
-        printf("%s ", makanan);
-        printf("dibatalkan\n");
-    } 
-    if (same(command, "MIX")) {
-        printf("%d. ");
-        printf("%s ", makanan);
-        printf("dibatalkan\n");
-    } 
+void printNotifInventory(Notif N);
+/* Fungsi mencetak ke layar*/
 
-    // Delivery Done
-    if (same(command, "DELIVERY")) {
-        printf("%d. ");
-        printf("%s ", makanan);
-        printf("sudah diterima oleh BNMO!\n");
-    }
+void printNotifUndo(Notif N);
+/* Fungsi mencetak ke layar*/
 
-    // Kadaluwarsa
-    if (same(command, "EXPIRED")) {
-        printf("%s ", makanan);
-        printf("kedaluwarsa...\n");
-    }
-}
+void printNotifRedo(Notif N);
+/* Fungsi mencetak ke layar*/
+
+// void printNotif(Word command, Word makanan) {
+//     // PEMBATALAN ACTION
+//     if (same(command, "FRY")) {
+//         printf("Penggorengan ");
+//         printf("%s ", makanan);
+//         printf("dibatalkan\n");
+//     } 
+//     if (same(command, "CHOP")) {
+//         printf("Pemotongan ");
+//         printf("%s ", makanan);
+//         printf("dibatalkan\n");
+//     } 
+//     if (same(command, "BOIL")) {
+//         printf("Perebusan ");
+//         printf("%s ", makanan);
+//         printf("dibatalkan\n");
+//     } 
+//     if (same(command, "MIX")) {
+//         printf("%d. ");
+//         printf("%s ", makanan);
+//         printf("dibatalkan\n");
+//     } 
+
+//     // Delivery Done
+//     if (same(command, "DELIVERY")) {
+//         printf("%d. ");
+//         printf("%s ", makanan);
+//         printf("sudah diterima oleh BNMO!\n");
+//     }
+
+//     // Kadaluwarsa
+//     if (same(command, "EXPIRED")) {
+//         printf("%s ", makanan);
+//         printf("kedaluwarsa...\n");
+//     }
+// }

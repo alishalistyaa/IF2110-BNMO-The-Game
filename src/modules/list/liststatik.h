@@ -4,6 +4,8 @@
 #include "../boolean/boolean.h"
 #include "../makanan/makanan.h"
 // #include "../i_o/i_o.h"
+#include "../wordmachine/wordmachine.h"
+#include "../charmachine/charmachine.h"
 #include "../time/time.h"
 #include "../point/point.h"
 
@@ -87,9 +89,9 @@ void CopyList(ListStatik l1,ListStatik *l2);
 /*Menyalin semua elemen di list 1 ke list 2*/
 
 
-void displayBuyable(ListStatik l, ListStatik *buylist);
-/* Menampilkan list yang dapat dibeli sekaligus membentuknya*/
+// void displayBuyable(ListStatik l, ListStatik *buylist);
+// /* Menampilkan list yang dapat dibeli sekaligus membentuknya*/
 
-void displayCookMethod(ListStatik l, ListStatik *mixlist, char *method);
-/* Menampilkan list dengan cook Method tertentu (FRY, BOIL, etc)*/
+// void displayCookMethod(ListStatik l, ListStatik *mixlist, char *method);
+// /* Menampilkan list dengan cook Method tertentu (FRY, BOIL, etc)*/
 #endif

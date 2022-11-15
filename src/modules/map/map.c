@@ -241,23 +241,57 @@ void cetakCatalog(ListStatik l, MAP M){
     }    
 }
 
+void displayBuyable(ListStatik l, ListStatik *buylist, MAP M){
+    int length = lengthList(l);
+    int ctr = 1;
+    for(int i = 0; i < length; i++){
+        if(getAction(ACTION(ELMTLIST(l,i)), M) == 'T'){
+            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
+            TulisTIME2(DELIVERY(ELMTLIST(l,i)));
+            printf(")\n");
+
+            ELMTLIST(*buylist,ctr-1) = ELMTLIST(l,i);
+            ctr++;
+        }
+    }
+    printf("\nKirim 0 untuk exit.\n");
+}
+
+void displayCookMethod(ListStatik l, ListStatik *methodlist, char action, MAP M){
+    int length = lengthList(l);
+    int ctr = 1;
+    printf("List Bahan Makanan yang Bisa Dibuat:\n");
+    for(int i = 0; i < length; i++){
+        if(getAction(ACTION(ELMTLIST(l,i)), M) == action){
+            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
+            TulisTIME2(DELIVERY(ELMTLIST(l,i)));
+
+            ELMTLIST(*methodlist,ctr-1) = ELMTLIST(l,i);
+            ctr++;
+        }
+    }
+    printf("\nKirim 0 untuk exit.\n");
+}
+
 
 int move_detector(Word command){
 /* Mengembalikan nilai base dari command move */
 /* Prekondisi: command move terdefinisi dan tidak kosong */
-    if(same(command, "WEST") || same(command, "MOVE WEST")){
+    if(same(command, "WEST")){
         return 1;
     }
-    else if(same(command, "SOUTH") || same(command, "MOVE SOUTH")){
+    else if(same(command, "SOUTH")){
         return 2;
     }
-    else if(same(command, "EAST") || same(command, "MOVE EAST")){
+    else if(same(command, "EAST")){
         return 3;
     }
-    else if(same(command, "NORTH") || same(command, "MOVE NORTH")){
+    else if(same(command, "NORTH")){
         return 4;
     }
     else{
         return 0;
     }
 }
+
+

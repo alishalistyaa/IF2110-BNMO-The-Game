@@ -1,8 +1,3 @@
-// NIM : 13521156 
-// Nama : Brigita Tri Carolina
-// Tanggal : 7 Oktober 2022
-// Topik : ADT Queue 
-// Deskripsi : Program berisi implementasi dari fungsi-fungsi pada prioqueue.c
 // Alt 2
 #include "prioqueue.h"
 #include <stdlib.h>
@@ -140,6 +135,7 @@ void decreaseTimeExpired(PrioQueue *Q) {
 
 void decreaseTimeDelivery(PrioQueue *Q) {
     for (int i = Head(*Q); i <= Tail(*Q); i++) {
+        
         PrevMenit(&TimeDelivery(Elmt(*Q, i)));
     }
 }
@@ -151,7 +147,7 @@ void printInventoryExpired (PrioQueue Q) {
         printf("List Makanan di Inventory\n");
         printf("(nama - waktu sisa kedaluwarsa)\n");
         printf("\t1. ");
-        printf("%s", NAME(InfoHead(Q))); // nama makanan 
+        printf("%s", NAME(InfoHead(Q)).TabWord); // nama makanan 
         printf(" - ");
         TulisTIME2(TimeExpired(InfoHead(Q))); // waktu expired
         printf("\n");
@@ -161,10 +157,11 @@ void printInventoryExpired (PrioQueue Q) {
         int count = 1;
         for (int i = Head(Q); i <= Tail(Q); i++) {
             printf("\t%d.", count);
-            printf("%s", NAME(Elmt(Q, i))); // nama makanan
+            printf("%s", NAME(Elmt(Q, i)).TabWord); // nama makanan
             printf(" - ");
             TulisTIME2(TimeExpired(Elmt(Q, i))); // waktu expired
             printf("\n");
+            count++;
         }
     }
 }
@@ -176,7 +173,7 @@ void printInventoryDelivery (PrioQueue Q) {
         printf("List Makanan di Perjalanan\n");
         printf("(nama - waktu sisa delivery)\n");
         printf("\t1. ");
-        printf("%s", NAME(InfoHead(Q))); // nama makanan 
+        printf("%s", NAME(InfoHead(Q)).TabWord); // nama makanan 
         printf(" - ");
         TulisTIME2(TimeDelivery(InfoHead(Q))); // waktu expired
         printf("\n");
@@ -186,10 +183,11 @@ void printInventoryDelivery (PrioQueue Q) {
         int count = 1;
         for (int i = Head(Q); i <= Tail(Q); i++) {
             printf("\t%d.", count);
-            printf("%s", NAME(Elmt(Q, i))); // nama makanan
+            printf("%s", NAME(Elmt(Q, i)).TabWord); // nama makanan
             printf(" - ");
             TulisTIME2(TimeDelivery(Elmt(Q, i))); // waktu expired
             printf("\n");
+            count++;
         }
     }
 }

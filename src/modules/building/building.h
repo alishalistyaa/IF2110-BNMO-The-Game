@@ -2,7 +2,7 @@
 /* Definisi Iput / Output */
 
 #ifndef BUILDING_H
-#define BUILDING_H
+#define BUILDING_H  xsa sq                                                          xcs 
 
 #include <stdio.h>
 #include "../point/point.h"
