@@ -2,7 +2,7 @@
 #define TIME_H
 
 #include "../boolean/boolean.h"
-#include "../simulator/simulator.h"
+//#include "../simulator/simulator.h"
 
 /* *** Definisi TYPE TIME <HH:MM:SS> *** */
 typedef struct { 

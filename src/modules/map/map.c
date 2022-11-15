@@ -182,6 +182,65 @@ void move_map(MAP *M, Word command)
     }
 }
 
+void cetakCatalog(ListStatik l, MAP M){
+    int panjang = lengthList(l);
+    int j;
+    // Header
+    printf("\n");
+    printf("List Makanan:\n");
+    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
+
+    if (panjang == 0)
+    {
+        printf("List kosong");
+    }
+    else
+    {
+        for(j = 0; j < panjang; j++)
+        {
+            // Tulis Nomor
+            printf("%d. ", (j+1));
+
+            // Tulis Nama Makanan
+            printf("%s - ", NAME(ELMTLIST(l,j)).TabWord);
+
+            // Tulis Expired
+            TulisTIME2(EXPIRED(ELMTLIST(l,j)));  
+            
+            printf(" - ");
+
+            // Tulis Action
+            char K;
+            K = getAction(ACTION(ELMTLIST(l,j)), M);
+            if(K == 'T'){
+                printf("Buy");
+            } else if(K == 'F'){
+                printf("Fry");
+            } else if(K == 'B'){
+                printf("Boil");
+            } else if(K == 'M'){
+                printf("Mix");
+            } else if(K == 'C'){
+                printf("Chop");
+            } else {printf("Tidak ada aksi");}
+            
+            printf(" - ");
+
+            // Tulis Delivery
+            TIME DelivKosong;
+            CreateTime(&DelivKosong, 0, 0, 0); 
+            if (TEQ(DELIVERY(ELMTLIST(l,j)), DelivKosong)){
+                printf("Tidak perlu delivery");
+            } else {
+                TulisTIME2(DELIVERY(ELMTLIST(l,j)));
+            }
+            
+            printf("\n");
+            
+        }
+    }    
+}
+
 
 // int move_detector(Word command){
 // /* Mengembalikan nilai base dari command move */

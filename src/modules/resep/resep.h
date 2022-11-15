@@ -5,8 +5,8 @@
 #include "../boolean/boolean.h"
 #include "../makanan/makanan.h"
 #include "../list/liststatik.h"
-#include "../map/map.h"
 #include "../building/building.h"
+#include "../prioqueue/prioqueue.h"
 //Membuat ADT resep dan buku resep dengan model list statik secara eksplisit
 
 /*  Kamus Umum */
@@ -21,11 +21,7 @@
 #define MARKMAKANAN -999
 /*ID untuk Makanan tak terdefinisi*/
 
-//Definisi untuk "Method" pengolahan resep
-#define MIX 0xF
-#define CHOP 0xFF
-#define FRY 0xFFF
-#define BOIL 0xFFFF
+
 
 /* Definisi Resep berbasiskan pohon n-ary */
 typedef Tree Resep;
@@ -78,7 +74,7 @@ void cetakBukuResep(BukuResep b, ListStatik listmakanan, MAP M);
 /* 3 . Nama makanan 3*/
 //void printResep(Resep r);
 
-boolean isResepOlah_able(Resep r);
+boolean isResepOlahable(BukuResep b, int ID_Root, STOCK s);
 
 void setMethod(Resep *r);
 // Resep concatResep(Resep r1, Resep r2);

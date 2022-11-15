@@ -9,6 +9,11 @@
         "map": "c",
         "charmachine.h": "c",
         "i_o.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "notification.h": "c",
+        "liststatik.h": "c",
+        "point.h": "c",
+        "stdio.h": "c",
+        "building.h": "c"
     }
 }

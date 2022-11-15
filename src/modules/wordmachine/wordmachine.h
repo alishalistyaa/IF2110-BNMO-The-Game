@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "../boolean/boolean.h"
 #include "../charmachine/charmachine.h"
-#include "../simulator/simulator.h"
+
 
 #define NMax 50
 #define BLANK ' '
@@ -64,5 +64,11 @@ int transformToInt(Word x);
 
 void ignoreUntilEnter();
       /* Mengabaikan semua input sampai enter */
+    
+int stringlen(char *s);
+/* Mengembalikan panjang string */
+      
+boolean same(Word one, char *s);
+/* Mengembalikan true jika kedua string sama */
 
 #endif

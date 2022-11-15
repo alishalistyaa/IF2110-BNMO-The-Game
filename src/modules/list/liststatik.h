@@ -3,8 +3,10 @@
 
 #include "../boolean/boolean.h"
 #include "../makanan/makanan.h"
-#include "../map/map.h"
-#include "../i_o/i_o.h"
+// #include "../i_o/i_o.h"
+#include "../time/time.h"
+#include "../point/point.h"
+
 
 /*  Kamus Umum */
 #define CAPACITY 100
@@ -22,10 +24,26 @@ typedef struct {
    MAKANAN contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
 } ListStatik;
 
+/* *** Definisi TYPE STOCK *** */
+typedef struct {
+   int buffer[CAPACITY]; 
+} STOCK;
+
 #define ELMTLIST(l, i) (l).contents[(i)]
-#define Effective_Capacity(l) (l).effCapacity;
+#define Effective_Capacity(l) (l).effCapacity
+#define ELMTSTOCK(s, i) (s).buffer[i]
 
 //--KONSTRUKTOR--
+void CreateStock(STOCK *s);
+/* I.S. l sembarang */
+/* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
+/* Proses: Inisialisasi semua elemen List l dengan MARK */
+
+void IncreaseStock(STOCK *s, int ID);
+/* Menambahkan satu stock pada ID tertentu */
+
+void DecreaseStock(STOCK *s, int ID);
+/* Mengurangi satu stock pada ID tertentu */
 
 void CreateListStatik(ListStatik *l);
 /* I.S. l sembarang */
@@ -36,7 +54,10 @@ int lengthList(ListStatik l);
 /* Mengirimkan banyaknya elemen efektif List */
 /* Mengirimkan nol jika List kosong */  
 
-boolean isFoodValid(ListStatik l, MAKANAN val);
+Word getNameMakanan(ListStatik l, int idx);
+/* Mengirimkan nama makanan dari ID */
+
+// boolean isFoodValid(ListStatik l, int ID_Makanan);
 /* Mengirimkan true jika i adalah elemen yang valid dari list */
 
 boolean isIdxListEff(ListStatik l, IdxType i);
@@ -45,7 +66,6 @@ boolean isIdxListEff(ListStatik l, IdxType i);
 
 boolean isEmpty(ListStatik l);
 /* Mengirimkan true jika List l kosong, mengirimkan false jika tidak */
-
 
 boolean isFull(ListStatik l);
 /* Mengirimkan true jika List l penuh, mengirimkan false jika tidak */
@@ -67,6 +87,9 @@ void CopyList(ListStatik l1,ListStatik *l2);
 /*Menyalin semua elemen di list 1 ke list 2*/
 
 
-void displayBuyable(ListStatik l);
+void displayBuyable(ListStatik l, ListStatik *buylist);
+/* Menampilkan list yang dapat dibeli sekaligus membentuknya*/
 
+void displayCookMethod(ListStatik l, ListStatik *mixlist, char *method);
+/* Menampilkan list dengan cook Method tertentu (FRY, BOIL, etc)*/
 #endif

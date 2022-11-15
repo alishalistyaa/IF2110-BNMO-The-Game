@@ -2,10 +2,10 @@
 /* Implementasi Makanan */
 
 #include "makanan.h"
-#include "../boolean/boolean.h"
-#include "../point/point.h"
-#include "../time/time.h"
-#include "../wordmachine/wordmachine.h"
+// #include "../boolean/boolean.h"
+// #include "../point/point.h"
+// #include "../time/time.h"
+// #include "../wordmachine/wordmachine.h"
 
 /* ***************************************************************** */
 /* DEFINISI PRIMITIF                                                 */
@@ -26,6 +26,7 @@ void CreateMakanan(MAKANAN *M, int ID, Word Name, TIME Expired, POINT Action, TI
 }
 
 
+
 /* ***************************************************************** */
 /* KELOMPOK BACA/TULIS                                               */
 /* ***************************************************************** */
@@ -42,9 +43,6 @@ void DecreaseExpired(MAKANAN *M){
     // Algoritma
     // PrevMenit(EXPIRED(*M));
 }
-
-void IncreaseDelivery(MAKANAN *M);
-/* Menambah waktu delivery */
 
 boolean isExpired(MAKANAN M){ 
     /* Mengirimkan true jika makanan sudah expired */
@@ -102,7 +100,6 @@ boolean isExpiredLonger(MAKANAN M1, MAKANAN M2){
     return(isLonger);
 
 }
-
 
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */

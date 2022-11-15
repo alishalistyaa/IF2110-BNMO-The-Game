@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "i_o.h"
+#include "../charmachine/charmachine.c"
 #include "../building/building.h"
 
 void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
@@ -209,25 +210,3 @@ void configResep(char *filename, BukuResep *b){
     
     fclose(pita);
 }
-
-int stringlen(char *s) {
-    int length = 0;
-    for (int i = 0; s[i] != '\0'; i++) {
-        length++;
-    }
-    return length;
-}
-
-boolean same(Word one, char *s) {
-    if (one.Length == stringlen(s)) {
-        for (int i = 0; i < one.Length; i++) {
-            if (one.TabWord[i] != s[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
-    return false;
-}
-boolean validateString();
-/* Mengembalikan true jika string yang dimasukkan valid */

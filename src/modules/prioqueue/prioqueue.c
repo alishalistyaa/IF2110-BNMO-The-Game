@@ -138,37 +138,6 @@ void decreaseTimeExpired(PrioQueue *Q) {
     }
 }
 
-<<<<<<< HEAD
-void decreaseTimeExpired(PrioQueue *I) {
-    for (int i = Head(Q); i <= Tail(Q); i++) {
-        prevMenit(&TimeExpired(Elmt(*I,i)));
-    }
-}
-// void printInventory (PrioQueue Q) {
-//     if (IsEmpty(Q)) {
-//         printf("Tidak terdapat bahan makanan apapun di inventory\n");
-//     } else if (Tail(Q) == Head(Q)) {
-//         printf("List Makanan di Inventory\n");
-//         printf("(nama - waktu sisa kedaluwarsa)\n");
-//         printf("\t1. ");
-//         printf("%s", NAME(InfoHead(Q))); // nama makanan 
-//         printf(" - ");
-//     } else {        
-//         printf("List Makanan di Inventory\n");
-//         printf("(nama - waktu sisa kedaluwarsa)\n");
-//         int count = 1;
-//         for (int i = Head(Q); i <= Tail(Q); i++) {
-//             printf("\t%d.", count);
-//             printf("%s", NAME(InfoHead(Q))); // nama makanan
-//             printf(" - ");
-//         }
-//     }
-// }
-
-// void printInventoryDelivery(PrioQueue delivery) {
-
-// }
-=======
 void decreaseTimeDelivery(PrioQueue *Q) {
     for (int i = Head(*Q); i <= Tail(*Q); i++) {
         PrevMenit(&TimeDelivery(Elmt(*Q, i)));
@@ -225,7 +194,48 @@ void printInventoryDelivery (PrioQueue Q) {
     }
 }
 
-void deliveryDone(PrioQueue *I, PrioQueue *D){
+void isDeliveredQueue(PrioQueue *I, PrioQueue *D, boolean *delivered, Word *makanan){
+    infotypePrioQueue val;
+    if (!IsEmpty(*D)){
+        for (int i = Head(*D); i <= Tail(*D); i++) {
+            if(isDelivered(Elmt(*D, i))){
+                Dequeue(D, &val);
+                EnqueueExpired(I, val);
+                *delivered = true;
+            }
+        }
+    }
+    *makanan = NAME(val); 
+}
+
+void isExpiredQueue(PrioQueue *I, boolean *expired, Word *makanan){
+    infotypePrioQueue val;
+    if (!IsEmpty(*I)){
+        for (int i = Head(*I); i <= Tail(*I); i++) {
+            if(isExpired(Elmt(*I, i))){
+                Dequeue(I, &val);
+                *expired = true;
+            }
+        }
+    }
+    *makanan = NAME(val);
+}
+
+void delElmt(PrioQueue *Q, int id, infotypePrioQueue * X) {
+    int delIdx = -1;
+    for (int i = Head(*Q); i <= Tail(*Q); i++) {
+        if (id == ID(Elmt(*Q,i))){
+            delIdx = i;
+            *X = Elmt(*Q,i);
+            break;
+        }
+    }
+
+    while (delIdx <  Tail(*Q))
+    {
+        Elmt(*Q,delIdx) = Elmt(*Q,delIdx+1);
+        delIdx++;
+    }
+    Tail(*Q)--;
     
 }
->>>>>>> d6f101a503a5445a0f7cd305fa0f242d73d2d586

@@ -3,10 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../boolean/boolean.h"
-#include "../simulator/simulator.h"
-#include "../i_o/i_o.h"
-#include "../charmachine/charmachine.c"
 #include "wordmachine.h"
 
 /* State Mesin Word */
@@ -223,9 +219,29 @@ int transformToInt(Word x){
     return result;
 }
 
+boolean same(Word one, char *s) {
+    if (one.Length == stringlen(s)) {
+        for (int i = 0; i < one.Length; i++) {
+            if (one.TabWord[i] != s[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
+}
+
 void ignoreUntilEnter(){
     /* Mengabaikan input sampai enter */
     while(currentChar != LINEMARK){
         ADV();
     }
+}
+
+int stringlen(char *s) {
+    int length = 0;
+    for (int i = 0; s[i] != '\0'; i++) {
+        length++;
+    }
+    return length;
 }

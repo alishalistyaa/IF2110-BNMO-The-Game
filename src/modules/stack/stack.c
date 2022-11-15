@@ -53,18 +53,20 @@ void Pop(Stack * S, infotype * X) {
     }
 }
 
-void Undo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, TIME *T, POINT *l) {
+void Undo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, PrioQueue *D, STOCK *stock, TIME *T, POINT *l) {
 /* Melakukan proses undo */
 /* Menghapus Top dari Stack Undo dan memasukkannya ke Stack Redo */
     infotype s;
     Pop(undo, &s);
     *command = InfoTop(*undo).command;
     *I = InfoTop(*undo).I;
+    *D = InfoTop(*undo).D;
     *T = InfoTop(*undo).T;
     *l = InfoTop(*undo).l;
+    *stock = InfoTop(*undo).stock;
     Push(Redo, s);
 }
-void Redo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, TIME *T, POINT *l) {
+void Redo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, PrioQueue *D, STOCK *stock, TIME *T, POINT *l) {
 /* Melakukan proses redo */
 /* Menghapus Top dari Stack Redo dan memasukkannya ke Stack Undo */
     infotype s;
@@ -72,18 +74,22 @@ void Redo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, TIME *T, POINT 
     Push(undo, s);
     *command = InfoTop(*undo).command;
     *I = InfoTop(*undo).I;
+    *D = InfoTop(*undo).D;
     *T = InfoTop(*undo).T;
     *l = InfoTop(*undo).l;
+    *stock = InfoTop(*undo).stock;
 }
 
-void updateState(Word command, PrioQueue I, TIME T, POINT l, Stack *undo) {
+void updateState(Word command, PrioQueue I, PrioQueue D, STOCK stock, TIME T, POINT l, Stack *undo) {
 /* Menginput atau mengupdate state */
 /* I. S. undo, M, T, l terdefinisi*/
 /* F. S. terbentuk infotype X untuk dan X telah di-push ke stack */
   infotype X;
   X.command = command;
   X.I = I;
+  X.D = D;
   X.T = T;
   X.l = l;
+  X.stock = stock;
   Push(undo, X);
 }

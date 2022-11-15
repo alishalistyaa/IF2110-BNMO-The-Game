@@ -18,6 +18,7 @@
 #include "./modules/simulator/simulator.c"
 #include "./modules/map/map.c"
 #include "./modules/resep/resep.c"
+#include "./modules/notification/notification.c"
 
 Word currentWord;
 boolean endWord;
@@ -29,31 +30,41 @@ int main(){
     int inputCom1;
     int inputCom2;
     int inputCom3;
+    int option;
     TIME wait;
     TIME curTime;
     POINT curLoc;
+    STOCK curStock;
     PrioQueue curInv;
+    PrioQueue curDeliv;
     SIMULATOR BNMO;
     Stack undo;
     Stack redo;
+    ListStatik buylist;
+    ListStatik mixlist;
+    ListStatik choplist;
+    ListStatik boillist;
+    ListStatik frylist;
 
     /* ALGORITMA */
     // Inisialisasi Game
+    CreateListStatik(&buylist);
     start = true;
+    option = -1;
     // Variable Main
     char* filename;
     char* curName;
     // PROGRAM MULAI
         // Splash Screen 
-        printf(
-            "======================================================================================\n"
-            "\n"
-            "▒█▀▀▀█ ▒█▀▀▀ ▒█░░░ ░█▀▀█ ▒█▀▄▀█ ░█▀▀█ ▀▀█▀▀ 　 ▒█▀▀▄ ░█▀▀█ ▀▀█▀▀ ░█▀▀█ ▒█▄░▒█ ▒█▀▀█ \n"
-            "░▀▀▀▄▄ ▒█▀▀▀ ▒█░░░ ▒█▄▄█ ▒█▒█▒█ ▒█▄▄█ ░▒█░░ 　 ▒█░▒█ ▒█▄▄█ ░▒█░░ ▒█▄▄█ ▒█▒█▒█ ▒█░▄▄ \n"
-            "▒█▄▄▄█ ▒█▄▄▄ ▒█▄▄█ ▒█░▒█ ▒█░░▒█ ▒█░▒█ ░▒█░░ 　 ▒█▄▄▀ ▒█░▒█ ░▒█░░ ▒█░▒█ ▒█░░▀█ ▒█▄▄█ \n"
-            "\n"
-            "======================================================================================\n"
-            );
+        // printf(
+        //     "======================================================================================\n"
+        //     "\n"
+        //     "▒█▀▀▀█ ▒█▀▀▀ ▒█░░░ ░█▀▀█ ▒█▀▄▀█ ░█▀▀█ ▀▀█▀▀ 　 ▒█▀▀▄ ░█▀▀█ ▀▀█▀▀ ░█▀▀█ ▒█▄░▒█ ▒█▀▀█ \n"
+        //     "░▀▀▀▄▄ ▒█▀▀▀ ▒█░░░ ▒█▄▄█ ▒█▒█▒█ ▒█▄▄█ ░▒█░░ 　 ▒█░▒█ ▒█▄▄█ ░▒█░░ ▒█▄▄█ ▒█▒█▒█ ▒█░▄▄ \n"
+        //     "▒█▄▄▄█ ▒█▄▄▄ ▒█▄▄█ ▒█░▒█ ▒█░░▒█ ▒█░▒█ ░▒█░░ 　 ▒█▄▄▀ ▒█░▒█ ░▒█░░ ▒█░▒█ ▒█░░▀█ ▒█▄▄█ \n"
+        //     "\n"
+        //     "======================================================================================\n"
+        //     );
 
     // COMMAND AWAL
     printf("1. START\n");
@@ -63,16 +74,12 @@ int main(){
     STARTWORD();
     if (same(currentWord, "START")) {
         // Variable to save the configuration
-        // Inventory
         Word command = currentWord;
-        PrioQueue I;
-        // Delivery
-        PrioQueue D;
-        MakeEmpty(&I, 100);
         // Simulator
         CreateTime(&curTime, 0, 0, 0);
         CreatePoint(&curLoc, 0, 0);
-        MakeEmpty(&curInv, 10);
+        MakeEmpty(&curInv, 100);
+        MakeEmpty(&curDeliv, 50);
         CreateSimulator(&BNMO, "test", curLoc, curInv, curTime);
         // PETA
         MAP peta;
@@ -82,10 +89,15 @@ int main(){
         CreateListStatik(&listMakanan); 
         // Resep
         BukuResep bookRsp;
+        // Inisialisasi array of word
+        Word undocommand[10];
+        Word makanancommand[10];
+        int count_undocommand = 0;
         // Undo-Redo
         CreateEmpty(&undo);
         CreateEmpty(&redo);
-        updateState(command, I, curTime, curLoc, &undo);
+        CreateStock(&curStock);
+        updateState(command, curInv, curDeliv, curStock, curTime, curLoc, &undo);
         // Reading all configuration
         int count = 0;
         do {
@@ -117,7 +129,6 @@ int main(){
         }
         while (count < 3);
         printf("File konfigurasi telah selesai dibaca\n");
-        char* notification = "-";
         boolean start = true;  
         boolean first = true;      
         while (start){
@@ -128,7 +139,12 @@ int main(){
             printf("Waktu: ");
             TulisTIME1(curTime);
             printf("\n");
-            printf("Notifikasi: %s\n", notification);
+            if (same(command, "UNDO")) { 
+                printf("masi diperbaiki");   
+                // printNotif(InfoTop(undo));
+            } else {
+                printf("Notifikasi: -\n");
+            }
             printMap(peta);
             printf("Enter command: ");
             STARTWORDBlank();
@@ -143,7 +159,7 @@ int main(){
                 printf("======================\n");
                 printf("         MIX          \n");
                 printf("======================\n");
-                // MIX HERE
+                
 
                 } else printf("\nBNMO tidak berada di area mix (M)!\n");
                 
@@ -171,29 +187,51 @@ int main(){
 
             case 4:
                 if(isNear(peta,'B')){
-                printf("======================\n");
-                printf("         BOIL         \n");
-                printf("======================\n");
-                // BOIL HERE
+                    while (option != 0)
+                    {
+                        printf("======================\n");
+                    printf("         BOIL         \n");
+                    printf("======================\n");
+                    // BOIL HERE
+                    displayCookMethod(listMakanan,&boillist,"Boil");
+                    printf("\nEnter Command: ");
+                    STARTWORDBlank();
+                    option = transformToInt(currentWord);
+                    if(option != 0){
+                                int ID_Root = ID(ELMTLIST(buylist,option-1));
+                                boolean bisaboil = isResepOlahable(bookRsp,ID_Root,curStock);
+                                if(bisaboil){
+                                    printf("%s selesai dibuat dan sudah masuk ke inventory!",NAME(ELMTLIST(buylist,option-1)));
+                                }
+                            }
+                    }
+                    
+                
                 
                 } else printf("\nBNMO tidak berada di area boil (B)!\n");
                 break;
             case 5:
                 if(isNear(peta,'T')){
-                printf("======================\n");
-                printf("         BUY          \n");
-                printf("======================\n");
-                
-                // BUY HERE
-                displayBuyable(listMakanan);
-                printf("\nEnter Command: ");
-                STARTWORDBlank();
-                int option = transformToInt(currentWord);
+                    while (option != 0)
+                    {
+                        printf("======================\n");
+                        printf("         BUY          \n");
+                        printf("======================\n");
 
-                // Barang apa saja yang bisa di buy
+                        // BUY HERE
+                        displayBuyable(listMakanan,&buylist);
+                        printf("\nEnter Command: ");
+                        STARTWORDBlank();
+                        option = transformToInt(currentWord);
+                        if(option != 0){
+                            printf("\n\nBerhasil memesan %s. %s akan diantar dalam ",NAME(ELMTLIST(buylist,option-1)),NAME(ELMTLIST(buylist,option-1)));
+                            TulisTIME2(DELIVERY(ELMTLIST(buylist,option-1)));
+                            printf(".\n");
 
-                // Add barang to inventory
-                
+                            EnqueueDelivery(&curDeliv,ELMTLIST(buylist,option-1));
+                          
+                        }
+                    }
                 } else printf("\nBNMO tidak berada di area telepon (T)!\n");
                 break;
 
@@ -255,45 +293,38 @@ int main(){
                 printf("======================\n");
                 printf("       INVENTORY      \n");
                 printf("======================\n");
-                printInventoryExpired(I);
+                printInventoryExpired(curInv);
                 break;
 
             case 10:
                 printf("======================\n");
                 printf("        DELIVERY      \n");
                 printf("======================\n");
-                printInventoryDelivery(D);
+                printInventoryDelivery(curDeliv);
 
                 break;
             case 11:
                 printf("======================\n");
                 printf("          UNDO        \n");
                 printf("======================\n");
-                int inputCommand = commandToInt(command);
-                char* makanan = NAME(InfoHead(I))
-                switch(inputCommand) {
-                    case 1: 
-                        notification = "Mix " +  + " dibatalkan";
-                    case 2: 
-                        notification = "Chop";
-                    case 3: 
-                        notification = "Penggorengan";
-                    case 4:  
-                        notification = "Perebusan";
-                    case 5:
-                        notification = "Buy";
-                    case 7: 
-                        notification = "Wait dibatalkan, mengembalikan waktu...";
-                Undo(&undo, &redo, &command, &I, &curTime, &curLoc);
+                STOCK tempStock = curStock;    
+                undocommand[count_undocommand] = command;            
+                Undo(&undo, &redo, &command, &curInv, &curDeliv, &curStock, &curTime, &curLoc);
+                STOCK tempStockUndo = curStock;
+                int theID = -1;
+                CreateStock(&count);
+                for (int i = 0; i < CAPACITY; i++) {
+                    if(ELMTSTOCK(tempStockUndo, i) - ELMTSTOCK(tempStock, i) == 1); theID = i;       
                 }
+                makanancommand[count_undocommand] = getNameMakanan(listMakanan, theID);
+                count_undocommand++;
                 break;
 
             case 12:
                 printf("======================\n");
                 printf("          REDO        \n");
                 printf("======================\n");
-                Redo(&undo, &redo, &command, &I, &curTime, &curLoc);
-                
+                Redo(&undo, &redo, &command, &curInv, &curDeliv, &curStock, &curTime, &curLoc);
                 break;
 
             case 13:
@@ -329,26 +360,56 @@ int main(){
                 start = false;
                 break;
             default:
-                printf("\nInput tidak valid! Coba lag1!\n");
+                printf("\nInput tidak valid! Coba lagi!\n");
                 break;
             }
         }
         if (!same(command, "UNDO") && !same(command, "REDO")) {
-            decreaseTimeDelivery(&D);
-            decreaseTimeInventory(&I);
-            updateState(command, I, curTime, curLoc, &undo);
+            decreaseTimeDelivery(&curDeliv);
+            decreaseTimeExpired(&curInv);
+            boolean delivered = false;
+            boolean expired = false;
+            Word makanan;
+            isDeliveredQueue(&curInv, &curDeliv, &delivered, &makanan);
+            if (delivered) {
+                undocommand[count_undocommand].Length = 8;
+                undocommand[count_undocommand].TabWord[0] = 'D'; 
+                undocommand[count_undocommand].TabWord[1] = 'E';
+                undocommand[count_undocommand].TabWord[2] = 'L';
+                undocommand[count_undocommand].TabWord[3] = 'I';
+                undocommand[count_undocommand].TabWord[4] = 'V';
+                undocommand[count_undocommand].TabWord[5] = 'E';
+                undocommand[count_undocommand].TabWord[6] = 'R';
+                undocommand[count_undocommand].TabWord[7] = 'Y';
+                makanancommand[count_undocommand] = makanan;
+                count_undocommand++;
+            }
+            isExpiredQueue(&curInv, &expired, &makanan);
+                if (expired) {
+                    undocommand[count_undocommand].Length = 7;
+                    undocommand[count_undocommand].TabWord[0] = 'E'; 
+                    undocommand[count_undocommand].TabWord[1] = 'X';
+                    undocommand[count_undocommand].TabWord[2] = 'P';
+                    undocommand[count_undocommand].TabWord[3] = 'I';
+                    undocommand[count_undocommand].TabWord[4] = 'R';
+                    undocommand[count_undocommand].TabWord[5] = 'E';
+                    undocommand[count_undocommand].TabWord[6] = 'D';
+                    makanancommand[count_undocommand] = makanan;
+                    count_undocommand++;
+            }
+            updateState(command, curInv, curDeliv, curStock, curTime, curLoc, &undo);
         }
     } else if (same(currentWord, "EXIT")) {
 
-        printf(
-            "\n"
-            "======================================================================================\n"
-            "\n"
-            "                            █▀▀▄ █░░█ █▀▀ 　 █▀▀▄ █░░█ █▀▀ 　 ▄ ▄▀ \n"
-            "                            █▀▀▄ █▄▄█ █▀▀ 　 █▀▀▄ █▄▄█ █▀▀ 　 ░ █░ \n"
-            "                            ▀▀▀░ ▄▄▄█ ▀▀▀ 　 ▀▀▀░ ▄▄▄█ ▀▀▀ 　 ▀ ▀▄ \n"
-            "\n"
-            "======================================================================================\n"
-        );
+        // printf(
+        //     "\n"
+        //     "======================================================================================\n"
+        //     "\n"
+        //     "                            █▀▀▄ █░░█ █▀▀ 　 █▀▀▄ █░░█ █▀▀ 　 ▄ ▄▀ \n"
+        //     "                            █▀▀▄ █▄▄█ █▀▀ 　 █▀▀▄ █▄▄█ █▀▀ 　 ░ █░ \n"
+        //     "                            ▀▀▀░ ▄▄▄█ ▀▀▀ 　 ▀▀▀░ ▄▄▄█ ▀▀▀ 　 ▀ ▀▄ \n"
+        //     "\n"
+        //     "======================================================================================\n"
+        // );
     }  
 }

@@ -1,12 +1,50 @@
 #include "liststatik.h"
-#include "../boolean/boolean.h"
-#include "../time/time.h"
-#include "../point/point.h"
-#include "../building/building.h"
+
 #include <stdio.h>
 
-void CreateListStatik(ListStatik *l)
-{
+/* STOCK */
+void CreateStock(STOCK *s){
+    /* I.S. l sembarang */
+    /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
+    /* Proses: Inisialisasi semua elemen List l dengan MARK */
+    for(int i = 0; i < CAPACITY; i++){
+        ELMTSTOCK(*s,i)= 0;
+    }
+}
+
+void IncreaseStock(STOCK *s, int ID){
+    /* Menambahkan satu stock pada ID tertentu */
+    ELMTSTOCK(*s, ID)++;
+}
+
+void DecreaseStock(STOCK *s, int ID){
+    /* Mengurangi satu stock pada ID tertentu */
+    ELMTSTOCK(*s, ID)--;
+}
+
+// boolean isFoodValid(ListStatik l, int ID_Makanan){
+//     /* Mengirimkan true jika i adalah elemen yang valid dari makanan */
+//     boolean found = false;
+//     int i = 0;
+//     while(ELMTLIST(l,i).ID!=MARKLIST && i!=CAPACITY && !found)
+//     {
+//         if(ELMTLIST(l,i).ID==ID_Makanan)
+//         {
+//             found = true;
+//         }
+//         else
+//         {
+//             i++;
+//         }
+//     }
+//     return (found);
+// }
+
+/* LIST STATIK */
+void CreateListStatik(ListStatik *l){
+    /* I.S. l sembarang */
+    /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
+    /* Proses: Inisialisasi semua elemen List l dengan MARK */
     int i;
     for (i=0;i<CAPACITY;i++)
     {
@@ -14,8 +52,9 @@ void CreateListStatik(ListStatik *l)
     }
 }
 
-int lengthList(ListStatik l)
-{
+int lengthList(ListStatik l){
+    /* Mengirimkan banyaknya elemen efektif List */
+    /* Mengirimkan nol jika List kosong */ 
     int i = 0;
     while(ELMTLIST(l,i).ID!=MARKLIST && i!=CAPACITY)
     {
@@ -23,48 +62,38 @@ int lengthList(ListStatik l)
     }
     return (i);
 }
-boolean isFoodValid(ListStatik l, MAKANAN val)
-{
-    boolean found = false;
+
+Word getNameMakanan(ListStatik l, int idx){
+    /* Mengirimkan nama makanan dari ID */
+    boolean isFound = false;
+    Word makanan;
     int i = 0;
-    while(ELMTLIST(l,i).ID!=MARKLIST && i!=CAPACITY && !found)
-    {
-        if(ELMTLIST(l,i).ID==val.ID)
-        {
-            found = true;
-        }
-        else
-        {
-            i++;
+    while(!isFound && i!=CAPACITY){
+        if (ID(ELMTLIST(l, i)) = idx){
+            makanan = NAME(ELMTLIST(l, i));
+            isFound = true;
         }
     }
-    return (found);
+    return makanan;
 }
-boolean isIdxListEff(ListStatik l, IdxType i)
-{
-    return(i>=0 && i<lengthList(l));
-}
-boolean isEmpty(ListStatik l)
-{
-    return(lengthList(l)==0);
-}
-boolean isFull(ListStatik l)
-{
-    return(lengthList(l)==CAPACITY);
-}
-void insert(ListStatik *l,MAKANAN val)
-{
-    if(isFull(*l))
-    {
+
+boolean isIdxListEff(ListStatik l, IdxType i){
+    return(i>=0 && i<lengthList(l));}
+boolean isEmpty(ListStatik l){
+    return(lengthList(l)==0);}
+boolean isFull(ListStatik l){
+    return(lengthList(l)==CAPACITY);}
+
+void insert(ListStatik *l,MAKANAN val){
+    /* Menambah elemen val sebagai elemen terakhir list*/
+    if(isFull(*l)){
         printf("List penuh\n");
     }
-    else
-    {
-        ELMTLIST(*l,lengthList(*l)) = val;
-    }
+    else { ELMTLIST(*l,lengthList(*l)) = val; }
 }
-void delete(ListStatik *l,MAKANAN *val,IdxType i)
-{
+
+void delete(ListStatik *l,MAKANAN *val,IdxType i){
+    /*Menghapus elemen indeks ke i pada list*/
     int idx;
     if(i>=0 && i<lengthList(*l))
     {
@@ -90,6 +119,7 @@ void delete(ListStatik *l,MAKANAN *val,IdxType i)
         printf("Index tidak terdapat di list");
     }
 }
+
 void cetakList(ListStatik l)
 {
     int panjang = lengthList(l);
@@ -127,66 +157,8 @@ void CopyList(ListStatik l1,ListStatik *l2)
     }
 }
 
-void cetakCatalog(ListStatik l, MAP M){
-    int panjang = lengthList(l);
-    int j;
-    // Header
-    printf("\n");
-    printf("List Makanan:\n");
-    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
 
-    if (panjang == 0)
-    {
-        printf("List kosong");
-    }
-    else
-    {
-        for(j = 0; j < panjang; j++)
-        {
-            // Tulis Nomor
-            printf("%d. ", (j+1));
-
-            // Tulis Nama Makanan
-            printf("%s - ", NAME(ELMTLIST(l,j)).TabWord);
-
-            // Tulis Expired
-            TulisTIME2(EXPIRED(ELMTLIST(l,j)));  
-            
-            printf(" - ");
-
-            // Tulis Action
-            char K;
-            K = getAction(ACTION(ELMTLIST(l,j)), M);
-            if(K == 'T'){
-                printf("Buy");
-            } else if(K == 'F'){
-                printf("Fry");
-            } else if(K == 'B'){
-                printf("Boil");
-            } else if(K == 'M'){
-                printf("Mix");
-            } else if(K == 'C'){
-                printf("Chop");
-            } else {printf("Tidak ada aksi");}
-            
-            printf(" - ");
-
-            // Tulis Delivery
-            TIME DelivKosong;
-            CreateTime(&DelivKosong, 0, 0, 0); 
-            if (TEQ(DELIVERY(ELMTLIST(l,j)), DelivKosong)){
-                printf("Tidak perlu delivery");
-            } else {
-                TulisTIME2(DELIVERY(ELMTLIST(l,j)));
-            }
-            
-            printf("\n");
-            
-        }
-    }    
-}
-
-void displayBuyable(ListStatik l){
+void displayBuyable(ListStatik l, ListStatik *buylist){
     int length = lengthList(l);
     int ctr = 1;
     for(int i = 0; i < length; i++){
@@ -194,8 +166,28 @@ void displayBuyable(ListStatik l){
             printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
             TulisTIME2(DELIVERY(ELMTLIST(l,i)));
             printf(")\n");
+
+            ELMTLIST(*buylist,ctr-1) = ELMTLIST(l,i);
             ctr++;
         }
     }
     printf("\nKirim 0 untuk exit.\n");
 }
+
+void displayCookMethod(ListStatik l, ListStatik *methodlist, char *method){
+    int length = lengthList(l);
+    int ctr = 1;
+    printf("List Bahan Makanan yang Bisa Dibuat:\n");
+    for(int i = 0; i < length; i++){
+        if(same(NAME(ELMTLIST(l,i)),method)){
+            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
+            TulisTIME2(DELIVERY(ELMTLIST(l,i)));
+
+            ELMTLIST(*methodlist,ctr-1) = ELMTLIST(l,i);
+            ctr++;
+        }
+    }
+    printf("\nKirim 0 untuk exit.\n");
+}
+
+

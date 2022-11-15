@@ -85,10 +85,17 @@ void cetakBukuResep(BukuResep b, ListStatik listmakanan, MAP M){
 
 //void printResep(Resep r);
 
-boolean isResepOlah_able(Resep r){
-    
+boolean isResepOlahable(BukuResep b, int ID_Root, STOCK s){
+    boolean olahable = true;
+    for(int i = 0; i < BanyakResep(b); i++){
+        if(ID_Root == Root(ELMTBUKURESEP(b,i))){
+            for(int k = 0; k < nChild(ELMTBUKURESEP(b,i));k++){
+                olahable &= (ELMTSTOCK(s, k) > 0);
+                }             
+            }                                                
+        }
+    return olahable;
 }
-
 
 //Resep concatResep(Resep r1, Resep r2);
 /*Melakukan konkatenasi Resep 2 ke resep 1*/

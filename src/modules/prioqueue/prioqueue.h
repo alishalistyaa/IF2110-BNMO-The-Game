@@ -1,6 +1,5 @@
 /* File : PrioQueue.h */
 /* Definisi ADT Priority Queue Time dengan representasi array secara eksplisit dan alokasi dinamik */
-/* Model Implementasi Versi III dengan circular buffer */
 /* Elemen queue terurut membesar berdasarkan elemen time */
 
 #ifndef PrioQueue_H
@@ -29,26 +28,15 @@ typedef struct {
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotypePrioQueue dan Q adalah PrioQueue, maka akses elemen : */
-#define TimeExpired(e)     (e).Expired
-<<<<<<< HEAD
-#define TimeDelivery(e)    (e).Expired
-#define Info(e)            (e).Name
-#define Head(Q)            (Q).HEAD
-#define Tail(Q)            (Q).TAIL
-#define InfoHead(Q)        (Q).T[(Q).HEAD]
-#define InfoTail(Q)        (Q).T[(Q).TAIL]
-#define MaxEl(Q)           (Q).MaxEl
-#define Elmt(Q,i)          (Q).T[(i)]
-=======
+#define TimeExpired(e)      (e).Expired
 #define TimeDelivery(e)     (e).Delivery
-#define Info(e)     (e).Name
-#define Head(Q)     (Q).HEAD
-#define Tail(Q)     (Q).TAIL
-#define InfoHead(Q) (Q).T[(Q).HEAD]
-#define InfoTail(Q) (Q).T[(Q).TAIL]
-#define MaxEl(Q)    (Q).MaxEl
-#define Elmt(Q,i)   (Q).T[(i)]
->>>>>>> d6f101a503a5445a0f7cd305fa0f242d73d2d586
+#define Info(e)             (e).Name
+#define Head(Q)             (Q).HEAD
+#define Tail(Q)             (Q).TAIL
+#define InfoHead(Q)         (Q).T[(Q).HEAD]
+#define InfoTail(Q)         (Q).T[(Q).TAIL]
+#define MaxEl(Q)            (Q).MaxEl
+#define Elmt(Q,i)           (Q).T[(i)]
 
 /* ********* Prototype ********* */
 boolean IsEmpty (PrioQueue Q);
@@ -74,32 +62,43 @@ void DeAlokasi(PrioQueue * Q);
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 /* *** Primitif Add/Delete *** */
-void Enqueue (PrioQueue * Q, infotypePrioQueue X);
+void EnqueueExpired (PrioQueue * Q, infotypePrioQueue X);
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan time */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
         TAIL "maju" dengan mekanisme circular buffer; */
+
+void EnqueueDelivery (PrioQueue * Q, infotypePrioQueue X);
+/* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan time */
+/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
+/* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
+        TAIL "maju" dengan mekanisme circular buffer; */
+    
 void Dequeue (PrioQueue * Q, infotypePrioQueue * X);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 
+
 /* Operasi Tambahan */
-// void PrintPrioQueue (PrioQueue Q);
-// /* Mencetak isi queue Q ke layar */
-// /* I.S. Q terdefinisi, mungkin kosong */
-// /* F.S. Q tercetak ke layar dengan format:
-// <time-1> <elemen-1>
-// ...
-// <time-n> <elemen-n>
-// #
-// */
+void decreaseTimeExpired(PrioQueue *Q);
+/* Proses: Mengurangi expired time sebanyak 1 detik */
+
+
+void decreaseTimeDelivery(PrioQueue *Q);
+/* Proses: Mengurangi expired time sebanyak 1 detik */
 
 void printInventoryExpired (PrioQueue Q);
+/* Proses mencetak Inventory dengan Expired Time mengurut */
 
 void printInventoryDelivery (PrioQueue Q);
+/* Proses mencetak Inventory dengan Delivery Time mengurut */
 
-void deliveryDone();
+void isDeliveredQueue(PrioQueue *I, PrioQueue *D, boolean *delivered, Word *makanan);
 
+void isExpiredQueue(PrioQueue *I, boolean *expired, Word *makanan);
+
+void delElmt(PrioQueue *Q, int ID, infotypePrioQueue * X);
+/*Proses: menghapus elemen pada Queue*/
 #endif

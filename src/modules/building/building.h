@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "../point/point.h"
 #include "../boolean/boolean.h"
+#include "../map/map.h"
 
 typedef struct {
     POINT coordinate;

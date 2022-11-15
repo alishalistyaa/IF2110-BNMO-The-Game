@@ -1,8 +1,13 @@
 #include <stdio.h>
-#include "building.h"
+#include "building.c"
 #include "../point/point.c"
 #include "../boolean/boolean.h"
+#include "../wordmachine/wordmachine.c"
+#include "../charmachine/charmachine.c"
 #include "../map/map.c"
+#include "../time/time.c"
+#include "../list/liststatik.c"
+#include "../matriks/matriks.c"
 
 int main(){
     // KAMUS LOKAL
@@ -23,7 +28,9 @@ int main(){
         printf("Building satu dan dua sama\n");
     } else { printf("Building tidak sama.\n");}
 
-
+    if(isBuildingExist('x', MAP M)){
+        printf("Building x exist.\n");
+    }
 
     return(0);
 }

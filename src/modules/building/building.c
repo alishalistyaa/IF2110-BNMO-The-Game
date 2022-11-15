@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "building.h"
-#include "../point/point.h"
-#include "../boolean/boolean.h"
-#include "../map/map.h"
+
 
 /* *** PROTOTYPE PRIMITIF  *** */
 void CreateBuilding(BUILDING *B, POINT p, char name){

@@ -17,12 +17,14 @@ typedef struct {
     TIME Delivery;     /* TIME <HH:MM:SS> Lama Kirim Makanan */    
 } MAKANAN;
 
+
 /* *** Notasi Akses: selektor MAKANAN *** */
 #define ID(M) (M).ID
 #define NAME(M) (M).Name
 #define EXPIRED(M) (M).Expired
 #define ACTION(M) (M).Action
 #define DELIVERY(M) (M).Delivery
+
 
 /* ***************************************************************** */
 /* DEFINISI PRIMITIF                                                 */
@@ -35,6 +37,8 @@ void CreateMakanan(MAKANAN *M, int ID, Word Name, TIME Expired, POINT Action, TI
 /* Membentuk sebuah MAKANAN dari komponen-komponen yang valid */
 /* Prekondisi*/
 
+
+/* Prekondisi*/
 /* ***************************************************************** */
 /* KELOMPOK BACA/TULIS                                               */
 /* ***************************************************************** */
@@ -48,8 +52,6 @@ void ConfigMakanan (MAKANAN *M, Word filename);
 /* ***************************************************************** */
 void DecreaseExpired(MAKANAN *M);
 /* Mengurangi waktu expired */
-void IncreaseDelivery(MAKANAN *M);
-/* Menambah waktu delivery */
 
 boolean isExpired(MAKANAN M);
 /* Mengirimkan true jika makanan sudah expired */
@@ -68,5 +70,7 @@ boolean isExpiredLonger(MAKANAN M1, MAKANAN M2);
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */
 /* ***************************************************************** */
+
+
 
 #endif

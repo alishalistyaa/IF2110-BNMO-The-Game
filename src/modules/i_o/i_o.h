@@ -26,11 +26,9 @@ void configResep(char *filename, BukuResep *b);
 /* I.S. Resep sembarang */
 /* F.S. Resep terdefinisi dari file */
 
-int stringlen(char *s);
 
-boolean same(Word one, char *s);
 
-boolean validateString();
-/* Mengembalikan true jika string yang dimasukkan valid */
+
+
 
 #endif

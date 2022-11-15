@@ -68,4 +68,8 @@ int move_detector(Word command);
 /* Mengembalikan nilai base dari command move */
 /* Prekondisi: command move terdefinisi dan tidak kosong */
 
+void cetakCatalog(ListStatik l, MAP M);
+/* Menampilkan semua yang terdapat dalam list makanan dengan format: */
+/* (nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)*/
+
 #endif
