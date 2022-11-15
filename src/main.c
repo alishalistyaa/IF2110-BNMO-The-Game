@@ -237,13 +237,93 @@ int main(){
 
             case 6:
                 ADVWORDBlank();
-                if(currentChar == '\n'){
-                    move_map(&peta, currentWord);
-                    passTime(&BNMO, 1, &curTime);
-                } else {
-                    printf("Input berlebihan\n");
+                inputCom2 = move_detector(currentWord);
+
+                switch(inputCom2)
+                {
+                case 1:
+                    ADVWORDBlank();
+                    if(currentWord.Length > 0){
+                        printf("Input berlebihan\n");
+                        ignoreUntilEnter();
+                    }
+                    else{
+                        Word w;
+                        w.Length=4;
+                        w.TabWord[0]='W';
+                        w.TabWord[1]='E';
+                        w.TabWord[2]='S';
+                        w.TabWord[3]='T';
+                        move_map(&peta, w);
+                        passTime(&BNMO, 1, &curTime);
+                    }
+                    break;
+                case 2:
+                    ADVWORDBlank();
+                    if(currentWord.Length > 0){
+                        printf("Input berlebihan\n");
+                        ignoreUntilEnter();
+                    }
+                    else{
+                        Word w;
+                        w.Length=5;
+                        w.TabWord[0]='S';
+                        w.TabWord[1]='O';
+                        w.TabWord[2]='U';
+                        w.TabWord[3]='T';
+                        w.TabWord[4]='H';
+                        move_map(&peta, w);
+                        passTime(&BNMO, 1, &curTime);
+                    }
+                    break;
+                case 3:
+                    ADVWORDBlank();
+                    if(currentWord.Length > 0){
+                        printf("Input berlebihan\n");
+                        ignoreUntilEnter();
+                    }
+                    else{
+                        Word w;
+                        w.Length=4;
+                        w.TabWord[0]='E';
+                        w.TabWord[1]='A';
+                        w.TabWord[2]='S';
+                        w.TabWord[3]='T';
+                        move_map(&peta, w);
+                        passTime(&BNMO, 1, &curTime);
+                    }
+                    break;
+                case 4:
+                    ADVWORDBlank();
+                    if(currentWord.Length > 0){
+                        printf("Input berlebihan\n");
+                        ignoreUntilEnter();
+                    }
+                    else{
+                        Word w;
+                        w.Length=5;
+                        w.TabWord[0]='N';
+                        w.TabWord[1]='O';
+                        w.TabWord[2]='R';
+                        w.TabWord[3]='T';
+                        w.TabWord[4]='H';
+                        move_map(&peta, w);
+                        passTime(&BNMO, 1, &curTime);
+                    }
+                    break;
+                default:
+                    printf("Arah tidak valid\n");
+                    break;
                 }
                 break;
+                // ADVWORDBlank();
+                // if(currentChar == '\n'){
+                //     move_map(&peta, currentWord);
+                //     passTime(&BNMO, 1, &curTime);
+                // } else {
+                //     printf("Input berlebihan\n");
+                // }
+                // break;
             case 7:
                 ADVWORDBlank();
                 if(currentWord.Length > 0){
