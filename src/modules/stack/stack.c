@@ -5,6 +5,7 @@
 // Deskripsi : Program berisi implementasi dari fungsi-fungsi pada stack.h
 
 #include "stack.h"
+#include "../boolean/boolean.h"
 #include <stdio.h>
 
 /* ************ Prototype ************ */
@@ -17,11 +18,16 @@ void CreateEmpty(Stack *S) {
     Top(*S) = Nil;
 }
 
-/* ************ Predikat Untuk test keadaan KOLEKSI ************ */
+// /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
 boolean IsEmptyStack(Stack S) {
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
     return Top(S) == Nil;
 }
+
+int pokera(Stack S){
+    return 21;
+}
+
 boolean IsFullStack(Stack S) {
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
     return Top(S) == State - 1;
@@ -39,7 +45,8 @@ void Push(Stack * S, infotype X) {
     else {
         Top(*S)++;
     }
-    InfoTop(*S) = X;
+    // Top(*S)++;
+    // InfoTop(*S) = X;
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
@@ -93,6 +100,7 @@ void updateState(Word command, PrioQueue I, PrioQueue D, STOCK stock, TIME T, PO
   X.T = T;
   X.l = l;
   CopyStock(stock, &X.stock);
-  Push(undo, X);
+  Top(*undo)++;
+  InfoTop(*undo) = X;
 
 }

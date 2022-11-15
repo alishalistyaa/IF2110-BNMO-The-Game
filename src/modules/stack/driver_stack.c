@@ -18,8 +18,8 @@ int main () {
     command.TabWord[0] = 'F';
     command.TabWord[1] = 'R';
     command.TabWord[2] = 'Y';
-    MakeEmpty(&D, 1);
-    MakeEmpty(&I, 1);
+    MakeEmpty(&D, 100);
+    MakeEmpty(&I, 100);
     CreateTime(&T, 0, 1, 0);
     CreatePoint(&l, 0, 0);
     CreateStock(&stock);

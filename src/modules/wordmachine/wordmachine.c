@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include "wordmachine.h"
 
+static Word MARKWORDLIST;
+
 /* State Mesin Word */
 boolean endWord;
 Word currentWord;
@@ -56,17 +58,6 @@ void STARTWORD(){
         CopyWord();
         IgnoreBlanks();
     }
-
-    // START();
-    // IgnoreBlanks();
-    // if(currentChar == LINEMARK){
-    //     endWord = true;
-    // }
-    // else{
-    //     endWord = false;
-    //     CopyWordBlank();
-    //     IgnoreBlanks();
-    // }
 }
 
 void ADVWORD(){
@@ -119,6 +110,16 @@ void LowerCase(){
         }
     }
 }
+
+
+// void CreateMarkWord(){
+//     MARKWORDLIST.Length = 5;
+//     MARKWORDLIST.TabWord[0] = 'X';
+//     MARKWORDLIST.TabWord[1] = 'D';
+//     MARKWORDLIST.TabWord[2] = 'O';
+//     MARKWORDLIST.TabWord[3] = 'N';
+//     MARKWORDLIST.TabWord[4] = 'E';
+// }
 
 void ADVWORDBlank(){
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
@@ -247,18 +248,12 @@ int stringlen(char *s) {
 
 
 // WORDLIST
-Word MARKWORDLIST;
-MARKWORDLIST.Length = 5;
-MARKWORDLIST.TabWord[0] = 'X';
-MARKWORDLIST.TabWord[1] = 'D';
-MARKWORDLIST.TabWord[2] = 'O';
-MARKWORDLIST.TabWord[3] = 'N';
-MARKWORDLIST.TabWord[4] = 'E';
 
 void CreateWordList(WordList *l){
     /* I.S. l sembarang */
     /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
     /* Proses: Inisialisasi semua elemen List l dengan MARK */
+    CreateMarkWord();
     for(int i=0; i<CAPACITYWORDLIST; i++){
         ELMTWORDLIST(*l,i) = MARKWORDLIST;
     }
@@ -266,7 +261,8 @@ void CreateWordList(WordList *l){
 
 int lengthWordList (WordList l){
     /* Mengirimkan banyaknya elemen efektif List */
-    /* Mengirimkan nol jika List kosong */ 
+    /* Mengirimkan nol jika List kosong */
+    CreateMarkWord(); 
     int i = 0;
     while(!same(ELMTWORDLIST(l,i), MARKWORDLIST.TabWord) && i!= CAPACITYWORDLIST)
     {

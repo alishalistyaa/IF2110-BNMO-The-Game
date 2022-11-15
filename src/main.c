@@ -18,11 +18,13 @@
 #include "./modules/simulator/simulator.c"
 #include "./modules/map/map.c"
 #include "./modules/resep/resep.c"
-#include "./modules/notification/notification.c"
+// #include "./modules/notification/notification.c"
 
 Word currentWord;
 boolean endWord;
 char currentChar;
+
+
 
 int main(){
     /* KAMUS */
@@ -99,18 +101,20 @@ int main(){
         CreateEmpty(&undo);
         CreateEmpty(&redo);
 
-        infotype X;
+        // infotype X;
   
-        X.command = command;
-        X.I = curInv;
-        X.D = curDeliv;
-        X.T = curTime;
-        X.l = curLoc;
-        X.stock = curStock;
-        Top(undo) = 0;
-        InfoTop(undo) = X;
+        // X.command = command;
+        // X.I = curInv;
+        // X.D = curDeliv;
+        // X.T = curTime;
+        // X.l = curLoc;
+        // X.stock = curStock;
+        // Top(undo) = 0;
+        // InfoTop(undo) = X;
+
+        // printf("%d",IsEmptyStack(undo));
         
-        // updateState(command, curInv, curDeliv, curStock, curTime, curLoc, &undo);
+        updateState(command, curInv, curDeliv, curStock, curTime, curLoc, &undo);
         int count = 0;
         do {
             printf("\nPastikan file config sudah masuk ke folder config ya!\n");
@@ -331,6 +335,8 @@ int main(){
                                     CreateTime(&wait, 0, inputCom2, inputCom3);
                                     long plusMinute = TIMEToMenit(wait);
                                     passTime(&BNMO, plusMinute, &curTime);
+                                    decreaseTimeDelivery(&curDeliv,plusMinute-1);
+                                    decreaseTimeExpired(&curInv,plusMinute-1);
                                 }
                             }
                             else{
@@ -439,48 +445,48 @@ int main(){
                 printf("\nInput tidak valid! Coba lagi!\n");
                 break;
             }
-        if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT")) {
-            decreaseTimeDelivery(&curDeliv);
-            decreaseTimeExpired(&curInv);
+        if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT") && !same(command,"WAIT")) {
+            decreaseTimeDelivery(&curDeliv,1);
+            decreaseTimeExpired(&curInv,1);
         }
       
             
         }
-          if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT")) {
-            decreaseTimeDelivery(&curDeliv);
-            decreaseTimeExpired(&curInv);
-            boolean delivered = false;
-            boolean expired = false;
-            Word makanan;
-            isDeliveredQueue(&curInv, &curDeliv, &delivered, &makanan);
-            if (delivered) {
-                undocommand[count_undocommand].Length = 8;
-                undocommand[count_undocommand].TabWord[0] = 'D'; 
-                undocommand[count_undocommand].TabWord[1] = 'E';
-                undocommand[count_undocommand].TabWord[2] = 'L';
-                undocommand[count_undocommand].TabWord[3] = 'I';
-                undocommand[count_undocommand].TabWord[4] = 'V';
-                undocommand[count_undocommand].TabWord[5] = 'E';
-                undocommand[count_undocommand].TabWord[6] = 'R';
-                undocommand[count_undocommand].TabWord[7] = 'Y';
-                makanancommand[count_undocommand] = makanan;
-                count_undocommand++;
-            }
-            isExpiredQueue(&curInv, &expired, &makanan);
-                if (expired) {
-                    undocommand[count_undocommand].Length = 7;
-                    undocommand[count_undocommand].TabWord[0] = 'E'; 
-                    undocommand[count_undocommand].TabWord[1] = 'X';
-                    undocommand[count_undocommand].TabWord[2] = 'P';
-                    undocommand[count_undocommand].TabWord[3] = 'I';
-                    undocommand[count_undocommand].TabWord[4] = 'R';
-                    undocommand[count_undocommand].TabWord[5] = 'E';
-                    undocommand[count_undocommand].TabWord[6] = 'D';
-                    makanancommand[count_undocommand] = makanan;
-                    count_undocommand++;
-            }
-            //updateState(command, curInv, curDeliv, curStock, curTime, curLoc, &undo);
-        }
+        //   if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT")) {
+        //     decreaseTimeDelivery(&curDeliv);
+        //     decreaseTimeExpired(&curInv);
+        //     boolean delivered = false;
+        //     boolean expired = false;
+        //     Word makanan;
+        //     isDeliveredQueue(&curInv, &curDeliv, &delivered, &makanan);
+        //     if (delivered) {
+        //         undocommand[count_undocommand].Length = 8;
+        //         undocommand[count_undocommand].TabWord[0] = 'D'; 
+        //         undocommand[count_undocommand].TabWord[1] = 'E';
+        //         undocommand[count_undocommand].TabWord[2] = 'L';
+        //         undocommand[count_undocommand].TabWord[3] = 'I';
+        //         undocommand[count_undocommand].TabWord[4] = 'V';
+        //         undocommand[count_undocommand].TabWord[5] = 'E';
+        //         undocommand[count_undocommand].TabWord[6] = 'R';
+        //         undocommand[count_undocommand].TabWord[7] = 'Y';
+        //         makanancommand[count_undocommand] = makanan;
+        //         count_undocommand++;
+        //     }
+        //     isExpiredQueue(&curInv, &expired, &makanan);
+        //         if (expired) {
+        //             undocommand[count_undocommand].Length = 7;
+        //             undocommand[count_undocommand].TabWord[0] = 'E'; 
+        //             undocommand[count_undocommand].TabWord[1] = 'X';
+        //             undocommand[count_undocommand].TabWord[2] = 'P';
+        //             undocommand[count_undocommand].TabWord[3] = 'I';
+        //             undocommand[count_undocommand].TabWord[4] = 'R';
+        //             undocommand[count_undocommand].TabWord[5] = 'E';
+        //             undocommand[count_undocommand].TabWord[6] = 'D';
+        //             makanancommand[count_undocommand] = makanan;
+        //             count_undocommand++;
+        //     }
+        //     //updateState(command, curInv, curDeliv, curStock, curTime, curLoc, &undo);
+        // }
         
     } else if (same(currentWord, "EXIT")) {
 

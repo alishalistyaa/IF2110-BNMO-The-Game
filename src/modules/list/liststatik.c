@@ -28,6 +28,12 @@ void DecreaseStock(STOCK *s, int ID){
     ELMTSTOCK(*s, ID)--;
 }
 
+void CopyStock(STOCK S1, STOCK *S2){
+    for(int i = 0; i < CAPACITY; i++){
+        ELMTSTOCK(*S2,i)= ELMTSTOCK(S1,i);
+    }
+}
+
 // boolean isFoodValid(ListStatik l, int ID_Makanan){
 //     /* Mengirimkan true jika i adalah elemen yang valid dari makanan */
 //     boolean found = false;

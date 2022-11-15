@@ -80,14 +80,17 @@ void Dequeue (PrioQueue * Q, infotypePrioQueue * X);
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 
+void CopyQueue(PrioQueue Q1,PrioQueue *Q2);
+/* I.S. Q1 terdefinisi */
+/* F.S. Q1 ter-copy ke Q2 */
 
 /* Operasi Tambahan */
-void decreaseTimeExpired(PrioQueue *Q);
-/* Proses: Mengurangi expired time sebanyak 1 detik */
+void decreaseTimeExpired(PrioQueue *Q, int N);
+/* Proses: Mengurangi expired time sebanyak N detik */
 
 
-void decreaseTimeDelivery(PrioQueue *Q);
-/* Proses: Mengurangi expired time sebanyak 1 detik */
+void decreaseTimeDelivery(PrioQueue *Q, int N);
+/* Proses: Mengurangi expired time sebanyak N detik */
 
 void printInventoryExpired (PrioQueue Q);
 /* Proses mencetak Inventory dengan Expired Time mengurut */

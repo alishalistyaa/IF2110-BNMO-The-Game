@@ -2,6 +2,7 @@
 #include "../wordmachine/wordmachine.c"
 
 int main() {
+    Notif N;
     Word command, makanan;
     command.Length = 3;
     command.TabWord[0] = 'F';
@@ -12,6 +13,15 @@ int main() {
     makanan.TabWord[1] = 'Y';
     makanan.TabWord[2] = 'A';
     makanan.TabWord[3] = 'M';
-    printNotif(command, makanan);
+
+    WordList inv, exp, redo;
+    CreateWordList(&inv);
+    CreateWordList(&exp);
+    CreateWordList(&redo);
+
+    addWord(&N, command, 1);
+    addWord(&N, makanan, 2);
+    printallnotif(N);
+
 
 }

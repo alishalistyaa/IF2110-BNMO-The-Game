@@ -9,7 +9,6 @@
 #include "../time/time.h"
 #include "../point/point.h"
 
-
 /*  Kamus Umum */
 #define CAPACITY 100
 /* Kapasitas penyimpanan */
@@ -47,6 +46,9 @@ void IncreaseStock(STOCK *s, int ID);
 void DecreaseStock(STOCK *s, int ID);
 /* Mengurangi satu stock pada ID tertentu */
 
+void CopyStock(STOCK S1, STOCK *S2);
+/*Melakukan penyalinan tiap elemen stock ke S2*/
+
 void CreateListStatik(ListStatik *l);
 /* I.S. l sembarang */
 /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
@@ -58,6 +60,8 @@ int lengthList(ListStatik l);
 
 Word getNameMakanan(ListStatik l, int idx);
 /* Mengirimkan nama makanan dari ID */
+
+Word CreateMarkWord();
 
 // boolean isFoodValid(ListStatik l, int ID_Makanan);
 /* Mengirimkan true jika i adalah elemen yang valid dari list */

@@ -127,16 +127,23 @@ void Dequeue (PrioQueue * Q, infotypePrioQueue * X) {
     }
 }
 
-void decreaseTimeExpired(PrioQueue *Q) {
-    for (int i = Head(*Q); i <= Tail(*Q); i++) {
-        PrevMenit(&TimeExpired(Elmt(*Q, i)));
+void CopyQueue(PrioQueue Q1,PrioQueue *Q2)
+{   MakeEmpty(Q2,MaxEl(Q1));
+    for (int i = Head(Q1); i <= Tail(Q1); i++) {
+        Elmt(*Q2, i) = Elmt(Q1,i);   
     }
 }
 
-void decreaseTimeDelivery(PrioQueue *Q) {
+void decreaseTimeExpired(PrioQueue *Q, int N) {
+    for (int i = Head(*Q); i <= Tail(*Q); i++) {
+        PrevNMenit(&TimeExpired(Elmt(*Q, i)),N);
+    }
+}
+
+void decreaseTimeDelivery(PrioQueue *Q, int N) {
     for (int i = Head(*Q); i <= Tail(*Q); i++) {
         
-        PrevMenit(&TimeDelivery(Elmt(*Q, i)));
+        PrevNMenit(&TimeDelivery(Elmt(*Q, i)),N);
     }
 }
 

@@ -31,6 +31,7 @@ extern boolean endWord;
 extern Word currentWord;
 
 #define ELMTWORDLIST(l, i) (l).buffer[(i)]
+#define LengthWord(l) (l).Length
 
 
 void IgnoreBlanks();
@@ -63,6 +64,8 @@ void LowerCase();
     /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
     /* F.S. currentword menjadi lowercase di setiap karakternya */
 
+// void CreateMarkWord();
+
 int commandToInt(Word x);
     /* Mengembalikan nilai base dari currentword */
     /* Prekondisi: currentword terdefinisi dan tidak kosong */
@@ -79,5 +82,10 @@ int stringlen(char *s);
       
 boolean same(Word one, char *s);
 /* Mengembalikan true jika kedua string sama */
+
+
+void CreateWordList(WordList *l);
+
+int lengthWordList (WordList l);
 
 #endif

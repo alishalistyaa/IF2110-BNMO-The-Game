@@ -70,7 +70,7 @@ void Pop(Stack * S, infotype *X);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
-
+// int pokera(Stack S);
 void Undo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, PrioQueue *D, STOCK *stock, TIME *T, POINT *l);
 /* Melakukan proses undo */
 /* Menghapus Top dari Stack Undo dan memasukkannya ke Stack Redo */
