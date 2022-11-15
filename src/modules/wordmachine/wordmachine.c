@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "wordmachine.h"
 
-static Word MARKWORDLIST;
+// static Word MARKWORDLIST;
 
 /* State Mesin Word */
 boolean endWord;
@@ -249,24 +249,24 @@ int stringlen(char *s) {
 
 // WORDLIST
 
-void CreateWordList(WordList *l){
-    /* I.S. l sembarang */
-    /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
-    /* Proses: Inisialisasi semua elemen List l dengan MARK */
-    CreateMarkWord();
-    for(int i=0; i<CAPACITYWORDLIST; i++){
-        ELMTWORDLIST(*l,i) = MARKWORDLIST;
-    }
-}
+// void CreateWordList(WordList *l){
+//     /* I.S. l sembarang */
+//     /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
+//     /* Proses: Inisialisasi semua elemen List l dengan MARK */
+//     CreateMarkWord();
+//     for(int i=0; i<CAPACITYWORDLIST; i++){
+//         ELMTWORDLIST(*l,i) = MARKWORDLIST;
+//     }
+// }
 
-int lengthWordList (WordList l){
-    /* Mengirimkan banyaknya elemen efektif List */
-    /* Mengirimkan nol jika List kosong */
-    CreateMarkWord(); 
-    int i = 0;
-    while(!same(ELMTWORDLIST(l,i), MARKWORDLIST.TabWord) && i!= CAPACITYWORDLIST)
-    {
-        i++;
-    }
-    return (i);
-}
+// int lengthWordList (WordList l){
+//     /* Mengirimkan banyaknya elemen efektif List */
+//     /* Mengirimkan nol jika List kosong */
+//     CreateMarkWord(); 
+//     int i = 0;
+//     while(!same(ELMTWORDLIST(l,i), MARKWORDLIST.TabWord) && i!= CAPACITYWORDLIST)
+//     {
+//         i++;
+//     }
+//     return (i);
+// }

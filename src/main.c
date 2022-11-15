@@ -50,12 +50,17 @@ int main(){
 
     /* ALGORITMA */
     // Inisialisasi Game
-    CreateListStatik(&buylist);
+    
     start = true;
+    boolean delivered;
+    boolean expired;
+    boolean validinput;
+    boolean moveable;
     option = -1;
     // Variable Main
     char* filename;
     char* curName;
+    Word buffer_makanan;
     // PROGRAM MULAI
         // Splash Screen 
         // printf(
@@ -93,6 +98,12 @@ int main(){
         CreateListStatik(&listMakanan); 
         // Resep
         BukuResep bookRsp;
+        // List Pengolahan dan Buy
+        CreateListStatik(&buylist);
+        CreateListStatik(&frylist);
+        CreateListStatik(&boillist);
+        CreateListStatik(&choplist);
+        CreateListStatik(&mixlist);
         // Inisialisasi array of word
         Word undocommand[10];
         Word makanancommand[10];
@@ -127,6 +138,7 @@ int main(){
                 printf("makanan: ");
             }
             STARTWORD();
+            // normalizeFilename(Word *w)
             filename = currentWord.TabWord;
             // printf("%s", filename);
             if (!isFileExist(filename)) {
@@ -144,7 +156,7 @@ int main(){
             }
         }
         while (count < 3);
-        printf("File konfigurasi telah selesai dibaca\n");
+        printf("\nFile konfigurasi telah selesai dibaca\n");
         boolean start = true;  
      
         while (start){
@@ -168,6 +180,7 @@ int main(){
             inputCom1 = commandToInt(currentWord);
             inputCom2 = -1;
             inputCom3 = -1;
+            validinput = true;
             switch (inputCom1)
             {
             case 1:
@@ -182,13 +195,31 @@ int main(){
                     printf("\nEnter Command: ");
                     STARTWORDBlank();
                     option = transformToInt(currentWord);
-                    if(option != 0){
+                    if(option != 0 && option <= lengthList(mixlist)){
                                 int ID_Root = ID(ELMTLIST(mixlist,option-1));
-                                boolean bisaboil = isResepOlahable(bookRsp,ID_Root,curStock);
-                                if(bisaboil){
-                                    printf("%s selesai dibuat dan sudah masuk ke inventory!",NAME(ELMTLIST(buylist,option-1)));
+                                boolean bisamix = isResepOlahable(bookRsp,ID_Root,curStock);
+                                Resep rsp = getResep(bookRsp,ID_Root);
+                                MAKANAN hasil = getMakanan(listMakanan,ID_Root);
+
+                                if(bisamix){
+                                    printf("%s selesai dibuat dan sudah masuk ke inventory!",NAME(ELMTLIST(mixlist,option-1)));
+                                ELMTSTOCK(curStock,ID_Root)++;
+                                    
+                                    EnqueueExpired(&curInv,hasil);
+                                    for(int i = 0; i < nChild(rsp); i++){
+                                        delElmt(&curInv, Root(getChild(rsp,i)), &buffer_makanan);
+                                        ELMTSTOCK(curStock,Root(getChild(rsp,i)))--;
+                                    }
+                                    
                                 }
-                            }
+                                else{
+                                printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut:\n",NAME(hasil).TabWord);
+                                printBahanMissing(rsp,curStock,listMakanan);
+                                printf("\n");
+                                }
+                    }
+                    else if(option > lengthList(mixlist)) printf("Input invalid! ");
+                    
                     }
                     option = -1;
                     passTime(&BNMO, 1, &curTime);
@@ -208,17 +239,35 @@ int main(){
                     printf("\nEnter Command: ");
                     STARTWORDBlank();
                     option = transformToInt(currentWord);
-                    if(option != 0){
+                    if(option != 0 && option <= lengthList(choplist)){
                                 int ID_Root = ID(ELMTLIST(choplist,option-1));
                                 boolean bisachop = isResepOlahable(bookRsp,ID_Root,curStock);
+                                Resep rsp = getResep(bookRsp,ID_Root);
+                                MAKANAN hasil = getMakanan(listMakanan,ID_Root);
                                 if(bisachop){
-                                    printf("%s selesai dibuat dan sudah masuk ke inventory!",NAME(ELMTLIST(choplist,option-1)));
+    
+                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n",NAME(ELMTLIST(choplist,option-1)));
                                     //TO DO: kurangin stock bahan
-                                    curStock.buffer[ID_Root]++;
+                                    ELMTSTOCK(curStock,ID_Root)++;
+                                    
+                                    EnqueueExpired(&curInv,hasil);
+                                    for(int i = 0; i < nChild(rsp); i++){
+                                        delElmt(&curInv, Root(getChild(rsp,i)), &buffer_makanan);
+                                        ELMTSTOCK(curStock,Root(getChild(rsp,i)))--;
+                                    }
                                 }
+                                else{
+                                printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut:\n",NAME(hasil).TabWord);
+                                printBahanMissing(rsp,curStock,listMakanan);
+                                printf("\n");
+                                } 
                             }
+                        else if(option > lengthList(choplist)) printf("Input invalid! ");
+                        
                     }
+                    
                     option = -1;
+                    displayStock(curStock,listMakanan);
                     passTime(&BNMO, 1, &curTime);
 
                 } else printf("\nBNMO tidak berada di area chop (C)!\n");
@@ -236,15 +285,28 @@ int main(){
                     printf("\nEnter Command: ");
                     STARTWORDBlank();
                     option = transformToInt(currentWord);
-                    if(option != 0){
+                    if(option != 0 && option <= lengthList(frylist)){
                                 int ID_Root = ID(ELMTLIST(frylist,option-1));
                                 boolean bisafry = isResepOlahable(bookRsp,ID_Root,curStock);
+                                Resep rsp = getResep(bookRsp,ID_Root);
+                                MAKANAN hasil = getMakanan(listMakanan,ID_Root);
                                 if(bisafry){
-                                    printf("%s selesai dibuat dan sudah masuk ke inventory!",NAME(ELMTLIST(frylist,option-1)));
-                                    //TO DO: kurangin stock bahan
-                                    curStock.buffer[ID_Root]++;
+                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n",NAME(ELMTLIST(frylist,option-1)));
+                                    ELMTSTOCK(curStock,ID_Root)++;
+                                    
+                                    EnqueueExpired(&curInv,hasil);
+                                    for(int i = 0; i < nChild(rsp); i++){
+                                        delElmt(&curInv, Root(getChild(rsp,i)), &buffer_makanan);
+                                        ELMTSTOCK(curStock,Root(getChild(rsp,i)))--;
+                                    }
                                 }
+                                else{
+                                printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut:\n",NAME(hasil).TabWord);
+                                printBahanMissing(rsp,curStock,listMakanan);
+                                printf("\n");
+                                }          
                             }
+                        else if(option > lengthList(frylist)) printf("Input invalid! ");
                     }
                     option = -1;
                     passTime(&BNMO, 1, &curTime);
@@ -265,13 +327,29 @@ int main(){
                     printf("\nEnter Command: ");
                     STARTWORDBlank();
                     option = transformToInt(currentWord);
-                    if(option != 0){
+                    if(option != 0 && option <= lengthList(boillist)){
                                 int ID_Root = ID(ELMTLIST(boillist,option-1));
                                 boolean bisaboil = isResepOlahable(bookRsp,ID_Root,curStock);
+                                Resep rsp = getResep(bookRsp,ID_Root);
+                                MAKANAN hasil = getMakanan(listMakanan,ID_Root);
                                 if(bisaboil){
-                                    printf("%s selesai dibuat dan sudah masuk ke inventory!",NAME(ELMTLIST(buylist,option-1)));
+                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n",NAME(ELMTLIST(boillist,option-1)));
+                                    ELMTSTOCK(curStock,ID_Root)++;
+                                    
+                                    EnqueueExpired(&curInv,hasil);
+                                    for(int i = 0; i < nChild(rsp); i++){
+                                        delElmt(&curInv, Root(getChild(rsp,i)), &buffer_makanan);
+                                        ELMTSTOCK(curStock,Root(getChild(rsp,i)))--;
+                                    }
+                                    
                                 }
+                                else{
+                                printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut:\n",NAME(hasil).TabWord);
+                                printBahanMissing(rsp,curStock,listMakanan);
+                                printf("\n");
+                                }          
                             }
+                        else if(option > lengthList(boillist)) printf("Input invalid! ");
                     }
                     option = -1;
                     passTime(&BNMO, 1, &curTime);
@@ -310,8 +388,8 @@ int main(){
                     same(currentWord, "WEST") ||
                     same(currentWord, "SOUTH") ||
                     same(currentWord, "NORTH")) && (currentChar == '\n')) {
-                        move_map(&peta, currentWord);  
-                        passTime(&BNMO, 1, &curTime);
+                        move_map(&peta, currentWord,&moveable);  
+                        if(moveable) passTime(&BNMO, 1, &curTime);
                 } else {
                     printf("Input tidak valid! Coba lagi!\n");
                 }
@@ -335,8 +413,40 @@ int main(){
                                     CreateTime(&wait, 0, inputCom2, inputCom3);
                                     long plusMinute = TIMEToMenit(wait);
                                     passTime(&BNMO, plusMinute, &curTime);
-                                    decreaseTimeDelivery(&curDeliv,plusMinute-1);
-                                    decreaseTimeExpired(&curInv,plusMinute-1);
+                                    decreaseTimeDelivery(&curDeliv,plusMinute);
+                                    
+
+                                    delivered = false;
+                                    expired = false;
+                                    isDeliveredQueue(&curInv, &curDeliv, &curStock, &delivered, &buffer_makanan);
+                                    // if (delivered) {
+                                    //     undocommand[count_undocommand].Length = 8;
+                                    //     undocommand[count_undocommand].TabWord[0] = 'D'; 
+                                    //     undocommand[count_undocommand].TabWord[1] = 'E';
+                                    //     undocommand[count_undocommand].TabWord[2] = 'L';
+                                    //     undocommand[count_undocommand].TabWord[3] = 'I';
+                                    //     undocommand[count_undocommand].TabWord[4] = 'V';
+                                    //     undocommand[count_undocommand].TabWord[5] = 'E';
+                                    //     undocommand[count_undocommand].TabWord[6] = 'R';
+                                    //     undocommand[count_undocommand].TabWord[7] = 'Y';
+                                    //     makanancommand[count_undocommand] = buffer_makanan;
+                                    //     count_undocommand++;
+                                    // }
+                                    decreaseTimeExpired(&curInv,plusMinute);
+                                    isExpiredQueue(&curInv, &curStock, &expired, &buffer_makanan);
+                                    //     if (expired) {
+                                    //         undocommand[count_undocommand].Length = 7;
+                                    //         undocommand[count_undocommand].TabWord[0] = 'E'; 
+                                    //         undocommand[count_undocommand].TabWord[1] = 'X';
+                                    //         undocommand[count_undocommand].TabWord[2] = 'P';
+                                    //         undocommand[count_undocommand].TabWord[3] = 'I';
+                                    //         undocommand[count_undocommand].TabWord[4] = 'R';
+                                    //         undocommand[count_undocommand].TabWord[5] = 'E';
+                                    //         undocommand[count_undocommand].TabWord[6] = 'D';
+                                    //         makanancommand[count_undocommand] = buffer_makanan;
+                                    //         count_undocommand++;
+                                    // }
+
                                 }
                             }
                             else{
@@ -443,12 +553,44 @@ int main(){
                 break;
             default:
                 printf("\nInput tidak valid! Coba lagi!\n");
+                validinput = false;
                 break;
             }
-        if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT") && !same(command,"WAIT")) {
+
+        if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT") && !same(command,"WAIT") && !same(command, "DELIVERY") && !same(command, "DELIVERY") && !same(command, "COOKBOOK") && validinput) {
             decreaseTimeDelivery(&curDeliv,1);
             decreaseTimeExpired(&curInv,1);
+                delivered = false;
+                expired = false;
+                isDeliveredQueue(&curInv, &curDeliv, &curStock, &delivered, &buffer_makanan);
+                if (delivered) {
+                    undocommand[count_undocommand].Length = 8;
+                    undocommand[count_undocommand].TabWord[0] = 'D'; 
+                    undocommand[count_undocommand].TabWord[1] = 'E';
+                    undocommand[count_undocommand].TabWord[2] = 'L';
+                    undocommand[count_undocommand].TabWord[3] = 'I';
+                    undocommand[count_undocommand].TabWord[4] = 'V';
+                    undocommand[count_undocommand].TabWord[5] = 'E';
+                    undocommand[count_undocommand].TabWord[6] = 'R';
+                    undocommand[count_undocommand].TabWord[7] = 'Y';
+                    makanancommand[count_undocommand] = buffer_makanan;
+                    count_undocommand++;
+                }
+                isExpiredQueue(&curInv, &curStock, &expired, &buffer_makanan);
+                    if (expired) {
+                        undocommand[count_undocommand].Length = 7;
+                        undocommand[count_undocommand].TabWord[0] = 'E'; 
+                        undocommand[count_undocommand].TabWord[1] = 'X';
+                        undocommand[count_undocommand].TabWord[2] = 'P';
+                        undocommand[count_undocommand].TabWord[3] = 'I';
+                        undocommand[count_undocommand].TabWord[4] = 'R';
+                        undocommand[count_undocommand].TabWord[5] = 'E';
+                        undocommand[count_undocommand].TabWord[6] = 'D';
+                        makanancommand[count_undocommand] = buffer_makanan;
+                        count_undocommand++;
+                }
         }
+
       
             
         }
@@ -458,7 +600,7 @@ int main(){
         //     boolean delivered = false;
         //     boolean expired = false;
         //     Word makanan;
-        //     isDeliveredQueue(&curInv, &curDeliv, &delivered, &makanan);
+        //     isDeliveredQueue(&curInv, &curDeliv, &curStock, &delivered, &buffer_makanan);
         //     if (delivered) {
         //         undocommand[count_undocommand].Length = 8;
         //         undocommand[count_undocommand].TabWord[0] = 'D'; 
@@ -472,7 +614,7 @@ int main(){
         //         makanancommand[count_undocommand] = makanan;
         //         count_undocommand++;
         //     }
-        //     isExpiredQueue(&curInv, &expired, &makanan);
+        //     isExpiredQueue(&curInv, &curStock, &expired, &buffer_makanan);
         //         if (expired) {
         //             undocommand[count_undocommand].Length = 7;
         //             undocommand[count_undocommand].TabWord[0] = 'E'; 

@@ -75,6 +75,11 @@ void cetakBukuResep(BukuResep b, ListStatik listmakanan, MAP M);
 //void printResep(Resep r);
 
 boolean isResepOlahable(BukuResep b, int ID_Root, STOCK s);
+/*apakah bisa diolah??*/
+Resep getResep(BukuResep b, int ID_Root);
+/*Mendapatkan resep yang ada*/
+void printBahanMissing(Resep r, STOCK , ListStatik listmakanan);
+/*Mencetak bahan-bahan yang kurang dari resep*/
 
 void setMethod(Resep *r);
 // Resep concatResep(Resep r1, Resep r2);

@@ -55,7 +55,7 @@ void printMap(MAP M);
 /* F.S. map ditampilkan ke layar */
 boolean isNear(MAP M, char ch);
 /* Mengembalikan true jika ada bangunan dengan karakter ch yang berdekatan dengan bangunan lain */
-void move_map(MAP *M, Word command);
+void move_map(MAP *M, Word command, boolean *canmove);
 /* I.S. map terdefinisi */
 /* F.S. map bergerak sesuai dengan command */
 void moveDirection(MAP *M, char direction);
@@ -77,4 +77,8 @@ void displayBuyable(ListStatik l, ListStatik *buylist, MAP M);
 
 void displayCookMethod(ListStatik l, ListStatik *mixlist, char method, MAP M);
 /* Menampilkan list dengan cook Method tertentu (FRY, BOIL, etc)*/
+
+void isDeliveredQueue(PrioQueue *I, PrioQueue *D, STOCK *stk, boolean *delivered, Word *makanan);
+
+void isExpiredQueue(PrioQueue *I, STOCK *stk, boolean *expired, Word *makanan);
 #endif

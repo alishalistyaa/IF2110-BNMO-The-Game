@@ -2,9 +2,16 @@
 /* Implementasi Input / Output */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "i_o.h"
 #include "../charmachine/charmachine.c"
 #include "../building/building.h"
+
+char currentChar;
+boolean EOP;
+
+static FILE *pita;
+static int retval;
 
 void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
     /* Membaca file figurasi config dan membaca makanan */
@@ -155,13 +162,18 @@ void configResep(char *filename, BukuResep *b){
     int child[100];
     int ctr;
 
+    
     nResep = 0;
     //ALGORITMA
+
     ADVFILE(filename);
+    
     while(currentChar != LINEMARK){
         nResep = nResep * 10 + (currentChar - 48);
         ADV();
     }
+    
+    
     BanyakResep(*b) = nResep;
     ADV(); // next after LINEMARK
     
@@ -186,7 +198,7 @@ void configResep(char *filename, BukuResep *b){
         }
         //currentChar == BLANK
         ADV();
-
+        
         nChild(ELMTBUKURESEP(*b,j)) = ctr;
         addressChild(ELMTBUKURESEP(*b,j)) = (Tree*) malloc(ctr *sizeof(Tree));
         i = 0;
@@ -205,8 +217,25 @@ void configResep(char *filename, BukuResep *b){
                 ADV(); //Lanjut ke angka selanjutnya  
             }
         }
-
     }
     
     fclose(pita);
+}
+
+void normalizeFilename(Word *w){
+    int lengthbefore = (*w).Length;
+    (*w).Length += 7;
+    // "config/"
+    for(int i = lengthbefore - 1; i >= 0; i--){
+        (*w).TabWord[i+7] = (*w).TabWord[i];
+    }
+    (*w).TabWord[0] = 'c';
+    (*w).TabWord[1] = 'o';
+    (*w).TabWord[2] = 'n';
+    (*w).TabWord[3] = 'f';
+    (*w).TabWord[4] = 'i';
+    (*w).TabWord[5] = 'g';
+    (*w).TabWord[6] = '/';
+
+
 }

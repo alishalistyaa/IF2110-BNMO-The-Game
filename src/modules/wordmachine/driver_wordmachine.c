@@ -9,8 +9,6 @@
 #include "wordmachine.c"
 #include "wordmachine.h"
 
-
-
 int main(){
     int i;
     STARTWORD();

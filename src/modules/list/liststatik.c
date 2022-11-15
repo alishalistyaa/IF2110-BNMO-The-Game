@@ -34,6 +34,20 @@ void CopyStock(STOCK S1, STOCK *S2){
     }
 }
 
+void displayStock(STOCK S, ListStatik l){
+    boolean stockempty = true;
+    for(int i = 0; i < CAPACITY; i++){
+        for(int k = 0; k < lengthList(l); k++){
+            if((ID(ELMTLIST(l,k)) == i) && (ELMTSTOCK(S,i) > 0)){
+                printf("%s: %d buah\n", NAME(ELMTLIST(l,k)).TabWord,ELMTSTOCK(S,i));
+                stockempty = false;
+            }
+        }
+                
+    }
+    if(stockempty) printf("Stok kosong!");
+}
+
 // boolean isFoodValid(ListStatik l, int ID_Makanan){
 //     /* Mengirimkan true jika i adalah elemen yang valid dari makanan */
 //     boolean found = false;
@@ -85,9 +99,25 @@ Word getNameMakanan(ListStatik l, int idx){
             makanan = NAME(ELMTLIST(l, i));
             isFound = true;
         }
+        i++;
     }
     return makanan;
 }
+
+MAKANAN getMakanan(ListStatik l, int ID){
+    boolean isFound = false;
+    MAKANAN mkn;
+    int i = 0;
+    while(!isFound && i!=CAPACITY){
+        if (ID(ELMTLIST(l, i)) == ID){
+            mkn = ELMTLIST(l, i);
+            isFound = true;
+        }
+        else i++;
+    }
+    return mkn;
+}
+
 
 boolean isIdxListEff(ListStatik l, IdxType i){
     return(i>=0 && i<lengthList(l));}

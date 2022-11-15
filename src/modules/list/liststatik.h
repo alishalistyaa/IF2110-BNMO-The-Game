@@ -49,6 +49,9 @@ void DecreaseStock(STOCK *s, int ID);
 void CopyStock(STOCK S1, STOCK *S2);
 /*Melakukan penyalinan tiap elemen stock ke S2*/
 
+void displayStock(STOCK S, ListStatik l);
+/*Mencetak elemen stok*/
+
 void CreateListStatik(ListStatik *l);
 /* I.S. l sembarang */
 /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
@@ -61,7 +64,8 @@ int lengthList(ListStatik l);
 Word getNameMakanan(ListStatik l, int idx);
 /* Mengirimkan nama makanan dari ID */
 
-Word CreateMarkWord();
+MAKANAN getMakanan(ListStatik l, int ID);
+/* Mendapatkan makanan dari ID */
 
 // boolean isFoodValid(ListStatik l, int ID_Makanan);
 /* Mengirimkan true jika i adalah elemen yang valid dari list */

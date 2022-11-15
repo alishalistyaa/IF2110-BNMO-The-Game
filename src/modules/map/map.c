@@ -32,7 +32,7 @@ void loadMap(MAP *M, char *filename)
 /* I.S. map sembarang */
 /* F.S. map terbentuk dari file eksternal */
 {
-    ADVFILE("peta.txt");
+    ADVFILE(filename);
     int i = 0;
     int s[2];
     while (currentChar != LINEMARK) {
@@ -156,29 +156,49 @@ boolean isNear(MAP M, char ch) {
     }
 }
 
-void move_map(MAP *M, Word command) 
+void move_map(MAP *M, Word command, boolean *canmove) 
 /* I.S. map terdefinisi */
 /* F.S. map bergerak sesuai dengan command */
 {
     if(same(command, "NORTH")){
         if(ElmtMap(*M, (int)Absis(S(*M)), (int)Ordinat(S(*M))+1) == ' '){
             Absis(S(*M))--;
+            *canmove = true;
         }
+        else{
+            printf("Tidak dapat berpindah karena bukan petak kosong!");
+            *canmove = false;
+        } 
     }
     else if(same(command, "SOUTH")){
         if(ElmtMap(*M, (int)Absis(S(*M))+2, (int)Ordinat(S(*M))+1) == ' '){
             Absis(S(*M))++;
+            *canmove = true;
         }
+        else{
+            printf("Tidak dapat berpindah karena bukan petak kosong!");
+            *canmove = false;
+        } 
     }
     else if(same(command, "EAST")){
         if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))+2) == ' '){
             Ordinat(S(*M))++;
+            *canmove = true;
         }
+        else{
+            printf("Tidak dapat berpindah karena bukan petak kosong!");
+            *canmove = false;
+        } 
     }
     else if(same(command, "WEST")){
         if(ElmtMap(*M, (int)Absis(S(*M))+1, (int)Ordinat(S(*M))) == ' '){
             Ordinat(S(*M))--;
+            *canmove = true;
         }
+        else{
+            printf("Tidak dapat berpindah karena bukan petak kosong!");
+            *canmove = false;
+        } 
     }
 }
 
@@ -263,7 +283,7 @@ void displayCookMethod(ListStatik l, ListStatik *methodlist, char action, MAP M)
     printf("List Bahan Makanan yang Bisa Dibuat:\n");
     for(int i = 0; i < length; i++){
         if(getAction(ACTION(ELMTLIST(l,i)), M) == action){
-            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
+            printf("   %d. %s ",ctr,NAME(ELMTLIST(l,i)));
             TulisTIME2(DELIVERY(ELMTLIST(l,i)));
 
             ELMTLIST(*methodlist,ctr-1) = ELMTLIST(l,i);
@@ -292,6 +312,35 @@ int move_detector(Word command){
     else{
         return 0;
     }
+}
+
+void isDeliveredQueue(PrioQueue *I, PrioQueue *D, STOCK *stk, boolean *delivered, Word *makanan){
+    infotypePrioQueue val;
+    if (!IsEmpty(*D)){
+        for (int i = Head(*D); i <= Tail(*D); i++) {
+            if(isDelivered(Elmt(*D, i))){
+                Dequeue(D, &val);
+                EnqueueExpired(I, val);
+                ELMTSTOCK(*stk, ID(val))++;
+                *delivered = true;
+            }
+        }
+    }
+    *makanan = NAME(val); 
+}
+
+void isExpiredQueue(PrioQueue *I, STOCK *stk, boolean *expired, Word *makanan){
+    infotypePrioQueue val;
+    if (!IsEmpty(*I)){
+        for (int i = Head(*I); i <= Tail(*I); i++) {
+            if(isExpired(Elmt(*I, i))){
+                Dequeue(I, &val);
+                ELMTSTOCK(*stk, ID(val))--;
+                *expired = true;
+            }
+        }
+    }
+    *makanan = NAME(val);
 }
 
 

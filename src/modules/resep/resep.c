@@ -90,11 +90,36 @@ boolean isResepOlahable(BukuResep b, int ID_Root, STOCK s){
     for(int i = 0; i < BanyakResep(b); i++){
         if(ID_Root == Root(ELMTBUKURESEP(b,i))){
             for(int k = 0; k < nChild(ELMTBUKURESEP(b,i));k++){
-                olahable &= (ELMTSTOCK(s, k) > 0);
+                int ID_bahan = Root(getChild(ELMTBUKURESEP(b,i),k));
+                olahable &= (ELMTSTOCK(s, ID_bahan) > 0);
                 }             
             }                                                
         }
     return olahable;
+}
+
+Resep getResep(BukuResep b, int ID_Root){
+    int i = 0;
+    boolean notfound = true;
+    while( i < BanyakResep(b) && notfound){
+        if(ID_Root == Root(ELMTBUKURESEP(b,i))) notfound = false;
+        i++;
+    }
+    return ELMTBUKURESEP(b,i-1);
+}
+
+void printBahanMissing(Resep r, STOCK S, ListStatik listmakanan){
+    int ctr = 1;
+    for(int i = 0; i < nChild(r);i++){
+        if(ELMTSTOCK(S,Root(getChild(r,i))) <= 0){
+            for(int k = 0; k < lengthList(listmakanan); k++){
+                if(ID(ELMTLIST(listmakanan,k)) == Root(getChild(r,i))){
+                    printf("   %d. %s\n",ctr,NAME(ELMTLIST(listmakanan,k)));
+                    ctr++;
+                }
+            }
+        }
+    }
 }
 
 //Resep concatResep(Resep r1, Resep r2);

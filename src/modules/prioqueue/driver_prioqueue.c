@@ -23,6 +23,6 @@ int main() {
     CreateTime(&DELIVERY(M1), 0, 0, 15);  
     EnqueueDelivery(&Q, M1);
     printInventoryDelivery(Q);
-    decreaseTimeDelivery(&Q);
+    decreaseTimeDelivery(&Q,1);
     printInventoryDelivery(Q);
 }

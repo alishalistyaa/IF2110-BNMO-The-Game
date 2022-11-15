@@ -199,32 +199,34 @@ void printInventoryDelivery (PrioQueue Q) {
     }
 }
 
-void isDeliveredQueue(PrioQueue *I, PrioQueue *D, boolean *delivered, Word *makanan){
-    infotypePrioQueue val;
-    if (!IsEmpty(*D)){
-        for (int i = Head(*D); i <= Tail(*D); i++) {
-            if(isDelivered(Elmt(*D, i))){
-                Dequeue(D, &val);
-                EnqueueExpired(I, val);
-                *delivered = true;
-            }
-        }
-    }
-    *makanan = NAME(val); 
-}
+// * DIPINDAH KE MAP YAAAAAAAAAAA!
 
-void isExpiredQueue(PrioQueue *I, boolean *expired, Word *makanan){
-    infotypePrioQueue val;
-    if (!IsEmpty(*I)){
-        for (int i = Head(*I); i <= Tail(*I); i++) {
-            if(isExpired(Elmt(*I, i))){
-                Dequeue(I, &val);
-                *expired = true;
-            }
-        }
-    }
-    *makanan = NAME(val);
-}
+// void isDeliveredQueue(PrioQueue *I, PrioQueue *D, boolean *delivered, Word *makanan){
+//     infotypePrioQueue val;
+//     if (!IsEmpty(*D)){
+//         for (int i = Head(*D); i <= Tail(*D); i++) {
+//             if(isDelivered(Elmt(*D, i))){
+//                 Dequeue(D, &val);
+//                 EnqueueExpired(I, val);
+//                 *delivered = true;
+//             }
+//         }
+//     }
+//     *makanan = NAME(val); 
+// }
+
+// void isExpiredQueue(PrioQueue *I, boolean *expired, Word *makanan){
+//     infotypePrioQueue val;
+//     if (!IsEmpty(*I)){
+//         for (int i = Head(*I); i <= Tail(*I); i++) {
+//             if(isExpired(Elmt(*I, i))){
+//                 Dequeue(I, &val);
+//                 *expired = true;
+//             }
+//         }
+//     }
+//     *makanan = NAME(val);
+// }
 
 void delElmt(PrioQueue *Q, int id, infotypePrioQueue * X) {
     int delIdx = -1;

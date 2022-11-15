@@ -46,12 +46,12 @@ void DecreaseExpired(MAKANAN *M){
 
 boolean isExpired(MAKANAN M){ 
     /* Mengirimkan true jika makanan sudah expired */
-    return (Day(EXPIRED(M)) == 0 && Hour(EXPIRED(M)) == 0 && Minute(EXPIRED(M)));
+    return (Day(EXPIRED(M)) <= 0 && Hour(EXPIRED(M)) <= 0 && Minute(EXPIRED(M))<= 0);
 }
 
 boolean isDelivered(MAKANAN M){
     /* Mengirimkan true jika makanan sudah dikirimkan */
-    return(Day(DELIVERY(M)) == 0 && Hour(DELIVERY(M)) == 0 && Minute(DELIVERY(M)));
+    return(Day(DELIVERY(M)) <= 0 && Hour(DELIVERY(M)) <= 0 && Minute(DELIVERY(M))<= 0);
 }
 
 boolean isDeliveryEqual(MAKANAN M1, MAKANAN M2){

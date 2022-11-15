@@ -84,8 +84,8 @@ boolean same(Word one, char *s);
 /* Mengembalikan true jika kedua string sama */
 
 
-void CreateWordList(WordList *l);
+// void CreateWordList(WordList *l);
 
-int lengthWordList (WordList l);
+// int lengthWordList (WordList l);
 
 #endif

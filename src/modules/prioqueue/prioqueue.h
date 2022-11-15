@@ -98,9 +98,9 @@ void printInventoryExpired (PrioQueue Q);
 void printInventoryDelivery (PrioQueue Q);
 /* Proses mencetak Inventory dengan Delivery Time mengurut */
 
-void isDeliveredQueue(PrioQueue *I, PrioQueue *D, boolean *delivered, Word *makanan);
+// void isDeliveredQueue(PrioQueue *I, PrioQueue *D, boolean *delivered, Word *makanan);
 
-void isExpiredQueue(PrioQueue *I, boolean *expired, Word *makanan);
+// void isExpiredQueue(PrioQueue *I, boolean *expired, Word *makanan);
 
 void delElmt(PrioQueue *Q, int ID, infotypePrioQueue * X);
 /*Proses: menghapus elemen pada Queue*/

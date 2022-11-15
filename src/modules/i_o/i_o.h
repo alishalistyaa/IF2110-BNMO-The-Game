@@ -4,7 +4,6 @@
 #ifndef IO_H
 #define IO_H
 
-#include <stdio.h>
 #include "../point/point.h"
 #include "../boolean/boolean.h"
 #include "../makanan/makanan.h"
@@ -25,6 +24,8 @@ void configResep(char *filename, BukuResep *b);
 /* Membaca file figurasi config dan membaca resep */
 /* I.S. Resep sembarang */
 /* F.S. Resep terdefinisi dari file */
+
+void normalizeFilename(Word *w);
 
 
 
