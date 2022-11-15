@@ -14,6 +14,7 @@ int main(){
     BUILDING B1, B2;
     POINT P1, P2;
     char name1, name2;
+    MAP peta;
 
     // ALGORITMA
     CreatePoint(&P1, 5, 5);
@@ -28,9 +29,11 @@ int main(){
         printf("Building satu dan dua sama\n");
     } else { printf("Building tidak sama.\n");}
 
-    if(isBuildingExist('x', MAP M)){
+    if(isBuildingExist('x', peta)){
         printf("Building x exist.\n");
     }
+
+    POINT p;
 
     return(0);
 }
