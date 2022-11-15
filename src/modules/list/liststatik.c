@@ -75,7 +75,7 @@ Word getNameMakanan(ListStatik l, int idx){
     Word makanan;
     int i = 0;
     while(!isFound && i!=CAPACITY){
-        if (ID(ELMTLIST(l, i)) = idx){
+        if (ID(ELMTLIST(l, i)) == idx){
             makanan = NAME(ELMTLIST(l, i));
             isFound = true;
         }

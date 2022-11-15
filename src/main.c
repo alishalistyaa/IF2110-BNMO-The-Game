@@ -288,12 +288,11 @@ int main(){
                         STARTWORDBlank();
                         option = transformToInt(currentWord);
                         if(option != 0){
-                            printf("\n\nBerhasil memesan %s. %s akan diantar dalam ",NAME(ELMTLIST(buylist,option-1)),NAME(ELMTLIST(buylist,option-1)));
+                            printf("\n\nBerhasil memesan %s. %s akan diantar dalam ",NAME(ELMTLIST(buylist,option-1)).TabWord,NAME(ELMTLIST(buylist,option-1)).TabWord);
                             TulisTIME2(DELIVERY(ELMTLIST(buylist,option-1)));
                             printf(".\n");
 
                             EnqueueDelivery(&curDeliv,ELMTLIST(buylist,option-1));
-                          
                         }
                     }
                     option = -1;
@@ -313,6 +312,7 @@ int main(){
                     printf("Input tidak valid! Coba lagi!\n");
                 }
                 break;
+
             case 7:
                 ADVWORDBlank();
                 if(currentWord.Length > 0){
