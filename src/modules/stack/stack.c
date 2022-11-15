@@ -26,6 +26,7 @@ boolean IsFullStack(Stack S) {
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
     return Top(S) == State - 1;
 }
+
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void Push(Stack * S, infotype X) {
 /* Menambahkan X sebagai elemen Stack S. */
@@ -60,11 +61,11 @@ void Undo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, PrioQueue *D, S
     infotype s;
     Pop(undo, &s);
     *command = InfoTop(*undo).command;
-    *I = InfoTop(*undo).I;
-    *D = InfoTop(*undo).D;
+    CopyQueue(InfoTop(*undo).I, I);
+    CopyQueue(InfoTop(*undo).D, D);
     *T = InfoTop(*undo).T;
     *l = InfoTop(*undo).l;
-    *stock = InfoTop(*undo).stock;
+    CopyStock(InfoTop(*undo).stock, stock);
     Push(Redo, s);
 }
 void Redo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, PrioQueue *D, STOCK *stock, TIME *T, POINT *l) {
@@ -74,11 +75,11 @@ void Redo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, PrioQueue *D, S
     Pop(Redo, &s);
     Push(undo, s);
     *command = InfoTop(*undo).command;
-    *I = InfoTop(*undo).I;
-    *D = InfoTop(*undo).D;
+    CopyQueue(InfoTop(*undo).I, I);
+    CopyQueue(InfoTop(*undo).D, D);
     *T = InfoTop(*undo).T;
     *l = InfoTop(*undo).l;
-    *stock = InfoTop(*undo).stock;
+    CopyStock(InfoTop(*undo).stock, stock);
 }
 
 void updateState(Word command, PrioQueue I, PrioQueue D, STOCK stock, TIME T, POINT l, Stack *undo) {
@@ -87,11 +88,11 @@ void updateState(Word command, PrioQueue I, PrioQueue D, STOCK stock, TIME T, PO
 /* F. S. terbentuk infotype X untuk dan X telah di-push ke stack */
   infotype X;
   X.command = command;
-  X.I = I;
-  X.D = D;
+  CopyQueue(I,&(X.I));
+  CopyQueue(D,&(X.D));
   X.T = T;
   X.l = l;
-  X.stock = stock;
-
+  CopyStock(stock, &X.stock);
   Push(undo, X);
+
 }

@@ -26,4 +26,13 @@ int main () {
     Stack undo;
     CreateEmpty(&undo);
     updateState(command, I, D, stock, T, l, &undo);
+    printf("State Now:\n");
+    printf("%s\n", command.TabWord);
+    printInventoryExpired(I);
+    printf("\n");
+    printInventoryDelivery(I);
+    printf("\n");
+    TulisTIME2(T);
+    printf("\n");
+    TulisPOINT(l);   
 }
