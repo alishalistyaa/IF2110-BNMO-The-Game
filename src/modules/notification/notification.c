@@ -1,7 +1,15 @@
 #include "notification.h"
 
-void printNotifInventory(Notif N);
+// void printNotifInventory(Notif N){
+//     int l;
+//     l = 3;
+//     for(int i=0; i<l; i++){
+//         printf("- %s kedaluwarsa...\n", N.notifKedaluarsa[i]);
+//     }
+// }
+
 /* Fungsi mencetak ke layar*/
+
 
 void printNotifUndo(Notif N);
 /* Fungsi mencetak ke layar*/
