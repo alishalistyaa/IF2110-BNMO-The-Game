@@ -1,20 +1,14 @@
 #include <stdio.h>
-#include "building.c"
+#include "building.h"
 #include "../point/point.c"
 #include "../boolean/boolean.h"
-#include "../wordmachine/wordmachine.c"
-#include "../charmachine/charmachine.c"
 #include "../map/map.c"
-#include "../time/time.c"
-#include "../list/liststatik.c"
-#include "../matriks/matriks.c"
 
 int main(){
     // KAMUS LOKAL
     BUILDING B1, B2;
     POINT P1, P2;
     char name1, name2;
-    MAP peta;
 
     // ALGORITMA
     CreatePoint(&P1, 5, 5);
@@ -28,12 +22,6 @@ int main(){
     if (isBuildingSame(B1, B2)){
         printf("Building satu dan dua sama\n");
     } else { printf("Building tidak sama.\n");}
-
-    if(isBuildingExist('x', peta)){
-        printf("Building x exist.\n");
-    }
-
-    POINT p;
 
     return(0);
 }

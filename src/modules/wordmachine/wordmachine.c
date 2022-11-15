@@ -19,13 +19,34 @@ void IgnoreBlanks(){
     }
 }
 
+void CopyWordBlank(){
+/* Mengakuisisi kata, menyimpan dalam currentWord
+    I.S. : currentChar adalah karakter pertama dari kata
+    F.S. : currentWord berisi kata yang sudah diakuisisi;
+            currentChar = BLANK atau currentChar = MARK;
+            currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+            Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+    int i = 0;
+    while (currentChar != BLANK && currentChar != LINEMARK) {
+        currentWord.TabWord[i] = currentChar;
+        ADV();
+        i++;
+    }
+
+    if (i > NMax) {
+        currentWord.Length = NMax;
+    } else {
+        currentWord.Length = i;
+    }
+    currentWord.TabWord[i] = '\0';
+}
+
 void STARTWORD(){
 /* I.S. : currentChar sembarang
     F.S. : EndWord = true, dan currentChar = MARK;
             atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
             currentChar karakter pertama sesudah karakter terakhir kata */
     START();
-    
     IgnoreBlanks();
     if(currentChar == LINEMARK){
         endWord = true;
@@ -33,17 +54,6 @@ void STARTWORD(){
     else{
         endWord = false;
         CopyWord();
-        IgnoreBlanks();
-    }
-
-    START();
-    IgnoreBlanks();
-    if(currentChar == LINEMARK){
-        endWord = true;
-    }
-    else{
-        endWord = false;
-        CopyWordBlank();
         IgnoreBlanks();
     }
 }
@@ -97,28 +107,6 @@ void LowerCase(){
             currentWord.TabWord[i] += 32;
         }
     }
-}
-
-void CopyWordBlank(){
-/* Mengakuisisi kata, menyimpan dalam currentWord
-    I.S. : currentChar adalah karakter pertama dari kata
-    F.S. : currentWord berisi kata yang sudah diakuisisi;
-            currentChar = BLANK atau currentChar = MARK;
-            currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-            Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-    int i = 0;
-    while (currentChar != BLANK && currentChar != LINEMARK) {
-        currentWord.TabWord[i] = currentChar;
-        ADV();
-        i++;
-    }
-
-    if (i > NMax) {
-        currentWord.Length = NMax;
-    } else {
-        currentWord.Length = i;
-    }
-    currentWord.TabWord[i] = '\0';
 }
 
 void ADVWORDBlank(){

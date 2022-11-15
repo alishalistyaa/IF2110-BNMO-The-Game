@@ -189,7 +189,7 @@ int main(){
                 if(isNear(peta,'B')){
                     while (option != 0)
                     {
-                        printf("======================\n");
+                    printf("======================\n");
                     printf("         BOIL         \n");
                     printf("======================\n");
                     // BOIL HERE
@@ -224,12 +224,11 @@ int main(){
                         STARTWORDBlank();
                         option = transformToInt(currentWord);
                         if(option != 0){
-                            printf("\n\nBerhasil memesan %s. %s akan diantar dalam ",NAME(ELMTLIST(buylist,option-1)),NAME(ELMTLIST(buylist,option-1)));
+                            printf("\n\nBerhasil memesan %s. %s akan diantar dalam ",NAME(ELMTLIST(buylist,option-1)).TabWord,NAME(ELMTLIST(buylist,option-1)).TabWord);
                             TulisTIME2(DELIVERY(ELMTLIST(buylist,option-1)));
                             printf(".\n");
 
                             EnqueueDelivery(&curDeliv,ELMTLIST(buylist,option-1));
-                          
                         }
                     }
                 } else printf("\nBNMO tidak berada di area telepon (T)!\n");
@@ -324,6 +323,7 @@ int main(){
                 //     printf("Input berlebihan\n");
                 // }
                 // break;
+
             case 7:
                 ADVWORDBlank();
                 if(currentWord.Length > 0){

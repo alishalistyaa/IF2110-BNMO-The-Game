@@ -77,7 +77,7 @@ void cetakBukuResep(BukuResep b, ListStatik listmakanan, MAP M){
             j = 0;
             
             while(Root(getChild(ELMTBUKURESEP(b,i),k)) != ID(ELMTLIST(listmakanan,j)) ) j++;
-            printf("- %s ",ELMTLIST(listmakanan,j).Name);
+            printf("- %s ", NAME(ELMTLIST(listmakanan,j)).TabWord);
         }
         printf("\n");
     }

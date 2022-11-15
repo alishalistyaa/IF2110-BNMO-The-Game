@@ -69,7 +69,7 @@ Word getNameMakanan(ListStatik l, int idx){
     Word makanan;
     int i = 0;
     while(!isFound && i!=CAPACITY){
-        if (ID(ELMTLIST(l, i)) = idx){
+        if (ID(ELMTLIST(l, i)) == idx){
             makanan = NAME(ELMTLIST(l, i));
             isFound = true;
         }
@@ -163,7 +163,7 @@ void displayBuyable(ListStatik l, ListStatik *buylist){
     int ctr = 1;
     for(int i = 0; i < length; i++){
         if(same(NAME(ELMTLIST(l,i)),"Buy")){
-            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
+            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)).TabWord);
             TulisTIME2(DELIVERY(ELMTLIST(l,i)));
             printf(")\n");
 
@@ -180,7 +180,7 @@ void displayCookMethod(ListStatik l, ListStatik *methodlist, char *method){
     printf("List Bahan Makanan yang Bisa Dibuat:\n");
     for(int i = 0; i < length; i++){
         if(same(NAME(ELMTLIST(l,i)),method)){
-            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
+            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)).TabWord);
             TulisTIME2(DELIVERY(ELMTLIST(l,i)));
 
             ELMTLIST(*methodlist,ctr-1) = ELMTLIST(l,i);

@@ -151,7 +151,7 @@ void printInventoryExpired (PrioQueue Q) {
         printf("List Makanan di Inventory\n");
         printf("(nama - waktu sisa kedaluwarsa)\n");
         printf("\t1. ");
-        printf("%s", NAME(InfoHead(Q))); // nama makanan 
+        printf("%s", NAME(InfoHead(Q)).TabWord); // nama makanan 
         printf(" - ");
         TulisTIME2(TimeExpired(InfoHead(Q))); // waktu expired
         printf("\n");
@@ -161,7 +161,7 @@ void printInventoryExpired (PrioQueue Q) {
         int count = 1;
         for (int i = Head(Q); i <= Tail(Q); i++) {
             printf("\t%d.", count);
-            printf("%s", NAME(Elmt(Q, i))); // nama makanan
+            printf("%s", NAME(Elmt(Q, i)).TabWord); // nama makanan
             printf(" - ");
             TulisTIME2(TimeExpired(Elmt(Q, i))); // waktu expired
             printf("\n");
@@ -176,7 +176,7 @@ void printInventoryDelivery (PrioQueue Q) {
         printf("List Makanan di Perjalanan\n");
         printf("(nama - waktu sisa delivery)\n");
         printf("\t1. ");
-        printf("%s", NAME(InfoHead(Q))); // nama makanan 
+        printf("%s", NAME(InfoHead(Q)).TabWord); // nama makanan 
         printf(" - ");
         TulisTIME2(TimeDelivery(InfoHead(Q))); // waktu expired
         printf("\n");
