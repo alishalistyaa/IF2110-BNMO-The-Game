@@ -19,6 +19,7 @@ typedef struct {
 
 
 /* *** Notasi Akses: selektor MAKANAN *** */
+#define ELMT(l, i) (l).contents[(i)]
 #define ID(M) (M).ID
 #define NAME(M) (M).Name
 #define EXPIRED(M) (M).Expired

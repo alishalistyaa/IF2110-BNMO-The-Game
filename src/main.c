@@ -18,6 +18,7 @@
 #include "./modules/simulator/simulator.c"
 #include "./modules/map/map.c"
 #include "./modules/resep/resep.c"
+#include "./modules/notification/notification.c"
 // #include "./modules/notification/notification.c"
 
 Word currentWord;
@@ -47,6 +48,7 @@ int main(){
     ListStatik choplist;
     ListStatik boillist;
     ListStatik frylist;
+    List_Link notifParser;
 
     /* ALGORITMA */
     // Inisialisasi Game
@@ -167,6 +169,7 @@ int main(){
             printf("Waktu: ");
             TulisTIME1(curTime);
             printf("\n");
+            printAllNotif(&Notification(BNMO));
             if (same(command, "UNDO")) { 
                 printf("masi diperbaiki");   
                 // printNotif(InfoTop(undo));
