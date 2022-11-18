@@ -36,6 +36,11 @@ typedef struct {
    int nResep;
 } BukuResep;
 
+typedef struct {
+   int ID_Makanan;
+   int ID_Bahan[CAPACITY]; /* memori tempat penyimpan elemen (container) */
+} SET;
+
 // --SELEKTOR--
 #define ELMTBUKURESEP(b, i) (b).contents[i]
 #define BanyakResep(b) (b).nResep

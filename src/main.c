@@ -125,7 +125,6 @@ int main(){
         // InfoTop(undo) = X;
 
         // printf("%d",IsEmptyStack(undo));
-        
         updateState(command, curInv, curDeliv, curStock, curTime, curLoc, &undo);
         int count = 0;
         do {
@@ -161,9 +160,10 @@ int main(){
         boolean start = true;  
      
         while (start){
+            curLoc = Location(SIMULATOR(peta));
             printf("\n");
             printf("BNMO di posisi: ");
-            TulisPOINT(Location(SIMULATOR(peta)));
+            TulisPOINT(curLoc);
             printf("\n");
             printf("Waktu: ");
             TulisTIME1(curTime);
@@ -367,10 +367,11 @@ int main(){
 
                         // BUY HERE
                         displayBuyable(listMakanan,&buylist,peta);
+                        int lenBuyList = lengthList(buylist);
                         printf("\nEnter Command: ");
                         STARTWORDBlank();
                         option = transformToInt(currentWord);
-                        if(option != 0){
+                        if(option != 0 && option <= lenBuyList){
                             printf("\n\nBerhasil memesan %s. %s akan diantar dalam ",NAME(ELMTLIST(buylist,option-1)).TabWord,NAME(ELMTLIST(buylist,option-1)).TabWord);
                             TulisTIME2(DELIVERY(ELMTLIST(buylist,option-1)));
                             printf(".\n");
@@ -390,8 +391,9 @@ int main(){
                     same(currentWord, "NORTH")) && (currentChar == '\n')) {
                         move_map(&peta, currentWord,&moveable);  
                         if(moveable) passTime(&BNMO, 1, &curTime);
-                } else {
+                }   else {
                     printf("Input tidak valid! Coba lagi!\n");
+                    validinput = false;
                 }
                 break;
             case 7:
@@ -464,6 +466,7 @@ int main(){
                 else{
                     printf("Input Waktu tidak valid\n");
                 }
+                updateState(command, curInv, curDeliv, curStock, curTime, Location(SIMULATOR(peta)), &undo);
                 break;
 
             case 8:
@@ -491,32 +494,30 @@ int main(){
                 printf("======================\n");
                 printf("          UNDO        \n");
                 printf("======================\n");
-                // if (IsEmptyStack(undo)) {
-                //     printf("Tidak ada yang bisa di-undo!\n");
-                // } else{
+                if (IsEmptyStack(undo)) {
+                    printf("Tidak ada yang bisa di-undo!\n");
+                } else{
                     printf("Go here\n");
                     STOCK tempStock = curStock;    
                     undocommand[count_undocommand] = InfoTop(undo).command;  
-                    displayStack(undo);
-                    displayStack(redo);
-                    // Undo(&undo, &redo, &command, &curInv, &curDeliv, &curStock, &curTime, &(Location(SIMULATOR(peta))));
-                    STOCK tempStockUndo = curStock;
-                    int theID = -1;
-                    for (int i = 0; i < CAPACITY; i++) {
-                        if(ELMTSTOCK(tempStockUndo, i) - ELMTSTOCK(tempStock, i) == 1); theID = i;       
-                    }
-                    makanancommand[count_undocommand] = getNameMakanan(listMakanan, theID);
-                    count_undocommand++;
-                // }
+                    Undo(&undo, &redo, &command, &curInv, &curDeliv, &curStock, &curTime, &(Location(SIMULATOR(peta))));
+                    // STOCK tempStockUndo = curStock;
+                    // int theID = -1;
+                    // for (int i = 0; i < CAPACITY; i++) {
+                    //     if(ELMTSTOCK(tempStockUndo, i) - ELMTSTOCK(tempStock, i) == 1); theID = i;       
+                    // }
+                    // makanancommand[count_undocommand] = getNameMakanan(listMakanan, theID);
+                    // count_undocommand++;
+                }
                 break;
             case 12:
                 printf("======================\n");
                 printf("          REDO        \n");
                 printf("======================\n");
                 if (IsEmptyStack(redo)) {
-                    printf("Tidak ada yang bisa di-redo!");
+                    printf("Tidak ada yang bisa di-redo!\n");
                 } else {
-                    Redo(&undo, &redo, &command, &curInv, &curDeliv, &curStock, &curTime, &curLoc);
+                    Redo(&undo, &redo, &command, &curInv, &curDeliv, &curStock, &curTime, &(Location(SIMULATOR(peta))));
                 }
                 break;
             case 13:
@@ -557,42 +558,40 @@ int main(){
                 break;
             }
 
-        if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT") && !same(command,"WAIT") && !same(command, "DELIVERY") && !same(command, "DELIVERY") && !same(command, "COOKBOOK") && validinput) {
+        if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT") && !same(command,"WAIT") && !same(command, "DELIVERY") && !same(command, "COOKBOOK") && !same(command, "INVENTORY") && validinput) {
             decreaseTimeDelivery(&curDeliv,1);
             decreaseTimeExpired(&curInv,1);
-                delivered = false;
-                expired = false;
-                isDeliveredQueue(&curInv, &curDeliv, &curStock, &delivered, &buffer_word_makanan);
-                if (delivered) {
-                    undocommand[count_undocommand].Length = 8;
-                    undocommand[count_undocommand].TabWord[0] = 'D'; 
-                    undocommand[count_undocommand].TabWord[1] = 'E';
-                    undocommand[count_undocommand].TabWord[2] = 'L';
+            delivered = false;
+            expired = false;
+            isDeliveredQueue(&curInv, &curDeliv, &curStock, &delivered, &buffer_word_makanan);
+            if (delivered) {
+                undocommand[count_undocommand].Length = 8;
+                undocommand[count_undocommand].TabWord[0] = 'D'; 
+                undocommand[count_undocommand].TabWord[1] = 'E';
+                undocommand[count_undocommand].TabWord[2] = 'L';
+                undocommand[count_undocommand].TabWord[3] = 'I';
+                undocommand[count_undocommand].TabWord[4] = 'V';
+                undocommand[count_undocommand].TabWord[5] = 'E';
+                undocommand[count_undocommand].TabWord[6] = 'R';
+                undocommand[count_undocommand].TabWord[7] = 'Y';
+                makanancommand[count_undocommand] = buffer_word_makanan;
+                count_undocommand++;
+            }
+            isExpiredQueue(&curInv, &curStock, &expired, &buffer_word_makanan);
+                if (expired) {
+                    undocommand[count_undocommand].Length = 7;
+                    undocommand[count_undocommand].TabWord[0] = 'E'; 
+                    undocommand[count_undocommand].TabWord[1] = 'X';
+                    undocommand[count_undocommand].TabWord[2] = 'P';
                     undocommand[count_undocommand].TabWord[3] = 'I';
-                    undocommand[count_undocommand].TabWord[4] = 'V';
+                    undocommand[count_undocommand].TabWord[4] = 'R';
                     undocommand[count_undocommand].TabWord[5] = 'E';
-                    undocommand[count_undocommand].TabWord[6] = 'R';
-                    undocommand[count_undocommand].TabWord[7] = 'Y';
+                    undocommand[count_undocommand].TabWord[6] = 'D';
                     makanancommand[count_undocommand] = buffer_word_makanan;
                     count_undocommand++;
-                }
-                isExpiredQueue(&curInv, &curStock, &expired, &buffer_word_makanan);
-                    if (expired) {
-                        undocommand[count_undocommand].Length = 7;
-                        undocommand[count_undocommand].TabWord[0] = 'E'; 
-                        undocommand[count_undocommand].TabWord[1] = 'X';
-                        undocommand[count_undocommand].TabWord[2] = 'P';
-                        undocommand[count_undocommand].TabWord[3] = 'I';
-                        undocommand[count_undocommand].TabWord[4] = 'R';
-                        undocommand[count_undocommand].TabWord[5] = 'E';
-                        undocommand[count_undocommand].TabWord[6] = 'D';
-                        makanancommand[count_undocommand] = buffer_word_makanan;
-                        count_undocommand++;
-                }
-        }
-
-      
-            
+            }
+                updateState(command, curInv, curDeliv, curStock, curTime, Location(SIMULATOR(peta)), &undo);
+            }
         }
         //   if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT")) {
         //     decreaseTimeDelivery(&curDeliv);
@@ -627,9 +626,7 @@ int main(){
         //             makanancommand[count_undocommand] = makanan;
         //             count_undocommand++;
         //     }
-        //     //updateState(command, curInv, curDeliv, curStock, curTime, curLoc, &undo);
         // }
-        
     } else if (same(currentWord, "EXIT")) {
 
         // printf(

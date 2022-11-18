@@ -24,10 +24,6 @@ boolean IsEmptyStack(Stack S) {
     return Top(S) == Nil;
 }
 
-// int pokera(Stack S){
-//     return 21;
-// }
-
 boolean IsFullStack(Stack S) {
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
     return Top(S) == State - 1;
@@ -35,26 +31,43 @@ boolean IsFullStack(Stack S) {
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void Push(Stack * S, infotype X) {
-/* Menambahkan X sebagai elemen Stack S. */
-/* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
-/* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
-    
+    /* Menambahkan X sebagai elemen Stack S. */
+    /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
+    /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
     if (IsEmptyStack(*S)) {
         Top(*S) = 0;
     }
     else {
+        printf("Penambahan\n");
         Top(*S)++;
     }
-    // Top(*S)++;
-    // InfoTop(*S) = X;
+    InfoTop(*S).command = X.command;
+    MakeEmpty(&(InfoTop(*S).I), MaxEl(X.I));
+    CopyQueue(X.I, &(InfoTop(*S).I));
+    MakeEmpty(&(InfoTop(*S).D), MaxEl(X.D));
+    CopyQueue(X.D, &(InfoTop(*S).D));
+    InfoTop(*S).T = X.T;
+    InfoTop(*S).l = X.l;
+    CopyStock(X.stock, &(InfoTop(*S).stock));
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
 void Pop(Stack * S, infotype * X) {
-/* Menghapus X dari Stack S. */
-/* I.S. S  tidak mungkin kosong */
-/* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
-    *X = InfoTop(*S);
+    /* Menghapus X dari Stack S. */
+    /* I.S. S  tidak mungkin kosong */
+    /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+    (*X).command = InfoTop(*S).command;
+
+    MakeEmpty(&(*X).I, MaxEl((InfoTop(*S).I)));
+    CopyQueue(InfoTop(*S).I, &((*X).I));
+    // DeAlokasi(&(InfoTop(*S).I));
+    MakeEmpty(&(*X).D, MaxEl((InfoTop(*S).D)));
+    CopyQueue(InfoTop(*S).D, &((*X).D));
+    // DeAlokasi(&(InfoTop(*S).D));
+
+    (*X).T = InfoTop(*S).T;
+    (*X).l = InfoTop(*S).l;
+    CopyStock(InfoTop(*S).stock, &((*X).stock));
     if (Top(*S) == 0) {
         Top(*S) = Nil;
     } else {
@@ -63,30 +76,39 @@ void Pop(Stack * S, infotype * X) {
 }
 
 void Undo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, PrioQueue *D, STOCK *stock, TIME *T, POINT *l) {
-/* Melakukan proses undo */
-/* Menghapus Top dari Stack Undo dan memasukkannya ke Stack Redo */
+    /* Melakukan proses undo */
+    /* Menghapus Top dari Stack Undo dan memasukkannya ke Stack Redo */
     infotype s;
     Pop(undo, &s);
+    printf("TOP UNDO: %d\n", Top(*undo));
     *command = InfoTop(*undo).command;
     CopyQueue(InfoTop(*undo).I, I);
     CopyQueue(InfoTop(*undo).D, D);
     *T = InfoTop(*undo).T;
     *l = InfoTop(*undo).l;
+    TulisPOINT(InfoTop(*undo).l);
+    printf("\n");
     CopyStock(InfoTop(*undo).stock, stock);
     Push(Redo, s);
+    printf("Command : %s\n", InfoTop(*Redo).command.TabWord);
 }
 void Redo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, PrioQueue *D, STOCK *stock, TIME *T, POINT *l) {
-/* Melakukan proses redo */
-/* Menghapus Top dari Stack Redo dan memasukkannya ke Stack Undo */
+    /* Melakukan proses redo */
+    /* Menghapus Top dari Stack Redo dan memasukkannya ke Stack Undo */
     infotype s;
     Pop(Redo, &s);
     Push(undo, s);
+    printf("TOP UNDO: %d\n", Top(*undo));
+    printf("Command : %s\n", InfoTop(*undo).command.TabWord);
     *command = InfoTop(*undo).command;
     CopyQueue(InfoTop(*undo).I, I);
     CopyQueue(InfoTop(*undo).D, D);
     *T = InfoTop(*undo).T;
     *l = InfoTop(*undo).l;
     CopyStock(InfoTop(*undo).stock, stock);
+    printf("Loc : ");
+    TulisPOINT(InfoTop(*undo).l);
+    printf("\n");
 }
 
 void updateState(Word command, PrioQueue I, PrioQueue D, STOCK stock, TIME T, POINT l, Stack *undo) {
@@ -107,17 +129,16 @@ void updateState(Word command, PrioQueue I, PrioQueue D, STOCK stock, TIME T, PO
   TulisPOINT(X.l);
   CreateStock(&(X.stock));
   CopyStock(stock, &X.stock);
-  printf("Stock\n");
-  Top(*undo)++;
-  InfoTop(*undo) = X;
+
+    Push(undo, X);
 }
 
 void displayStack(Stack s) {
+    printf("%s\n", InfoTop(s).command.TabWord);
     printInventoryDelivery(InfoTop(s).D);
     printInventoryExpired(InfoTop(s).I);
     TulisTIME1(InfoTop(s).T);
     printf("\n");
     TulisPOINT(InfoTop(s).l);
     printf("\n");
-    printf("%s\n", InfoTop(s).command.TabWord);
 }

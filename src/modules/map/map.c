@@ -166,7 +166,7 @@ void move_map(MAP *M, Word command, boolean *canmove)
             *canmove = true;
         }
         else{
-            printf("Tidak dapat berpindah karena bukan petak kosong!");
+            printf("Tidak dapat berpindah karena bukan petak kosong!\n");
             *canmove = false;
         } 
     }
@@ -176,7 +176,7 @@ void move_map(MAP *M, Word command, boolean *canmove)
             *canmove = true;
         }
         else{
-            printf("Tidak dapat berpindah karena bukan petak kosong!");
+            printf("Tidak dapat berpindah karena bukan petak kosong!\n");
             *canmove = false;
         } 
     }
@@ -186,7 +186,7 @@ void move_map(MAP *M, Word command, boolean *canmove)
             *canmove = true;
         }
         else{
-            printf("Tidak dapat berpindah karena bukan petak kosong!");
+            printf("Tidak dapat berpindah karena bukan petak kosong!\n");
             *canmove = false;
         } 
     }
@@ -196,7 +196,7 @@ void move_map(MAP *M, Word command, boolean *canmove)
             *canmove = true;
         }
         else{
-            printf("Tidak dapat berpindah karena bukan petak kosong!");
+            printf("Tidak dapat berpindah karena bukan petak kosong!\n");
             *canmove = false;
         } 
     }

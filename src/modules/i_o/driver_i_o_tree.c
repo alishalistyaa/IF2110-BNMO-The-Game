@@ -12,11 +12,15 @@
 #include "../matriks/matriks.c"
 #include "../tree/tree.c"
 #include "../resep/resep.c"
+#include "../resep/resep.h"
+#include "../building/building.c"
 
 int main(){
     BukuResep b;
-    configResep("resep.txt",&b);
-    
-    cetakBukuResep(b);
+    BukuResep q;
+    configResep("../../config/resep.txt",&b);
+    for(int i =0; i < b.nResep; i++){
+        printTree(b.contents[i],2);
+    }
     return 0;
 }

@@ -36,8 +36,8 @@ int main () {
     command.TabWord[0] = 'B';
     command.TabWord[1] = 'U';
     command.TabWord[2] = 'Y';
-    // updateState(command, I, D, stock, T, l, &undo);
-    // displayStack(undo);
+    updateState(command, I, D, stock, T, l, &undo);
+    displayStack(undo);
     if (IsEmptyStack(undo)) {
         printf("Tidak ada yang bisa di-undo\n");
     } else {
