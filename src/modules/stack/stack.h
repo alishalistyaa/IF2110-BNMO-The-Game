@@ -15,7 +15,7 @@
 #include "../prioqueue/prioqueue.h"
 
 #define Nil -1
-#define State 1000
+#define State 100
 /* Nil adalah stack dengan elemen kosong . */
 
 

@@ -39,7 +39,7 @@ typedef struct {
 void createMap(MAP *M);
 /* I.S. map sembarang */
 /* F.S. map dengan ukuran row x col terbentuk */
-void loadMap(MAP *M, char *filename);
+// void loadMap(MAP *M, char *filename);
 /* I.S. map sembarang */
 /* F.S. map terbentuk dari file eksternal */
 
@@ -81,4 +81,6 @@ void displayCookMethod(ListStatik l, ListStatik *mixlist, char method, MAP M);
 void isDeliveredQueue(PrioQueue *I, PrioQueue *D, STOCK *stk, boolean *delivered, Word *makanan);
 
 void isExpiredQueue(PrioQueue *I, STOCK *stk, boolean *expired, Word *makanan);
+
+
 #endif

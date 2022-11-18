@@ -15,6 +15,8 @@
 #include "../matriks/matriks.h"
 #include "../resep/resep.h"
 
+void loadMap(MAP *M, char *filename);
+
 void configMakanan(MAP M, char *filename, ListStatik *listofMakanan);
 /* Membaca file figurasi config dan membaca makanan */
 /* I.S. Makanan sembarang */
@@ -25,7 +27,7 @@ void configResep(char *filename, BukuResep *b);
 /* I.S. Resep sembarang */
 /* F.S. Resep terdefinisi dari file */
 
-void normalizeFilename(Word *w);
+void normalizeFilename(Word *x);
 
 
 

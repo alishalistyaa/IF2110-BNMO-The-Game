@@ -13,6 +13,64 @@ boolean EOP;
 static FILE *pita;
 static int retval;
 
+void loadMap(MAP *M, char *filename)
+/* I.S. map sembarang */
+/* F.S. map terbentuk dari file eksternal */
+{
+    printf("%s %c\n",filename,currentChar);
+    ADVFILE(filename);
+    
+    int i = 0;
+    int s[2];
+    while (currentChar != LINEMARK) {
+        int value = 0;
+        while (currentChar != BLANK && currentChar != LINEMARK) {
+            value = value * 10 + (currentChar - 48);
+            ADV();
+        }
+        s[i] = value;
+        if (currentChar == BLANK) {
+            ADV();
+        }
+        i++;
+    }    
+    
+    createMatrix(s[0] + 2, s[1] + 2, &MATRIX(*M));
+    // creating border for matrix peta
+    for (int i = 0; i < s[1] + 2; i++) {
+        (*M).m.mem[0][i] = '*';
+        (*M).m.mem[s[0] + 1][i] = '*';
+    }
+    for (int i = 0; i < s[0] + 2; i++) {
+        (*M).m.mem[i][0] = '*';
+        (*M).m.mem[i][s[1] + 1] = '*';
+    }
+
+    ADV(); // next after LINEMARK
+    while (currentChar != FILEMARK) {
+        for (int i = 1; i < s[0] + 1; i++) {
+            if (currentChar == LINEMARK) {
+                ADV();
+            }
+            for (int j = 1; j < s[1] + 1; j++) {
+                if (currentChar == '#') {
+                    (*M).m.mem[i][j] = BLANK;
+                    ADV();
+                } else if (currentChar != 'S') {
+                    (*M).m.mem[i][j] = currentChar;
+                    ADV();
+                } else {
+                    (*M).m.mem[i][j] = BLANK;
+                    Absis(S(*M)) = i-1;
+                    Ordinat(S(*M)) = j-1;
+                    ADV();
+                }
+            }
+        }
+    }
+    fclose(pita);
+}
+
 void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
     /* Membaca file figurasi config dan membaca makanan */
     /* I.S. Makanan sembarang */
@@ -29,6 +87,7 @@ void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
 
     // ALGORITMA
     // Membaca berapa makanan yang ada di file config
+    printf("%s\n",filename);
     ADVFILE(filename);
     countMakanan = 0;
     while (currentChar != LINEMARK){
@@ -37,8 +96,7 @@ void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
             IgnoreBlanks();    
     }
     // testing
-    // printf("%d\n", countMakanan);
-
+    
     // Membaca makanan sebanyak countMakanan
     for(i = 0; i < countMakanan; i++){
         // TESTING
@@ -148,7 +206,10 @@ void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
 
         // TESTING
         // printf("Done MAKANAN\n");
+        
+
     }
+    printf("%s\n",filename);
     fclose(pita);
 }
 
@@ -161,7 +222,7 @@ void configResep(char *filename, BukuResep *b){
     int nResep;
     int child[100];
     int ctr;
-
+    
     
     nResep = 0;
     //ALGORITMA
@@ -176,9 +237,8 @@ void configResep(char *filename, BukuResep *b){
     
     BanyakResep(*b) = nResep;
     ADV(); // next after LINEMARK
-    
-
-    for(j = 0; j < nResep; j++){
+    j = 0;
+    while(j < nResep){
         i = 0;
         while (currentChar == BLANK || currentChar == LINEMARK) ADV();
         while (currentChar != BLANK)
@@ -216,7 +276,10 @@ void configResep(char *filename, BukuResep *b){
                 i = 0;
                 ADV(); //Lanjut ke angka selanjutnya  
             }
-        }
+        }  
+
+
+    j++;
     }
     
     fclose(pita);
@@ -236,6 +299,4 @@ void normalizeFilename(Word *w){
     (*w).TabWord[4] = 'i';
     (*w).TabWord[5] = 'g';
     (*w).TabWord[6] = '/';
-
-
 }

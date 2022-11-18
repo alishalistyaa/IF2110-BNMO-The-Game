@@ -7,6 +7,7 @@
 #include "../list/liststatik.h"
 #include "../building/building.h"
 #include "../prioqueue/prioqueue.h"
+#include "../wordmachine/wordmachine.h"
 //Membuat ADT resep dan buku resep dengan model list statik secara eksplisit
 
 /*  Kamus Umum */
@@ -82,6 +83,7 @@ void printBahanMissing(Resep r, STOCK , ListStatik listmakanan);
 /*Mencetak bahan-bahan yang kurang dari resep*/
 
 void setMethod(Resep *r);
+
 // Resep concatResep(Resep r1, Resep r2);
 /*Melakukan konkatenasi Resep 2 ke resep 1*/
 #endif

@@ -81,6 +81,7 @@ void EnqueueExpired (PrioQueue * Q, infotypePrioQueue X) {
             count--;
         }
     }
+    MaxEl(*Q)++;
 }
 
 void EnqueueDelivery (PrioQueue * Q, infotypePrioQueue X) {
@@ -111,6 +112,7 @@ void EnqueueDelivery (PrioQueue * Q, infotypePrioQueue X) {
             count--;
         }
     }
+    MaxEl(*Q)++;
 }
 
 void Dequeue (PrioQueue * Q, infotypePrioQueue * X) {
@@ -125,12 +127,15 @@ void Dequeue (PrioQueue * Q, infotypePrioQueue * X) {
     } else {
         Head(*Q)++;
     }
+    MaxEl(*Q)--;
 }
 
 void CopyQueue(PrioQueue Q1,PrioQueue *Q2)
-{   MakeEmpty(Q2,MaxEl(Q1));
-    for (int i = Head(Q1); i <= Tail(Q1); i++) {
-        Elmt(*Q2, i) = Elmt(Q1,i);   
+{   
+    if (MaxEl(Q1) != 0) {
+        for (int i = Head(Q1); i <= Tail(Q1); i++) {
+            Elmt(*Q2, i) = Elmt(Q1,i);   
+        }
     }
 }
 

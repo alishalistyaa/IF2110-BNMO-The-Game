@@ -24,9 +24,9 @@ boolean IsEmptyStack(Stack S) {
     return Top(S) == Nil;
 }
 
-int pokera(Stack S){
-    return 21;
-}
+// int pokera(Stack S){
+//     return 21;
+// }
 
 boolean IsFullStack(Stack S) {
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
@@ -95,12 +95,29 @@ void updateState(Word command, PrioQueue I, PrioQueue D, STOCK stock, TIME T, PO
 /* F. S. terbentuk infotype X untuk dan X telah di-push ke stack */
   infotype X;
   X.command = command;
-  CopyQueue(I,&(X.I));
+  MakeEmpty(&(X.I), MaxEl(I));
+  CopyQueue(I, &(X.I));
+  printInventoryExpired(X.I);
+  MakeEmpty(&(X.D), MaxEl(D));
   CopyQueue(D,&(X.D));
-  X.T = T;
-  X.l = l;
+  printInventoryDelivery(X.D);
+  CreateTime(&(X.T), T.DD, T.HH, T.MM);
+  TulisTIME1(X.T);
+  CreatePoint(&(X.l), l.X, l.Y);
+  TulisPOINT(X.l);
+  CreateStock(&(X.stock));
   CopyStock(stock, &X.stock);
+  printf("Stock\n");
   Top(*undo)++;
   InfoTop(*undo) = X;
+}
 
+void displayStack(Stack s) {
+    printInventoryDelivery(InfoTop(s).D);
+    printInventoryExpired(InfoTop(s).I);
+    TulisTIME1(InfoTop(s).T);
+    printf("\n");
+    TulisPOINT(InfoTop(s).l);
+    printf("\n");
+    printf("%s\n", InfoTop(s).command.TabWord);
 }

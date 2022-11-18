@@ -28,61 +28,61 @@ void createMap(MAP *M)
     Ordinat(S(*M))=IDX_UNDEF;
 }
 
-void loadMap(MAP *M, char *filename)
-/* I.S. map sembarang */
-/* F.S. map terbentuk dari file eksternal */
-{
-    ADVFILE(filename);
-    int i = 0;
-    int s[2];
-    while (currentChar != LINEMARK) {
-        int value = 0;
-        while (currentChar != BLANK && currentChar != LINEMARK) {
-            value = value * 10 + (currentChar - 48);
-            ADV();
-        }
-        s[i] = value;
-        if (currentChar == BLANK) {
-            ADV();
-        }
-        i++;
-    }    
+// void loadMap(MAP *M, char *filename)
+// /* I.S. map sembarang */
+// /* F.S. map terbentuk dari file eksternal */
+// {
+//     ADVFILE(filename);
+//     int i = 0;
+//     int s[2];
+//     while (currentChar != LINEMARK) {
+//         int value = 0;
+//         while (currentChar != BLANK && currentChar != LINEMARK) {
+//             value = value * 10 + (currentChar - 48);
+//             ADV();
+//         }
+//         s[i] = value;
+//         if (currentChar == BLANK) {
+//             ADV();
+//         }
+//         i++;
+//     }    
     
-    createMatrix(s[0] + 2, s[1] + 2, &MATRIX(*M));
-    // creating border for matrix peta
-    for (int i = 0; i < s[1] + 2; i++) {
-        (*M).m.mem[0][i] = '*';
-        (*M).m.mem[s[0] + 1][i] = '*';
-    }
-    for (int i = 0; i < s[0] + 2; i++) {
-        (*M).m.mem[i][0] = '*';
-        (*M).m.mem[i][s[1] + 1] = '*';
-    }
+//     createMatrix(s[0] + 2, s[1] + 2, &MATRIX(*M));
+//     // creating border for matrix peta
+//     for (int i = 0; i < s[1] + 2; i++) {
+//         (*M).m.mem[0][i] = '*';
+//         (*M).m.mem[s[0] + 1][i] = '*';
+//     }
+//     for (int i = 0; i < s[0] + 2; i++) {
+//         (*M).m.mem[i][0] = '*';
+//         (*M).m.mem[i][s[1] + 1] = '*';
+//     }
 
-    ADV(); // next after LINEMARK
-    while (currentChar != FILEMARK) {
-        for (int i = 1; i < s[0] + 1; i++) {
-            if (currentChar == LINEMARK) {
-                ADV();
-            }
-            for (int j = 1; j < s[1] + 1; j++) {
-                if (currentChar == '#') {
-                    (*M).m.mem[i][j] = BLANK;
-                    ADV();
-                } else if (currentChar != 'S') {
-                    (*M).m.mem[i][j] = currentChar;
-                    ADV();
-                } else {
-                    (*M).m.mem[i][j] = BLANK;
-                    Absis(S(*M)) = i-1;
-                    Ordinat(S(*M)) = j-1;
-                    ADV();
-                }
-            }
-        }
-    }
-    fclose(pita);
-}
+//     ADV(); // next after LINEMARK
+//     while (currentChar != FILEMARK) {
+//         for (int i = 1; i < s[0] + 1; i++) {
+//             if (currentChar == LINEMARK) {
+//                 ADV();
+//             }
+//             for (int j = 1; j < s[1] + 1; j++) {
+//                 if (currentChar == '#') {
+//                     (*M).m.mem[i][j] = BLANK;
+//                     ADV();
+//                 } else if (currentChar != 'S') {
+//                     (*M).m.mem[i][j] = currentChar;
+//                     ADV();
+//                 } else {
+//                     (*M).m.mem[i][j] = BLANK;
+//                     Absis(S(*M)) = i-1;
+//                     Ordinat(S(*M)) = j-1;
+//                     ADV();
+//                 }
+//             }
+//         }
+//     }
+//     fclose(pita);
+// }
 /* Validator */
 boolean isEmptyMap(MAP M)
 /* Mengembalikan true jika map kosong */
