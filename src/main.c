@@ -19,6 +19,7 @@
 #include "./modules/map/map.c"
 #include "./modules/resep/resep.c"
 #include "./modules/notification/notification.c"
+#include "./modules/splash_screen/splash_screen.c"
 
 // VARIABEL
 Word currentWord;
@@ -65,6 +66,8 @@ int main(){
     infotypePrioQueue buffer_makanan;
     // PROGRAM MULAI
         // Splash Screen 
+        print_ss_static();
+        printf("\n");
         
         // printf(
         //     "======================================================================================\n"
@@ -86,7 +89,7 @@ int main(){
         // Variable to save the configuration
         // Simulator
         Word command = currentWord;
-        printf("%s\n", command);
+        // printf("%s\n", command);
         CreateTime(&curTime, 0, 0, 0);
         CreatePoint(&curLoc, 0, 0);
         MakeEmpty(&curInv, 100);

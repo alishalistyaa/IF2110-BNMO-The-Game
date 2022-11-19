@@ -99,7 +99,7 @@ void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
     // Membaca makanan sebanyak countMakanan
     for(i = 0; i < countMakanan; i++){
         // TESTING
-        printf("i: %d\n", i);
+        // printf("i: %d\n", i);
         /* BACA ID */
         tempID = 0;
         ADV(); // next after LINEMARK
@@ -127,7 +127,7 @@ void configMakanan(MAP peta, char *filename, ListStatik *listofMakanan){
         int LEx[3];
         int countEx = 0;
         while (currentChar != LINEMARK) {
-            if(i == 3) printf("%c\n",currentChar);
+            // if(i == 3) printf("%c\n",currentChar);
             int value = 0;
                 while (currentChar != BLANK && currentChar != LINEMARK) {
                     value = value * 10 + (currentChar - 48);
