@@ -57,9 +57,7 @@ void printtxtfile(char* filename){
         printf ("%c", c);
         c = fgetc(fptr);
     }
-  
     fclose(fptr);
-
 }
 
 void print_ss_dinamic(const char *path){
@@ -68,6 +66,7 @@ void print_ss_dinamic(const char *path){
 
     // Unable to open directory stream
     if (!dir) 
+        printf("test\n");
         return; 
 
     while ((dp = readdir(dir)) != NULL)

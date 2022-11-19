@@ -66,7 +66,7 @@ int main(){
     infotypePrioQueue buffer_makanan;
     // PROGRAM MULAI
         // Splash Screen 
-        print_ss_static();
+        print_ss_dinamic("./utils/BMNOframes_Start");
         printf("\n");
         
         // printf(
