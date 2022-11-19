@@ -1,16 +1,18 @@
 #include "set.h"
 #include <stdio.h>
 
+
+void createEmptySet(SET* s){
+    HEADSET(*s) = MARKEMPTYSET;
+    for(int i = 0; i < CAPACITY; i++) ELMTSET(*s,i) = false;
+}
+
 boolean isEmptySet(SET s){
     boolean emp = false;
     for(int i = 0; i < CAPACITY; i++) emp |= ELMTSET(s,i);
     return !emp;
 }
 
-void createEmptySet(SET* s){
-    HEADSET(*s) = MARKEMPTYSET;
-    for(int i = 0; i < CAPACITY; i++) ELMTSET(*s,i) = false;
-}
 
 SET concatSet(SET s1, SET s2){
     SET s3;

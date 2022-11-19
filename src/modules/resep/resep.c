@@ -124,10 +124,6 @@ void printBahanMissing(Resep r, STOCK S, ListStatik listmakanan){
 
 
 //ADT SET
-void createEmptySet(SET* s){
-    HEADSET(*s) = MARKEMPTYSET;
-    for(int i = 0; i < CAPACITY; i++) ELMTSET(*s,i) = false;
-}
 
 SET StockToSet(STOCK St){
     SET s;
@@ -166,13 +162,6 @@ void ListRekomenn(SET stock, BukuResep b, SET *listrkm){
                 if(ELMTSET(stock,k) && ELMTSET(ResepToSet(ELMTBUKURESEP(b,i)),k)) ELMTSET(newstock,k) = false;
                 else ELMTSET(newstock,k) = ELMTSET(stock,k);
             }
-            //Untuk ELMT dari newstocknya HEADSETnya resep diupdate
-            ELMTSET(newstock,HEADSET(ResepToSet(ELMTBUKURESEP(b,i)))) = true;
-            ELMTSET(*listrkm,HEADSET(ResepToSet(ELMTBUKURESEP(b,i)))) = true;
-
-            ListRekomenn(newstock, b, listrkm);
-
-
 
 
         }
