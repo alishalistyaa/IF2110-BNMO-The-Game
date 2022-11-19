@@ -21,7 +21,13 @@
 /* Nilai elemen tak terdefinisi*/
 #define MARKMAKANAN -999
 /*ID untuk Makanan tak terdefinisi*/
-#define MARKSTOCK -1
+#define MARKSTOCK -11
+/*ID_Makanan set dari stock adalah -11*/
+#define MARKLISTREKOMEN -111
+/*ID_Makanan set dari list Rekomen adalah -111*/
+#define MARKEMPTYSET -1111
+/*EmptySet memiliki Mark -1111*/
+
 
 
 
@@ -92,10 +98,18 @@ void printBahanMissing(Resep r, STOCK , ListStatik listmakanan);
 
 
 //ADT SET
+void createEmptySet(SET* s);
 
 SET StockToSet(STOCK St);
 
 SET ResepToSet(Resep r);
+
+boolean isSubset(SET s1, SET s2); //Mengecek apakah s1 adalah subset dari s2
+
+SET concatSet(SET s1, SET s2)
+
+void ListRekomenn(SET stock, BukuResep b, SET *listrkm);
+
 
 
 

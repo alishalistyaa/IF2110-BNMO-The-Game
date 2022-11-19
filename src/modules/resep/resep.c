@@ -124,6 +124,11 @@ void printBahanMissing(Resep r, STOCK S, ListStatik listmakanan){
 
 
 //ADT SET
+void createEmptySet(SET* s){
+    HEADSET(*s) = MARKEMPTYSET;
+    for(int i = 0; i < CAPACITY; i++) ELMTSET(*s,i) = 0;
+}
+
 SET StockToSet(STOCK St){
     SET s;
     HEADSET(s) = MARKSTOCK;
@@ -141,6 +146,37 @@ SET ResepToSet(Resep r){
         ELMTSET(s,Root(getChild(r,i))) = 1;
     }
     return s;
+}
+
+SET concatSet(SET s1, SET s2){
+    SET s3;
+    createEmptySet(&s3);
+    for(int i = 0; i < CAPACITY; i++)
+}
+
+boolean isSubset(SET s1, SET s2){
+    boolean state = true;
+    for(int i = 0; i < CAPACITY; i++){
+        if(ELMTSET(s1,i) == 0 && ELMTSET(s2,i) == 1) state = false;
+    }
+    return state;
+}
+
+void ListRekomenn(SET stock, BukuResep b, SET *listrkm){
+    for(int i = 0; i < nResep; i++){
+        if(isSubset(stock,ResepToSet(ELMTBUKURESEP(b,i)))){
+            //Buat Stock baru
+            SET newstock;
+            createEmptySet(&newstock);
+            HEADSET(newstock) = MARKSTOCK;
+            //Update elemen newstock
+            for(int k = 0; k < CAPACITY; k++){
+                if(sto)
+            }
+
+
+        }
+    }
 }
 
 
