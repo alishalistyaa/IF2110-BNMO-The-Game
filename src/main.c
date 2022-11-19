@@ -18,12 +18,12 @@
 #include "./modules/simulator/simulator.c"
 #include "./modules/map/map.c"
 #include "./modules/resep/resep.c"
-// #include "./modules/notification/notification.c"
+#include "./modules/notification/notification.c"
 
+// VARIABEL
 Word currentWord;
 boolean endWord;
 char currentChar;
-
 
 
 int main(){
@@ -47,6 +47,7 @@ int main(){
     ListStatik choplist;
     ListStatik boillist;
     ListStatik frylist;
+    List_Link notifParser;
 
     /* ALGORITMA */
     // Inisialisasi Game
@@ -64,6 +65,7 @@ int main(){
     infotypePrioQueue buffer_makanan;
     // PROGRAM MULAI
         // Splash Screen 
+        
         // printf(
         //     "======================================================================================\n"
         //     "\n"
@@ -161,19 +163,20 @@ int main(){
      
         while (start){
             curLoc = Location(SIMULATOR(peta));
-            printf("\n");
+            printf("\n\n");
             printf("BNMO di posisi: ");
             TulisPOINT(curLoc);
             printf("\n");
             printf("Waktu: ");
             TulisTIME1(curTime);
             printf("\n");
-            if (same(command, "UNDO")) { 
-                printf("masi diperbaiki");   
-                // printNotif(InfoTop(undo));
-            } else {
-                printf("Notifikasi: -\n");
-            }
+            printAllNotif(&Notification(BNMO));
+            // if (same(command, "UNDO")) { 
+            //     // printf("masi diperbaiki");   
+            //     // printNotif(InfoTop(undo));
+            // } else {
+            //     printf("Notifikasi: -\n");
+            // }
             printMap(peta);
             printf("Enter command: ");
             STARTWORDBlank();
@@ -497,7 +500,7 @@ int main(){
                 if (IsEmptyStack(undo)) {
                     printf("Tidak ada yang bisa di-undo!\n");
                 } else{
-                    printf("Go here\n");
+                    // printf("Go here\n");
                     STOCK tempStock = curStock;    
                     undocommand[count_undocommand] = InfoTop(undo).command;  
                     Undo(&undo, &redo, &command, &curInv, &curDeliv, &curStock, &curTime, &(Location(SIMULATOR(peta))));

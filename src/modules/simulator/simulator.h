@@ -13,6 +13,7 @@
 #include "../makanan/makanan.h"
 #include "../wordmachine/wordmachine.h"
 #include "../time/time.h"
+#include "../notification/notification.h"
 
 /***** Definisi TYPE LOKASI *****/
 typedef struct{
@@ -20,6 +21,7 @@ typedef struct{
     POINT LOCATION; /* Koordinat Lokasi pada Map */
     PrioQueue INVENTORY; /* Inventory */
     TIME TIME; /* Waktu */
+    List_Link NOTIFICATION;
 } SIMULATOR;
 
 /* NOTASI AKSES: Selektor SIMULATOR */
@@ -27,6 +29,7 @@ typedef struct{
 #define Location(S) (S).LOCATION
 #define Inventory(S) (S).INVENTORY
 #define Time2(S) (S).TIME
+#define Notification(S) (S).NOTIFICATION
 
 /* ** DEFINISI PROTOTIPE PRIMITIF ** */
 /* ** Konstruktor PEMBENTUK SIMULATOR ***/
@@ -61,5 +64,13 @@ void setTime(SIMULATOR * S, TIME T);
     F.S. : meng-set currentTime pada SIMULATOR */
 
 void passTime (SIMULATOR *S, long plus, TIME *T);
+
+void printNotif(Notif N);
+/*  I.S. : sembarang
+    F.S. : mencetak notifikasi */
+
+void printAllNotif(List_Link *L);
+/*  I.S. : sembarang
+    F.S. : mencetak semua notifikasi */
 
 #endif

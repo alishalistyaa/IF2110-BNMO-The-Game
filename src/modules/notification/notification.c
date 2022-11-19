@@ -1,107 +1,115 @@
 #include "notification.h"
+#include "../wordmachine/wordmachine.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-void addWord(Notif *N, Word Kata, int tipeMode){
-    /* Fungsi Menambah Kata pada WORDLIST */
-    /* Tipe Mode berdasarkan jenisnya 
-    1 -> notifInventory
-    2 -> notifKedaluarsa
-    3 -> notif UndoRedo */
-    int i = 0;
-    CreateMarkWord();
-    if(tipeMode == 1){
-        while(!same(MARKWORDLIST, ELMTWORDLIST(NOTIFINV(*N), i).TabWord && i != CAPACITYWORDLIST)){
-            ELMTWORDLIST(NOTIFINV(*N), i+1) = Kata;
-            i++;
-        }
-    } else if(tipeMode == 2){
-        while(!same(MARKWORDLIST, ELMTWORDLIST(NOTIFEXP(*N), i).TabWord && i != CAPACITYWORDLIST)){
-            ELMTWORDLIST(NOTIFEXP(*N), i+1) = Kata;
-            i++;
-        }
+/*********************************************/
+/********************Notif********************/
+/*********************************************/
 
-    } else if(tipeMode == 3){
-        while(!same(MARKWORDLIST, ELMTWORDLIST(NOTIFUNDOREDO(*N), i).TabWord && i != CAPACITYWORDLIST)){
-            ELMTWORDLIST(NOTIFUNDOREDO(*N), i+1) = Kata;
-            i++;
-        }
+Address_n newNode(ElTypeL N){
+    /* KAMUS */
+    Address_n P;
+
+    /* ALGORITMA */
+    P = (Address_n) malloc(sizeof(NodeList_n));
+    if(P != NULL){
+        INFO(P) = N;
+        NEXT(P) = NULL;
+    }
+    return P;
+}
+
+Notif createNotif(char kasus, MAKANAN val){
+    /* KAMUS */
+    Notif N;
+    int i;
+
+    /* ALGORITMA */
+    KASUS(N) = kasus;
+    for(i=0; i<25; i++){
+        ELMT_ITEM(N, i) = val.Name.TabWord[i];
+    }
+    return N;
+}
+/* Membentuk sebuah Notif dari komponen-komponennya */
+
+/***************************************************/
+/********************Linked List********************/
+/***************************************************/
+
+
+void createListLink(List_Link *L)
+/* I.S. sembarang             */
+/* F.S. Terbentuk list kosong */
+{
+    /* KAMUS */
+
+    /* ALGORITMA */
+    FIRST(*L) = NULL;
+}
+
+boolean isEmptyListLink(List_Link L)
+//mengembalikan true jika listlink kosong
+{
+    /* KAMUS */
+
+    /* ALGORITMA */
+    return (FIRST(L) == NULL);
+}
+
+void insertFirst(List_Link *L, char kasus, MAKANAN item)
+/* I.S. L mungkin kosong */
+/* F.S. Melakukan alokasi sebuah elemen dan */
+/* menambahkan elemen pertama dengan Notif N jika alokasi berhasil. */
+/* Jika alokasi gagal: I.S.= F.S. dan menampilkan "Allocation Error"*/
+{
+    /* KAMUS */
+    Address_n P;
+    Notif N;
+
+    /* ALGORITMA */
+    N = createNotif(kasus, item);
+    P = newNode(N);
+    if(P != NULL){
+        NEXT(P) = FIRST(*L);
+        FIRST(*L) = P;
+    } else {
+        printf("Alokasi Gagal\n");
     }
 }
 
-void printNotifDelivery(Notif N){
-    /* Fungsi mencetak ke layar*/
-    int l;
-    l = lengthWordList(NOTIFINV(N));
-    for(int i=0; i<l; i++){
-        printf("- %s sudah diterima oleh BNMO!\n", ELMTWORDLIST(NOTIFINV(N), i));
+void deleteFirst(List_Link *L, ElTypeL *N)
+/* I.S. List L tidak kosong  */
+/* F.S. Elemen pertama list dihapus: Notif disimpan pada N */
+/*      dan alamat elemen pertama di-dealokasi */
+{
+    /* KAMUS */
+    Address_n P;
+
+    /* ALGORITMA */
+    P = FIRST(*L);
+    FIRST(*L) = NEXT(P);
+    *N = INFO(P);
+    free(P);
+}
+
+void concatDel(List_Link *L_bawah, List_Link *L_atas)
+//L_bawah bakal habis masuk ke L_atas
+{
+    /* KAMUS */
+    Address_n P;
+
+    /* ALGORITMA */
+    if(isEmptyListLink(*L_bawah)){
+        printf("List bawah kosong\n");
+    } else {
+        P = FIRST(*L_bawah);
+        while(NEXT(P) != NULL){
+            P = NEXT(P);
+        }
+        NEXT(P) = FIRST(*L_atas);
+        FIRST(*L_atas) = FIRST(*L_bawah);
+        FIRST(*L_bawah) = NULL;
     }
 }
-
-void printNotifExpired(Notif N){
-    /* Fungsi mencetak ke layar*/
-    int l;
-    l = lengthWordList(NOTIFEXP(N));
-    for(int i=0; i<l; i++){
-        printf("- %s kedaluwarsa...\n", ELMTWORDLIST(NOTIFEXP(N), i));
-    }
-}
-void printNotifUndoAction(Notif N){
-    /* Fungsi mencetak ke layar*/
-    int l;
-    l = lengthWordList(NOTIFUNDOREDO(N));
-    for(int i=0; i<l; i++){
-        printf("- Pembuatan %s dibatalkan.\n", ELMTWORDLIST(NOTIFUNDOREDO(N), i));
-    }    
-}
-
-void printNotifUndoWaktu(Notif N){
-    /* Fungsi mencetak ke layar*/
-    int l;
-    l = lengthWordList(NOTIFUNDOREDO(N));
-    for(int i=0; i<l; i++){
-        printf("- %s .\n", ELMTWORDLIST(NOTIFUNDOREDO(N), i));
-    }     
-}
-
-void printallnotif(Notif N){
-    printNotifUndoWaktu(N);
-    printNotifUndoAction(N);
-    printNotifExpired(N);
-    printNotifDelivery(N);
-}
-
-// void printNotif(Word command, Word makanan) {
-//     // PEMBATALAN ACTION
-//     if (same(command, "FRY")) {
-//         printf("Penggorengan ");
-//         printf("%s ", makanan);
-//         printf("dibatalkan\n");
-//     } 
-//     if (same(command, "CHOP")) {
-//         printf("Pemotongan ");
-//         printf("%s ", makanan);
-//         printf("dibatalkan\n");
-//     } 
-//     if (same(command, "BOIL")) {
-//         printf("Perebusan ");
-//         printf("%s ", makanan);
-//         printf("dibatalkan\n");
-//     } 
-//     if (same(command, "MIX")) {
-//         printf("%d. ");
-//         printf("%s ", makanan);
-//         printf("dibatalkan\n");
-//     } 
-
-//     // Delivery Done
-//     if (same(command, "DELIVERY")) {
-//         printf("%d. ");
-//         printf("%s ", makanan);
-//         printf("sudah diterima oleh BNMO!\n");
-//     }
-
-//     // Kadaluwarsa
-//     if (same(command, "EXPIRED")) {
-//         printf("%s ", makanan);
-//         printf("kedaluwarsa...\n");
-//     }
-// }

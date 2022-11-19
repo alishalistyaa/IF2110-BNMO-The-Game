@@ -38,7 +38,7 @@ void Push(Stack * S, infotype X) {
         Top(*S) = 0;
     }
     else {
-        printf("Penambahan\n");
+        // printf("Penambahan\n");
         Top(*S)++;
     }
     InfoTop(*S).command = X.command;
@@ -80,17 +80,17 @@ void Undo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, PrioQueue *D, S
     /* Menghapus Top dari Stack Undo dan memasukkannya ke Stack Redo */
     infotype s;
     Pop(undo, &s);
-    printf("TOP UNDO: %d\n", Top(*undo));
+    // printf("TOP UNDO: %d\n", Top(*undo));
     *command = InfoTop(*undo).command;
     CopyQueue(InfoTop(*undo).I, I);
     CopyQueue(InfoTop(*undo).D, D);
     *T = InfoTop(*undo).T;
     *l = InfoTop(*undo).l;
-    TulisPOINT(InfoTop(*undo).l);
-    printf("\n");
+    // TulisPOINT(InfoTop(*undo).l);
+    // printf("\n");
     CopyStock(InfoTop(*undo).stock, stock);
     Push(Redo, s);
-    printf("Command : %s\n", InfoTop(*Redo).command.TabWord);
+    // printf("Command : %s\n", InfoTop(*Redo).command.TabWord);
 }
 void Redo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, PrioQueue *D, STOCK *stock, TIME *T, POINT *l) {
     /* Melakukan proses redo */
@@ -98,17 +98,17 @@ void Redo(Stack *undo, Stack *Redo, Word *command, PrioQueue *I, PrioQueue *D, S
     infotype s;
     Pop(Redo, &s);
     Push(undo, s);
-    printf("TOP UNDO: %d\n", Top(*undo));
-    printf("Command : %s\n", InfoTop(*undo).command.TabWord);
+    // printf("TOP UNDO: %d\n", Top(*undo));
+    // printf("Command : %s\n", InfoTop(*undo).command.TabWord);
     *command = InfoTop(*undo).command;
     CopyQueue(InfoTop(*undo).I, I);
     CopyQueue(InfoTop(*undo).D, D);
     *T = InfoTop(*undo).T;
     *l = InfoTop(*undo).l;
     CopyStock(InfoTop(*undo).stock, stock);
-    printf("Loc : ");
-    TulisPOINT(InfoTop(*undo).l);
-    printf("\n");
+    // printf("Loc : ");
+    // TulisPOINT(InfoTop(*undo).l);
+    // printf("\n");
 }
 
 void updateState(Word command, PrioQueue I, PrioQueue D, STOCK stock, TIME T, POINT l, Stack *undo) {
@@ -119,14 +119,14 @@ void updateState(Word command, PrioQueue I, PrioQueue D, STOCK stock, TIME T, PO
   X.command = command;
   MakeEmpty(&(X.I), MaxEl(I));
   CopyQueue(I, &(X.I));
-  printInventoryExpired(X.I);
+//   printInventoryExpired(X.I);
   MakeEmpty(&(X.D), MaxEl(D));
   CopyQueue(D,&(X.D));
-  printInventoryDelivery(X.D);
+//   printInventoryDelivery(X.D);
   CreateTime(&(X.T), T.DD, T.HH, T.MM);
-  TulisTIME1(X.T);
+//   TulisTIME1(X.T);
   CreatePoint(&(X.l), l.X, l.Y);
-  TulisPOINT(X.l);
+//   TulisPOINT(X.l);
   CreateStock(&(X.stock));
   CopyStock(stock, &X.stock);
 
