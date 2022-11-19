@@ -123,6 +123,12 @@ void printBahanMissing(Resep r, STOCK S, ListStatik listmakanan){
 }
 
 
+//ADT SET
+void createEmptySet(SET* s){
+    HEADSET(*s) = MARKEMPTYSET;
+    for(int i = 0; i < CAPACITY; i++) ELMTSET(*s,i) = false;
+}
+
 SET StockToSet(STOCK St){
     SET s;
     createEmptySet(&s);
@@ -164,7 +170,6 @@ void ListRekomenn(SET stock, BukuResep b, SET *listrkm){
             ELMTSET(newstock,HEADSET(ResepToSet(ELMTBUKURESEP(b,i)))) = true;
             ELMTSET(*listrkm,HEADSET(ResepToSet(ELMTBUKURESEP(b,i)))) = true;
 
-            //Rekurens
             ListRekomenn(newstock, b, listrkm);
 
 
@@ -174,15 +179,6 @@ void ListRekomenn(SET stock, BukuResep b, SET *listrkm){
     }
 }
 
-/*
-*******************************************************************
-*******************************************************************
-*******************************************************************
----------------------- BONUS 3 ------------------------------------
-*******************************************************************
-*******************************************************************
-*******************************************************************
-*/
 SET ListRekomen(SET stock, BukuResep b){
     SET listrkm;
     createEmptySet(&listrkm);
@@ -191,17 +187,17 @@ SET ListRekomen(SET stock, BukuResep b){
     return listrkm;
 }
 
-
-
-void printListRekomen(SET s, ListStatik l){
-    int counter = 1;
+void printSet(SET s){
+    printf("(");
+    boolean first = true;
     for(int i = 0; i < CAPACITY; i++){
-        if(ELMTSET(s,i)){
-            printf("%d. %s\n",counter,getNameMakanan(l,i).TabWord);
-            counter++;  
+        if(ELMTSET(s,i) && first){
+            printf("%d",i);
+            first = false;
         }
+        else if(ELMTSET(s,i) && !first) printf(",%d",i);
     }
-
+    printf(")\n");
     
 }
 
