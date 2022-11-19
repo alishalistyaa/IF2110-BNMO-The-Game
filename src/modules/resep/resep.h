@@ -108,9 +108,9 @@ boolean isSubset(SET s1, SET s2); //Mengecek apakah s1 adalah subset dari s2
 
 SET concatSet(SET s1, SET s2)
 
-void ListRekomenn(SET stock, BukuResep b, SET *listrkm);
+SET ListRekomen(SET stock, BukuResep b);
 
-
+void printSet(SET s);
 
 
 #endif
