@@ -204,6 +204,9 @@ int commandToInt(Word x){
     else if(same(x, "EXIT")){
         return 15;
     }
+    else if(same(x, "REKOMEN_MAKANAN")){
+        return 16;
+    }
     return 0;
 }
 

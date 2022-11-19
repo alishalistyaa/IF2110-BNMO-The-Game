@@ -61,7 +61,7 @@ int lengthList(ListStatik l);
 /* Mengirimkan banyaknya elemen efektif List */
 /* Mengirimkan nol jika List kosong */  
 
-Word getNameMakanan(ListStatik l, int idx);
+Word getNameMakanan(ListStatik l, int ID);
 /* Mengirimkan nama makanan dari ID */
 
 MAKANAN getMakanan(ListStatik l, int ID);

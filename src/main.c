@@ -19,7 +19,29 @@
 #include "./modules/map/map.c"
 #include "./modules/resep/resep.c"
 #include "./modules/notification/notification.c"
-#include "./modules/splash_screen/splash_screen.c"
+#include "./modules/set/set.c"
+
+//UNCOMMENT COMMAND DI BAWAH APABILA DIJALANKAN TANPA FILE .c NYA
+// #include "./modules/boolean/boolean.h"
+// #include "./modules/wordmachine/wordmachine.h"
+// #include "./modules/charmachine/charmachine.h"
+// #include "./modules/list/liststatik.h"
+// #include "./modules/makanan/makanan.h"
+// #include "./modules/matriks/matriks.h"
+// #include "./modules/point/point.h"
+// // #include "./modules/queue/queue.h"
+// #include "./modules/prioqueue/prioqueue.h"
+// #include "./modules/stack/stack.h"
+// #include "./modules/time/time.h"
+// #include "./modules/tree/tree.h"
+// #include "./modules/i_o/i_o.h"
+// #include "./modules/building/building.h"
+// #include "./modules/simulator/simulator.h"
+// #include "./modules/map/map.h"
+// #include "./modules/resep/resep.h"
+// #include "./modules/notification/notification.h"
+// #include "./modules/set/set.h"
+
 
 // VARIABEL
 Word currentWord;
@@ -70,7 +92,7 @@ int main(){
     infotypePrioQueue buffer_makanan;
     // PROGRAM MULAI
         // Splash Screen 
-        print_ss_dinamic("./utils/BMNOframes_Start");
+        // print_ss_dinamic("./utils/BMNOframes_Start");
         printf("\n");
         
             printf( 
@@ -94,6 +116,7 @@ int main(){
     STARTWORD();
     if (same(currentWord, "START")) {
         // Variable to save the configuration
+
         // Simulator
         Word command = currentWord;
         // printf("%s\n", command);
@@ -118,23 +141,12 @@ int main(){
         CreateListStatik(&boillist);
         CreateListStatik(&choplist);
         CreateListStatik(&mixlist);
-        // Inisialisasi array of word
+        
         // Undo-Redo
         CreateEmpty(&undo);
         CreateEmpty(&redo);
 
-        // infotype X;
-  
-        // X.command = command;
-        // X.I = curInv;
-        // X.D = curDeliv;
-        // X.T = curTime;
-        // X.l = curLoc;
-        // X.stock = curStock;
-        // Top(undo) = 0;
-        // InfoTop(undo) = X;
-
-        // printf("%d",IsEmptyStack(undo));
+        
         updateState(command, curInv, curDeliv, curStock, curTime, curLoc, &undo);
         int count = 0;
         do {
@@ -148,8 +160,8 @@ int main(){
                 printf("makanan: ");
             }
             STARTWORD();
+            normalizeFilename(&currentWord);
             filename = currentWord.TabWord;
-            normalizeFilename(filename);
             if (!isFileExist(filename)) {
                 printf("Masukan file tidak valid!\n");
             } else {
@@ -625,6 +637,7 @@ int main(){
                     "11. COOKBOOK   | Melihat resep yang dapat dibuat \n"
                     "12. INVENTORY  | Melihat inventory \n"
                     "13. DELIVERY   | Melihat barang yang sedang diantar\n"
+                    "14. REKOMEN_MAKANAN   | Melihat rekomendasi makanan berdasarkan barang yang ada di inventory\n"
                     );
                 break;
 
@@ -632,13 +645,43 @@ int main(){
                 printf("Game berhenti\n");
                 start = false;
                 break;
+            case 16:
+                /*
+                *******************************************************************
+                *******************************************************************
+                *******************************************************************
+                ---------------------- BONUS 3 ------------------------------------
+                *******************************************************************
+                *******************************************************************
+                *******************************************************************
+                */
+                printf("");
+                SET stokk = StockToSet(curStock);
+                
+                if(isEmptySet(stokk)){
+                    printf("Stok Inventory Kosong!\n");
+                }
+                else{
+                    SET listrkm = ListRekomen(stokk,bookRsp);
+                    if (isEmptySet(listrkm)) printf("Tidak dapat membuat makanan apapun! kekurangan bahan!\n");
+                    else{
+                        printf("======================\n");
+                        printf(" REKOMENDASI MAKANAN \n");
+                        printf("======================\n");
+                        printListRekomen(listrkm,listMakanan);
+                    } 
+                }  
+                break;
+                
+
+                break;
             default:
                 printf("\nInput tidak valid! Coba lagi!\n");
                 validinput = false;
                 break;
             }
 
-        if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT") && !same(command,"WAIT") && !same(command, "DELIVERY") && !same(command, "COOKBOOK") && !same(command, "INVENTORY") && validinput) {
+        if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT") && !same(command,"WAIT") && !same(command, "DELIVERY") && !same(command, "COOKBOOK") && !same(command, "INVENTORY") && validinput && !same(command,"REKOMEN_MAKANAN")) {
             decreaseTimeDelivery(&curDeliv,1);
             decreaseTimeExpired(&curInv,1);
             delivered = false;

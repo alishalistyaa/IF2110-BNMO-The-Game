@@ -8,6 +8,7 @@
 #include "../building/building.h"
 #include "../prioqueue/prioqueue.h"
 #include "../wordmachine/wordmachine.h"
+#include "../set/set.h"
 //Membuat ADT resep dan buku resep dengan model list statik secara eksplisit
 
 /*  Kamus Umum */
@@ -21,12 +22,7 @@
 /* Nilai elemen tak terdefinisi*/
 #define MARKMAKANAN -999
 /*ID untuk Makanan tak terdefinisi*/
-#define MARKSTOCK -11
-/*ID_Makanan set dari stock adalah -11*/
-#define MARKLISTREKOMEN -111
-/*ID_Makanan set dari list Rekomen adalah -111*/
-#define MARKEMPTYSET -1111
-/*EmptySet memiliki Mark -1111*/
+
 
 
 
@@ -43,17 +39,16 @@ typedef struct {
    int nResep;
 } BukuResep;
 
-typedef struct {
-   int ID_Makanan;
-   int ID_Bahan[CAPACITY]; /* memori tempat penyimpan elemen (container) */
-} SET;
+// typedef struct {
+//    int ID_Makanan;
+//    int ID_Bahan[CAPACITY]; /* memori tempat penyimpan elemen (container) */
+// } SET;
 
 // --SELEKTOR--
 #define ELMTBUKURESEP(b, i) (b).contents[i]
 #define BanyakResep(b) (b).nResep
 #define MethodResep(r) Method(r)
-#define HEADSET(S) (S).ID_Makanan
-#define ELMTSET(S,i) (S).ID_Bahan[i]
+
 
 //--KONSTRUKTOR--
 
@@ -98,19 +93,19 @@ void printBahanMissing(Resep r, STOCK , ListStatik listmakanan);
 
 
 //ADT SET
-void createEmptySet(SET* s);
+
 
 SET StockToSet(STOCK St);
 
+//Mengubah Stock makanan menjadi jenis Set
+
 SET ResepToSet(Resep r);
+//Mengubah Resep makanan(dalam tree) menjadi jenis Set
 
-boolean isSubset(SET s1, SET s2); //Mengecek apakah s1 adalah subset dari s2
+SET ListRekomen(SET stock, BukuResep b);
+//Mengambil List Rekomendasi
 
-SET concatSet(SET s1, SET s2)
-
-void ListRekomenn(SET stock, BukuResep b, SET *listrkm);
-
-
+void printListRekomen(SET s, ListStatik l);
 
 
 #endif

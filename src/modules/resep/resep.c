@@ -123,47 +123,33 @@ void printBahanMissing(Resep r, STOCK S, ListStatik listmakanan){
 }
 
 
-//ADT SET
-void createEmptySet(SET* s){
-    HEADSET(*s) = MARKEMPTYSET;
-    for(int i = 0; i < CAPACITY; i++) ELMTSET(*s,i) = 0;
-}
-
 SET StockToSet(STOCK St){
     SET s;
+    createEmptySet(&s);
     HEADSET(s) = MARKSTOCK;
     for(int i = 0; i < CAPACITY; i++){
-        if(ELMTSTOCK(St,i) > 0) ELMTSET(s,i) = 1;
-        else ELMTSET(s,i) = 0;
+        if(ELMTSTOCK(St,i) > 0) ELMTSET(s,i) = true;
+        else ELMTSET(s,i) = false;
     }
     return s;
 }
 
 SET ResepToSet(Resep r){
     SET s;
+    createEmptySet(&s);
     HEADSET(s) = Root(r);
     for(int i = 0; i < nChild(r); i++){
-        ELMTSET(s,Root(getChild(r,i))) = 1;
+        ELMTSET(s,Root(getChild(r,i))) = true;
     }
     return s;
 }
 
-SET concatSet(SET s1, SET s2){
-    SET s3;
-    createEmptySet(&s3);
-    for(int i = 0; i < CAPACITY; i++)
-}
 
-boolean isSubset(SET s1, SET s2){
-    boolean state = true;
-    for(int i = 0; i < CAPACITY; i++){
-        if(ELMTSET(s1,i) == 0 && ELMTSET(s2,i) == 1) state = false;
-    }
-    return state;
-}
 
 void ListRekomenn(SET stock, BukuResep b, SET *listrkm){
-    for(int i = 0; i < nResep; i++){
+    for(int i = 0; i < BanyakResep(b); i++){
+        //KAMUS
+        // ResepToSet(ELMTBUKURESEP(b,i)) : Resep representasi Set
         if(isSubset(stock,ResepToSet(ELMTBUKURESEP(b,i)))){
             //Buat Stock baru
             SET newstock;
@@ -171,12 +157,52 @@ void ListRekomenn(SET stock, BukuResep b, SET *listrkm){
             HEADSET(newstock) = MARKSTOCK;
             //Update elemen newstock
             for(int k = 0; k < CAPACITY; k++){
-                if(sto)
+                if(ELMTSET(stock,k) && ELMTSET(ResepToSet(ELMTBUKURESEP(b,i)),k)) ELMTSET(newstock,k) = false;
+                else ELMTSET(newstock,k) = ELMTSET(stock,k);
             }
+            //Untuk ELMT dari newstocknya HEADSETnya resep diupdate
+            ELMTSET(newstock,HEADSET(ResepToSet(ELMTBUKURESEP(b,i)))) = true;
+            ELMTSET(*listrkm,HEADSET(ResepToSet(ELMTBUKURESEP(b,i)))) = true;
+
+            //Rekurens
+            ListRekomenn(newstock, b, listrkm);
+
+
 
 
         }
     }
+}
+
+/*
+*******************************************************************
+*******************************************************************
+*******************************************************************
+---------------------- BONUS 3 ------------------------------------
+*******************************************************************
+*******************************************************************
+*******************************************************************
+*/
+SET ListRekomen(SET stock, BukuResep b){
+    SET listrkm;
+    createEmptySet(&listrkm);
+    HEADSET(listrkm) = MARKLISTREKOMEN;
+    ListRekomenn(stock, b, &listrkm);
+    return listrkm;
+}
+
+
+
+void printListRekomen(SET s, ListStatik l){
+    int counter = 1;
+    for(int i = 0; i < CAPACITY; i++){
+        if(ELMTSET(s,i)){
+            printf("%d. %s\n",counter,getNameMakanan(l,i).TabWord);
+            counter++;  
+        }
+    }
+
+    
 }
 
 

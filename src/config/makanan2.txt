@@ -1,0 +1,86 @@
+17
+11
+Ayam Mentah
+1 0 0
+0 0 15
+Buy
+12
+Air
+20 0 0
+0 0 15
+Buy
+21
+Ayam Potong
+0 2 0
+0 0 0
+Chop
+10
+Tepung
+0 1 0
+0 0 30
+Buy
+15
+Minyak Goreng
+0 1 30
+0 1 0
+Buy
+31
+Ayam Tepung
+0 0 30
+0 0 0
+Mix
+37
+Ayam Goreng
+0 0 15
+0 0 0
+Fry
+13
+Cabai
+0 2 0
+0 1 0
+Buy
+14
+Bawang
+0 2 0
+0 1 0
+Buy
+22
+Sambal
+0 2 0
+0 0 0
+Mix
+36
+Sambal Goreng
+0 2 0
+0 0 0
+Fry
+38
+Ayam Goreng extra Sambal
+0 1 0
+0 0 0
+Mix
+41
+Lalapan
+0 1 0
+0 0 5
+Buy
+42
+Nasi Uduk
+0 1 0
+0 0 1
+Buy
+43
+Nasi Uduk Pecel Ayam
+0 1 0
+0 0 0
+Mix
+16
+Telur Mentah
+0 5 0
+0 0 5
+Buy
+23
+Telur Rebus
+0 1 0
+0 0 0
+Boil

@@ -89,13 +89,13 @@ int lengthList(ListStatik l){
     return (i);
 }
 
-Word getNameMakanan(ListStatik l, int idx){
+Word getNameMakanan(ListStatik l, int ID){
     /* Mengirimkan nama makanan dari ID */
     boolean isFound = false;
     Word makanan;
     int i = 0;
     while(!isFound && i!=CAPACITY){
-        if (ID(ELMTLIST(l, i)) == idx){
+        if (ID(ELMTLIST(l, i)) == ID){
             makanan = NAME(ELMTLIST(l, i));
             isFound = true;
         }
