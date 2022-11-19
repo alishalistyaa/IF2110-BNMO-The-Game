@@ -7,8 +7,8 @@
 /*Notifikasi Menggunakan List Linked*/
 
 typedef struct { 
-	char kasus; 
-	char item[25]; 
+	Word kasus; 
+	Word item; 
 } Notif;
 
 typedef Notif ElTypeL;
@@ -21,7 +21,6 @@ typedef struct node_n {
 /***SELEKTOR***/
 #define KASUS(n) (n).kasus
 #define ITEM(n) (n).item
-#define ELMT_ITEM(n,i) (n).item[i] 
 #define INFO(p) (p)->info
 #define NEXT(p) (p)->next
 
@@ -40,7 +39,7 @@ typedef Address_n List_Link;
 /********************Notif********************/
 /*********************************************/
 
-Notif createNotif(char kasus, MAKANAN  item);
+Notif createNotif(Word kasus, Word item);
 /* Membentuk sebuah Notif dari komponen-komponennya */
 
 /***************************************************/
@@ -55,7 +54,7 @@ void createListLink(List_Link *L);
 boolean isEmptyListLink(List_Link L);
 //mengembalikan true jika listlink kosong
 
-void insertFirst(List_Link *L, char kasus, MAKANAN item);
+void insertFirst(List_Link *L, Word kasus, Word item);
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan Notif N jika alokasi berhasil. */

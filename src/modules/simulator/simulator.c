@@ -13,7 +13,6 @@ void CreateSimulator(SIMULATOR * S, char X[], POINT P, PrioQueue I, TIME T){
     Location(*S) = P; 
     Inventory(*S) = I;
     Time2(*S) = T;
-    createListLink(&Notification(*S));
 }
 
 /** Primitif SIMULATOR **/
@@ -67,47 +66,48 @@ void passTime (SIMULATOR *S, long plus, TIME *T){
     Time2(*S) = *T;
     }
 
-void printNotification(Notif N){
+void printNotification(Notif N, boolean isUndo){
 /*  I.S. : sembarang
     F.S. : mencetak notifikasi */
 
     /* ALGORITMA */
-    if(KASUS(N) == 'd'){
-        printf("%s sudah berhasil diterima!\n", ITEM(N));
-    }else if(KASUS(N) == 'e'){
-        printf("%s kadaluwarsa!\n", ITEM(N));
-    }else if(KASUS(N) == '1'){
-        printf("Anda telah membatalkan pencampuran %s!\n", ITEM(N));
-    }else if(KASUS(N) == '2'){
-        printf("Anda telah membatalkan pemotongan %s!\n", ITEM(N));
-    }else if(KASUS(N) == '3'){
-        printf("Anda telah membatalkan penggorengan %s!\n", ITEM(N));
-    }else if(KASUS(N) == '4'){
-        printf("Anda telah membatalkan perebusan %s!\n", ITEM(N));
-    }else if(KASUS(N) == '5'){
-        printf("Anda telah membatalkan pembelian %s!\n", ITEM(N));
-    }else if(KASUS(N) == '6'){
+    if(same(KASUS(N),"DELIVERY") && (isUndo)){
         printf("%s tidak jadi di-delivery!\n", ITEM(N));
-    }else if(KASUS(N) == '7'){
+    }else if(same(KASUS(N),"EXPIRED") && (isUndo)){
         printf("%s tidak jadi kadaluwarsa!\n", ITEM(N));
-    }else if(KASUS(N) == 'p'){
+        // UNDO
+    }else if(same(KASUS(N),"MIX") && (isUndo)){
+        printf("Anda telah membatalkan pencampuran %s!\n", ITEM(N));
+    }else if(same(KASUS(N),"CHOP") && (isUndo)){
+        printf("Anda telah membatalkan pemotongan %s!\n", ITEM(N));
+    }else if(same(KASUS(N),"FRY") && (isUndo)){
+        printf("Anda telah membatalkan penggorengan %s!\n", ITEM(N));
+    }else if(same(KASUS(N),"BOIL") && (isUndo)){
+        printf("Anda telah membatalkan perebusan %s!\n", ITEM(N));
+    }else if(same(KASUS(N),"BUY") && (isUndo)){
+        printf("Anda telah membatalkan pembelian %s!\n", ITEM(N));
+    }else if(same(KASUS(N),"MIX")){
         printf("%s kembali dicampurkan\n", ITEM(N));
-    }else if(KASUS(N) == 'o'){
+    }else if(same(KASUS(N), "CHOP")){
         printf("%s kembali dipotong\n", ITEM(N));
-    }else if(KASUS(N) == 'i'){
+    }else if(same(KASUS(N), "FRY")){
         printf("%s kembali digoreng\n", ITEM(N));
-    }else if(KASUS(N) == 'u'){
+    }else if(same(KASUS(N), "BOIL")){
         printf("%s kembali direbus\n", ITEM(N));
-    }else if(KASUS(N) == 'y'){
+    }else if(same(KASUS(N), "BUY")){
         printf("%s kembali dibeli\n", ITEM(N));
-    }else if(KASUS(N) == 't'){
+    }else if(same(KASUS(N),"DELIVERY")){
+        printf("%s sudah berhasil diterima!\n", ITEM(N));
+    }else if(same(KASUS(N),"EXPIRED")){
+        printf("%s kadaluwarsa!\n", ITEM(N));
+    }else if(same(KASUS(N), "DELIVERY")){
         printf("%s kembali di-delivery\n", ITEM(N));
-    }else if(KASUS(N) == 'r'){
+    }else if(same(KASUS(N), "EXPIRED")){
         printf("%s kembali tidak kadaluwarsa\n", ITEM(N));
     }
 }
 
-void printAllNotif(List_Link *L)
+void printAllNotif(List_Link *L, boolean *isUndo)
 /*  I.S. : sembarang
     F.S. : mencetak semua notifikasi */
 {
@@ -123,8 +123,9 @@ void printAllNotif(List_Link *L)
         while(!isEmptyListLink(*L)){
             deleteFirst(L, &N);
             printf("%d. ", i);
-            printNotification(N);
+            printNotification(N, *isUndo);
             i++;
         }
     }
+    *isUndo = false;
 }

@@ -21,7 +21,6 @@ typedef struct{
     POINT LOCATION; /* Koordinat Lokasi pada Map */
     PrioQueue INVENTORY; /* Inventory */
     TIME TIME; /* Waktu */
-    List_Link NOTIFICATION;
 } SIMULATOR;
 
 /* NOTASI AKSES: Selektor SIMULATOR */
@@ -29,7 +28,6 @@ typedef struct{
 #define Location(S) (S).LOCATION
 #define Inventory(S) (S).INVENTORY
 #define Time2(S) (S).TIME
-#define Notification(S) (S).NOTIFICATION
 
 /* ** DEFINISI PROTOTIPE PRIMITIF ** */
 /* ** Konstruktor PEMBENTUK SIMULATOR ***/
@@ -65,11 +63,11 @@ void setTime(SIMULATOR * S, TIME T);
 
 void passTime (SIMULATOR *S, long plus, TIME *T);
 
-void printNotif(Notif N);
+void printNotif(Notif N, boolean isUndo);
 /*  I.S. : sembarang
     F.S. : mencetak notifikasi */
 
-void printAllNotif(List_Link *L);
+void printAllNotif(List_Link *L, boolean *isUndo);
 /*  I.S. : sembarang
     F.S. : mencetak semua notifikasi */
 

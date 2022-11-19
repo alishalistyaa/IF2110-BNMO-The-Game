@@ -21,6 +21,7 @@
 /* Nilai elemen tak terdefinisi*/
 #define MARKMAKANAN -999
 /*ID untuk Makanan tak terdefinisi*/
+#define MARKSTOCK -1
 
 
 
@@ -45,6 +46,8 @@ typedef struct {
 #define ELMTBUKURESEP(b, i) (b).contents[i]
 #define BanyakResep(b) (b).nResep
 #define MethodResep(r) Method(r)
+#define HEADSET(S) (S).ID_Makanan
+#define ELMTSET(S,i) (S).ID_Bahan[i]
 
 //--KONSTRUKTOR--
 
@@ -87,8 +90,13 @@ Resep getResep(BukuResep b, int ID_Root);
 void printBahanMissing(Resep r, STOCK , ListStatik listmakanan);
 /*Mencetak bahan-bahan yang kurang dari resep*/
 
-void setMethod(Resep *r);
 
-// Resep concatResep(Resep r1, Resep r2);
-/*Melakukan konkatenasi Resep 2 ke resep 1*/
+//ADT SET
+
+SET StockToSet(STOCK St);
+
+SET ResepToSet(Resep r);
+
+
+
 #endif

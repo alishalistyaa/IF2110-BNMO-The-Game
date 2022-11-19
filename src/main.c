@@ -30,6 +30,7 @@ char currentChar;
 int main(){
     /* KAMUS */
     boolean start;
+    boolean isUndo;
     int inputCom1;
     int inputCom2;
     int inputCom3;
@@ -62,22 +63,28 @@ int main(){
     // Variable Main
     char* filename;
     char* curName;
+    Word delivery;
+    Word expiredword;
     Word buffer_word_makanan;
+    Word buffer_command_before;
     infotypePrioQueue buffer_makanan;
     // PROGRAM MULAI
         // Splash Screen 
         print_ss_dinamic("./utils/BMNOframes_Start");
         printf("\n");
         
-        // printf(
-        //     "======================================================================================\n"
-        //     "\n"
-        //     "▒█▀▀▀█ ▒█▀▀▀ ▒█░░░ ░█▀▀█ ▒█▀▄▀█ ░█▀▀█ ▀▀█▀▀ 　 ▒█▀▀▄ ░█▀▀█ ▀▀█▀▀ ░█▀▀█ ▒█▄░▒█ ▒█▀▀█ \n"
-        //     "░▀▀▀▄▄ ▒█▀▀▀ ▒█░░░ ▒█▄▄█ ▒█▒█▒█ ▒█▄▄█ ░▒█░░ 　 ▒█░▒█ ▒█▄▄█ ░▒█░░ ▒█▄▄█ ▒█▒█▒█ ▒█░▄▄ \n"
-        //     "▒█▄▄▄█ ▒█▄▄▄ ▒█▄▄█ ▒█░▒█ ▒█░░▒█ ▒█░▒█ ░▒█░░ 　 ▒█▄▄▀ ▒█░▒█ ░▒█░░ ▒█░▒█ ▒█░░▀█ ▒█▄▄█ \n"
-        //     "\n"
-        //     "======================================================================================\n"
-        //     );
+            printf( 
+                "     /\\ \\        /\\__\\       /\\__\\       /\\  \\    \n"
+                "    /::\\  \\     /::|  |       /::|  |       /::\\  \\   \n"
+                "   /:/\\:\\ \\   /:|:|  |      /:|:|  |      /:/\\:\\ \\  \n"
+                "  /::\\~\\:\\__\\/:/|:| |__   /:/|:|__|__   /:/  \\:\\ \\ \n"
+                " /:/\\:\\\\:|__| /:/ |:| /\\__\\ /:/|::::\\__\\/:/__/\\:\\__\\ \n"
+                " \\:\\~\\:\\/://\\/__|:|/:/ / \\/__/~~/:/  / \\:\\ \\ /:/ /\n"
+                "  \\:\\ \\::/  /     |:/:/ /         /:/  /   \\:\\  /:/ / \n"
+                "   \\:\\/:/  /      |::/  /         /:/  /     \\:\\/:/ /  \n"
+                "    \\::/__/        /:/  /         /:/  /       \\::/  /   \n"
+                "     ~~            \\/__/         \\/__/         \\/__/    \n"
+             );
 
     // COMMAND AWAL
     printf("1. START\n");
@@ -95,6 +102,7 @@ int main(){
         MakeEmpty(&curInv, 100);
         MakeEmpty(&curDeliv, 50);
         CreateStock(&curStock);
+        createListLink(&notifParser);
         CreateSimulator(&BNMO, "test", curLoc, curInv, curTime);
         // PETA
         MAP peta;
@@ -111,9 +119,6 @@ int main(){
         CreateListStatik(&choplist);
         CreateListStatik(&mixlist);
         // Inisialisasi array of word
-        Word undocommand[10];
-        Word makanancommand[10];
-        int count_undocommand = 0;
         // Undo-Redo
         CreateEmpty(&undo);
         CreateEmpty(&redo);
@@ -173,13 +178,7 @@ int main(){
             printf("Waktu: ");
             TulisTIME1(curTime);
             printf("\n");
-            printAllNotif(&Notification(BNMO));
-            // if (same(command, "UNDO")) { 
-            //     // printf("masi diperbaiki");   
-            //     // printNotif(InfoTop(undo));
-            // } else {
-            //     printf("Notifikasi: -\n");
-            // }
+            printAllNotif(&notifParser, &isUndo);
             printMap(peta);
             printf("Enter command: ");
             STARTWORDBlank();
@@ -209,7 +208,7 @@ int main(){
                                 MAKANAN hasil = getMakanan(listMakanan,ID_Root);
 
                                 if(bisamix){
-                                printf("%s selesai dibuat dan sudah masuk ke inventory!",NAME(ELMTLIST(mixlist,option-1)));
+                                printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(mixlist,option-1)));
                                 ELMTSTOCK(curStock,ID_Root)++;
                                     
                                     EnqueueExpired(&curInv,hasil);
@@ -253,7 +252,7 @@ int main(){
                                 MAKANAN hasil = getMakanan(listMakanan,ID_Root);
                                 if(bisachop){
     
-                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n",NAME(ELMTLIST(choplist,option-1)));
+                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(choplist,option-1)));
                                     //TO DO: kurangin stock bahan
                                     ELMTSTOCK(curStock,ID_Root)++;
                                     
@@ -298,7 +297,7 @@ int main(){
                                 Resep rsp = getResep(bookRsp,ID_Root);
                                 MAKANAN hasil = getMakanan(listMakanan,ID_Root);
                                 if(bisafry){
-                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n",NAME(ELMTLIST(frylist,option-1)));
+                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(frylist,option-1)));
                                     ELMTSTOCK(curStock,ID_Root)++;
                                     
                                     EnqueueExpired(&curInv,hasil);
@@ -340,7 +339,7 @@ int main(){
                                 Resep rsp = getResep(bookRsp,ID_Root);
                                 MAKANAN hasil = getMakanan(listMakanan,ID_Root);
                                 if(bisaboil){
-                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n",NAME(ELMTLIST(boillist,option-1)));
+                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(boillist,option-1)));
                                     ELMTSTOCK(curStock,ID_Root)++;
                                     
                                     EnqueueExpired(&curInv,hasil);
@@ -421,38 +420,34 @@ int main(){
                                     long plusMinute = TIMEToMenit(wait);
                                     passTime(&BNMO, plusMinute, &curTime);
                                     decreaseTimeDelivery(&curDeliv,plusMinute);
-                                    
-
                                     delivered = false;
                                     expired = false;
                                     isDeliveredQueue(&curInv, &curDeliv, &curStock, &delivered, &buffer_word_makanan);
-                                    // if (delivered) {
-                                    //     undocommand[count_undocommand].Length = 8;
-                                    //     undocommand[count_undocommand].TabWord[0] = 'D'; 
-                                    //     undocommand[count_undocommand].TabWord[1] = 'E';
-                                    //     undocommand[count_undocommand].TabWord[2] = 'L';
-                                    //     undocommand[count_undocommand].TabWord[3] = 'I';
-                                    //     undocommand[count_undocommand].TabWord[4] = 'V';
-                                    //     undocommand[count_undocommand].TabWord[5] = 'E';
-                                    //     undocommand[count_undocommand].TabWord[6] = 'R';
-                                    //     undocommand[count_undocommand].TabWord[7] = 'Y';
-                                    //     makanancommand[count_undocommand] = buffer_word_makanan;
-                                    //     count_undocommand++;
-                                    // }
+                                   if (delivered) {
+                                        delivery.Length = 8;
+                                        delivery.TabWord[0] = 'D'; 
+                                        delivery.TabWord[1] = 'E';
+                                        delivery.TabWord[2] = 'L';
+                                        delivery.TabWord[3] = 'I';
+                                        delivery.TabWord[4] = 'V';
+                                        delivery.TabWord[5] = 'E';
+                                        delivery.TabWord[6] = 'R';
+                                        delivery.TabWord[7] = 'Y';
+                                        insertFirst(&notifParser, delivery, buffer_word_makanan);
+                                    }
                                     decreaseTimeExpired(&curInv,plusMinute);
                                     isExpiredQueue(&curInv, &curStock, &expired, &buffer_word_makanan);
-                                    //     if (expired) {
-                                    //         undocommand[count_undocommand].Length = 7;
-                                    //         undocommand[count_undocommand].TabWord[0] = 'E'; 
-                                    //         undocommand[count_undocommand].TabWord[1] = 'X';
-                                    //         undocommand[count_undocommand].TabWord[2] = 'P';
-                                    //         undocommand[count_undocommand].TabWord[3] = 'I';
-                                    //         undocommand[count_undocommand].TabWord[4] = 'R';
-                                    //         undocommand[count_undocommand].TabWord[5] = 'E';
-                                    //         undocommand[count_undocommand].TabWord[6] = 'D';
-                                    //         makanancommand[count_undocommand] = buffer_word_makanan;
-                                    //         count_undocommand++;
-                                    // }
+                                    if (expired) {
+                                        expiredword.Length = 7;
+                                        expiredword.TabWord[0] = 'E'; 
+                                        expiredword.TabWord[1] = 'X';
+                                        expiredword.TabWord[2] = 'P';
+                                        expiredword.TabWord[3] = 'I';
+                                        expiredword.TabWord[4] = 'R';
+                                        expiredword.TabWord[5] = 'E';
+                                        expiredword.TabWord[6] = 'D';
+                                        insertFirst(&notifParser, expiredword, buffer_word_makanan);                    
+                                    }
 
                                 }
                             }
@@ -504,16 +499,44 @@ int main(){
                     printf("Tidak ada yang bisa di-undo!\n");
                 } else{
                     // printf("Go here\n");
-                    STOCK tempStock = curStock;    
-                    undocommand[count_undocommand] = InfoTop(undo).command;  
+                    // CreateStock(&tempStock);
+                    isUndo = true;
+                    STOCK tempStock = curStock;
+                    Word command_before = InfoTop(undo).command;
                     Undo(&undo, &redo, &command, &curInv, &curDeliv, &curStock, &curTime, &(Location(SIMULATOR(peta))));
-                    // STOCK tempStockUndo = curStock;
-                    // int theID = -1;
-                    // for (int i = 0; i < CAPACITY; i++) {
-                    //     if(ELMTSTOCK(tempStockUndo, i) - ELMTSTOCK(tempStock, i) == 1); theID = i;       
-                    // }
-                    // makanancommand[count_undocommand] = getNameMakanan(listMakanan, theID);
-                    // count_undocommand++;
+                    STOCK tempStockUndo = curStock;
+                    int theID = -1;
+                    for (int i = 0; i < CAPACITY; i++) {
+                        if((ELMTSTOCK(tempStock, i) - ELMTSTOCK(tempStockUndo, i)) == 1){
+                             theID = i;}
+                    }
+                    buffer_word_makanan = getNameMakanan(listMakanan, theID);
+                    if (delivered) {
+                        delivery.Length = 8;
+                        delivery.TabWord[0] = 'D'; 
+                        delivery.TabWord[1] = 'E';
+                        delivery.TabWord[2] = 'L';
+                        delivery.TabWord[3] = 'I';
+                        delivery.TabWord[4] = 'V';
+                        delivery.TabWord[5] = 'E';
+                        delivery.TabWord[6] = 'R';
+                        delivery.TabWord[7] = 'Y';
+                        insertFirst(&notifParser, delivery, buffer_word_makanan);
+                    }
+                    if (expired) {
+                        expiredword.Length = 7;
+                        expiredword.TabWord[0] = 'E'; 
+                        expiredword.TabWord[1] = 'X';
+                        expiredword.TabWord[2] = 'P';
+                        expiredword.TabWord[3] = 'I';
+                        expiredword.TabWord[4] = 'R';
+                        expiredword.TabWord[5] = 'E';
+                        expiredword.TabWord[6] = 'D';
+                        insertFirst(&notifParser, expiredword, buffer_word_makanan);
+                    }
+                    if (!same(command_before, "MOVE") && !same(command_before, "WAIT")) {
+                        insertFirst(&notifParser, command_before, buffer_word_makanan);
+                    }
                 }
                 break;
             case 12:
@@ -523,7 +546,58 @@ int main(){
                 if (IsEmptyStack(redo)) {
                     printf("Tidak ada yang bisa di-redo!\n");
                 } else {
+                    STOCK tempStock = curStock;
+                    TIME before = curTime;
+                    PrioQueue curDelivbefore = curDeliv;
+                    PrioQueue curInventorybefore = curInv;
                     Redo(&undo, &redo, &command, &curInv, &curDeliv, &curStock, &curTime, &(Location(SIMULATOR(peta))));
+                    TIME after = curTime;
+                    TIME gap;
+                    gap.DD = Day(after) - Day(before);
+                    gap.HH = Hour(after) - Hour(before);
+                    gap.MM = Minute(after) - Minute(before);
+                    int gap_menit = TIMEToMenit(gap);
+                    decreaseTimeDelivery(&curDelivbefore, gap_menit);
+                    decreaseTimeExpired(&curInventorybefore, gap_menit);
+                    delivered = false;
+                    expired = false;
+                    isDeliveredQueue(&curInventorybefore, &curDelivbefore, &curStock, &delivered, &buffer_word_makanan);
+                    if (delivered) {
+                        delivery.Length = 8;
+                        delivery.TabWord[0] = 'D'; 
+                        delivery.TabWord[1] = 'E';
+                        delivery.TabWord[2] = 'L';
+                        delivery.TabWord[3] = 'I';
+                        delivery.TabWord[4] = 'V';
+                        delivery.TabWord[5] = 'E';
+                        delivery.TabWord[6] = 'R';
+                        delivery.TabWord[7] = 'Y';
+                        insertFirst(&notifParser, delivery, buffer_word_makanan);
+                    }
+                    isExpiredQueue(&curInventorybefore, &curStock, &expired, &buffer_word_makanan);
+                    if (expired) {
+                        expiredword.Length = 7;
+                        expiredword.TabWord[0] = 'E'; 
+                        expiredword.TabWord[1] = 'X';
+                        expiredword.TabWord[2] = 'P';
+                        expiredword.TabWord[3] = 'I';
+                        expiredword.TabWord[4] = 'R';
+                        expiredword.TabWord[5] = 'E';
+                        expiredword.TabWord[6] = 'D';
+                        insertFirst(&notifParser, expiredword, buffer_word_makanan);                    
+                    }
+                    if (!same(command, "WAIT")) {
+                        STOCK tempStockRedo = curStock;
+                        int theID = -1;
+                        displayStock(tempStock, listMakanan);
+                        displayStock(tempStockRedo, listMakanan);
+                        for (int i = 0; i < CAPACITY; i++) {
+                            if((ELMTSTOCK(tempStockRedo, i) - ELMTSTOCK(tempStock, i)) == 1){
+                                theID = i;}
+                        }
+                        buffer_word_makanan = getNameMakanan(listMakanan, theID);
+                        insertFirst(&notifParser, command, buffer_word_makanan);
+                    }
                 }
                 break;
             case 13:
@@ -571,70 +645,34 @@ int main(){
             expired = false;
             isDeliveredQueue(&curInv, &curDeliv, &curStock, &delivered, &buffer_word_makanan);
             if (delivered) {
-                undocommand[count_undocommand].Length = 8;
-                undocommand[count_undocommand].TabWord[0] = 'D'; 
-                undocommand[count_undocommand].TabWord[1] = 'E';
-                undocommand[count_undocommand].TabWord[2] = 'L';
-                undocommand[count_undocommand].TabWord[3] = 'I';
-                undocommand[count_undocommand].TabWord[4] = 'V';
-                undocommand[count_undocommand].TabWord[5] = 'E';
-                undocommand[count_undocommand].TabWord[6] = 'R';
-                undocommand[count_undocommand].TabWord[7] = 'Y';
-                makanancommand[count_undocommand] = buffer_word_makanan;
-                count_undocommand++;
+                delivery.Length = 8;
+                delivery.TabWord[0] = 'D'; 
+                delivery.TabWord[1] = 'E';
+                delivery.TabWord[2] = 'L';
+                delivery.TabWord[3] = 'I';
+                delivery.TabWord[4] = 'V';
+                delivery.TabWord[5] = 'E';
+                delivery.TabWord[6] = 'R';
+                delivery.TabWord[7] = 'Y';
+                insertFirst(&notifParser, delivery, buffer_word_makanan);
             }
             isExpiredQueue(&curInv, &curStock, &expired, &buffer_word_makanan);
-                if (expired) {
-                    undocommand[count_undocommand].Length = 7;
-                    undocommand[count_undocommand].TabWord[0] = 'E'; 
-                    undocommand[count_undocommand].TabWord[1] = 'X';
-                    undocommand[count_undocommand].TabWord[2] = 'P';
-                    undocommand[count_undocommand].TabWord[3] = 'I';
-                    undocommand[count_undocommand].TabWord[4] = 'R';
-                    undocommand[count_undocommand].TabWord[5] = 'E';
-                    undocommand[count_undocommand].TabWord[6] = 'D';
-                    makanancommand[count_undocommand] = buffer_word_makanan;
-                    count_undocommand++;
+            if (expired) {
+                expiredword.Length = 7;
+                expiredword.TabWord[0] = 'E'; 
+                expiredword.TabWord[1] = 'X';
+                expiredword.TabWord[2] = 'P';
+                expiredword.TabWord[3] = 'I';
+                expiredword.TabWord[4] = 'R';
+                expiredword.TabWord[5] = 'E';
+                expiredword.TabWord[6] = 'D';
+                insertFirst(&notifParser, expiredword, buffer_word_makanan);                    
             }
                 updateState(command, curInv, curDeliv, curStock, curTime, Location(SIMULATOR(peta)), &undo);
             }
         }
-        //   if (!same(command, "UNDO") && !same(command, "REDO") && !same(command, "EXIT")) {
-        //     decreaseTimeDelivery(&curDeliv);
-        //     decreaseTimeExpired(&curInv);
-        //     boolean delivered = false;
-        //     boolean expired = false;
-        //     Word makanan;
-        //     isDeliveredQueue(&curInv, &curDeliv, &curStock, &delivered, &buffer_word_makanan);
-        //     if (delivered) {
-        //         undocommand[count_undocommand].Length = 8;
-        //         undocommand[count_undocommand].TabWord[0] = 'D'; 
-        //         undocommand[count_undocommand].TabWord[1] = 'E';
-        //         undocommand[count_undocommand].TabWord[2] = 'L';
-        //         undocommand[count_undocommand].TabWord[3] = 'I';
-        //         undocommand[count_undocommand].TabWord[4] = 'V';
-        //         undocommand[count_undocommand].TabWord[5] = 'E';
-        //         undocommand[count_undocommand].TabWord[6] = 'R';
-        //         undocommand[count_undocommand].TabWord[7] = 'Y';
-        //         makanancommand[count_undocommand] = makanan;
-        //         count_undocommand++;
-        //     }
-        //     isExpiredQueue(&curInv, &curStock, &expired, &buffer_word_makanan);
-        //         if (expired) {
-        //             undocommand[count_undocommand].Length = 7;
-        //             undocommand[count_undocommand].TabWord[0] = 'E'; 
-        //             undocommand[count_undocommand].TabWord[1] = 'X';
-        //             undocommand[count_undocommand].TabWord[2] = 'P';
-        //             undocommand[count_undocommand].TabWord[3] = 'I';
-        //             undocommand[count_undocommand].TabWord[4] = 'R';
-        //             undocommand[count_undocommand].TabWord[5] = 'E';
-        //             undocommand[count_undocommand].TabWord[6] = 'D';
-        //             makanancommand[count_undocommand] = makanan;
-        //             count_undocommand++;
-        //     }
-        // }
     } else if (same(currentWord, "EXIT")) {
-
+        
         // printf(
         //     "\n"
         //     "======================================================================================\n"

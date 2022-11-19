@@ -122,5 +122,27 @@ void printBahanMissing(Resep r, STOCK S, ListStatik listmakanan){
     }
 }
 
+
+//ADT SET
+SET StockToSet(STOCK St){
+    SET s;
+    HEADSET(s) = MARKSTOCK;
+    for(int i = 0; i < CAPACITY; i++){
+        if(ELMTSTOCK(St,i) > 0) ELMTSET(s,i) = 1;
+        else ELMTSET(s,i) = 0;
+    }
+    return s;
+}
+
+SET ResepToSet(Resep r){
+    SET s;
+    HEADSET(s) = Root(r);
+    for(int i = 0; i < nChild(r); i++){
+        ELMTSET(s,Root(getChild(r,i))) = 1;
+    }
+    return s;
+}
+
+
 //Resep concatResep(Resep r1, Resep r2);
 /*Melakukan konkatenasi Resep 2 ke resep 1*/

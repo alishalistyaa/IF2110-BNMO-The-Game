@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 /*********************************************/
-/********************Notif********************/
+/******************* Notif *******************/
 /*********************************************/
 
 Address_n newNode(ElTypeL N){
@@ -20,22 +20,20 @@ Address_n newNode(ElTypeL N){
     return P;
 }
 
-Notif createNotif(char kasus, MAKANAN val){
+Notif createNotif(Word kasus, Word makanan){
     /* KAMUS */
     Notif N;
     int i;
 
     /* ALGORITMA */
     KASUS(N) = kasus;
-    for(i=0; i<25; i++){
-        ELMT_ITEM(N, i) = val.Name.TabWord[i];
-    }
+    ITEM(N) = makanan;
     return N;
 }
 /* Membentuk sebuah Notif dari komponen-komponennya */
 
 /***************************************************/
-/********************Linked List********************/
+/******************* Linked List *******************/
 /***************************************************/
 
 
@@ -58,7 +56,7 @@ boolean isEmptyListLink(List_Link L)
     return (FIRST(L) == NULL);
 }
 
-void insertFirst(List_Link *L, char kasus, MAKANAN item)
+void insertFirst(List_Link *L, Word kasus, Word item)
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan Notif N jika alokasi berhasil. */
