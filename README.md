@@ -1,7 +1,7 @@
 # IF2110-BNMO-The-Game
 Tugas besar I IF2110 Algoritma dan Struktur Data: BNMO The Game
-<p> ![image](https://user-images.githubusercontent.com/73476678/202867644-d271e61e-397f-412c-a36e-760ae835f16e.png)
- </p>
+![image](https://user-images.githubusercontent.com/73476678/202867644-d271e61e-397f-412c-a36e-760ae835f16e.png)
+ 
 
 <p> Program berbasis Command-Line Interface (CLI) yang dibuat dalam bahasa C. Program ini memproyeksikan sebuah gim mini memasak dengan BNMO sebagai karakter utama. Pada program ini, BNMO dapat melakukan beberapa perintah sesuai masukan user, seperti berjalan dan aksi memasak. </p>
 
