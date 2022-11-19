@@ -1,6 +1,7 @@
 # IF2110-BNMO-The-Game
 Tugas besar I IF2110 Algoritma dan Struktur Data: BNMO The Game
-< img src="![image](https://user-images.githubusercontent.com/73476678/202866460-3f404032-4d4e-492e-8aef-393610dda6c7.png)">
+<p> ![image](https://user-images.githubusercontent.com/73476678/202867644-d271e61e-397f-412c-a36e-760ae835f16e.png)
+ </p>
 
 <p> Program berbasis Command-Line Interface (CLI) yang dibuat dalam bahasa C. Program ini memproyeksikan sebuah gim mini memasak dengan BNMO sebagai karakter utama. Pada program ini, BNMO dapat melakukan beberapa perintah sesuai masukan user, seperti berjalan dan aksi memasak. </p>
 
@@ -38,7 +39,15 @@ Gunakan command berikut pada folder src untuk menjalankan program utama
 ```
 ./main
 ```
+## Pembagian Tugas
 
+| Nama / NIM                            | Pembagian Tugas                                                                                                                                            |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  Jeremya Darmawan Raharjo / 13521131  | <li>ADT Point</li><li>ADT Tree</li><li>Membuat driver</li><li>Alur Utama Program</li>  |
+|  Brigita Tri Carolina / 13521156      | <li>ADT Time</li><li>ADT Matriks</li><li>ADT Stack</li><li>ADT Prioqueue</li><li>Membuat driver</li><li>Alur Utama Program</li>|
+|  Alisha Listya Wardhani / 13521171    | <li>ADT Makanan</li><li>ADT Charmacine</li><li>ADT Building</li> <li>ADT i_o</li><li>Membuat driver</li><li>Alur Utama Program</li><li>Laporan</li>|
+|  Sulthan Dzaky Alfaro / 13521159      | <li>ADT List</li> <li>ADT Queue</li><li>Membuat driver</li><li>Laporan</li>|
+|  Mohammad Rifqi Farhansyah / 13521166 | <li>ADT Simulator</li><li>ADT Wordmachine</li> <li>ADT Map</li><li>Membuat driver</li>
 
 
 ## Daftar Fitur
