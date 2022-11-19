@@ -162,6 +162,10 @@ void ListRekomenn(SET stock, BukuResep b, SET *listrkm){
                 if(ELMTSET(stock,k) && ELMTSET(ResepToSet(ELMTBUKURESEP(b,i)),k)) ELMTSET(newstock,k) = false;
                 else ELMTSET(newstock,k) = ELMTSET(stock,k);
             }
+            ELMTSET(newstock, HEADSET(ResepToSet(ELMTBUKURESEP(b,i)))) = true;
+            ELMTSET(*listrkm, HEADSET(ResepToSet(ELMTBUKURESEP(b,i)))) = true;
+            ListRekomenn(newstock,b,listrkm);
+
 
 
         }
@@ -177,9 +181,12 @@ SET ListRekomen(SET stock, BukuResep b){
 }
 
 void printListRekomen(SET s, ListStatik l){
-    int ctr = 0;
+    int ctr = 1;
     for(int i = 0; i < CAPACITY; i++){
-        if(ELMTSET(s,i)) printf("%d. %s\n",ctr,getNameMakanan(l,i).TabWord);
+        if(ELMTSET(s,i)){
+            printf("%d. %s\n",ctr,getNameMakanan(l,i).TabWord);
+            ctr++;
+        } 
     }
 }
 //Resep concatResep(Resep r1, Resep r2);
