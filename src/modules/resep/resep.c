@@ -176,20 +176,11 @@ SET ListRekomen(SET stock, BukuResep b){
     return listrkm;
 }
 
-void printSet(SET s){
-    printf("(");
-    boolean first = true;
+void printListRekomen(SET s, ListStatik l){
+    int ctr = 0;
     for(int i = 0; i < CAPACITY; i++){
-        if(ELMTSET(s,i) && first){
-            printf("%d",i);
-            first = false;
-        }
-        else if(ELMTSET(s,i) && !first) printf(",%d",i);
+        if(ELMTSET(s,i)) printf("%d. %s\n",ctr,getNameMakanan(l,i).TabWord);
     }
-    printf(")\n");
-    
 }
-
-
 //Resep concatResep(Resep r1, Resep r2);
 /*Melakukan konkatenasi Resep 2 ke resep 1*/
