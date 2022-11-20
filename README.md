@@ -9,6 +9,7 @@
 </p>
 
 <p> Program berbasis Command-Line Interface (CLI) yang dibuat dalam bahasa C. Program ini memproyeksikan sebuah gim mini memasak dengan BNMO sebagai karakter utama. Pada program ini, BNMO dapat melakukan beberapa perintah sesuai masukan user, seperti berjalan dan aksi memasak. </p>
+<hr>
 
 ## Table of Contents
 1. [Getting Started](#getting-started)
@@ -16,6 +17,7 @@
 3. [Pembagian Tugas](#pembagian-tugas)
 4. [Daftar Fitur](#daftar-fitur)
 5. [Struktur](#struktur)
+6. [Author](#author)
 
 <a name="getting started"></a>
 
@@ -278,3 +280,12 @@ Bagaimana cara menjalankan program? Gunakan command berikut pada folder src untu
                 8.txt
                 9.txt
 ```
+
+<a name="author"></a>
+
+## Author
+<h4 align="center">
+    Created by Kelompok K02/J<br/>
+    2022
+</h4>
+<hr>
