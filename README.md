@@ -123,162 +123,107 @@ Bagaimana cara menjalankan program? Gunakan command berikut pada folder src untu
     │       resep.txt
     │       resep2.txt
     │
-    ├───modules
-    │   │   .DS_Store
-    │   │
-    │   ├───boolean
-    │   │       boolean.h
-    │   │
-    │   ├───building
-    │   │       building.c
-    │   │       building.h
-    │   │       driver_building.c
-    │   │       driver_building.exe
-    │   │
-    │   ├───charmachine
-    │   │       charmachine.c
-    │   │       charmachine.h
-    │   │       driver_charmachine.c
-    │   │
-    │   ├───i_o
-    │   │       driver_i_o_makanan.c
-    │   │       driver_i_o_tree.c
-    │   │       driver_i_o_tree.exe
-    │   │       i_o.c
-    │   │       i_o.h
-    │   │
-    │   ├───list
-    │   │       driver_liststatik.c
-    │   │       liststatik.c
-    │   │       liststatik.h
-    │   │
-    │   ├───makanan
-    │   │       driver_makanan.c
-    │   │       makanan.c
-    │   │       makanan.h
-    │   │
-    │   ├───map
-    │   │       driver_map.c
-    │   │       map.c
-    │   │       map.h
-    │   │
-    │   ├───matriks
-    │   │       driver_matriks.c
-    │   │       matriks.c
-    │   │       matriks.h
-    │   │
-    │   ├───notification
-    │   │       driver_notification.c
-    │   │       notification.c
-    │   │       notification.h
-    │   │
-    │   ├───point
-    │   │       driver_point.c
-    │   │       driver_point.exe
-    │   │       point.c
-    │   │       point.h
-    │   │
-    │   ├───prioqueue
-    │   │       driver_prioqueue.c
-    │   │       driver_prioqueue.exe
-    │   │       prioqueue.c
-    │   │       prioqueue.h
-    │   │
-    │   ├───queue
-    │   │       driver_queue.c
-    │   │       queue.c
-    │   │       queue.h
-    │   │
-    │   ├───resep
-    │   │       driver_resep.c
-    │   │       driver_resep.exe
-    │   │       resep.c
-    │   │       resep.h
-    │   │
-    │   ├───set
-    │   │       driver_set.c
-    │   │       driver_set.exe
-    │   │       set.c
-    │   │       set.h
-    │   │
-    │   ├───simulator
-    │   │       driver_simulator.c
-    │   │       simulator.c
-    │   │       simulator.h
-    │   │
-    │   ├───splash_screen
-    │   │       splash_screen.c
-    │   │       test
-    │   │
-    │   ├───stack
-    │   │       driverstack.exe
-    │   │       driver_stack.c
-    │   │       stack.c
-    │   │       stack.h
-    │   │
-    │   ├───time
-    │   │       driver_time.c
-    │   │       time.c
-    │   │       time.h
-    │   │
-    │   ├───tree
-    │   │       driver_tree
-    │   │       driver_tree.c
-    │   │       driver_tree.exe
-    │   │       tree.c
-    │   │       tree.h
-    │   │
-    │   └───wordmachine
-    │           driver_wordmachine.c
-    │           wordmachine.c
-    │           wordmachine.h
-    │
-    └───utils
-        │   BMO_SplashScreen.c
+    └────modules
+        │   .DS_Store
         │
-        ├───BMOframes_End
-        │       .DS_Store
-        │       0.txt
-        │       1.txt
-        │       10.txt
-        │       11.txt
-        │       12.txt
-        │       13.txt
-        │       2.txt
-        │       3.txt
-        │       4.txt
-        │       5.txt
-        │       6.txt
-        │       7.txt
-        │       8.txt
-        │       9.txt
-        │       bmo.gif
+        ├───boolean
+        │       boolean.h
         │
-        └───BMOframes_Start
-                .DS_Store
-                0.txt
-                1.txt
-                10.txt
-                11.txt
-                12.txt
-                13.txt
-                14.txt
-                15.txt
-                16.txt
-                17.txt
-                18.txt
-                19.txt
-                2.txt
-                20.txt
-                21.txt
-                22.txt
-                3.txt
-                4.txt
-                5.txt
-                6.txt
-                7.txt
-                8.txt
-                9.txt
+        ├───building
+        │       building.c
+        │       building.h
+        │       driver_building.c
+        │       driver_building.exe
+        │
+        ├───charmachine
+        │       charmachine.c
+        │       charmachine.h
+        │       driver_charmachine.c
+        │
+        ├───i_o
+        │       driver_i_o_makanan.c
+        │       driver_i_o_tree.c
+        │       driver_i_o_tree.exe
+        │       i_o.c
+        │       i_o.h
+        │
+        ├───list
+        │       driver_liststatik.c
+        │       liststatik.c
+        │       liststatik.h
+        │
+        ├───makanan
+        │       driver_makanan.c
+        │       makanan.c
+        │       makanan.h
+        │
+        ├───map
+        │       driver_map.c
+        │       map.c
+        │       map.h
+        │
+        ├───matriks
+        │       driver_matriks.c
+        │       matriks.c
+        │       matriks.h
+        │
+        ├───notification
+        │       driver_notification.c
+        │       notification.c
+        │       notification.h
+        │
+        ├───point
+        │       driver_point.c
+        │       driver_point.exe
+        │       point.c
+        │       point.h
+        │
+        ├───prioqueue
+        │       driver_prioqueue.c
+        │       driver_prioqueue.exe
+        │       prioqueue.c
+        │       prioqueue.h
+        │
+        ├───resep
+        │       driver_resep.c
+        │       driver_resep.exe
+        │       resep.c
+        │       resep.h
+        │
+        ├───set
+        │       driver_set.c
+        │       driver_set.exe
+        │       set.c
+        │       set.h
+        │
+        ├───simulator
+        │       driver_simulator.c
+        │       simulator.c
+        │       simulator.h
+        │
+        ├───stack
+        │       driverstack.exe
+        │       driver_stack.c
+        │       stack.c
+        │       stack.h
+        │
+        ├───time
+        │       driver_time.c
+        │       time.c
+        │       time.h
+        │
+        ├───tree
+        │       driver_tree
+        │       driver_tree.c
+        │       driver_tree.exe
+        │       tree.c
+        │       tree.h
+        │
+        └───wordmachine
+                driver_wordmachine.c
+                wordmachine.c
+                wordmachine.h
+   
 ```
 
 <a name="author"></a>
