@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "liststatik.c"
+#include "liststatik.h"
 
 int main(){
     // KAMUS
@@ -25,10 +25,28 @@ int main(){
     TIME del1;
     TIME del2;
     TIME del3;
+    Word nm1, nm2, nm3;
 
-    Word nm1 = 'ayam';
-    Word nm2 = 'cendol';
-    Word nm3 = 'tahu';
+    nm1.Length = 4;
+    nm1.TabWord[0] = 'a';
+    nm1.TabWord[1] = 'y';
+    nm1.TabWord[2] = 'a';
+    nm1.TabWord[3] = 'm';
+
+    nm2.Length = 6;
+    nm2.TabWord[0] = 'c';
+    nm2.TabWord[1] = 'e';
+    nm2.TabWord[2] = 'n';
+    nm2.TabWord[3] = 'd';
+    nm2.TabWord[4] = 'o';
+    nm2.TabWord[5] = 'l';
+
+
+    nm3.Length = 4;
+    nm3.TabWord[0] = 't';
+    nm3.TabWord[1] = 'a';
+    nm3.TabWord[2] = 'h';
+    nm3.TabWord[3] = 'u';
 
     // ALGORITMA
 

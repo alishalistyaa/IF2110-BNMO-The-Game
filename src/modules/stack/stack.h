@@ -83,4 +83,7 @@ void updateState(Word command, PrioQueue I, PrioQueue D, STOCK stock, TIME T, PO
 /* Menginput atau mengupdate state */
 /* I. S. undo, M, T, l terdefinisi*/
 /* F. S. terbentuk infotype X untuk dan X telah di-push ke stack */
+
+void displayStack(Stack s);
+/* Mengeprint stack*/
 #endif

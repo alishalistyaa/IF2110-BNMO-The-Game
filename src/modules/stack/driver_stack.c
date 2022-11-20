@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include "stack.c"
-#include "../time/time.c"
-#include "../point/point.c"
-#include "../prioqueue/prioqueue.c"
-#include "../makanan/makanan.c"
-#include "../simulator/simulator.c"
-#include "../list/liststatik.c"
+#include "stack.h"
+#include "../time/time.h"
+// #include "../point/point.h"
+// #include "../prioqueue/prioqueue.h"
+// #include "../makanan/makanan.h"
+// #include "../simulator/simulator.h"
+// #include "../list/liststatik.h"
 
 int main () {
     Word command;
