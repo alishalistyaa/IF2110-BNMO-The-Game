@@ -1,4 +1,4 @@
-#include "set.c"
+#include "set.h"
 #include <stdio.h>
 
 int main(){

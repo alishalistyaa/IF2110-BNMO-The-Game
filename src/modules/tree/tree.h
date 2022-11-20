@@ -120,7 +120,7 @@ A
    ((()()B)(()()C)A) adalah pohon dengan akar A dan subpohon kiri (()()B) dan subpohon kanan (()()C) */
 
 /* *** Searching *** */
-boolean SearchTree(Tree p, ElType X);
+boolean searchTree(Tree p, ElType X);
 /* Mengirimkan true jika ada node dari P yang bernilai X */
 
 

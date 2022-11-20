@@ -6,16 +6,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "map.c"
-#include "../matriks/matriks.c"
-#include "../point/point.c"
-#include "../building/building.c"
-#include "../i_o/i_o.c"
-#include "../wordmachine/wordmachine.c"
-#include "../tree/tree.c"
-#include "../makanan/makanan.c"
-#include "../list/liststatik.c"
-#include "../time/time.c"
+#include "map.h"
+#include "../matriks/matriks.h"
+#include "../point/point.h"
+#include "../building/building.h"
+#include "../i_o/i_o.h"
+#include "../wordmachine/wordmachine.h"
+#include "../tree/tree.h"
+#include "../makanan/makanan.h"
+#include "../list/liststatik.h"
+#include "../time/time.h"
 
 
 int main(){
@@ -30,12 +30,13 @@ int main(){
         printf("Near *\n");
     }
     Word w;
+    boolean canmove = true;
     w.Length=4;
     w.TabWord[0]='E';
     w.TabWord[1]='A';
     w.TabWord[2]='S';
     w.TabWord[3]='T';
-    move_map(&m, w);
+    move_map(&m, w, &canmove);
     printf("\n");
     printf("MOVE EAST\n");
     printMap(m);
@@ -49,7 +50,7 @@ int main(){
     w.TabWord[2]='U';
     w.TabWord[3]='T';
     w.TabWord[4]='H';
-    move_map(&m, w);
+    move_map(&m, w, &canmove);
     printf("MOVE SOUTH\n");
     printMap(m);
     printf("Simulator loc: \n");
@@ -65,7 +66,7 @@ int main(){
     w.TabWord[1]='E';
     w.TabWord[2]='S';
     w.TabWord[3]='T';
-    move_map(&m, w);
+    move_map(&m, w, &canmove);
     printf("MOVE WEST\n");
     printMap(m);
     printf("Simulator loc: \n");
@@ -78,7 +79,7 @@ int main(){
     w.TabWord[2]='R';
     w.TabWord[3]='T';
     w.TabWord[4]='H';
-    move_map(&m, w);
+    move_map(&m, w, &canmove);
     printf("MOVE NORTH\n");
     printMap(m);
     printf("Simulator loc: \n");

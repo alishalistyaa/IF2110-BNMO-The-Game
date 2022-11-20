@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "wordmachine.c"
+// #include "wordmachine.c"
 #include "wordmachine.h"
 
 int main(){

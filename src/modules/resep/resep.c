@@ -60,7 +60,7 @@ void cetakBukuResep(BukuResep b, ListStatik listmakanan, MAP M){
         j = 0;
         while(Root(ELMTBUKURESEP(b,i)) != ID(ELMTLIST(listmakanan,j)) ) j++;
         //Cetak baris 1
-        printf("%d. %s\n",(i+1),ELMTLIST(listmakanan,j).Name);
+        printf("%d. %s\n",(i+1),(ELMTLIST(listmakanan,j).Name).TabWord);
         //Mendapatkan action:
         char K;
         K = getAction(ACTION(ELMTLIST(listmakanan,j)), M);
@@ -114,7 +114,7 @@ void printBahanMissing(Resep r, STOCK S, ListStatik listmakanan){
         if(ELMTSTOCK(S,Root(getChild(r,i))) <= 0){
             for(int k = 0; k < lengthList(listmakanan); k++){
                 if(ID(ELMTLIST(listmakanan,k)) == Root(getChild(r,i))){
-                    printf("   %d. %s\n",ctr,NAME(ELMTLIST(listmakanan,k)));
+                    printf("   %d. %s\n",ctr,(NAME(ELMTLIST(listmakanan,k))).TabWord);
                     ctr++;
                 }
             }

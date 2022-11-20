@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tree.h"
-#include "tree.c"
+// #include "tree.c"
 
 int main(){
     Tree pohon1;

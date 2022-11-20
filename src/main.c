@@ -1,46 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./modules/boolean/boolean.h"
-#include "./modules/wordmachine/wordmachine.c"
-#include "./modules/charmachine/charmachine.h"
-#include "./modules/list/liststatik.c"
-#include "./modules/makanan/makanan.c"
-#include "./modules/matriks/matriks.c"
-#include "./modules/point/point.c"
-// #include "./modules/queue/queue.c"
-#include "./modules/prioqueue/prioqueue.c"
-#include "./modules/stack/stack.c"
-#include "./modules/time/time.c"
-#include "./modules/tree/tree.c"
-#include "./modules/i_o/i_o.c"
-#include "./modules/building/building.c"
-#include "./modules/simulator/simulator.c"
-#include "./modules/map/map.c"
-#include "./modules/resep/resep.c"
-#include "./modules/notification/notification.c"
-#include "./modules/set/set.c"
-
-//UNCOMMENT COMMAND DI BAWAH APABILA DIJALANKAN TANPA FILE .c NYA
 // #include "./modules/boolean/boolean.h"
-// #include "./modules/wordmachine/wordmachine.h"
+// #include "./modules/wordmachine/wordmachine.c"
 // #include "./modules/charmachine/charmachine.h"
-// #include "./modules/list/liststatik.h"
-// #include "./modules/makanan/makanan.h"
-// #include "./modules/matriks/matriks.h"
-// #include "./modules/point/point.h"
-// // #include "./modules/queue/queue.h"
-// #include "./modules/prioqueue/prioqueue.h"
-// #include "./modules/stack/stack.h"
-// #include "./modules/time/time.h"
-// #include "./modules/tree/tree.h"
-// #include "./modules/i_o/i_o.h"
-// #include "./modules/building/building.h"
-// #include "./modules/simulator/simulator.h"
-// #include "./modules/map/map.h"
-// #include "./modules/resep/resep.h"
-// #include "./modules/notification/notification.h"
-// #include "./modules/set/set.h"
+// #include "./modules/list/liststatik.c"
+// #include "./modules/makanan/makanan.c"
+// #include "./modules/matriks/matriks.c"
+// #include "./modules/point/point.c"
+// #include "./modules/prioqueue/prioqueue.c"
+// #include "./modules/stack/stack.c"
+// #include "./modules/time/time.c"
+// #include "./modules/tree/tree.c"
+// #include "./modules/i_o/i_o.c"
+// #include "./modules/building/building.c"
+// #include "./modules/simulator/simulator.c"
+// #include "./modules/map/map.c"
+// #include "./modules/resep/resep.c"
+// #include "./modules/notification/notification.c"
+// #include "./modules/set/set.c"
+
+// UNCOMMENT COMMAND DI BAWAH APABILA DIJALANKAN TANPA FILE .c NYA
+#include "./modules/boolean/boolean.h"
+#include "./modules/wordmachine/wordmachine.h"
+#include "./modules/charmachine/charmachine.h"
+#include "./modules/list/liststatik.h"
+#include "./modules/makanan/makanan.h"
+#include "./modules/matriks/matriks.h"
+#include "./modules/point/point.h"
+#include "./modules/prioqueue/prioqueue.h"
+#include "./modules/stack/stack.h"
+#include "./modules/time/time.h"
+#include "./modules/tree/tree.h"
+#include "./modules/i_o/i_o.h"
+#include "./modules/building/building.h"
+#include "./modules/simulator/simulator.h"
+#include "./modules/map/map.h"
+#include "./modules/resep/resep.h"
+#include "./modules/notification/notification.h"
+#include "./modules/set/set.h"
 
 
 // VARIABEL
@@ -220,7 +218,7 @@ int main(){
                                 MAKANAN hasil = getMakanan(listMakanan,ID_Root);
 
                                 if(bisamix){
-                                printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(mixlist,option-1)));
+                                printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(mixlist,option-1)).TabWord);
                                 ELMTSTOCK(curStock,ID_Root)++;
                                     
                                     EnqueueExpired(&curInv,hasil);
@@ -264,7 +262,7 @@ int main(){
                                 MAKANAN hasil = getMakanan(listMakanan,ID_Root);
                                 if(bisachop){
     
-                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(choplist,option-1)));
+                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(choplist,option-1)).TabWord);
                                     //TO DO: kurangin stock bahan
                                     ELMTSTOCK(curStock,ID_Root)++;
                                     
@@ -280,7 +278,7 @@ int main(){
                                 printf("\n");
                                 } 
                             }
-                        else if(option > lengthList(choplist)) printf("Input invalid! ");
+                        else if(option > lengthList(choplist)) printf("Input invalid! \n");
                         
                     }
                     
@@ -309,7 +307,7 @@ int main(){
                                 Resep rsp = getResep(bookRsp,ID_Root);
                                 MAKANAN hasil = getMakanan(listMakanan,ID_Root);
                                 if(bisafry){
-                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(frylist,option-1)));
+                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(frylist,option-1)).TabWord);
                                     ELMTSTOCK(curStock,ID_Root)++;
                                     
                                     EnqueueExpired(&curInv,hasil);
@@ -324,7 +322,7 @@ int main(){
                                 printf("\n");
                                 }          
                             }
-                        else if(option > lengthList(frylist)) printf("Input invalid! ");
+                        else if(option > lengthList(frylist)) printf("Input invalid! \n");
                     }
                     option = -1;
                     passTime(&BNMO, 1, &curTime);
@@ -351,7 +349,7 @@ int main(){
                                 Resep rsp = getResep(bookRsp,ID_Root);
                                 MAKANAN hasil = getMakanan(listMakanan,ID_Root);
                                 if(bisaboil){
-                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(boillist,option-1)));
+                                    printf("%s selesai dibuat dan sudah masuk ke inventory!\n\n",NAME(ELMTLIST(boillist,option-1)).TabWord);
                                     ELMTSTOCK(curStock,ID_Root)++;
                                     
                                     EnqueueExpired(&curInv,hasil);
@@ -367,7 +365,7 @@ int main(){
                                 printf("\n");
                                 }          
                             }
-                        else if(option > lengthList(boillist)) printf("Input invalid! ");
+                        else if(option > lengthList(boillist)) printf("Input invalid! \n");
                     }
                     option = -1;
                     passTime(&BNMO, 1, &curTime);
@@ -586,7 +584,7 @@ int main(){
                         delivery.TabWord[7] = 'Y';
                         insertFirst(&notifParser, delivery, buffer_word_makanan);
                     }
-                    isExpiredQueue(&curInventorybefore, &curStock, &expired, &buffer_word_makanan);
+                    isExpiredQueue(&curInv, &curStock, &expired, &buffer_word_makanan);
                     if (expired) {
                         expiredword.Length = 7;
                         expiredword.TabWord[0] = 'E'; 
@@ -601,8 +599,6 @@ int main(){
                     if (!same(command, "WAIT")) {
                         STOCK tempStockRedo = curStock;
                         int theID = -1;
-                        displayStock(tempStock, listMakanan);
-                        displayStock(tempStockRedo, listMakanan);
                         for (int i = 0; i < CAPACITY; i++) {
                             if((ELMTSTOCK(tempStockRedo, i) - ELMTSTOCK(tempStock, i)) == 1){
                                 theID = i;}

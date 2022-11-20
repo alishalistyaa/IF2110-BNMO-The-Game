@@ -27,9 +27,9 @@ int main() {
 /* Pengecekan TIME untuk waktu kedaluwarsa dan sisa delivery time */
     TIME T1, T2;
     printf("Masukkan waktu kedaluwarsa dalam hari jam menit: ");
-    BacaTIME2(&T1); 
+    BacaTIMEDelivery(&T1); 
     printf("Masukkan waktu sisa delivery dalam hari jam menit: ");
-    BacaTIME2(&T2); // Kalau delivery gak bisa hari berarti pake bacatime1
+    BacaTIMEDelivery(&T2); // Kalau delivery gak bisa hari berarti pake bacatime1
 
     printf("Sisa waktu kedaluwarsa setelah satu menit: ");
     PrevMenit(&T1);

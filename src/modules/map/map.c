@@ -266,7 +266,7 @@ void displayBuyable(ListStatik l, ListStatik *buylist, MAP M){
     int ctr = 1;
     for(int i = 0; i < length; i++){
         if(getAction(ACTION(ELMTLIST(l,i)), M) == 'T'){
-            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)));
+            printf("   %d. %s (",ctr,NAME(ELMTLIST(l,i)).TabWord);
             TulisTIME2(DELIVERY(ELMTLIST(l,i)));
             printf(")\n");
 
@@ -283,7 +283,7 @@ void displayCookMethod(ListStatik l, ListStatik *methodlist, char action, MAP M)
     printf("List Bahan Makanan yang Bisa Dibuat:\n");
     for(int i = 0; i < length; i++){
         if(getAction(ACTION(ELMTLIST(l,i)), M) == action){
-            printf("   %d. %s ",ctr,NAME(ELMTLIST(l,i)));
+            printf("   %d. %s ",ctr,NAME(ELMTLIST(l,i)).TabWord);
             TulisTIME2(DELIVERY(ELMTLIST(l,i)));
 
             ELMTLIST(*methodlist,ctr-1) = ELMTLIST(l,i);

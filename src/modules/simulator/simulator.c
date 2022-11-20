@@ -72,38 +72,38 @@ void printNotification(Notif N, boolean isUndo){
 
     /* ALGORITMA */
     if(same(KASUS(N),"DELIVERY") && (isUndo)){
-        printf("%s tidak jadi di-delivery!\n", ITEM(N));
+        printf("%s tidak jadi di-delivery!\n", ITEM(N).TabWord);
     }else if(same(KASUS(N),"EXPIRED") && (isUndo)){
-        printf("%s tidak jadi kadaluwarsa!\n", ITEM(N));
+        printf("%s tidak jadi kadaluwarsa!\n", ITEM(N).TabWord);
         // UNDO
     }else if(same(KASUS(N),"MIX") && (isUndo)){
-        printf("Anda telah membatalkan pencampuran %s!\n", ITEM(N));
+        printf("Anda telah membatalkan pencampuran %s!\n", ITEM(N).TabWord);
     }else if(same(KASUS(N),"CHOP") && (isUndo)){
-        printf("Anda telah membatalkan pemotongan %s!\n", ITEM(N));
+        printf("Anda telah membatalkan pemotongan %s!\n", ITEM(N).TabWord);
     }else if(same(KASUS(N),"FRY") && (isUndo)){
-        printf("Anda telah membatalkan penggorengan %s!\n", ITEM(N));
+        printf("Anda telah membatalkan penggorengan %s!\n", ITEM(N).TabWord);
     }else if(same(KASUS(N),"BOIL") && (isUndo)){
-        printf("Anda telah membatalkan perebusan %s!\n", ITEM(N));
+        printf("Anda telah membatalkan perebusan %s!\n", ITEM(N).TabWord);
     }else if(same(KASUS(N),"BUY") && (isUndo)){
-        printf("Anda telah membatalkan pembelian %s!\n", ITEM(N));
+        printf("Anda telah membatalkan pembelian %s!\n", ITEM(N).TabWord);
     }else if(same(KASUS(N),"MIX")){
-        printf("%s kembali dicampurkan\n", ITEM(N));
+        printf("%s kembali dicampurkan\n", ITEM(N).TabWord);
     }else if(same(KASUS(N), "CHOP")){
-        printf("%s kembali dipotong\n", ITEM(N));
+        printf("%s kembali dipotong\n", ITEM(N).TabWord);
     }else if(same(KASUS(N), "FRY")){
-        printf("%s kembali digoreng\n", ITEM(N));
+        printf("%s kembali digoreng\n", ITEM(N).TabWord);
     }else if(same(KASUS(N), "BOIL")){
-        printf("%s kembali direbus\n", ITEM(N));
+        printf("%s kembali direbus\n", ITEM(N).TabWord);
     }else if(same(KASUS(N), "BUY")){
-        printf("%s kembali dibeli\n", ITEM(N));
+        printf("%s kembali dibeli\n", ITEM(N).TabWord);
     }else if(same(KASUS(N),"DELIVERY")){
-        printf("%s sudah berhasil diterima!\n", ITEM(N));
+        printf("%s sudah berhasil diterima!\n", ITEM(N).TabWord);
     }else if(same(KASUS(N),"EXPIRED")){
-        printf("%s kadaluwarsa!\n", ITEM(N));
+        printf("%s kadaluwarsa!\n", ITEM(N).TabWord);
     }else if(same(KASUS(N), "DELIVERY")){
-        printf("%s kembali di-delivery\n", ITEM(N));
+        printf("%s kembali di-delivery\n", ITEM(N).TabWord);
     }else if(same(KASUS(N), "EXPIRED")){
-        printf("%s kembali tidak kadaluwarsa\n", ITEM(N));
+        printf("%s kembali tidak kadaluwarsa\n", ITEM(N).TabWord);
     }
 }
 

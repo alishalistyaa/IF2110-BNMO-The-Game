@@ -1,4 +1,4 @@
-#include "point.c"
+#include "point.h"
 #include <stdio.h>
 #include <stdlib.h>
 
