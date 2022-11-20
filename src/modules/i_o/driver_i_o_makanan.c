@@ -1,15 +1,15 @@
 #include <stdio.h>
-#include "i_o.c"
-#include "../wordmachine/wordmachine.c"
-#include "../makanan/makanan.c"
+#include "i_o.h"
+#include "../wordmachine/wordmachine.h"
+#include "../makanan/makanan.h"
 #include "../boolean/boolean.h"
-#include "../point/point.c"
-#include "../time/time.c"
-#include "../list/liststatik.c"
-#include "../matriks/matriks.c"
-#include "../map/map.c"
-#include "../building/building.c"
-#include "../tree/tree.c"
+#include "../point/point.h"
+#include "../time/time.h"
+#include "../list/liststatik.h"
+#include "../matriks/matriks.h"
+#include "../map/map.h"
+#include "../building/building.h"
+#include "../tree/tree.h"
 
 
 int main(){

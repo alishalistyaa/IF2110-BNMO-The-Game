@@ -1,18 +1,16 @@
-#include "resep.c"
-#include "../tree/tree.c"
-#include "../boolean/boolean.h"
-#include "../makanan/makanan.c"
-#include "../list/liststatik.c"
-#include "../building/building.c"
-#include "../prioqueue/prioqueue.c"
-#include "../wordmachine/wordmachine.c"
-#include "../charmachine/charmachine.c"
-#include "../time/time.c"
-#include "../point/point.c"
+#include "resep.h"
+// #include "../tree/tree.h"
+// #include "../boolean/boolean.h"
+// #include "../makanan/makanan.h"
+// #include "../list/liststatik.h"
+// #include "../building/building.h"
+// #include "../prioqueue/prioqueue.h"
+// #include "../wordmachine/wordmachine.h"
+// #include "../charmachine/charmachine.h"
+// #include "../time/time.h"
+// #include "../point/point.h"
 
 int main(){
-    
-
     SET ayam_potong;
     createEmptySet(&ayam_potong);
     HEADSET(ayam_potong) = 21;

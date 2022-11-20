@@ -1,9 +1,9 @@
-#include "prioqueue.c"
-#include "../makanan/makanan.c"
-#include "../point/point.c"
-#include "../time/time.c"
-#include "../wordmachine/wordmachine.c"
-#include "../charmachine/charmachine.c"
+#include "prioqueue.h"
+#include "../makanan/makanan.h"
+#include "../point/point.h"
+#include "../time/time.h"
+#include "../wordmachine/wordmachine.h"
+#include "../charmachine/charmachine.h"
 
 
 

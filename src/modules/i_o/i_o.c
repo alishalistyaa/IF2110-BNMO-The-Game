@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "i_o.h"
-#include "../charmachine/charmachine.c"
+#include "../charmachine/charmachine.h"
 #include "../building/building.h"
 
 char currentChar;
